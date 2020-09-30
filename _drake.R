@@ -4,6 +4,7 @@
 
 library("drake")
 library("here")
+library("readr")
 
 #==============================================================================#
 # ---- FUNCTIONS ----
@@ -17,7 +18,8 @@ source(here("R", "render.R"))
 
 plan <- drake_plan(
     configs = list(
-        site = read_lines(here(file_in("pages/_site.yml")))
+        site = read_lines(here(file_in("pages/_site.yml"))),
+        setup = read_lines(here(file_in("R/document_setup.R")))
     ),
     dataset = target(
         callr_render(

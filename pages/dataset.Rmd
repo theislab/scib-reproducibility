@@ -10,21 +10,12 @@ params:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-    echo       = FALSE,
-    fig.width  = 10,
-    fig.height = 8,
-    fig.align  = "center",
-    warning    = FALSE,
-    message    = FALSE
-)
+source(here::here("R", "document_setup.R"))
 ```
 
 ```{r libraries}
-library("here")
 library("reactable")
 library("htmltools")
-library("tidyverse")
 ```
 
 ```{r load}
@@ -291,7 +282,6 @@ ggplot(
             order          = 90
         )
     ) +
-    theme_minimal() +
     theme(
         legend.position  = "right",
         axis.text        = element_text(size = 7),
@@ -539,7 +529,6 @@ metric_barplot <- function(metrics, metric, label) {
                 order          = 90
             )
         ) +
-        theme_minimal() +
         theme(
             legend.position  = "right",
             axis.text        = element_text(size = 7),
