@@ -1,5 +1,10 @@
 ---
 title: "Results"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
 params:
   dataset: "mini_sim"
 ---
@@ -21,78 +26,6 @@ library("reactable")
 library("htmltools")
 library("tidyverse")
 ```
-
-<style>
-
-  .main-container {
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .metrics {
-    font-family: Karla, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-  }
-  
-  .title {
-    margin: 18px 0;
-    font-size: 16px;
-  }
-
-  .title h2 {
-    font-size: 20px;
-    font-weight: 600;
-  }
-
-  .metrics-table {
-    margin-bottom: 20px;
-  }
-
-  /* Align header text to the bottom */
-  .header,
-  .group-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-
-  .header {
-    border-bottom-color: #555;
-    font-size: 13px;
-    font-weight: 400;
-    text-transform: uppercase;
-  }
-
-  /* Highlight headers when sorting */
-  .header:hover,
-  .header[aria-sort="ascending"],
-  .header[aria-sort="descending"] {
-    background-color: #eee;
-  }
-  
-  .border-left {
-    border-left: 2px solid #555;
-  }
-  
-  .number {
-    font-family: "Fira Mono", Consolas, Monaco, monospace;
-    font-size: 16px;
-    line-height: 30px;
-    white-space: pre;
-  }
-  
-  .score {
-    width: 30px;
-    height: 30px;
-    border: 1px solid rgba(0, 0, 0, 0.03);
-    border-radius: 50%;
-    color: #000;
-    margin: auto;
-    font-size: 13px;
-    letter-spacing: -2px;
-  }
-</style>
 
 ```{r load}
 method_labels = c(

@@ -17,3 +17,4 @@ output:
     number_sections: yes
     toc: yes
     toc_float: yes
+    css: style.css
