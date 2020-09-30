@@ -4,21 +4,12 @@
 
 library("drake")
 library("here")
-library("tidyverse")
-
-library("htmltools")
 
 #==============================================================================#
 # ---- FUNCTIONS ----
 #==============================================================================#
 
-# See https://github.com/rstudio/gt/issues/297#issuecomment-497778735
-callr_render <- function(input, output_file) {
-    callr::r(
-        function(...) rmarkdown::render(...),
-        args = list(input = input, output_file = output_file)
-    )
-}
+source(here("R", "render.R"))
 
 #==============================================================================#
 # ---- PLAN ----
