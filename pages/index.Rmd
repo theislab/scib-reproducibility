@@ -1,0 +1,8 @@
+---
+title: "scIB Results"
+output:
+  html_document:
+    toc: no
+---
+
+Results from single-cell integration benchmarking

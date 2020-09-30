@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Results</title>
+
+<script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-16.12.0/react.min.js"></script>
+<script src="site_libs/react-16.12.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/reactable-binding-0.2.2/reactable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">scIB Results</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="https://github.com/theislab/scIB-results">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Results</h1>
+
+</div>
+
+
+<style>
+
+  .main-container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .metrics {
+    font-family: Karla, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+  }
+  
+  .title {
+    margin: 18px 0;
+    font-size: 16px;
+  }
+
+  .title h2 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .metrics-table {
+    margin-bottom: 20px;
+  }
+
+  /* Align header text to the bottom */
+  .header,
+  .group-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .header {
+    border-bottom-color: #555;
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  /* Highlight headers when sorting */
+  .header:hover,
+  .header[aria-sort="ascending"],
+  .header[aria-sort="descending"] {
+    background-color: #eee;
+  }
+  
+  .border-left {
+    border-left: 2px solid #555;
+  }
+  
+  .number {
+    font-family: "Fira Mono", Consolas, Monaco, monospace;
+    font-size: 16px;
+    line-height: 30px;
+    white-space: pre;
+  }
+  
+  .score {
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    border-radius: 50%;
+    color: #000;
+    margin: auto;
+    font-size: 13px;
+    letter-spacing: -2px;
+  }
+</style>
+<div id="overall" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Overall</h1>
+<div id="plot" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Plot</h2>
+<p><img src="dataset_files/figure-html/overall-plot-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="table" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Table</h2>
+<div class="metrics">
+<div id="htmlwidget-24790c591b1fae69ea02" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-24790c591b1fae69ea02">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"method":["MNN","MNN","MNN","MNN","Scanorama","Scanorama","Scanorama","Scanorama","Scanorama","Scanorama","Scanorama","Scanorama","Seurat v3","Seurat v3","Seurat v3","Seurat v3","Harmony","Harmony","Harmony","Harmony","BBKNN","BBKNN","BBKNN","BBKNN","scVI","scVI","ComBat","ComBat","ComBat","ComBat","LIGER","LIGER","scANVI","scANVI","FastMNN","FastMNN","FastMNN","FastMNN","FastMNN","FastMNN","FastMNN","FastMNN","Unintegrated"],"output":["Features","Features","Features","Features","Embedding","Embedding","Embedding","Embedding","Features","Features","Features","Features","Features","Features","Features","Features","Embedding","Embedding","Embedding","Embedding","Graph","Graph","Graph","Graph","Embedding","Embedding","Features","Features","Features","Features","Embedding","Embedding","Embedding","Embedding","Embedding","Embedding","Embedding","Embedding","Features","Features","Features","Features","Features"],"features":["HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","Full"],"scaling":["Unscaled","Unscaled","Scaled","Scaled","Unscaled","Unscaled","Scaled","Scaled","Unscaled","Unscaled","Scaled","Scaled","Unscaled","Unscaled","Scaled","Scaled","Unscaled","Unscaled","Scaled","Scaled","Unscaled","Unscaled","Scaled","Scaled","Unscaled","Unscaled","Unscaled","Unscaled","Scaled","Scaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Scaled","Scaled","Unscaled","Unscaled","Scaled","Scaled","Unscaled"],"overall":[0.772740008476991,0.570432531605065,0.738428810835,0.722921300039555,0.809209239293102,0.805486362774611,0.889808800634223,0.817542818373404,0.785647210378221,0.776459698599495,0.76660195113382,0.679157447610952,0.832163744715564,0.826279873751166,0.787602126960802,0.755179222201197,0.611444780287143,0.289284988784393,0.791905232971496,0.744419740386021,0.79913911123348,0.789441351830738,0.833661647007639,0.790500833824373,0.450132714894135,0.0180243833760355,0.766128549376014,0.761155026866198,0.741603536131426,0.736189240619339,0.462708562052395,0.502970764199219,0.419846616480929,0.200562004588066,0.841966730652293,0.83804024660404,0.663342090443944,0.62248632048194,0.789109901132308,0.778653776415317,0.636302766005014,0.596257808400468,0.354619112192837],"batch_correction":[0.784856366454395,0.648507257215442,0.809242046738756,0.795904048732215,0.84718530528654,0.8625471316264,0.919261299651802,0.844449262662393,0.843508700998759,0.856700889870324,0.818962585274725,0.762399075525502,0.884743002107205,0.885559107742973,0.867963958162714,0.865406943859047,0.595450061024726,0.129877324535316,0.806177256656118,0.824226427179482,0.648482870662104,0.655104269005786,0.673985750551943,0.669241729145414,0.276467073287947,0.0170813175756487,0.81026087911588,0.816460341929781,0.802907414362787,0.82306050064783,0.791523633046578,0.780403706305711,0.237909556227204,0.053425598252039,0.885557681751989,0.869861949385474,0.886387217762299,0.88462269439814,0.885158377755225,0.866935402892291,0.886949209396289,0.885652889180923,0.138175166404436],"PCR_batch":[0.977625429086521,0.848486754473496,0.996861388592331,0.994306092477831,0.998085914338228,0.998279839731521,0.998454272035262,0.998385107268928,0.995303547038406,0.993461024064078,0.988701661944388,0.957448491341741,0.997676791847582,0.995201505703792,0.99875090231317,0.996796702156781,0.77614294353103,0,0.998507343075436,0.998774560382573,"NA","NA","NA","NA",0.768410236254004,0,0.99999606486746,0.999998055862646,0.999999996630497,1,0.998712373908241,0.994017343093042,0.775060216222791,0.0639837377392855,0.99750684369408,0.997304989590908,0.999785180802265,0.999657235418587,0.997506837192485,0.997304985104203,0.999785180670451,0.999657237211844,0],"ASW_label_batch":[0.975987995695177,0.915956708431187,1,0.997180009516936,0.987835895396449,0.979525137294953,0.98312151137669,0.99630801082168,0.983396973165787,0.966623740594155,0.670573519602866,0.621779919362895,0.848104559166475,0.845222128705028,0.775891537894784,0.77470031737249,0.909008112412118,0.491152983470719,0.994018290713286,0.982471519190507,"NA","NA","NA","NA",0.313212064730689,0,0.997675077178651,0.987325591489646,0.99338324522599,0.983518408425064,0.979774101878374,0.976881862085894,0.346602446278385,0.0511927651099731,0.964619477266532,0.957676700010479,0.979733739363541,0.978472355343916,0.964619474140849,0.957676704384236,0.979733742015095,0.97847235645076,0.521829972259201],"iLISI":[0.892358656647726,0.416115676213958,0.984331363534459,0.961750460834226,0.970811979808813,0.966091569638947,0.929545567972538,0.996762597206908,0.923416831007414,0.936880050121914,0.584781751845765,0.418502767329594,0.594237306251829,0.647856789303739,0.565177350605614,0.56120638436828,0.502683832215343,0,0.984005796197068,0.97431149236071,0.940656420572377,0.962484654406595,0.972527857002246,0.973433619126757,0,0,0.980969554132481,1,0.974319164953571,0.975631618074979,0.993435895488839,0.933039800790451,0,0,0.915928704843418,0.956009879587395,0.874343442329611,0.865162221112107,0.91390407543003,0.941391532171803,0.877082047881998,0.870300088109594,0],"graph_connectivity":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.76969213948906,0.0678851186348445,1,1,1,1,1,1,0.300712909294527,0,1,1,1,1,0.982320063619341,0.994948589605526,0.0678851186348445,0.0678851186348445,1,1,1,1,1,1,1,1,0.0678851186348445],"kBET":[0.0783097508425496,0.0619771469585679,0.065017481566989,0.0262836808320827,0.279192736889212,0.368839111466578,0.685185146874519,0.230790598014447,0.315426153782187,0.386539634571472,0.850755992980605,0.814264199593281,0.98369635327014,0.939515115002305,1,0.994331315397684,0.0197232774760796,0.0903485205710147,0.0543548532947986,0.16557456396362,0.00479219141393428,0.00282815261076259,0.0494293946535844,0.0342915683094856,1.56160517101315e-07,0.0854065878782435,0.0726636994008073,0.0949780622966124,0.0468346650038792,0.156152476739109,0.00337573033809734,0.00313093595364155,0,0.0840663697760921,0.549733382955914,0.438318177738586,0.578073726316078,0.579821660116089,0.549761502012761,0.438303792801212,0.5781450764139,0.579834764132418,0.101160741128134],"bio_conservation":[0.764662436492056,0.51838271453148,0.691219986899163,0.674266134244449,0.783891861964143,0.767445850206752,0.870173801289171,0.799605188847412,0.747072883297863,0.72296557108561,0.731694861706549,0.623663029001253,0.797110906454469,0.786760384423295,0.734027572826194,0.681694074429298,0.622107926462088,0.395556764950445,0.782390550515081,0.691215282523713,0.899576604947731,0.878999407047373,0.94011224464477,0.871340236943679,0.565909809298261,0.0186530939096267,0.736706996216104,0.724284816823809,0.700734283977185,0.678275067267011,0.243498514722939,0.318015469461558,0.541137989983413,0.298652942145417,0.812906096585828,0.816825778083085,0.514645338898374,0.447728737871141,0.725077583383696,0.719799358764002,0.469205137077497,0.403327754546831,0.498915076051772],"NMI_cluster_label":[1,0.622602980183059,0.898273097718119,0.988144218697018,0.994908104477957,0.989497063981251,0.987404688633747,0.932856476120677,0.994434737714557,0.986422609417658,0.753341653863372,0.713607608059875,0.981069230504691,0.942537007463451,0.867193031983586,0.851928221530841,0.771272231215738,0.595541025025353,0.992268678352492,0.927548045863505,0.855883493160138,0.853611985778926,0.928406419278422,0.850022507145689,0.577820047628669,0,0.928143317532966,0.929328092477192,0.931793539074094,0.985944424543931,0.213764714254202,0.30138227130255,0.55586127550964,0.352386365647662,0.931039427468003,0.986002442220387,0.580169804524094,0.469069449415637,0.931039427468003,0.986002442220387,0.580169804524094,0.475262681757584,0.595541025025353],"ARI_cluster_label":[1,0.347044437934618,0.901592139752557,0.974442069420523,0.988793184801599,0.977835650138119,0.973307541663043,0.923006604332212,0.985889976494703,0.971245934728959,0.607464872649197,0.527377727694932,0.96732281256519,0.947292770350711,0.876600330595647,0.764537719138219,0.594053657238087,0.329660792336061,0.983568799458901,0.9144052850604,0.861797223030239,0.770189107658437,0.915731300527615,0.760186914760907,0.308536959981723,0,0.915538476071974,0.917098108156881,0.922298961873883,0.970024250993836,0.119600442847435,0.190462491432973,0.273988383021805,0.130177954358577,0.920585681728837,0.970173795289667,0.651932072348582,0.576193803972595,0.920585681728837,0.970173795289667,0.651932072348582,0.572158543438141,0.329660792336061],"ASW_label":[0.373812610927273,0.331593028999771,0.413667181361583,0.361178108723629,0.253230912086682,0.237634541461911,0.294576841138179,0.260332604999023,0.390582143900837,0.373033589040959,0.736109900692831,0.570108660131996,0.483834598205523,0.460380104113357,0.559209467208681,0.520493816546526,0.317153826029294,0.168371934704895,0.4323965824746,0.389027105445331,"NA","NA","NA","NA",1,0,0.388022781833098,0.369481228915124,0.425540413634986,0.376584234308783,0.206681197409044,0.263553912903882,0.92374242371414,0.0606412476135066,0.472856724157235,0.444048850911222,0.191853041602295,0.169964836608371,0.472856775866754,0.44404884438805,0.191853028745202,0.169964851027734,0.187781098398749],"isolated_label_F1":[1,0.503273425516339,0.943443474842167,0.962480059071828,0.987550661314865,0.974881213570687,0.965753736300057,0.925657392140665,0.972630097208794,0.961064159283253,0.809019800945415,0.723539924196329,0.945156553334977,0.973092140490715,0.908372699099918,0.860054307999661,0.746445255176028,0.287999349830682,0.98238665369111,0.916311258773042,0.880625703600548,0.892196534752127,0.916311258773042,0.875151525868121,0.287999349830682,0,0.924030823696563,0.91519080140176,0.943443474842167,0.947462616282817,0.119303861686867,0.285628856957842,0.272133359306405,0.145041091435888,0.936260905119232,0.95191224574494,0.788460092090795,0.738368680883094,0.936260905119232,0.95191224574494,0.788460092090795,0.722583267808897,0.287999349830682],"isolated_label_silhouette":[0.450184818913138,0.354803094308481,0.507590304417235,0.426802595008657,0.478868309103758,0.42482663208854,1,0.755778055491893,0.478868309103758,0.42482663208854,1,0.755778055491893,0.65441022434104,0.691308553040045,0.775982035244915,0.747186800128386,0.303722589113382,0,0.303722589113382,0,"NA","NA","NA","NA",0.221102498348489,0.11191856345776,0.47057138130645,0.423748106226456,0.518749099776937,0.467909944739711,0.11191853955638,0.11191853955638,0.221102498348489,0.11191856345776,0.616693841041663,0.548817334332293,0.328717964943308,0.328353373295843,0.616693841041663,0.548817334332293,0.328717964943308,0.328353373295843,0.11191856345776],"cLISI":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.991767487805676,1,1,1,1,1,1,1,0,1,1,1,1,0.689722332583708,0.755146744615721,1,0.991752430359106,1,1,0.546739057881169,0.404422283051305,1,1,0.57661142887982,0.466196013435456,0.979504703313796],"HVG_overlap":[0.528639625603981,0.469362034778094,0.173973710202479,0.00681588878948584,"NA","NA","NA","NA",0.407104918662391,0.3441660730399,0.21592780379503,0.0752292274337437,0.547982926229863,0.492712115504783,0.150835445650613,0.0276576556614505,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",0.530642193071674,0.515147380589251,0.163314498638227,0,"NA","NA","NA","NA","NA","NA","NA","NA",0.198106452461381,0.137640849372675,0.166691568010679,0.0887755510641588,1],"cell_cycle":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"trajectory":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]},"columns":[{"accessor":"method","name":"Method","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"output","name":"Output","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"features","name":"Features","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"scaling","name":"Scaling","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"overall","name":"Overall score","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#2A9EC1"},"className":"score"},"children":["0.77"]},{"name":"div","attribs":{"style":{"background":"#64C3BE"},"className":"score"},"children":["0.57"]},{"name":"div","attribs":{"style":{"background":"#31A6C2"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#34A9C2"},"className":"score"},"children":["0.72"]},{"name":"div","attribs":{"style":{"background":"#2296C0"},"className":"score"},"children":["0.81"]},{"name":"div","attribs":{"style":{"background":"#2397C0"},"className":"score"},"children":["0.81"]},{"name":"div","attribs":{"style":{"background":"#1E7FB7"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#2094C0"},"className":"score"},"children":["0.82"]},{"name":"div","attribs":{"style":{"background":"#279BC1"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#299DC1"},"className":"score"},"children":["0.78"]},{"name":"div","attribs":{"style":{"background":"#2B9FC1"},"className":"score"},"children":["0.77"]},{"name":"div","attribs":{"style":{"background":"#3EB3C3"},"className":"score"},"children":["0.68"]},{"name":"div","attribs":{"style":{"background":"#1D91C0"},"className":"score"},"children":["0.83"]},{"name":"div","attribs":{"style":{"background":"#1E92C0"},"className":"score"},"children":["0.83"]},{"name":"div","attribs":{"style":{"background":"#269BC1"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#2DA2C1"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#55BDC1"},"className":"score"},"children":["0.61"]},{"name":"div","attribs":{"style":{"background":"#D1ECB3"},"className":"score"},"children":["0.29"]},{"name":"div","attribs":{"style":{"background":"#259AC0"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#30A4C2"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#2498C0"},"className":"score"},"children":["0.80"]},{"name":"div","attribs":{"style":{"background":"#269AC1"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#1D90BF"},"className":"score"},"children":["0.83"]},{"name":"div","attribs":{"style":{"background":"#269AC1"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#94D5B8"},"className":"score"},"children":["0.45"]},{"name":"div","attribs":{"style":{"background":"#FDFED4"},"className":"score"},"children":["0.02"]},{"name":"div","attribs":{"style":{"background":"#2B9FC1"},"className":"score"},"children":["0.77"]},{"name":"div","attribs":{"style":{"background":"#2CA1C1"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#30A5C2"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#31A6C2"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#8FD3B9"},"className":"score"},"children":["0.46"]},{"name":"div","attribs":{"style":{"background":"#7DCCBB"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#A1DAB7"},"className":"score"},"children":["0.42"]},{"name":"div","attribs":{"style":{"background":"#E5F4B1"},"className":"score"},"children":["0.20"]},{"name":"div","attribs":{"style":{"background":"#1D8EBE"},"className":"score"},"children":["0.84"]},{"name":"div","attribs":{"style":{"background":"#1D8FBF"},"className":"score"},"children":["0.84"]},{"name":"div","attribs":{"style":{"background":"#42B6C3"},"className":"score"},"children":["0.66"]},{"name":"div","attribs":{"style":{"background":"#51BCC1"},"className":"score"},"children":["0.62"]},{"name":"div","attribs":{"style":{"background":"#269AC1"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#289DC1"},"className":"score"},"children":["0.78"]},{"name":"div","attribs":{"style":{"background":"#4CBAC2"},"className":"score"},"children":["0.64"]},{"name":"div","attribs":{"style":{"background":"#5BBFC0"},"className":"score"},"children":["0.60"]},{"name":"div","attribs":{"style":{"background":"#BDE5B4"},"className":"score"},"children":["0.35"]}],"maxWidth":80,"align":"center","headerStyle":{"fontWeight":700}},{"accessor":"batch_correction","name":"Overall","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#E44399"},"className":"score"},"children":["0.78"]},{"name":"div","attribs":{"style":{"background":"#F76DA3"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#E03B98"},"className":"score"},"children":["0.81"]},{"name":"div","attribs":{"style":{"background":"#E23F99"},"className":"score"},"children":["0.80"]},{"name":"div","attribs":{"style":{"background":"#D92F94"},"className":"score"},"children":["0.85"]},{"name":"div","attribs":{"style":{"background":"#D42B92"},"className":"score"},"children":["0.86"]},{"name":"div","attribs":{"style":{"background":"#C4198A"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#D93095"},"className":"score"},"children":["0.84"]},{"name":"div","attribs":{"style":{"background":"#DA3095"},"className":"score"},"children":["0.84"]},{"name":"div","attribs":{"style":{"background":"#D62C93"},"className":"score"},"children":["0.86"]},{"name":"div","attribs":{"style":{"background":"#DF3897"},"className":"score"},"children":["0.82"]},{"name":"div","attribs":{"style":{"background":"#E84A9B"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#CE248F"},"className":"score"},"children":["0.88"]},{"name":"div","attribs":{"style":{"background":"#CE248F"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#D32991"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#D32A92"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#F87FA9"},"className":"score"},"children":["0.60"]},{"name":"div","attribs":{"style":{"background":"#FDE5E1"},"className":"score"},"children":["0.13"]},{"name":"div","attribs":{"style":{"background":"#E13C98"},"className":"score"},"children":["0.81"]},{"name":"div","attribs":{"style":{"background":"#DE3697"},"className":"score"},"children":["0.82"]},{"name":"div","attribs":{"style":{"background":"#F76EA3"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#F76BA2"},"className":"score"},"children":["0.66"]},{"name":"div","attribs":{"style":{"background":"#F565A0"},"className":"score"},"children":["0.67"]},{"name":"div","attribs":{"style":{"background":"#F667A0"},"className":"score"},"children":["0.67"]},{"name":"div","attribs":{"style":{"background":"#FCCEC9"},"className":"score"},"children":["0.28"]},{"name":"div","attribs":{"style":{"background":"#FEF4F0"},"className":"score"},"children":["0.02"]},{"name":"div","attribs":{"style":{"background":"#E03B98"},"className":"score"},"children":["0.81"]},{"name":"div","attribs":{"style":{"background":"#DF3998"},"className":"score"},"children":["0.82"]},{"name":"div","attribs":{"style":{"background":"#E13D98"},"className":"score"},"children":["0.80"]},{"name":"div","attribs":{"style":{"background":"#DE3797"},"className":"score"},"children":["0.82"]},{"name":"div","attribs":{"style":{"background":"#E34199"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#E5449A"},"className":"score"},"children":["0.78"]},{"name":"div","attribs":{"style":{"background":"#FCD4D0"},"className":"score"},"children":["0.24"]},{"name":"div","attribs":{"style":{"background":"#FEEFEB"},"className":"score"},"children":["0.05"]},{"name":"div","attribs":{"style":{"background":"#CE248F"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#D22891"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#CE238F"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#CE248F"},"className":"score"},"children":["0.88"]},{"name":"div","attribs":{"style":{"background":"#CE248F"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#D32991"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#CD238E"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#CE238F"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#FDE3E0"},"className":"score"},"children":["0.14"]}],"maxWidth":80,"align":"center"},{"accessor":"PCR_batch","name":"PCR batch","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#B40781"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#D82F94"},"className":"score"},"children":["0.85"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AF027E"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AF027E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AF037E"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#B1047F"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#B90E84"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AF027E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#E5459A"},"className":"score"},"children":["0.78"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#E7489A"},"className":"score"},"children":["0.77"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AF027E"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#E6469A"},"className":"score"},"children":["0.78"]},{"name":"div","attribs":{"style":{"background":"#FEEEEA"},"className":"score"},"children":["0.06"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"align":"center"},{"accessor":"ASW_label_batch","name":"Batch ASW","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#B40881"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#C51A8A"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#B1047F"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#B30781"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#B20680"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#AF027E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#B20680"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#B70B83"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#F666A0"},"className":"score"},"children":["0.67"]},{"name":"div","attribs":{"style":{"background":"#F776A6"},"className":"score"},"children":["0.62"]},{"name":"div","attribs":{"style":{"background":"#D82F94"},"className":"score"},"children":["0.85"]},{"name":"div","attribs":{"style":{"background":"#D93095"},"className":"score"},"children":["0.85"]},{"name":"div","attribs":{"style":{"background":"#E5459A"},"className":"score"},"children":["0.78"]},{"name":"div","attribs":{"style":{"background":"#E6469A"},"className":"score"},"children":["0.77"]},{"name":"div","attribs":{"style":{"background":"#C71C8B"},"className":"score"},"children":["0.91"]},{"name":"div","attribs":{"style":{"background":"#FAA1B5"},"className":"score"},"children":["0.49"]},{"name":"div","attribs":{"style":{"background":"#AF027E"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#B20680"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#FCC8C3"},"className":"score"},"children":["0.31"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#B1047F"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#AF037E"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#B20680"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#B30781"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#B40881"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#FBC1BF"},"className":"score"},"children":["0.35"]},{"name":"div","attribs":{"style":{"background":"#FEEFEC"},"className":"score"},"children":["0.05"]},{"name":"div","attribs":{"style":{"background":"#B70B83"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#B90D84"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#B30781"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#B40781"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#B70B83"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#B90D84"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#B30781"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#B40781"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#F997B2"},"className":"score"},"children":["0.52"]}],"maxWidth":80,"align":"center"},{"accessor":"iLISI","name":"Graph\niLISI","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#CC218E"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#FBB2BA"},"className":"score"},"children":["0.42"]},{"name":"div","attribs":{"style":{"background":"#B20580"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#B80C83"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#B60982"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#B70B83"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#C11688"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#C31889"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#BF1487"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#F883AA"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#FAB1BA"},"className":"score"},"children":["0.42"]},{"name":"div","attribs":{"style":{"background":"#F87FA9"},"className":"score"},"children":["0.59"]},{"name":"div","attribs":{"style":{"background":"#F76EA3"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#F889AD"},"className":"score"},"children":["0.57"]},{"name":"div","attribs":{"style":{"background":"#F88AAD"},"className":"score"},"children":["0.56"]},{"name":"div","attribs":{"style":{"background":"#F99EB4"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#B20580"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#B50881"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#BE1386"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#B80C83"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#B50982"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#B50981"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#B30680"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#B50881"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#B40881"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#AF037E"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#C01588"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#C51A8A"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#BA0E84"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#D12790"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#D42A92"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#C61B8A"},"className":"score"},"children":["0.91"]},{"name":"div","attribs":{"style":{"background":"#BE1286"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#D02690"},"className":"score"},"children":["0.88"]},{"name":"div","attribs":{"style":{"background":"#D22891"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"align":"center"},{"accessor":"graph_connectivity","name":"Graph connectivity","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#E6479A"},"className":"score"},"children":["0.77"]},{"name":"div","attribs":{"style":{"background":"#FEEDEA"},"className":"score"},"children":["0.07"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FCCAC5"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#B20680"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#AF027E"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#FEEDEA"},"className":"score"},"children":["0.07"]},{"name":"div","attribs":{"style":{"background":"#FEEDEA"},"className":"score"},"children":["0.07"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FEEDEA"},"className":"score"},"children":["0.07"]}],"maxWidth":80,"align":"center"},{"accessor":"kBET","name":"kBET","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FEECE8"},"className":"score"},"children":["0.08"]},{"name":"div","attribs":{"style":{"background":"#FEEEEA"},"className":"score"},"children":["0.06"]},{"name":"div","attribs":{"style":{"background":"#FEEEEA"},"className":"score"},"children":["0.07"]},{"name":"div","attribs":{"style":{"background":"#FEF3EF"},"className":"score"},"children":["0.03"]},{"name":"div","attribs":{"style":{"background":"#FCCDC9"},"className":"score"},"children":["0.28"]},{"name":"div","attribs":{"style":{"background":"#FBBCBD"},"className":"score"},"children":["0.37"]},{"name":"div","attribs":{"style":{"background":"#F4629F"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#FCD5D1"},"className":"score"},"children":["0.23"]},{"name":"div","attribs":{"style":{"background":"#FCC7C3"},"className":"score"},"children":["0.32"]},{"name":"div","attribs":{"style":{"background":"#FBB8BC"},"className":"score"},"children":["0.39"]},{"name":"div","attribs":{"style":{"background":"#D82E94"},"className":"score"},"children":["0.85"]},{"name":"div","attribs":{"style":{"background":"#DF3998"},"className":"score"},"children":["0.81"]},{"name":"div","attribs":{"style":{"background":"#B20580"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#BF1387"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AF027E"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#FEF4F0"},"className":"score"},"children":["0.02"]},{"name":"div","attribs":{"style":{"background":"#FDEAE7"},"className":"score"},"children":["0.09"]},{"name":"div","attribs":{"style":{"background":"#FEEFEB"},"className":"score"},"children":["0.05"]},{"name":"div","attribs":{"style":{"background":"#FDE0DD"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#FEF6F2"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF6F2"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF0EC"},"className":"score"},"children":["0.05"]},{"name":"div","attribs":{"style":{"background":"#FEF2EE"},"className":"score"},"children":["0.03"]},{"name":"div","attribs":{"style":{"background":"#FEF6F2"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FDEBE7"},"className":"score"},"children":["0.09"]},{"name":"div","attribs":{"style":{"background":"#FEECE9"},"className":"score"},"children":["0.07"]},{"name":"div","attribs":{"style":{"background":"#FDE9E6"},"className":"score"},"children":["0.09"]},{"name":"div","attribs":{"style":{"background":"#FEF0EC"},"className":"score"},"children":["0.05"]},{"name":"div","attribs":{"style":{"background":"#FDE1DE"},"className":"score"},"children":["0.16"]},{"name":"div","attribs":{"style":{"background":"#FEF6F2"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF6F2"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FDEBE7"},"className":"score"},"children":["0.08"]},{"name":"div","attribs":{"style":{"background":"#F98EAF"},"className":"score"},"children":["0.55"]},{"name":"div","attribs":{"style":{"background":"#FAADB9"},"className":"score"},"children":["0.44"]},{"name":"div","attribs":{"style":{"background":"#F885AB"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#F884AB"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#F98EAF"},"className":"score"},"children":["0.55"]},{"name":"div","attribs":{"style":{"background":"#FAADB9"},"className":"score"},"children":["0.44"]},{"name":"div","attribs":{"style":{"background":"#F885AB"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#F884AB"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#FDE9E5"},"className":"score"},"children":["0.10"]}],"maxWidth":80,"align":"center"},{"accessor":"bio_conservation","name":"Overall","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#F4754F"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#FCB57F"},"className":"score"},"children":["0.52"]},{"name":"div","attribs":{"style":{"background":"#FA8756"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#FB8B58"},"className":"score"},"children":["0.67"]},{"name":"div","attribs":{"style":{"background":"#F2704D"},"className":"score"},"children":["0.78"]},{"name":"div","attribs":{"style":{"background":"#F4744E"},"className":"score"},"children":["0.77"]},{"name":"div","attribs":{"style":{"background":"#E9593E"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#F16D4B"},"className":"score"},"children":["0.80"]},{"name":"div","attribs":{"style":{"background":"#F57950"},"className":"score"},"children":["0.75"]},{"name":"div","attribs":{"style":{"background":"#F77F53"},"className":"score"},"children":["0.72"]},{"name":"div","attribs":{"style":{"background":"#F67D52"},"className":"score"},"children":["0.73"]},{"name":"div","attribs":{"style":{"background":"#FC9864"},"className":"score"},"children":["0.62"]},{"name":"div","attribs":{"style":{"background":"#F16D4B"},"className":"score"},"children":["0.80"]},{"name":"div","attribs":{"style":{"background":"#F2704C"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#F67C52"},"className":"score"},"children":["0.73"]},{"name":"div","attribs":{"style":{"background":"#FA8957"},"className":"score"},"children":["0.68"]},{"name":"div","attribs":{"style":{"background":"#FC9964"},"className":"score"},"children":["0.62"]},{"name":"div","attribs":{"style":{"background":"#FDCA94"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#F2714D"},"className":"score"},"children":["0.78"]},{"name":"div","attribs":{"style":{"background":"#FA8756"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#E54F37"},"className":"score"},"children":["0.90"]},{"name":"div","attribs":{"style":{"background":"#E8563C"},"className":"score"},"children":["0.88"]},{"name":"div","attribs":{"style":{"background":"#DF432D"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#E9583E"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#FCA872"},"className":"score"},"children":["0.57"]},{"name":"div","attribs":{"style":{"background":"#FEF5E7"},"className":"score"},"children":["0.02"]},{"name":"div","attribs":{"style":{"background":"#F67C51"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#F77F53"},"className":"score"},"children":["0.72"]},{"name":"div","attribs":{"style":{"background":"#F98455"},"className":"score"},"children":["0.70"]},{"name":"div","attribs":{"style":{"background":"#FB8A57"},"className":"score"},"children":["0.68"]},{"name":"div","attribs":{"style":{"background":"#FDDEB4"},"className":"score"},"children":["0.24"]},{"name":"div","attribs":{"style":{"background":"#FDD5A1"},"className":"score"},"children":["0.32"]},{"name":"div","attribs":{"style":{"background":"#FCAF79"},"className":"score"},"children":["0.54"]},{"name":"div","attribs":{"style":{"background":"#FDD8A6"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#F0694A"},"className":"score"},"children":["0.81"]},{"name":"div","attribs":{"style":{"background":"#F06849"},"className":"score"},"children":["0.82"]},{"name":"div","attribs":{"style":{"background":"#FCB680"},"className":"score"},"children":["0.51"]},{"name":"div","attribs":{"style":{"background":"#FDC28C"},"className":"score"},"children":["0.45"]},{"name":"div","attribs":{"style":{"background":"#F77E53"},"className":"score"},"children":["0.73"]},{"name":"div","attribs":{"style":{"background":"#F78053"},"className":"score"},"children":["0.72"]},{"name":"div","attribs":{"style":{"background":"#FDBF88"},"className":"score"},"children":["0.47"]},{"name":"div","attribs":{"style":{"background":"#FDC993"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#FDBB84"},"className":"score"},"children":["0.50"]}],"maxWidth":80,"align":"center"},{"accessor":"NMI_cluster_label","name":"NMI cluster/label","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FC9964"},"className":"score"},"children":["0.62"]},{"name":"div","attribs":{"style":{"background":"#E55038"},"className":"score"},"children":["0.90"]},{"name":"div","attribs":{"style":{"background":"#D83321"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#D73120"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#D83321"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#D83422"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#E0452F"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#D73120"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#D83422"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#F57850"},"className":"score"},"children":["0.75"]},{"name":"div","attribs":{"style":{"background":"#F88154"},"className":"score"},"children":["0.71"]},{"name":"div","attribs":{"style":{"background":"#D93623"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#DF422D"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#EA5A3F"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#EC5F43"},"className":"score"},"children":["0.85"]},{"name":"div","attribs":{"style":{"background":"#F3734E"},"className":"score"},"children":["0.77"]},{"name":"div","attribs":{"style":{"background":"#FCA06B"},"className":"score"},"children":["0.60"]},{"name":"div","attribs":{"style":{"background":"#D83220"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#E14730"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#EB5D42"},"className":"score"},"children":["0.86"]},{"name":"div","attribs":{"style":{"background":"#EC5E43"},"className":"score"},"children":["0.85"]},{"name":"div","attribs":{"style":{"background":"#E14630"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#EC5F43"},"className":"score"},"children":["0.85"]},{"name":"div","attribs":{"style":{"background":"#FCA56F"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#E14630"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#E14630"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#E0452F"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#D93422"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#FDE2BC"},"className":"score"},"children":["0.21"]},{"name":"div","attribs":{"style":{"background":"#FDD7A6"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FCAB75"},"className":"score"},"children":["0.56"]},{"name":"div","attribs":{"style":{"background":"#FDD19B"},"className":"score"},"children":["0.35"]},{"name":"div","attribs":{"style":{"background":"#E0452F"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#D93422"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#FCA46F"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#FDBF88"},"className":"score"},"children":["0.47"]},{"name":"div","attribs":{"style":{"background":"#E0452F"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#D93422"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#FCA46F"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#FDBE87"},"className":"score"},"children":["0.48"]},{"name":"div","attribs":{"style":{"background":"#FCA06B"},"className":"score"},"children":["0.60"]}],"maxWidth":80,"align":"center"},{"accessor":"ARI_cluster_label","name":"ARI cluster/label","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FDD19B"},"className":"score"},"children":["0.35"]},{"name":"div","attribs":{"style":{"background":"#E54F37"},"className":"score"},"children":["0.90"]},{"name":"div","attribs":{"style":{"background":"#DA3825"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#D83321"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#DA3724"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#DA3825"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#E24831"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#D93422"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#DB3926"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#FC9D68"},"className":"score"},"children":["0.61"]},{"name":"div","attribs":{"style":{"background":"#FCB37C"},"className":"score"},"children":["0.53"]},{"name":"div","attribs":{"style":{"background":"#DB3A27"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#DE402B"},"className":"score"},"children":["0.95"]},{"name":"div","attribs":{"style":{"background":"#E8573D"},"className":"score"},"children":["0.88"]},{"name":"div","attribs":{"style":{"background":"#F4754F"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#FCA16B"},"className":"score"},"children":["0.59"]},{"name":"div","attribs":{"style":{"background":"#FDD49E"},"className":"score"},"children":["0.33"]},{"name":"div","attribs":{"style":{"background":"#D93523"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#E34B34"},"className":"score"},"children":["0.91"]},{"name":"div","attribs":{"style":{"background":"#EA5B40"},"className":"score"},"children":["0.86"]},{"name":"div","attribs":{"style":{"background":"#F3744E"},"className":"score"},"children":["0.77"]},{"name":"div","attribs":{"style":{"background":"#E34A33"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#F4764F"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#FDD6A4"},"className":"score"},"children":["0.31"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#E34A33"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#E24A33"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#E24832"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#DB3926"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#FEECD2"},"className":"score"},"children":["0.12"]},{"name":"div","attribs":{"style":{"background":"#FDE5C2"},"className":"score"},"children":["0.19"]},{"name":"div","attribs":{"style":{"background":"#FDDBAC"},"className":"score"},"children":["0.27"]},{"name":"div","attribs":{"style":{"background":"#FEEBCF"},"className":"score"},"children":["0.13"]},{"name":"div","attribs":{"style":{"background":"#E24932"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#DB3926"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#FC915C"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#FCA570"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#E24932"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#DB3926"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#FC915C"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#FCA771"},"className":"score"},"children":["0.57"]},{"name":"div","attribs":{"style":{"background":"#FDD49E"},"className":"score"},"children":["0.33"]}],"maxWidth":80,"align":"center"},{"accessor":"ASW_label","name":"Label ASW","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FDCD97"},"className":"score"},"children":["0.37"]},{"name":"div","attribs":{"style":{"background":"#FDD49E"},"className":"score"},"children":["0.33"]},{"name":"div","attribs":{"style":{"background":"#FDC791"},"className":"score"},"children":["0.41"]},{"name":"div","attribs":{"style":{"background":"#FDCF99"},"className":"score"},"children":["0.36"]},{"name":"div","attribs":{"style":{"background":"#FDDDB2"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FDDFB6"},"className":"score"},"children":["0.24"]},{"name":"div","attribs":{"style":{"background":"#FDD8A7"},"className":"score"},"children":["0.29"]},{"name":"div","attribs":{"style":{"background":"#FDDCB0"},"className":"score"},"children":["0.26"]},{"name":"div","attribs":{"style":{"background":"#FDCB95"},"className":"score"},"children":["0.39"]},{"name":"div","attribs":{"style":{"background":"#FDCE97"},"className":"score"},"children":["0.37"]},{"name":"div","attribs":{"style":{"background":"#F67C51"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#FCA771"},"className":"score"},"children":["0.57"]},{"name":"div","attribs":{"style":{"background":"#FDBD86"},"className":"score"},"children":["0.48"]},{"name":"div","attribs":{"style":{"background":"#FDC08A"},"className":"score"},"children":["0.46"]},{"name":"div","attribs":{"style":{"background":"#FCAA74"},"className":"score"},"children":["0.56"]},{"name":"div","attribs":{"style":{"background":"#FCB57E"},"className":"score"},"children":["0.52"]},{"name":"div","attribs":{"style":{"background":"#FDD5A2"},"className":"score"},"children":["0.32"]},{"name":"div","attribs":{"style":{"background":"#FDE7C7"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#FDC58E"},"className":"score"},"children":["0.43"]},{"name":"div","attribs":{"style":{"background":"#FDCB95"},"className":"score"},"children":["0.39"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FDCB95"},"className":"score"},"children":["0.39"]},{"name":"div","attribs":{"style":{"background":"#FDCE98"},"className":"score"},"children":["0.37"]},{"name":"div","attribs":{"style":{"background":"#FDC68F"},"className":"score"},"children":["0.43"]},{"name":"div","attribs":{"style":{"background":"#FDCD97"},"className":"score"},"children":["0.38"]},{"name":"div","attribs":{"style":{"background":"#FDE3BD"},"className":"score"},"children":["0.21"]},{"name":"div","attribs":{"style":{"background":"#FDDCAF"},"className":"score"},"children":["0.26"]},{"name":"div","attribs":{"style":{"background":"#E14831"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#FEF1DE"},"className":"score"},"children":["0.06"]},{"name":"div","attribs":{"style":{"background":"#FDBF88"},"className":"score"},"children":["0.47"]},{"name":"div","attribs":{"style":{"background":"#FDC38C"},"className":"score"},"children":["0.44"]},{"name":"div","attribs":{"style":{"background":"#FDE4C1"},"className":"score"},"children":["0.19"]},{"name":"div","attribs":{"style":{"background":"#FDE7C7"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#FDBF88"},"className":"score"},"children":["0.47"]},{"name":"div","attribs":{"style":{"background":"#FDC38C"},"className":"score"},"children":["0.44"]},{"name":"div","attribs":{"style":{"background":"#FDE4C1"},"className":"score"},"children":["0.19"]},{"name":"div","attribs":{"style":{"background":"#FDE7C7"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#FDE5C2"},"className":"score"},"children":["0.19"]}],"maxWidth":80,"align":"center"},{"accessor":"isolated_label_F1","name":"Isolated label F1","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FCBA83"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#DF412C"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#DC3B28"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#D83322"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#DA3725"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#DB3A27"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#E14731"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#DA3825"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#DC3C28"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#F06A4A"},"className":"score"},"children":["0.81"]},{"name":"div","attribs":{"style":{"background":"#F77F53"},"className":"score"},"children":["0.72"]},{"name":"div","attribs":{"style":{"background":"#DE412C"},"className":"score"},"children":["0.95"]},{"name":"div","attribs":{"style":{"background":"#DA3825"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#E44D35"},"className":"score"},"children":["0.91"]},{"name":"div","attribs":{"style":{"background":"#EB5C41"},"className":"score"},"children":["0.86"]},{"name":"div","attribs":{"style":{"background":"#F57950"},"className":"score"},"children":["0.75"]},{"name":"div","attribs":{"style":{"background":"#FDD9A9"},"className":"score"},"children":["0.29"]},{"name":"div","attribs":{"style":{"background":"#D93523"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#E34A33"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#E8553C"},"className":"score"},"children":["0.88"]},{"name":"div","attribs":{"style":{"background":"#E65239"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#E34A33"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#E8573D"},"className":"score"},"children":["0.88"]},{"name":"div","attribs":{"style":{"background":"#FDD9A9"},"className":"score"},"children":["0.29"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#E14831"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#E34A33"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#DF412C"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#DE402B"},"className":"score"},"children":["0.95"]},{"name":"div","attribs":{"style":{"background":"#FEECD2"},"className":"score"},"children":["0.12"]},{"name":"div","attribs":{"style":{"background":"#FDD9AA"},"className":"score"},"children":["0.29"]},{"name":"div","attribs":{"style":{"background":"#FDDBAD"},"className":"score"},"children":["0.27"]},{"name":"div","attribs":{"style":{"background":"#FEE9CC"},"className":"score"},"children":["0.15"]},{"name":"div","attribs":{"style":{"background":"#E0442E"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#DD3F2A"},"className":"score"},"children":["0.95"]},{"name":"div","attribs":{"style":{"background":"#F26F4C"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#F67B51"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#E0442E"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#DD3F2A"},"className":"score"},"children":["0.95"]},{"name":"div","attribs":{"style":{"background":"#F26F4C"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#F77F53"},"className":"score"},"children":["0.72"]},{"name":"div","attribs":{"style":{"background":"#FDD9A9"},"className":"score"},"children":["0.29"]}],"maxWidth":80,"align":"center"},{"accessor":"isolated_label_silhouette","name":"Isolated label silhouette","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FDC28B"},"className":"score"},"children":["0.45"]},{"name":"div","attribs":{"style":{"background":"#FDD09A"},"className":"score"},"children":["0.35"]},{"name":"div","attribs":{"style":{"background":"#FCB882"},"className":"score"},"children":["0.51"]},{"name":"div","attribs":{"style":{"background":"#FDC58F"},"className":"score"},"children":["0.43"]},{"name":"div","attribs":{"style":{"background":"#FDBE87"},"className":"score"},"children":["0.48"]},{"name":"div","attribs":{"style":{"background":"#FDC68F"},"className":"score"},"children":["0.42"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#F5774F"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#FDBE87"},"className":"score"},"children":["0.48"]},{"name":"div","attribs":{"style":{"background":"#FDC68F"},"className":"score"},"children":["0.42"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#F5774F"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#FC905C"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#FA8756"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#F3724D"},"className":"score"},"children":["0.78"]},{"name":"div","attribs":{"style":{"background":"#F57950"},"className":"score"},"children":["0.75"]},{"name":"div","attribs":{"style":{"background":"#FDD7A5"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FDD7A5"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#FDE1BA"},"className":"score"},"children":["0.22"]},{"name":"div","attribs":{"style":{"background":"#FEECD3"},"className":"score"},"children":["0.11"]},{"name":"div","attribs":{"style":{"background":"#FDBF88"},"className":"score"},"children":["0.47"]},{"name":"div","attribs":{"style":{"background":"#FDC68F"},"className":"score"},"children":["0.42"]},{"name":"div","attribs":{"style":{"background":"#FCB57F"},"className":"score"},"children":["0.52"]},{"name":"div","attribs":{"style":{"background":"#FDBF89"},"className":"score"},"children":["0.47"]},{"name":"div","attribs":{"style":{"background":"#FEECD3"},"className":"score"},"children":["0.11"]},{"name":"div","attribs":{"style":{"background":"#FEECD3"},"className":"score"},"children":["0.11"]},{"name":"div","attribs":{"style":{"background":"#FDE1BA"},"className":"score"},"children":["0.22"]},{"name":"div","attribs":{"style":{"background":"#FEECD3"},"className":"score"},"children":["0.11"]},{"name":"div","attribs":{"style":{"background":"#FC9A65"},"className":"score"},"children":["0.62"]},{"name":"div","attribs":{"style":{"background":"#FCAD77"},"className":"score"},"children":["0.55"]},{"name":"div","attribs":{"style":{"background":"#FDD49F"},"className":"score"},"children":["0.33"]},{"name":"div","attribs":{"style":{"background":"#FDD49F"},"className":"score"},"children":["0.33"]},{"name":"div","attribs":{"style":{"background":"#FC9A65"},"className":"score"},"children":["0.62"]},{"name":"div","attribs":{"style":{"background":"#FCAD77"},"className":"score"},"children":["0.55"]},{"name":"div","attribs":{"style":{"background":"#FDD49F"},"className":"score"},"children":["0.33"]},{"name":"div","attribs":{"style":{"background":"#FDD49F"},"className":"score"},"children":["0.33"]},{"name":"div","attribs":{"style":{"background":"#FEECD3"},"className":"score"},"children":["0.11"]}],"maxWidth":80,"align":"center"},{"accessor":"cLISI","name":"Graph cLISI","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D83221"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FA8756"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#F5774F"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D83221"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FCAE77"},"className":"score"},"children":["0.55"]},{"name":"div","attribs":{"style":{"background":"#FDC992"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FCA570"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#FDC089"},"className":"score"},"children":["0.47"]},{"name":"div","attribs":{"style":{"background":"#D93624"},"className":"score"},"children":["0.98"]}],"maxWidth":80,"align":"center"},{"accessor":"HVG_overlap","name":"HVG conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FCB37C"},"className":"score"},"children":["0.53"]},{"name":"div","attribs":{"style":{"background":"#FDBF88"},"className":"score"},"children":["0.47"]},{"name":"div","attribs":{"style":{"background":"#FDE7C6"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#FEF6EA"},"className":"score"},"children":["0.01"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#FDC892"},"className":"score"},"children":["0.41"]},{"name":"div","attribs":{"style":{"background":"#FDD29C"},"className":"score"},"children":["0.34"]},{"name":"div","attribs":{"style":{"background":"#FDE2BB"},"className":"score"},"children":["0.22"]},{"name":"div","attribs":{"style":{"background":"#FEF0DB"},"className":"score"},"children":["0.08"]},{"name":"div","attribs":{"style":{"background":"#FCAD77"},"className":"score"},"children":["0.55"]},{"name":"div","attribs":{"style":{"background":"#FDBC85"},"className":"score"},"children":["0.49"]},{"name":"div","attribs":{"style":{"background":"#FEE9CB"},"className":"score"},"children":["0.15"]},{"name":"div","attribs":{"style":{"background":"#FEF4E6"},"className":"score"},"children":["0.03"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#FCB27C"},"className":"score"},"children":["0.53"]},{"name":"div","attribs":{"style":{"background":"#FCB680"},"className":"score"},"children":["0.52"]},{"name":"div","attribs":{"style":{"background":"#FEE8C8"},"className":"score"},"children":["0.16"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#FDE4C0"},"className":"score"},"children":["0.20"]},{"name":"div","attribs":{"style":{"background":"#FEEACE"},"className":"score"},"children":["0.14"]},{"name":"div","attribs":{"style":{"background":"#FDE7C7"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#FEEFD8"},"className":"score"},"children":["0.09"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]}],"maxWidth":80,"align":"center"},{"accessor":"cell_cycle","name":"Cell cycle conservation","type":"logical","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]}],"maxWidth":80,"align":"center"},{"accessor":"trajectory","name":"Trajectory conservation","type":"logical","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]}],"maxWidth":80,"align":"center"}],"columnGroups":[{"headerClassName":"group-header","name":"Batch correction","columns":["batch_correction","PCR_batch","ASW_label_batch","iLISI","graph_connectivity","kBET"]},{"headerClassName":"group-header","name":"Bio conservation","columns":["bio_conservation","NMI_cluster_label","ARI_cluster_label","ASW_label","isolated_label_F1","isolated_label_silhouette","cLISI","HVG_overlap","cell_cycle","trajectory"]}],"defaultSortDesc":true,"defaultSorted":[{"id":"overall","desc":true}],"defaultPageSize":43,"paginationType":"numbers","showPageInfo":true,"minRows":1,"highlight":true,"borderless":true,"compact":true,"showSortIcon":false,"className":"metrics-table","dataKey":"3efa61db27206363fa6543bf5d4e0615","key":"3efa61db27206363fa6543bf5d4e0615"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="individual-metrics" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Individual metrics</h1>
+<div id="overall-1" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Overall</h2>
+<p><img src="dataset_files/figure-html/metrics-overall-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="batch-correction" class="section level2 tabset" number="2.2">
+<h2 class="tabset" number="2.2"><span class="header-section-number">2.2</span> Batch correction</h2>
+<div id="batch-correction-1" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Batch correction</h3>
+<p><img src="dataset_files/figure-html/metrics-batch-batch_correction-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pcr-batch" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">PCR batch</h3>
+<p><img src="dataset_files/figure-html/metrics-batch-PCR_batch-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="batch-asw" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Batch ASW</h3>
+<p><img src="dataset_files/figure-html/metrics-batch-ASW_label_batch-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="graph-ilisi" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Graph iLISI</h3>
+<p><img src="dataset_files/figure-html/metrics-batch-iLISI-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="graph-connectivity" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Graph connectivity</h3>
+<p><img src="dataset_files/figure-html/metrics-batch-graph_connectivity-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="kbet" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">kBET</h3>
+<p><img src="dataset_files/figure-html/metrics-batch-kBET-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="bio-conservation" class="section level2 tabset" number="2.3">
+<h2 class="tabset" number="2.3"><span class="header-section-number">2.3</span> Bio conservation</h2>
+<div id="bio-conservation-1" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Bio conservation</h3>
+<p><img src="dataset_files/figure-html/metrics-bio-bio_conservation-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="nmi-clusterlabel" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">NMI cluster/label</h3>
+<p><img src="dataset_files/figure-html/metrics-bio-NMI_cluster_label-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="ari-clusterlabel" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">ARI cluster/label</h3>
+<p><img src="dataset_files/figure-html/metrics-bio-ARI_cluster_label-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="label-asw" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Label ASW</h3>
+<p><img src="dataset_files/figure-html/metrics-bio-ASW_label-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="isolated-label-f1" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Isolated label F1</h3>
+<p><img src="dataset_files/figure-html/metrics-bio-isolated_label_F1-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="isolated-label-silhouette" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Isolated label silhouette</h3>
+<p><img src="dataset_files/figure-html/metrics-bio-isolated_label_silhouette-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="graph-clisi" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Graph cLISI</h3>
+<p><img src="dataset_files/figure-html/metrics-bio-cLISI-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="hvg-conservation" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">HVG conservation</h3>
+<p><img src="dataset_files/figure-html/metrics-bio-HVG_overlap-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cell-cycle-conservation" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Cell cycle conservation</h3>
+<p><img src="dataset_files/figure-html/metrics-bio-cell_cycle-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="trajectory-conservation" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Trajectory conservation</h3>
+<p><img src="dataset_files/figure-html/metrics-bio-trajectory-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="umaps" class="section level1 tabset tabset-pills tabset-fade" number="3">
+<h1 class="tabset tabset-pills tabset-fade" number="3"><span class="header-section-number">3</span> UMAPs</h1>
+<div id="full" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">Full</h2>
+<div id="scaled" class="section level3 unnumbered tabset tabset-pills" number="">
+<h3 class="unnumbered tabset tabset-pills" number="">Scaled</h3>
+<div id="mnn---features" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">MNN - Features</h4>
+<div id="batch" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/mnn_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/mnn_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scanorama---embedding" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Scanorama - Embedding</h4>
+<div id="batch-1" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/scanorama_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-1" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/scanorama_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scanorama---features" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Scanorama - Features</h4>
+<div id="batch-2" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/scanorama_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-2" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/scanorama_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="seurat-v3---features" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Seurat v3 - Features</h4>
+<div id="batch-3" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/seurat_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-3" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/seurat_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="harmony---embedding" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Harmony - Embedding</h4>
+<div id="batch-4" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/harmony_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-4" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/harmony_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="bbknn---graph" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">BBKNN - Graph</h4>
+<div id="batch-5" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/bbknn_knn_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-5" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/bbknn_knn_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="combat---features" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">ComBat - Features</h4>
+<div id="batch-6" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/combat_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-6" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/combat_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="fastmnn---embedding" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">FastMNN - Embedding</h4>
+<div id="batch-7" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/fastmnn_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-7" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/fastmnn_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="fastmnn---features" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">FastMNN - Features</h4>
+<div id="batch-8" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/fastmnn_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-8" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/full_feature/fastmnn_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="unscaled" class="section level3 unnumbered tabset tabset-pills" number="">
+<h3 class="unnumbered tabset tabset-pills" number="">Unscaled</h3>
+<div id="mnn---features-1" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">MNN - Features</h4>
+<div id="batch-9" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/mnn_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-9" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/mnn_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scanorama---embedding-1" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Scanorama - Embedding</h4>
+<div id="batch-10" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/scanorama_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-10" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/scanorama_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scanorama---features-1" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Scanorama - Features</h4>
+<div id="batch-11" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/scanorama_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-11" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/scanorama_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="seurat-v3---features-1" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Seurat v3 - Features</h4>
+<div id="batch-12" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/seurat_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-12" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/seurat_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="harmony---embedding-1" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Harmony - Embedding</h4>
+<div id="batch-13" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/harmony_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-13" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/harmony_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="bbknn---graph-1" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">BBKNN - Graph</h4>
+<div id="batch-14" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/bbknn_knn_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-14" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/bbknn_knn_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scvi---embedding" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">scVI - Embedding</h4>
+<div id="batch-15" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/scvi_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-15" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/scvi_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="combat---features-1" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">ComBat - Features</h4>
+<div id="batch-16" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/combat_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-16" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/combat_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="liger---embedding" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">LIGER - Embedding</h4>
+<div id="batch-17" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/liger_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-17" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/liger_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scanvi---embedding" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">scANVI - Embedding</h4>
+<div id="batch-18" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/scanvi_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-18" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/scanvi_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="fastmnn---embedding-1" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">FastMNN - Embedding</h4>
+<div id="batch-19" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/fastmnn_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-19" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/fastmnn_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="fastmnn---features-1" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">FastMNN - Features</h4>
+<div id="batch-20" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/fastmnn_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-20" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/fastmnn_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="unintegrated---features" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Unintegrated - Features</h4>
+<div id="batch-21" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/unintegrated_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-21" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/full_feature/unintegrated_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+</div>
+<div id="hvg" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">HVG</h2>
+<div id="scaled-1" class="section level3 unnumbered tabset tabset-pills" number="">
+<h3 class="unnumbered tabset tabset-pills" number="">Scaled</h3>
+<div id="mnn---features-2" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">MNN - Features</h4>
+<div id="batch-22" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/mnn_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-22" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/mnn_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scanorama---embedding-2" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Scanorama - Embedding</h4>
+<div id="batch-23" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/scanorama_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-23" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/scanorama_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scanorama---features-2" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Scanorama - Features</h4>
+<div id="batch-24" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/scanorama_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-24" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/scanorama_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="seurat-v3---features-2" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Seurat v3 - Features</h4>
+<div id="batch-25" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/seurat_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-25" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/seurat_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="harmony---embedding-2" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Harmony - Embedding</h4>
+<div id="batch-26" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/harmony_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-26" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/harmony_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="bbknn---graph-2" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">BBKNN - Graph</h4>
+<div id="batch-27" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/bbknn_knn_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-27" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/bbknn_knn_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="combat---features-2" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">ComBat - Features</h4>
+<div id="batch-28" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/combat_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-28" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/combat_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="fastmnn---embedding-2" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">FastMNN - Embedding</h4>
+<div id="batch-29" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/fastmnn_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-29" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/fastmnn_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="fastmnn---features-2" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">FastMNN - Features</h4>
+<div id="batch-30" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/fastmnn_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-30" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/scaled/hvg/fastmnn_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="unscaled-1" class="section level3 unnumbered tabset tabset-pills" number="">
+<h3 class="unnumbered tabset tabset-pills" number="">Unscaled</h3>
+<div id="mnn---features-3" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">MNN - Features</h4>
+<div id="batch-31" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/mnn_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-31" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/mnn_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scanorama---embedding-3" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Scanorama - Embedding</h4>
+<div id="batch-32" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/scanorama_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-32" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/scanorama_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scanorama---features-3" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Scanorama - Features</h4>
+<div id="batch-33" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/scanorama_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-33" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/scanorama_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="seurat-v3---features-3" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Seurat v3 - Features</h4>
+<div id="batch-34" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/seurat_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-34" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/seurat_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="harmony---embedding-3" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">Harmony - Embedding</h4>
+<div id="batch-35" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/harmony_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-35" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/harmony_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="bbknn---graph-3" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">BBKNN - Graph</h4>
+<div id="batch-36" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/bbknn_knn_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-36" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/bbknn_knn_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scvi---embedding-1" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">scVI - Embedding</h4>
+<div id="batch-37" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/scvi_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-37" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/scvi_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="combat---features-3" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">ComBat - Features</h4>
+<div id="batch-38" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/combat_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-38" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/combat_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="liger---embedding-1" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">LIGER - Embedding</h4>
+<div id="batch-39" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/liger_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-39" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/liger_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scanvi---embedding-1" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">scANVI - Embedding</h4>
+<div id="batch-40" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/scanvi_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-40" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/scanvi_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="fastmnn---embedding-3" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">FastMNN - Embedding</h4>
+<div id="batch-41" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/fastmnn_embed_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-41" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/fastmnn_embed_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="fastmnn---features-3" class="section level4 tabset unnumbered" number="">
+<h4 class="tabset unnumbered" number="">FastMNN - Features</h4>
+<div id="batch-42" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Batch</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/fastmnn_full_batch.png" width="500" style="display: block; margin: auto;" /></p>
+</div>
+<div id="labels-42" class="section level5 unnumbered" number="">
+<h5 class="unnumbered" number="">Labels</h5>
+<p><img src="/Users/luke.zappia/Documents/Projects/scIB-results/data/mini_sim/unscaled/hvg/fastmnn_full_labels.png" width="502" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

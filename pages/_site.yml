@@ -1,0 +1,19 @@
+name: "scIB-results"
+output_dir: "../docs"
+navbar:
+  title: "scIB Results"
+  left:
+    - text: "Home"
+      href: index.html
+  right:
+    - text: "About"
+      href: about.html
+    - icon: fa-github fa-lg
+      href: https://github.com/theislab/scIB-results
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    number_sections: yes
+    toc: yes
+    toc_float: yes
