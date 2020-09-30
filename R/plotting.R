@@ -198,3 +198,65 @@ metric_barplot <- function(metrics, metric, label) {
 
     plot
 }
+
+plot_embedding_coords <- function(dataset, scaling, features, method, output,
+                                  labels) {
+
+    `%>%` <- magrittr::`%>%`
+
+    coords_path <- get_coords_path(dataset, scaling, features, method, output,
+                                   labels)
+
+    coords <- suppressMessages(suppressWarnings(
+        readr::read_csv(coords_path
+    ))) %>%
+        dplyr::rename(ID = X1)
+
+    group_name <- colnames(coords)[2]
+    batch_name <- colnames(coords)[3]
+    dim1_name  <- colnames(coords)[4]
+    dim2_name  <- colnames(coords)[5]
+
+    base_plot <- ggplot2::ggplot(
+        coords,
+        ggplot2::aes(x = .data[[dim1_name]], y = .data[[dim2_name]])
+    ) +
+        ggplot2::theme(
+            plot.title      = ggplot2::element_text(hjust = 0.5, size = 20),
+            legend.position = "bottom",
+            panel.border    = ggplot2::element_rect(fill = NA)
+        )
+
+    group_plot <- base_plot +
+        ggplot2::geom_point(ggplot2::aes(colour = .data[[group_name]])) +
+        ggplot2::labs(title = group_name)  +
+        ggplot2::scale_colour_hue(h = c(10, 170))
+
+    batch_plot <- base_plot +
+        ggplot2::geom_point(ggplot2::aes(colour = .data[[batch_name]])) +
+        ggplot2::labs(title = batch_name) +
+        ggplot2::scale_colour_hue(h = c(190, 350))
+
+    group_plot + batch_plot
+}
+
+get_coords_path <- function(dataset, scaling, features, method, output,
+                            labels) {
+    scaling <- stringr::str_to_lower(scaling)
+    features <- dplyr::if_else(features == "Full", "full_feature", "hvg")
+    method <- labels$methods[method]
+    output <- dplyr::case_when(
+        output == "Features"  ~ "full",
+        output == "Embedding" ~ "embed",
+        output == "Graph"     ~ "knn"
+    )
+
+    here::here(
+        "data",
+        dataset,
+        scaling,
+        features,
+        "figures",
+        paste(method, output, "coords.csv", sep = "_")
+    )
+}

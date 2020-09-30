@@ -10,6 +10,7 @@ suppressPackageStartupMessages({
     library("here")
     # Presentation
     library("knitr")
+    library("patchwork")
     # Tidyverse
     library("tidyverse")
 })

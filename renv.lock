@@ -172,6 +172,18 @@
       "RemoteSha": "1.4-1",
       "Hash": "6b436e95723d1f0e861224dd9b094dfb"
     },
+    "conflicted": {
+      "Package": "conflicted",
+      "Version": "1.0.4",
+      "Source": "CRAN",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemoteRef": "conflicted",
+      "RemoteRepos": "https://cran.rstudio.com",
+      "RemotePkgType": "macos",
+      "RemoteSha": "1.0.4",
+      "Hash": "43c5107cc96f47043a56736768ecc59d"
+    },
     "cpp11": {
       "Package": "cpp11",
       "Version": "0.2.1",
@@ -458,6 +470,18 @@
       "RemotePkgType": "macos",
       "RemoteSha": "1.1",
       "Hash": "61e4a10781dd00d7d81dd06ca9b94e95"
+    },
+    "memoise": {
+      "Package": "memoise",
+      "Version": "1.1.0",
+      "Source": "CRAN",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemoteRef": "memoise",
+      "RemoteRepos": "https://cran.rstudio.com",
+      "RemotePkgType": "macos",
+      "RemoteSha": "1.1.0",
+      "Hash": "58baa74e4603fcfb9a94401c58c8f9b1"
     },
     "mgcv": {
       "Package": "mgcv",

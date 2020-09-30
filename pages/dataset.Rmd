@@ -96,10 +96,10 @@ out <- knitr::knit_child(text = unlist(src_list), options = list(cache = FALSE))
 
 `r out`
 
-UMAPs {.tabset .tabset-pills .tabset-fade}
-=====
+Embeddings {.tabset .tabset-pills .tabset-fade}
+==========
 
-```{r umaps, results = "hide"}
+```{r embeddings, results = "hide"}
 full_src <- list()
 for (feature in levels(metrics$features)) {
     full_src <- c(
@@ -110,38 +110,17 @@ for (feature in levels(metrics$features)) {
     for (scale in levels(metrics$scaling)) {
         full_src <- c(
             full_src,
-            paste("###", scale, "{.unnumbered .tabset .tabset-pills}"), ""
+            paste("###", scale, "{.unnumbered .tabset}"), ""
         )
         metrics_sel <- filter(metrics, features == feature, scaling == scale)
         src_list <- map2_chr(
             metrics_sel$method, metrics_sel$output,
             function(.method, .output) {
-                batch_path <- here(
-                    "data", params$dataset,
-                    tolower(scale),
-                    if_else(feature == "Full", "full_feature", "hvg"),
-                    paste(
-                        labels$methods[.method],
-                        case_when(
-                            .output == "Features"  ~ "full",
-                            .output == "Embedding" ~ "embed",
-                            .output == "Graph"     ~ "knn"
-                        ),
-                        "batch.png", sep = "_"
-                    )
-                )
-                labels_path <- str_replace(batch_path, "batch", "labels")
                 src <- c(
-                    "#### <<.method>> - <<.output>> {.tabset .unnumbered}",
-                    "",
-                    "##### Batch {.unnumbered}",
-                    "```{r umap-<<feature>>-<<scale>>-<<.method>>-<<.output>>-batch}",
-                    "knitr::include_graphics('<<batch_path>>')",
-                    "```",
-                    "",
-                    "##### Labels {.unnumbered}",
-                    "```{r umap-<<feature>>-<<scale>>-<<.method>>-<<.output>>-labels}",
-                    "knitr::include_graphics('<<labels_path>>')",
+                    "#### <<.method>> (<<.output>>) {.unnumbered}",
+                    "```{r embedding-<<feature>>-<<scale>>-<<.method>>-<<.output>>}",
+                    "plot_embedding_coords(params$dataset, '<<scale>>',",
+                    "'<<feature>>', '<<.method>>', '<<.output>>', labels)",
                     "```",
                     ""
                 )
