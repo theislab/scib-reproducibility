@@ -30,7 +30,7 @@ knitr::opts_chunk$set(
     autodep        = TRUE,
     cache          = FALSE,
     cache.comments = FALSE,
-    echo           = TRUE,
+    echo           = FALSE,
     error          = FALSE,
     fig.align      = "center",
     fig.width      = 10,

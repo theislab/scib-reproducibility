@@ -11,6 +11,7 @@ library("here")
 
 source(here("R", "render.R"))
 source(here("R", "load.R"))
+source(here("R", "plotting.R"))
 
 #==============================================================================#
 # ---- PLAN ----
