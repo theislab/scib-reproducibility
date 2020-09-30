@@ -4,13 +4,13 @@
 
 library("drake")
 library("here")
-library("readr")
 
 #==============================================================================#
 # ---- FUNCTIONS ----
 #==============================================================================#
 
 source(here("R", "render.R"))
+source(here("R", "load.R"))
 
 #==============================================================================#
 # ---- PLAN ----
@@ -18,9 +18,11 @@ source(here("R", "render.R"))
 
 plan <- drake_plan(
     configs = list(
-        site = read_lines(here(file_in("pages/_site.yml"))),
-        setup = read_lines(here(file_in("R/document_setup.R")))
+        site = readr::read_lines(here(file_in("pages/_site.yml"))),
+        setup = readr::read_lines(here(file_in("R/document_setup.R")))
     ),
+    labels = get_labels(),
+    metrics = get_metrics(here(file_in("data/metrics.csv")), labels),
     dataset = target(
         callr_render(
             here(knitr_in("pages/dataset.Rmd")),

@@ -19,149 +19,9 @@ library("htmltools")
 ```
 
 ```{r load}
-method_labels = c(
-    "MNN" = "mnn", 
-    "Scanorama"    = "scanorama",
-    "Seurat v3"    = "seurat",
-    "Harmony"      = "harmony",
-    "BBKNN"        = "bbknn",
-    "SAUCIE"       = "saucie",
-    "trVAE"        = "trvae",
-    "trVAEp"       = "trvaep",
-    "scVI"         = "scvi",
-    "CONOS"        = "conos",
-    "ComBat"       = "combat",
-    "LIGER"        = "liger",
-    "scGen"        = "scgen",
-    "scANVI"       = "scanvi",
-    "FastMNN"      = "fastmnn",
-    "DESC"         = "desc",
-    "Unintegrated" = "unintegrated"
-)
-
-metrics <- read_csv(
-    here("data", "metrics.csv"),
-    col_names = c(
-        "path",
-        "NMI_cluster_label",
-        "ARI_cluster_label",
-        "ASW_label",
-        "ASW_label_batch",
-        "PCR_batch",
-        "cell_cycle",
-        "isolated_label_F1",
-        "isolated_label_silhouette",
-        "graph_connectivity",
-        "kBET",
-        "iLISI",
-        "cLISI",
-        "HVG_overlap",
-        "trajectory"
-    ),
-    col_types = cols(
-        path                      = col_character(),
-        NMI_cluster_label         = col_double(),
-        ARI_cluster_label         = col_double(),
-        ASW_label                 = col_double(),
-        ASW_label_batch           = col_double(),
-        PCR_batch                 = col_double(),
-        cell_cycle                = col_logical(),
-        isolated_label_F1         = col_double(),
-        isolated_label_silhouette = col_double(),
-        graph_connectivity        = col_double(),
-        kBET                      = col_double(),
-        iLISI                     = col_double(),
-        cLISI                     = col_double(),
-        HVG_overlap               = col_double(),
-        trajectory                = col_logical()
-    ),
-    skip = 1
-) %>%
-    separate(
-        path,
-        into = c(NA, "dataset", NA, "scaling", "features", "method"),
-        sep = "/"
-    ) %>%
-    separate(method, into = c("method", "output"), sep = "_") %>%
-    mutate(
-        dataset = factor(dataset),
-        scaling = factor(
-            scaling,
-            levels = c("scaled", "unscaled"),
-            labels = c("Scaled", "Unscaled")
-        ),
-        features = factor(
-            features,
-            levels = c("full_feature", "hvg"),
-            labels = c("Full", "HVG")
-        ),
-        method = factor(
-            method,
-            levels = method_labels,
-            labels = names(method_labels)
-        ),
-        output = factor(
-            output,
-            levels = c("full", "embed", "knn"),
-            labels = c("Features", "Embedding", "Graph")
-        )
-    ) %>%
-    mutate(
-        input       = paste(dataset, scaling, features, sep = "-"),
-        full_method = paste(method, output, sep = "-"),
-        scenario    = paste(input, full_method, sep = "|")
-    ) %>%
-    group_by(dataset) %>%
-    mutate(across(where(is.numeric), scales::rescale, to = c(0, 1))) %>%
-    ungroup() %>%
-    rowwise() %>%
-    mutate(
-        batch_correction = mean(
-            c(PCR_batch, ASW_label_batch, iLISI, graph_connectivity, kBET),
-            na.rm = TRUE
-        ),
-        bio_conservation = mean(
-            c(
-                NMI_cluster_label, ARI_cluster_label, ASW_label, 
-                isolated_label_F1, isolated_label_silhouette, cLISI,
-                HVG_overlap, cell_cycle, trajectory
-            ),
-            na.rm = TRUE
-        )
-    ) %>%
-    ungroup() %>%
-    mutate(overall = 0.4 * batch_correction + 0.6 * bio_conservation) %>%
-    relocate(
-        scenario, input, dataset, scaling, features, full_method, method, 
-        output, overall, batch_correction, PCR_batch, ASW_label_batch, iLISI,
-        graph_connectivity, kBET, bio_conservation, NMI_cluster_label,
-        ARI_cluster_label, ASW_label, isolated_label_F1, 
-        isolated_label_silhouette, cLISI, HVG_overlap, cell_cycle, trajectory
-    )
-
-metrics <- filter(metrics, dataset == params$dataset)
-
-batch_metrics <- c(
-    "Batch correction"   = "batch_correction",
-    "PCR batch"          = "PCR_batch",
-    "Batch ASW"          = "ASW_label_batch",
-    "Graph iLISI"        = "iLISI",
-    "Graph connectivity" = "graph_connectivity",
-    "kBET"               = "kBET"
-)
-
-bio_metrics <- c(
-    "Bio conservation"          = "bio_conservation",
-    "NMI cluster/label"         = "NMI_cluster_label",
-    "ARI cluster/label"         = "ARI_cluster_label",
-    "Label ASW"                 = "ASW_label",
-    "Isolated label F1"         = "isolated_label_F1", 
-    "Isolated label silhouette" = "isolated_label_silhouette",
-    "Graph cLISI"               = "cLISI",
-    "HVG conservation"          = "HVG_overlap",
-    "Cell cycle conservation"   = "cell_cycle",
-    "Trajectory conservation"   = "trajectory"
-)
+labels <- drake::readd("labels")
+metrics <- drake::readd("metrics") %>%
+    filter(dataset == params$dataset)
 ```
 
 Overall
@@ -346,11 +206,11 @@ tbl <- metrics %>%
         columnGroups = list(
             colGroup(
                 name = "Batch correction",
-                columns = unname(batch_metrics)
+                columns = unname(labels$metrics$batch)
             ),
             colGroup(
                 name = "Bio conservation",
-                columns = unname(bio_metrics)
+                columns = unname(labels$metrics$bio)
             )
         ),
         columns = list(
@@ -557,8 +417,8 @@ Batch correction {.tabset}
 ----------------
 
 ```{r metrics-batch, results = "hide"}
-src_list <- lapply(names(batch_metrics), function(label) {
-    metric <- batch_metrics[label]
+src_list <- lapply(names(labels$metrics$batch), function(label) {
+    metric <- labels$metrics$batch[label]
     src <- c(
         "### <<label>> {.unnumbered}",
         "```{r metrics-batch-<<metric>>}",
@@ -577,8 +437,8 @@ Bio conservation {.tabset}
 ----------------
 
 ```{r metrics-bio, results = "hide"}
-src_list <- lapply(names(bio_metrics), function(label) {
-    metric <- bio_metrics[label]
+src_list <- lapply(names(labels$metrics$bio), function(label) {
+    metric <- labels$metrics$bio[label]
     src <- c(
         "### <<label>> {.unnumbered}",
         "```{r metrics-bio-<<metric>>}",
@@ -618,7 +478,7 @@ for (feature in levels(metrics$features)) {
                     tolower(scale),
                     if_else(feature == "Full", "full_feature", "hvg"),
                     paste(
-                        method_labels[.method],
+                        labels$methods[.method],
                         case_when(
                             .output == "Features"  ~ "full",
                             .output == "Embedding" ~ "embed",
