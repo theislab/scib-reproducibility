@@ -155,22 +155,48 @@ plot_overall <- function(metrics, ref_lines, colour_by) {
     return(plot)
 }
 
-metric_barplot <- function(metrics, metric, label) {
-    metric_str <- rlang::as_label(rlang::enquo(metric))
-    metric_vec <- metrics[[metric_str]]
+metric_dataset_barplot <- function(metrics, metric, label) {
 
     ref_lines <- tibble::tribble(
-                                              ~Value,          ~Type,
-                    median(metric_vec, na.rm = TRUE),       "Median",
-        metric_vec[metrics$method == "Unintegrated"], "Unintegrated"
+                                                          ~Value,         ~Type,
+        median(dplyr::pull(metrics, {{ metric }}), na.rm = TRUE),      "Median",
+        dplyr::filter(metrics, method == "Unintegrated") %>%
+            dplyr::pull({{ metric }}),                            "Unintegrated"
     )
+
+    metric_barplot(metrics, {{ metric }}, full_method, method, ref_lines, label)
+}
+
+metric_method_barplot <- function(metrics, metric, label) {
+
+    ref_lines <- tibble::tribble(
+                                           ~Value,                   ~Type,
+        median(dplyr::pull(metrics, {{ metric }}), na.rm = TRUE), "Median",
+    )
+
+    metric_barplot(metrics, {{ metric }}, dataset, dataset, ref_lines, label)
+}
+
+metric_barplot <- function(metrics, metric, group, colour, ref_lines, label) {
+
+    metric_str <- rlang::as_label(rlang::enquo(metric))
+
+    ref_lines <- ref_lines %>%
+        dplyr::arrange(Type) %>%
+        dplyr::mutate(
+            colour = dplyr::case_when(
+                Type == "Unintegrated" ~ "red",
+                Type == "Median"       ~ "blue",
+                TRUE                   ~ "black"
+            )
+        )
 
     plot <- ggplot2::ggplot(
         metrics,
         ggplot2::aes(
-            x = forcats::fct_reorder(full_method, {{ metric }}, .fun = max),
-            y = {{ metric }},
-            fill = method
+            x    = forcats::fct_reorder({{ group }}, {{ metric }}, .fun = max),
+            y    = {{ metric }},
+            fill = {{ colour }}
         )
     ) +
         ggplot2::geom_hline(
@@ -212,7 +238,7 @@ metric_barplot <- function(metrics, metric, label) {
                 title          = "",
                 title.position = "top",
                 ncol           = 1,
-                override.aes   = list(colour = c("blue", "red")),
+                override.aes   = list(colour = unique(ref_lines$colour)),
                 order          = 90
             )
         ) +
@@ -228,7 +254,7 @@ metric_barplot <- function(metrics, metric, label) {
             )
         )
 
-    if (any(!is.na(metric_vec))) {
+    if (any(!is.na(metrics[[metric_str]]))) {
         plot <- plot +
             ggplot2::scale_y_continuous(limits = c(0, 1)) +
             ggplot2::facet_grid(features ~ scaling)
