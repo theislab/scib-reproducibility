@@ -21,10 +21,14 @@ DATASETS <- get_datasets()
 METHODS  <- get_methods()
 
 plan <- drake_plan(
-    configs = list(
-        site = readr::read_lines(here(file_in("pages/_site.yml"))),
+    site = target(
+        make_site_yaml(here(file_out("pages/_site.yml")), DATASETS, METHODS),
+        trigger = trigger(change = list(DATASETS, METHODS)),
+    ),
+    setup = list(
         setup = readr::read_lines(here(file_in("R/document_setup.R")))
     ),
+    configs = list(site, setup),
     css = fs::file_copy(
         here(file_in("pages/style.css")),
         here(file_out("docs/style.css"))

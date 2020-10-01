@@ -17,3 +17,59 @@ callr_render <- function(input, output_file, params = NULL) {
         args = list(input = input, output_file = output_file, params = params)
     )
 }
+
+
+make_site_yaml <- function(outpath, datasets, methods) {
+
+    `%>%` <- magrittr::`%>%`
+
+    datasets_list <- purrr::map(sort(datasets), function(.dataset) {
+        ymlthis::navbar_page(.dataset, paste0("dataset_", .dataset, ".html"))
+    })
+
+    methods_list <- purrr::map(sort(methods), function(.method) {
+        ymlthis::navbar_page(.method, paste0("method_", .method, ".html"))
+    })
+
+    site_yml <- ymlthis::yml_empty() %>%
+        ymlthis::yml_site_opts(
+            name       = "scIB-results",
+            output_dir = "../docs"
+        ) %>%
+        ymlthis::yml_navbar(
+            title = "scIB Results",
+            type = "default",
+            left = list(
+                ymlthis::navbar_page("Home", "index.html"),
+                ymlthis::navbar_page("Datasets", menu = datasets_list),
+                ymlthis::navbar_page("Methods", menu = methods_list)
+            ),
+            right = list(
+                ymlthis::navbar_page("About", "about.html"),
+                ymlthis::navbar_page(
+                    icon = "fa-github fa-lg",
+                    href = "https://github.com/theislab/scIB-results"
+                )
+            )
+        ) %>%
+        ymlthis::yml_output(
+            rmarkdown::html_document(
+                theme           = "cosmo",
+                highlight       = "textmate",
+                number_sections = TRUE,
+                toc             = TRUE,
+                toc_float       = TRUE,
+                css             = "style.css",
+                self_contained  = FALSE,
+                lib_dir         = "../docs/site_libs"
+            )
+        )
+
+    if (fs::file_exists(outpath)) {
+        fs::file_delete(outpath)
+    }
+
+    ymlthis::use_site_yml(site_yml, fs::path_dir(outpath))
+
+    invisible(site_yml)
+}
