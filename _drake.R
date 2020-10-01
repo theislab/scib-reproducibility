@@ -18,6 +18,7 @@ source(here("R", "plotting.R"))
 #==============================================================================#
 
 DATASETS <- get_datasets()
+METHODS  <- get_methods()
 
 plan <- drake_plan(
     configs = list(
@@ -33,6 +34,15 @@ plan <- drake_plan(
             list(dataset = dataset)
         ),
         transform = map(dataset = !!DATASETS),
+        trigger = trigger(change = configs)
+    ),
+    rmd_method = target(
+        callr_render(
+            here(knitr_in("pages/method.Rmd")),
+            here("docs", paste0("method_", method, ".html")),
+            list(method = method)
+        ),
+        transform = map(method = !!METHODS),
         trigger = trigger(change = configs)
     )
 )

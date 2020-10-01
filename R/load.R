@@ -2,6 +2,12 @@ get_datasets <- function() {
     c("mini_sim", "mini_pancreas")
 }
 
+get_methods <- function() {
+    labels <- get_labels()
+    metrics <- get_metrics(here::here("data", "metrics.csv"), labels)
+    unique(as.character(metrics$method))
+}
+
 get_metrics <- function(metrics_file, labels) {
 
     `%>%` <- magrittr::`%>%`

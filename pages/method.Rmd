@@ -6,7 +6,7 @@ output:
     toc_float: true
     number_sections: true
 params:
-  method: "scanorama"
+  method: "Scanorama"
 ---
 
 ```{r setup, include=FALSE}
@@ -26,9 +26,8 @@ source(here("R", "tables.R"))
 ```{r load}
 labels <- drake::readd("labels")
 
-method_label <- names(labels$method)[labels$methods == params$method]
 metrics <- drake::readd("metrics") %>%
-    filter(method == method_label)
+    filter(method == params$method)
 ```
 
 Overall
@@ -122,7 +121,7 @@ for (feature in levels(metrics$features)) {
                     "#### <<.dataset>> (<<.output>>) {.unnumbered}",
                     "```{r embedding-<<feature>>-<<scale>>-<<.dataset>>-<<.output>>}",
                     "plot_embedding_coords('<<.dataset>>', '<<scale>>',",
-                    "'<<feature>>', method_label, '<<.output>>', labels)",
+                    "'<<feature>>', params$method, '<<.output>>', labels)",
                     "```",
                     ""
                 )
