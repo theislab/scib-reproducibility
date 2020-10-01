@@ -27,12 +27,15 @@ suppressMessages({
 # ---- KNITR ----
 #==============================================================================#
 
+DOCNAME <- knitr::current_input()
+
 knitr::opts_chunk$set(
     autodep        = TRUE,
     cache          = FALSE,
     cache.comments = FALSE,
     echo           = FALSE,
     error          = FALSE,
+    fig.path       = paste0("figures/", DOCNAME, "/"),
     fig.align      = "center",
     fig.width      = 10,
     fig.height     = 8,

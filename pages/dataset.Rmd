@@ -7,10 +7,12 @@ output:
     number_sections: true
 params:
   dataset: "mini_pancreas"
+  fig_dir: false
 ---
 
 ```{r setup, include=FALSE}
 source(here::here("R", "document_setup.R"))
+knitr::opts_chunk$set(fig.path = paste0(params$fig_dir, "/"))
 ```
 
 ```{r libraries}
@@ -53,7 +55,7 @@ Overall
 -------
 
 ```{r metrics-overall}
-metric_barplot(metrics, overall, "Overall score")
+metric_dataset_barplot(metrics, overall, "Overall score")
 ```
 
 Batch correction {.tabset}
@@ -65,7 +67,7 @@ src_list <- lapply(names(labels$metrics$batch), function(label) {
     src <- c(
         "### <<label>> {.unnumbered}",
         "```{r metrics-batch-<<metric>>}",
-        "metric_barplot(metrics, <<metric>>, '<<label>>')",
+        "metric_dataset_barplot(metrics, <<metric>>, '<<label>>')",
         "```",
         ""
     )
@@ -85,7 +87,7 @@ src_list <- lapply(names(labels$metrics$bio), function(label) {
     src <- c(
         "### <<label>> {.unnumbered}",
         "```{r metrics-bio-<<metric>>}",
-        "metric_barplot(metrics, <<metric>>, '<<label>>')",
+        "metric_dataset_barplot(metrics, <<metric>>, '<<label>>')",
         "```",
         ""
     )

@@ -7,10 +7,12 @@ output:
     number_sections: true
 params:
   method: "Scanorama"
+  fig_dir: false
 ---
 
 ```{r setup, include=FALSE}
 source(here::here("R", "document_setup.R"))
+knitr::opts_chunk$set(fig.path = paste0(params$fig_dir, "/"))
 ```
 
 ```{r libraries}
