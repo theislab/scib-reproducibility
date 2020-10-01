@@ -43,7 +43,7 @@ navbar:
     icon: fa-github fa-lg
 output:
   rmarkdown::html_document:
-    theme: cosmo
+    theme: yeti
     highlight: textmate
     number_sections: true
     toc: true

@@ -54,7 +54,7 @@ make_site_yaml <- function(outpath, datasets, methods) {
         ) %>%
         ymlthis::yml_output(
             rmarkdown::html_document(
-                theme           = "cosmo",
+                theme           = "yeti",
                 highlight       = "textmate",
                 number_sections = TRUE,
                 toc             = TRUE,
