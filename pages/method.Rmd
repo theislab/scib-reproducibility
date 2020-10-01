@@ -1,0 +1,138 @@
+---
+title: "Method results"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+params:
+  method: "scanorama"
+---
+
+```{r setup, include=FALSE}
+source(here::here("R", "document_setup.R"))
+```
+
+```{r libraries}
+library("reactable")
+library("htmltools")
+```
+
+```{r functions}
+source(here("R", "plotting.R"))
+source(here("R", "tables.R"))
+```
+
+```{r load}
+labels <- drake::readd("labels")
+
+method_label <- names(labels$method)[labels$methods == params$method]
+metrics <- drake::readd("metrics") %>%
+    filter(method == method_label)
+```
+
+Overall
+=======
+
+Plot
+----
+
+```{r overall-plot}
+plot_method_overall(metrics)
+```
+
+Table
+-----
+
+```{r overall-table}
+make_dataset_table(metrics, labels)
+```
+
+Individual metrics
+==================
+
+Overall
+-------
+
+```{r metrics-overall}
+metric_method_barplot(metrics, overall, "Overall score")
+```
+
+Batch correction {.tabset}
+----------------
+
+```{r metrics-batch, results = "hide"}
+src_list <- lapply(names(labels$metrics$batch), function(label) {
+    metric <- labels$metrics$batch[label]
+    src <- c(
+        "### <<label>> {.unnumbered}",
+        "```{r metrics-batch-<<metric>>}",
+        "metric_method_barplot(metrics, <<metric>>, '<<label>>')",
+        "```",
+        ""
+    )
+    knitr::knit_expand(text = src, delim = c("<<", ">>"))
+})
+out <- knitr::knit_child(text = unlist(src_list), options = list(cache = FALSE))
+```
+
+`r out`
+
+Bio conservation {.tabset}
+----------------
+
+```{r metrics-bio, results = "hide"}
+src_list <- lapply(names(labels$metrics$bio), function(label) {
+    metric <- labels$metrics$bio[label]
+    src <- c(
+        "### <<label>> {.unnumbered}",
+        "```{r metrics-bio-<<metric>>}",
+        "metric_method_barplot(metrics, <<metric>>, '<<label>>')",
+        "```",
+        ""
+    )
+    knitr::knit_expand(text = src, delim = c("<<", ">>"))
+})
+out <- knitr::knit_child(text = unlist(src_list), options = list(cache = FALSE))
+```
+
+`r out`
+
+Embeddings {.tabset .tabset-pills .tabset-fade}
+==========
+
+```{r embeddings, results = "hide"}
+full_src <- list()
+for (feature in levels(metrics$features)) {
+    full_src <- c(
+        full_src,
+        paste("##", feature, "{.unnumbered .tabset .tabset-pills .tabset-fade}"),
+        ""
+    )
+    for (scale in levels(metrics$scaling)) {
+        full_src <- c(
+            full_src,
+            paste("###", scale, "{.unnumbered .tabset}"), ""
+        )
+        metrics_sel <- filter(metrics, features == feature, scaling == scale)
+        src_list <- map2_chr(
+            metrics_sel$dataset, metrics_sel$output,
+            function(.dataset, .output) {
+                src <- c(
+                    "#### <<.dataset>> (<<.output>>) {.unnumbered}",
+                    "```{r embedding-<<feature>>-<<scale>>-<<.dataset>>-<<.output>>}",
+                    "plot_embedding_coords('<<.dataset>>', '<<scale>>',",
+                    "'<<feature>>', method_label, '<<.output>>', labels)",
+                    "```",
+                    ""
+                )
+                knitr::knit_expand(text = src, delim = c("<<", ">>"))
+        })
+        full_src <- c(full_src, src_list)
+    }
+}
+
+out <- knitr::knit_child(text = unlist(full_src), options = list(cache = FALSE))
+```
+
+`r out`
