@@ -155,7 +155,6 @@ metric_barplot <- function(metrics, metric, label) {
         ggplot2::scale_linetype_manual(values = c(1, 5)) +
         ggplot2::scale_colour_manual(values = c("blue", "red"), guide = FALSE) +
         ggplot2::scale_shape_manual(values = c(21, 22, 23)) +
-        ggplot2::facet_grid(features ~ scaling) +
         ggplot2::labs(y = label) +
         ggplot2::guides(
             fill = ggplot2::guide_legend(
@@ -193,7 +192,9 @@ metric_barplot <- function(metrics, metric, label) {
         )
 
     if (any(!is.na(metric_vec))) {
-        plot <- plot + ggplot2::scale_y_continuous(limits = c(0, 1))
+        plot <- plot +
+            ggplot2::scale_y_continuous(limits = c(0, 1)) +
+            ggplot2::facet_grid(features ~ scaling)
     }
 
     plot
@@ -209,8 +210,7 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
 
     coords <- suppressMessages(suppressWarnings(
         readr::read_csv(coords_path
-    ))) %>%
-        dplyr::rename(ID = X1)
+    )))
 
     group_name <- colnames(coords)[2]
     batch_name <- colnames(coords)[3]

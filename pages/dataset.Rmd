@@ -6,7 +6,7 @@ output:
     toc_float: true
     number_sections: true
 params:
-  dataset: "mini_sim"
+  dataset: "mini_pancreas"
 ---
 
 ```{r setup, include=FALSE}

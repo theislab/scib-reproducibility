@@ -11,9 +11,9 @@
 #' https://github.com/rstudio/gt/issues/297#issuecomment-497778735.
 #'
 #' @return path to the output file
-callr_render <- function(input, output_file) {
+callr_render <- function(input, output_file, params = NULL) {
     callr::r(
         function(...) {rmarkdown::render(...)},
-        args = list(input = input, output_file = output_file)
+        args = list(input = input, output_file = output_file, params = params)
     )
 }

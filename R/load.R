@@ -1,3 +1,7 @@
+get_datasets <- function() {
+    c("mini_sim", "mini_pancreas")
+}
+
 get_metrics <- function(metrics_file, labels) {
 
     `%>%` <- magrittr::`%>%`
@@ -29,7 +33,7 @@ get_metrics <- function(metrics_file, labels) {
             ASW_label                 = readr::col_double(),
             ASW_label_batch           = readr::col_double(),
             PCR_batch                 = readr::col_double(),
-            cell_cycle                = readr::col_logical(),
+            cell_cycle                = readr::col_double(),
             isolated_label_F1         = readr::col_double(),
             isolated_label_silhouette = readr::col_double(),
             graph_connectivity        = readr::col_double(),
@@ -37,14 +41,14 @@ get_metrics <- function(metrics_file, labels) {
             iLISI                     = readr::col_double(),
             cLISI                     = readr::col_double(),
             HVG_overlap               = readr::col_double(),
-            trajectory                = readr::col_logical()
+            trajectory                = readr::col_double()
         ),
         skip = 1
     ) %>%
         # Split the path into the different parts of the scenario
         tidyr::separate(
             path,
-            into = c(NA, "dataset", NA, "scaling", "features", "method"),
+            into = c("dataset", NA, "scaling", "features", "method"),
             sep = "/"
         ) %>%
         # Split method into method and output

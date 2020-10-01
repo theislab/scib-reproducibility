@@ -17,6 +17,8 @@ source(here("R", "plotting.R"))
 # ---- PLAN ----
 #==============================================================================#
 
+DATASETS <- get_datasets()
+
 plan <- drake_plan(
     configs = list(
         site = readr::read_lines(here(file_in("pages/_site.yml"))),
@@ -24,11 +26,13 @@ plan <- drake_plan(
     ),
     labels = get_labels(),
     metrics = get_metrics(here(file_in("data/metrics.csv")), labels),
-    dataset = target(
+    rmd_dataset = target(
         callr_render(
             here(knitr_in("pages/dataset.Rmd")),
-            here(file_out("docs/dataset.html"))
+            here("docs", paste0("dataset_", dataset, ".html")),
+            list(dataset = dataset)
         ),
+        transform = map(dataset = !!DATASETS),
         trigger = trigger(change = configs)
     )
 )
@@ -37,4 +41,4 @@ plan <- drake_plan(
 # ---- CONFIG ----
 #==============================================================================#
 
-drake_config(plan, verbose = 2)
+drake_config(plan, verbose = 1)
