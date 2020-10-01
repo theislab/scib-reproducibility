@@ -17,44 +17,77 @@ plot_dataset_overall <- function(metrics) {
         dplyr::select(type, batch_correction, bio_conservation) %>%
         dplyr::bind_rows(medians)
 
-    ggplot2::ggplot(
-        plot_data,
+    plot_overall(plot_data, ref_lines, method)
+}
+
+plot_method_overall <- function(metrics) {
+
+    plot_data <- metrics %>%
+        dplyr::mutate(output_features = paste(output, features, sep = "-"))
+
+    ref_lines <- metrics %>%
+        dplyr::summarise(
+            batch_correction = median(batch_correction),
+            bio_conservation = median(bio_conservation)
+        ) %>%
+        dplyr::mutate(type = "Median")
+
+    plot_overall(plot_data, ref_lines, dataset)
+}
+
+plot_overall <- function(metrics, ref_lines, colour_by) {
+
+    plot <- ggplot2::ggplot(
+        metrics,
         ggplot2::aes(
             x      = batch_correction,
             y      = bio_conservation,
-            colour = method,
+            colour = {{ colour_by }},
             size   = overall,
             shape  = output_features,
         )
-    ) +
-        ggplot2::geom_hline(
-            data = dplyr::filter(ref_lines, type == "Unintegrated"),
-            aes(yintercept = bio_conservation, linetype = type),
-            colour = "red"
-        ) +
-        ggplot2::geom_vline(
-            data = dplyr::filter(ref_lines, type == "Unintegrated"),
-            aes(xintercept = batch_correction, linetype = type),
-            colour = "red"
-        ) +
-        ggplot2::geom_hline(
-            data = dplyr::filter(ref_lines, type == "Median"),
-            aes(yintercept = bio_conservation, linetype = type),
-            colour = "blue"
-        ) +
-        ggplot2::geom_vline(
-            data = dplyr::filter(ref_lines, type == "Median"),
-            aes(xintercept = batch_correction, linetype = type),
-            colour = "blue"
-        ) +
+    )
+
+    ref_lines <- ref_lines %>%
+        dplyr::arrange(type) %>%
+        dplyr::mutate(
+            colour = dplyr::case_when(
+                type == "Unintegrated" ~ "red",
+                type == "Median"       ~ "blue",
+                TRUE                   ~ "black"
+            )
+        )
+
+    ref_layers <- purrr::pmap(ref_lines, function(...) {
+            current <- tibble(...)
+
+            hline <- ggplot2::geom_hline(
+                    data = current,
+                    aes(yintercept = bio_conservation, linetype = type),
+                    colour = current$colour
+            )
+            vline <- ggplot2::geom_vline(
+                data = current,
+                aes(xintercept = batch_correction, linetype = type),
+                colour = current$colour
+            )
+
+            return(list(hline = hline, vline = vline))
+    })
+
+    for (layer in ref_layers) {
+        plot <- plot + layer$hline + layer$vline
+    }
+
+    plot <- plot +
         ggplot2::geom_point(stroke = 1, fill = "white") +
         ggplot2::geom_point(
-            data = dplyr::filter(plot_data, features == "Full"),
+            data = dplyr::filter(metrics, features == "Full"),
             aes(alpha = scaling),
             shape = 4, size = 1.5, colour = "white"
         ) +
         ggplot2::geom_point(
-            data = dplyr::filter(plot_data, features == "HVG"),
+            data = dplyr::filter(metrics, features == "HVG"),
             aes(alpha = scaling),
             shape = 4, size = 1.5
         ) +
@@ -62,7 +95,7 @@ plot_dataset_overall <- function(metrics) {
         ggplot2::scale_y_continuous(limits = c(0, 1)) +
         ggplot2::scale_colour_brewer(palette = "Paired") +
         ggplot2::scale_size_continuous(range = c(0.5, 5), limits = c(0, 1),
-                              breaks = seq(0, 1, 0.2)) +
+                                       breaks = seq(0, 1, 0.2)) +
         ggplot2::scale_shape_manual(
             values = c(16, 21, 15, 22, 17, 24),
             labels = c("Embedding (Full)", "Embedding (HVG)", "Features (Full)",
@@ -77,7 +110,9 @@ plot_dataset_overall <- function(metrics) {
         ) +
         ggplot2::guides(
             colour = ggplot2::guide_legend(
-                title          = "Method",
+                title          = stringr::str_to_sentence(
+                    rlang::as_label(rlang::enquo(colour_by))
+                ),
                 title.position = "top",
                 ncol           = 2,
                 order          = 10
@@ -107,7 +142,7 @@ plot_dataset_overall <- function(metrics) {
                 title          = "",
                 title.position = "top",
                 ncol           = 1,
-                override.aes   = list(colour = c("blue", "red")),
+                override.aes   = list(colour = unique(ref_lines$colour)),
                 order          = 90
             )
         ) +
@@ -116,6 +151,8 @@ plot_dataset_overall <- function(metrics) {
             axis.text        = ggplot2::element_text(size = 7),
             panel.border     = ggplot2::element_rect(fill = NA)
         )
+
+    return(plot)
 }
 
 metric_barplot <- function(metrics, metric, label) {
