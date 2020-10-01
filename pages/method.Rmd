@@ -1,13 +1,8 @@
 ---
-title: "Method results"
-output:
-  html_document:
-    toc: true
-    toc_float: true
-    number_sections: true
 params:
   method: "Scanorama"
   fig_dir: false
+title: "`r paste('Method:', params$method)`"
 ---
 
 ```{r setup, include=FALSE}

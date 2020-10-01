@@ -1,13 +1,8 @@
 ---
-title: "Results"
-output:
-  html_document:
-    toc: true
-    toc_float: true
-    number_sections: true
 params:
   dataset: "mini_pancreas"
   fig_dir: false
+title: "`r paste('Dataset:', params$dataset)`"
 ---
 
 ```{r setup, include=FALSE}
