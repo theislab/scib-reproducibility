@@ -1,11 +1,13 @@
 get_datasets <- function() {
-    c("mini_sim", "mini_pancreas")
+    labels <- get_labels()
+    metrics <- get_metrics(here::here("data", "metrics.csv"), labels)
+    sort(unique(as.character(metrics$dataset)))
 }
 
 get_methods <- function() {
     labels <- get_labels()
     metrics <- get_metrics(here::here("data", "metrics.csv"), labels)
-    unique(as.character(metrics$method))
+    sort(unique(as.character(metrics$method)))
 }
 
 get_metrics <- function(metrics_file, labels) {
@@ -94,7 +96,12 @@ get_metrics <- function(metrics_file, labels) {
         dplyr::mutate(
             dplyr::across(
                 where(is.numeric),
-                scales::rescale, to = c(0, 1)
+                function (x) {
+                    if (all(is.na(x))) {
+                        return(x)
+                    }
+                    scales::rescale(x, to = c(0, 1))
+                }
             )
         ) %>%
         dplyr::ungroup() %>%

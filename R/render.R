@@ -23,11 +23,11 @@ make_site_yaml <- function(outpath, datasets, methods) {
 
     `%>%` <- magrittr::`%>%`
 
-    datasets_list <- purrr::map(sort(datasets), function(.dataset) {
+    datasets_list <- purrr::map(datasets, function(.dataset) {
         ymlthis::navbar_page(.dataset, paste0("dataset_", .dataset, ".html"))
     })
 
-    methods_list <- purrr::map(sort(methods), function(.method) {
+    methods_list <- purrr::map(methods, function(.method) {
         ymlthis::navbar_page(.method, paste0("method_", .method, ".html"))
     })
 
