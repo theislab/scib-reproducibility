@@ -35,6 +35,17 @@ plan <- drake_plan(
     ),
     labels = get_labels(),
     metrics = get_metrics(here(file_in("data/metrics.csv")), labels),
+    rmd_index = target(
+        callr_render(
+            here(knitr_in("pages/index.Rmd")),
+            here("docs", "index.html"),
+            list(
+                datasets = DATASETS,
+                methods  = METHODS
+            )
+        ),
+        trigger = trigger(change = configs)
+    ),
     rmd_dataset = target(
         callr_render(
             here(knitr_in("pages/dataset.Rmd")),

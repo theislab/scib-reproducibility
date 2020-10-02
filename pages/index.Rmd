@@ -1,8 +1,74 @@
 ---
 title: "scIB Results"
 output:
-  html_document:
-    toc: no
+  rmarkdown::html_document:
+    toc: false
+    number_sections: false
+params:
+  datasets:
+    - Dataset1
+    - Dataset2
+  methods:
+    - Method1
+    - Method2
 ---
 
-Results from single-cell integration benchmarking
+```{r setup, include=FALSE}
+source(here::here("R", "document_setup.R"))
+```
+
+This website displays additional results from the single-cell integration benchmarking project. 
+Here you can view all the individual benchmarking metrics broken down by dataset and method.
+
+<div class = "row">
+<div class = "col-md-2"></div>
+<div class = "col-md-3">
+
+## Datasets
+
+```{r datasets}
+dataset_list <- paste(
+    glue::glue(
+        "* [{params$datasets}](dataset_{params$datasets}.html)"
+    ),
+    collapse = "\n"
+)
+```
+
+`r dataset_list`
+
+</div>
+<div class = "col-md-2"></div>
+
+<div class = "col-md-3">
+
+## Methods
+
+```{r methods}
+methods_list <- paste(
+    glue::glue(
+        "* [{params$methods}](method_{params$methods}.html)"
+    ),
+    collapse = "\n"
+)
+```
+
+`r methods_list`
+
+</div>
+<div class = "col-md-2"></div>
+</div>
+
+For more information please refer to the main [scIB GitHub page][scIB-github] or the [preprint][preprint].
+You can also view the code for this website on [GitHub][scIB-results-github].
+
+If any part of the project is useful for your work please cite:
+
+> Luecken MD, Buttner M, Chaichoompu K, Danese A, Interlandi M, Mueller MF, Strobl DC, Zappia L, Dugas M, Colome-Tatche M, Theis FJ.
+> _"Benchmarking atlas-level data integration in single-cell genomics"_
+> **bioRxiv**. 2020
+> DOI: [10.1101/2020.05.22.111161][preprint]
+
+[scIB-github]: https://github.com/theislab/scib "scIB GitHub repository"
+[scIB-results-github]: https://github.com/theislab/scib "scIB results GitHub repository"
+[preprint]: https://doi.org/10.1101/2020.05.22.111161 "scIB preprint"
