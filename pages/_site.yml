@@ -37,8 +37,6 @@ navbar:
     - text: Unintegrated
       href: method_Unintegrated.html
   right:
-  - text: About
-    href: about.html
   - href: https://github.com/theislab/scIB-results
     icon: fa-github fa-lg
 output:

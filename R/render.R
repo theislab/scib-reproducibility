@@ -18,7 +18,6 @@ callr_render <- function(input, output_file, params = NULL) {
     )
 }
 
-
 make_site_yaml <- function(outpath, datasets, methods) {
 
     `%>%` <- magrittr::`%>%`
@@ -45,7 +44,7 @@ make_site_yaml <- function(outpath, datasets, methods) {
                 ymlthis::navbar_page("Methods", menu = methods_list)
             ),
             right = list(
-                ymlthis::navbar_page("About", "about.html"),
+                # ymlthis::navbar_page("About", "about.html"),
                 ymlthis::navbar_page(
                     icon = "fa-github fa-lg",
                     href = "https://github.com/theislab/scIB-results"
