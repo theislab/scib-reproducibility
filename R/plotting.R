@@ -316,10 +316,10 @@ get_coords_path <- function(dataset, scaling, features, method, output,
 
     here::here(
         "data",
+        "embeddings",
         dataset,
         scaling,
         features,
-        "figures",
-        paste(method, output, "coords.csv", sep = "_")
+        paste0(method, "_", output, ".csv")
     )
 }
