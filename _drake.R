@@ -35,6 +35,7 @@ plan <- drake_plan(
     ),
     labels = get_labels(),
     metrics = get_metrics(here(file_in("data/metrics.csv")), labels),
+    benchmarks = get_benchmarks(here(file_in("data/benchmarks.csv")), labels),
     rmd_index = target(
         callr_render(
             here(knitr_in("pages/index.Rmd")),

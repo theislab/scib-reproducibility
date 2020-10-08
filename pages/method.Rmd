@@ -21,10 +21,18 @@ source(here("R", "tables.R"))
 ```
 
 ```{r load}
+is_method <- params$method != "Unintegrated"
+
 labels <- drake::readd("labels")
 
 metrics <- drake::readd("metrics") %>%
     filter(method == params$method)
+
+benchmarks <- drake::readd("benchmarks") %>%
+    filter(
+        method    == params$method,
+        dataset %in% as.character(metrics$dataset)
+    )
 ```
 
 Overall
@@ -132,3 +140,28 @@ out <- knitr::knit_child(text = unlist(full_src), options = list(cache = FALSE))
 ```
 
 `r out`
+
+Scalability
+===========
+
+Time
+----
+
+```{r scalability-time, eval = is_method}
+benchmark_barplot(benchmarks, s, dataset, "Time") +
+    scale_y_log10(
+        breaks = c(      1,      60,  60 * 60, 60 * 60 * 24),
+        labels = c("1 sec", "1 min", "1 hour",      "1 day")
+    )
+```
+
+Memory
+------
+
+```{r scalability-memory, eval = is_method}
+benchmark_barplot(benchmarks, max_rss, dataset, "Maximum memory") +
+    scale_y_log10(
+        breaks = c(    1,     10,     100,   1024, 1024 * 10, 1024 * 100),
+        labels = c("1 MB","10 MB","100 MB", "1 GB",  "10 GB",   "100 GB")
+    )
+```

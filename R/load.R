@@ -140,7 +140,7 @@ get_labels <- function() {
         methods = c(
             "MNN"          = "mnn",
             "Scanorama"    = "scanorama",
-            "Seurat v3"    = "seurat",
+            "Seurat CCA"   = "seurat",
             "Harmony"      = "harmony",
             "BBKNN"        = "bbknn",
             "SAUCIE"       = "saucie",
@@ -178,4 +178,49 @@ get_labels <- function() {
             )
         )
     )
+}
+
+get_benchmarks <- function(benchmarks_file, labels) {
+
+    `%>%` <- magrittr::`%>%`
+
+    readr::read_csv(
+        benchmarks_file,
+        col_types = readr::cols(
+            .default = readr::col_double(),
+            scenario = readr::col_character(),
+            h_m_s    = readr::col_time(format = "")
+        ),
+        na = "-"
+    ) %>%
+        dplyr::mutate(
+            scenario = stringr::str_remove(scenario, "/R"),
+            scenario = stringr::str_remove(scenario, ".h5ad"),
+            scenario = stringr::str_remove(scenario, ".RDS")
+        ) %>%
+        # Split the path into the different parts of the scenario
+        tidyr::separate(
+            scenario,
+            into = c("dataset", NA, "scaling", "features", "method"),
+            sep = "/"
+        ) %>%
+        # Set factors with pretty labels
+        dplyr::mutate(
+            dataset = factor(dataset),
+            scaling = factor(
+                scaling,
+                levels = c("scaled", "unscaled"),
+                labels = c("Scaled", "Unscaled")
+            ),
+            features = factor(
+                features,
+                levels = c("full_feature", "hvg"),
+                labels = c("Full", "HVG")
+            ),
+            method = factor(
+                method,
+                levels = labels$methods,
+                labels = names(labels$methods)
+            )
+        )
 }

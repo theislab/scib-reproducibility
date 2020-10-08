@@ -323,3 +323,62 @@ get_coords_path <- function(dataset, scaling, features, method, output,
         paste0(method, "_", output, ".csv")
     )
 }
+
+benchmark_barplot <- function(benchmarks, metric, group, label) {
+
+    `%>%` <- magrittr::`%>%`
+
+    medians <- benchmarks %>%
+        dplyr::group_by(features, scaling) %>%
+        dplyr::summarise(median = median({{ metric }}), .groups = "drop")
+
+    plot <- ggplot2::ggplot(
+        benchmarks,
+        ggplot2::aes(
+            x    = forcats::fct_reorder({{ group }}, {{ metric }}, .fun = max),
+            y    = {{ metric }},
+            fill = {{ group }}
+        )
+    ) +
+        ggplot2::geom_hline(
+            data = medians,
+            ggplot2::aes(yintercept = median, linetype = "Median"),
+            colour = "blue"
+        ) +
+        ggplot2::geom_col() +
+        ggplot2::coord_flip() +
+        ggplot2::scale_fill_brewer(palette = "Paired") +
+        ggplot2::labs(y = label) +
+        ggplot2::guides(
+            fill = ggplot2::guide_legend(
+                title          = "Method",
+                title.position = "top",
+                ncol           = 2,
+                order          = 10
+            ),
+            linetype = ggplot2::guide_legend(
+                title          = "",
+                title.position = "top",
+                ncol           = 1,
+                override.aes   = list(colour = "blue"),
+                order          = 90
+            )
+        ) +
+        ggplot2::theme(
+            legend.position  = "right",
+            axis.text        = ggplot2::element_text(size = 7),
+            axis.title.y     = ggplot2::element_blank(),
+            panel.border     = ggplot2::element_rect(fill = NA),
+            strip.background = ggplot2::element_rect(fill = "black"),
+            strip.text       = ggplot2::element_text(
+                size = 10,
+                colour = "white"
+            )
+        )
+
+    if (any(!is.na(dplyr::pull(benchmarks, {{ metric }})))) {
+        plot <- plot + ggplot2::facet_grid(features ~ scaling)
+    }
+
+    return(plot)
+}
