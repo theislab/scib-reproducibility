@@ -1,5 +1,5 @@
 name: scIB-results
-output_dir: ../docs
+output_dir: ../../docs
 navbar:
   title: scIB Results
   type: default
@@ -48,5 +48,5 @@ output:
     toc_float: true
     css: style.css
     self_contained: false
-    lib_dir: ../docs/site_libs
+    lib_dir: ../../docs/site_libs
 

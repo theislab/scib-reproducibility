@@ -31,15 +31,16 @@ plan <- drake_plan(
     configs = list(site, setup),
     css = fs::file_copy(
         here(file_in("pages/style.css")),
-        here(file_out("docs/style.css"))
+        here(file_out("../docs/style.css")),
+        overwrite = TRUE
     ),
     labels = get_labels(),
-    metrics = get_metrics(here(file_in("data/metrics.csv")), labels),
-    benchmarks = get_benchmarks(here(file_in("data/benchmarks.csv")), labels),
+    metrics = get_metrics(here(file_in("../data/metrics.csv")), labels),
+    benchmarks = get_benchmarks(here(file_in("../data/benchmarks.csv")), labels),
     rmd_index = target(
         callr_render(
             here(knitr_in("pages/index.Rmd")),
-            here("docs", "index.html"),
+            here("..", "docs", "index.html"),
             list(
                 datasets = DATASETS,
                 methods  = METHODS
@@ -50,10 +51,10 @@ plan <- drake_plan(
     rmd_dataset = target(
         callr_render(
             here(knitr_in("pages/dataset.Rmd")),
-            here("docs", paste0("dataset_", dataset, ".html")),
+            here("..", "docs", paste0("dataset_", dataset, ".html")),
             list(
                 dataset = dataset,
-                fig_dir = here("docs", "figures", paste0("dataset_", dataset))
+                fig_dir = here("..", "docs", "figures", paste0("dataset_", dataset))
             )
         ),
         transform = map(dataset = !!DATASETS),
@@ -62,10 +63,10 @@ plan <- drake_plan(
     rmd_method = target(
         callr_render(
             here(knitr_in("pages/method.Rmd")),
-            here("docs", paste0("method_", method, ".html")),
+            here("..", "docs", paste0("method_", method, ".html")),
             list(
                 method = method,
-                fig_dir = here("docs", "figures", paste0("method_", method))
+                fig_dir = here("..", "docs", "figures", paste0("method_", method))
             )
         ),
         transform = map(method = !!METHODS),

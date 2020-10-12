@@ -315,6 +315,7 @@ get_coords_path <- function(dataset, scaling, features, method, output,
     )
 
     here::here(
+        "..",
         "data",
         "embeddings",
         dataset,

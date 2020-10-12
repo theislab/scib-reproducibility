@@ -1,12 +1,12 @@
 get_datasets <- function() {
     labels <- get_labels()
-    metrics <- get_metrics(here::here("data", "metrics.csv"), labels)
+    metrics <- get_metrics(here::here("..", "data", "metrics.csv"), labels)
     sort(unique(as.character(metrics$dataset)))
 }
 
 get_methods <- function() {
     labels <- get_labels()
-    metrics <- get_metrics(here::here("data", "metrics.csv"), labels)
+    metrics <- get_metrics(here::here("..", "data", "metrics.csv"), labels)
     sort(unique(as.character(metrics$method)))
 }
 

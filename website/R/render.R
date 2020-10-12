@@ -33,7 +33,7 @@ make_site_yaml <- function(outpath, datasets, methods) {
     site_yml <- ymlthis::yml_empty() %>%
         ymlthis::yml_site_opts(
             name       = "scIB-results",
-            output_dir = "../docs"
+            output_dir = "../../docs"
         ) %>%
         ymlthis::yml_navbar(
             title = "scIB Results",
@@ -60,7 +60,7 @@ make_site_yaml <- function(outpath, datasets, methods) {
                 toc_float       = TRUE,
                 css             = "style.css",
                 self_contained  = FALSE,
-                lib_dir         = "../docs/site_libs"
+                lib_dir         = "../../docs/site_libs"
             )
         )
 
