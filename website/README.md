@@ -24,7 +24,7 @@ renv::restore()
 
 ## Building the website
 
-The website can rebuild using the [**{drake}**][drake] package.
+The website can be rebuilt using the [**{drake}**][drake] package.
 After you have set up the environment just run:
 
 ```r
