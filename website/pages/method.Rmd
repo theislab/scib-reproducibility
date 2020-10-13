@@ -25,6 +25,9 @@ is_method <- params$method != "Unintegrated"
 
 labels <- drake::readd("labels")
 
+method_meta <- drake::readd("methods_meta") %>%
+    filter(Name == params$method)
+
 metrics <- drake::readd("metrics") %>%
     filter(method == params$method)
 
@@ -33,6 +36,30 @@ benchmarks <- drake::readd("benchmarks") %>%
         method    == params$method,
         dataset %in% as.character(metrics$dataset)
     )
+```
+
+This page displays information for the following method:
+
+```{r metadata}
+link_github <- function(github) {
+    githubs <- str_split(github, ",")[[1]]
+    glue("[{githubs}](https://github.com/{githubs})") %>%
+        glue_collapse(sep = ", ")
+}
+
+tribble(
+            ~ Category, ~ Value,
+                "Name", method_meta$Name,
+         "Description", method_meta$Description,
+              "GitHub", link_github(method_meta$GitHub),
+                 "DOI", glue("[{method_meta$DOI}](https://doi.org/{method_meta$DOI})"),
+    "Labels required?", method_meta$Labels
+) %>%
+    mutate(Category = glue("**{Category}**:")) %>%
+    gt() %>%
+    cols_label(Category = "", Value = "") %>%
+    fmt_markdown(c("Category", "Value")) %>%
+    cols_align("left")
 ```
 
 Overall

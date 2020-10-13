@@ -138,22 +138,23 @@ get_metrics <- function(metrics_file, labels) {
 get_labels <- function() {
     list(
         methods = c(
-            "MNN"          = "mnn",
-            "Scanorama"    = "scanorama",
-            "Seurat CCA"   = "seurat",
-            "Harmony"      = "harmony",
-            "BBKNN"        = "bbknn",
-            "SAUCIE"       = "saucie",
-            "trVAE"        = "trvae",
-            "scVI"         = "scvi",
-            "CONOS"        = "conos",
-            "ComBat"       = "combat",
-            "LIGER"        = "liger",
-            "scGen"        = "scgen",
-            "scANVI"       = "scanvi",
-            "FastMNN"      = "fastmnn",
-            "DESC"         = "desc",
-            "Unintegrated" = "unintegrated"
+            "MNN"            = "mnn",
+            "Scanorama"      = "scanorama",
+            "Seurat v3 CCA"  = "seurat",
+            "Seurat v3 RPCA" = "seuratrpca",
+            "Harmony"        = "harmony",
+            "BBKNN"          = "bbknn",
+            "SAUCIE"         = "saucie",
+            "trVAE"          = "trvae",
+            "scVI"           = "scvi",
+            "Conos"          = "conos",
+            "ComBat"         = "combat",
+            "LIGER"          = "liger",
+            "scGen"          = "scgen",
+            "scANVI"         = "scanvi",
+            "FastMNN"        = "fastmnn",
+            "DESC"           = "desc",
+            "Unintegrated"   = "unintegrated"
         ),
         metrics = list(
             batch = c(
@@ -236,6 +237,20 @@ get_datasets_meta <- function(datasets_meta_file) {
             Cells       = readr::col_double(),
             Batches     = readr::col_double(),
             Labels      = readr::col_double()
+        )
+    )
+}
+
+get_methods_meta <- function(methods_meta_file) {
+
+    readr::read_tsv(
+        methods_meta_file,
+        col_types       = readr::cols(
+            Name        = readr::col_character(),
+            Description = readr::col_character(),
+            GitHub      = readr::col_character(),
+            DOI         = readr::col_character(),
+            Labels      = readr::col_character()
         )
     )
 }

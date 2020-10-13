@@ -1,0 +1,18 @@
+Name	Description	GitHub	DOI	Labels
+ComBat	Linear mixed effect model	"jtleek/sva-devel,theislab/scanpy"	10.1093/biostatistics/kxj037	No
+MNN	Mutual nearest neighbours	"chriscainx/mnnpy,LTLA/batchelor"	10.1038/nbt.4091	No
+scVI	Conditional variational autoencoder	YosefLab/scvi-tools	10.1038/s41592-018-0229-2	No
+Scanorama	SVD and mutatl nearest neighbours	brianhie/scanorama	10.1038/s41587-019-0113-3	No
+BBKNN	KNN graph integration	Teichlab/bbknn	10.1093/bioinformatics/btz625	No
+Conos	PCA and KNN integration	kharchenkolab/conos	10.1038/s41592-019-0466-z	No
+Seurat v3 CCA	Canonical correlation analysis and mutual nearest neighbours	satijalab/seurat	10.1016/j.cell.2019.05.031	No
+Seurat v3 RPCA	Randomised PCA and mutual nearest neighbouts	satijalab/seurat		No
+Harmony	PCA and clustering-based correction	immunogenomics/harmony	10.1038/s41592-019-0619-0	No
+LIGER	Integrative non-negative matrix factorisation	MacoskoLab/liger	10.1016/j.cell.2019.05.006	No
+trVAE	Conditional variational autoencoder	theislab/trvae	arXiv:1910.01791	No
+SAUCIE	Sparse regularizes autoencoder	KrishnaswamyLab/SAUCIE	10.1038/s41592-019-0576-7	No
+FastMNN	PCA and mutual nearest neighbours	LTLA/batchelor		No
+DESC	Autoencoder with interative clustering	eleozzr/desc	10.1038/s41467-020-15851-3	No
+scANVI	Semi-supervised variational inference with deep generative models	YosefLab/scvi-tools	10.1101/532895	Yes
+scGen	Conditional variational autoencoder with cell labels	theislab/scgen	10.1038/s41592-019-0494-8	Yes
+Unintegrated	Raw unintegrated dataset			No

@@ -32,8 +32,8 @@ navbar:
       href: method_scANVI.html
     - text: scVI
       href: method_scVI.html
-    - text: Seurat CCA
-      href: method_Seurat CCA.html
+    - text: Seurat v3 CCA
+      href: method_Seurat v3 CCA.html
     - text: Unintegrated
       href: method_Unintegrated.html
   right:
