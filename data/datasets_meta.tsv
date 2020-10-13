@@ -1,0 +1,12 @@
+Name	Description	Type	Cells	Batches	Labels
+pancreas_jointnorm	Human pancreas	RNA	16382	9	14
+lung_atlas	Human lung	RNA	32472	16	17
+immune_cell_hum	Human immune cells	RNA	33506	10	16
+immune_cell_hum_mou	Human and mouse immune cells	RNA	97952	23	19
+mouse_brain	Mouse brain	RNA	978734	5	10
+simulations_1_1	Simulation different cell type proportions and sequencing depth	Simulated RNA	12097	6	7
+simulations_2	Simulation with nested batch effects	Simulated RNA	19318	16	4
+mouse_brain_atac_large_3datasets	Small mouse brain	ATAC	25960	3	8
+mouse_brain_atac_small_3datasets	Large mouse brain	ATAC	67612	3	12
+mini_sim	Mini simulation used for testing	Simulated RNA	2000	4	4
+mini_pancreas	Cut down version of the pancreas dataset used for testing	RNA	4314	4	8

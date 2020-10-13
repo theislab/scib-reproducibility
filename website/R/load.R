@@ -224,3 +224,18 @@ get_benchmarks <- function(benchmarks_file, labels) {
             )
         )
 }
+
+get_datasets_meta <- function(datasets_meta_file) {
+
+    readr::read_tsv(
+        datasets_meta_file,
+        col_types = readr::cols(
+            Name        = readr::col_character(),
+            Description = readr::col_character(),
+            Type        = readr::col_character(),
+            Cells       = readr::col_double(),
+            Batches     = readr::col_double(),
+            Labels      = readr::col_double()
+        )
+    )
+}

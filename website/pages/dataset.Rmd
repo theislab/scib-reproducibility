@@ -23,6 +23,9 @@ source(here("R", "tables.R"))
 ```{r load}
 labels <- drake::readd("labels")
 
+dataset_meta <- drake::readd("datasets_meta") %>%
+    filter(Name == params$dataset)
+
 metrics <- drake::readd("metrics") %>%
     filter(dataset == params$dataset)
 
@@ -31,6 +34,19 @@ benchmarks <- drake::readd("benchmarks") %>%
         dataset  == params$dataset,
         method %in% as.character(metrics$method)
     )
+```
+
+This page displays information for the following dataset:
+
+```{r metadata}
+data.frame(
+    Category = glue("**{colnames(dataset_meta)}:**"),
+    Value    = unlist(dataset_meta[1, ])
+) %>%
+    gt() %>%
+    cols_label(Category = "", Value = "") %>%
+    fmt_markdown("Category") %>%
+    cols_align("left")
 ```
 
 Overall

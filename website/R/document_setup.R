@@ -11,6 +11,8 @@ suppressPackageStartupMessages({
     # Presentation
     library("knitr")
     library("patchwork")
+    library("gt")
+    library("glue")
     # Tidyverse
     library("tidyverse")
 })

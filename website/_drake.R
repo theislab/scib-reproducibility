@@ -37,6 +37,7 @@ plan <- drake_plan(
     labels = get_labels(),
     metrics = get_metrics(here(file_in("../data/metrics.csv")), labels),
     benchmarks = get_benchmarks(here(file_in("../data/benchmarks.csv")), labels),
+    datasets_meta = get_datasets_meta(here(file_in("../data/datasets_meta.tsv"))),
     rmd_index = target(
         callr_render(
             here(knitr_in("pages/index.Rmd")),
