@@ -36,6 +36,8 @@ navbar:
       href: method_Seurat v3 CCA.html
     - text: Unintegrated
       href: method_Unintegrated.html
+  - text: Usability
+    href: usability.html
   right:
   - href: https://github.com/theislab/scIB-results
     icon: fa-github fa-lg

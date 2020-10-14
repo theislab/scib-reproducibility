@@ -41,7 +41,8 @@ make_site_yaml <- function(outpath, datasets, methods) {
             left = list(
                 ymlthis::navbar_page("Home", "index.html"),
                 ymlthis::navbar_page("Datasets", menu = datasets_list),
-                ymlthis::navbar_page("Methods", menu = methods_list)
+                ymlthis::navbar_page("Methods", menu = methods_list),
+                ymlthis::navbar_page("Usability", "usability.html")
             ),
             right = list(
                 # ymlthis::navbar_page("About", "about.html"),
