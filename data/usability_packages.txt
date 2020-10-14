@@ -1,0 +1,18 @@
+Package	Method	Repo	OpenCode	OpenPlatform	VersionControl	UnitTests	HasTutorial	TutorialErrors	TutorialScenarios	TutorialNonNative	FunctionPurpose	FunctionParameters	FunctionOutput
+bbknn	BBKNN	Teichlab/bbknn	1	1	1	0	1	1	1	1	1	1	1
+conos	Conos	kharchenkolab/conos	1	1	1	0	1	1	1	1	0	0	0
+harmony	Harmony	immunogenomics/harmony	1	1	1	1	1	1	1	0	1	1	1
+liger	LIGER	MacoskoLab/liger	1	1	1	1	1	1	1	0	1	1	1
+batchelor	MNN	LTLA/batchelor	1	1	1	0	1	1	0.25	0	1	1	1
+mnnpy	MNN	chriscainx/mnnpy	1	1	1	0	1	0	0	0	0	0	0
+scanorama	Scanorama	brianhie/scanorama	1	1	1	0	1	1	0.5	1	1	1	1
+scvi	scVI	YosefLab/scvi-tools	1	1	1	1	1	0.5	0.25	0	1	1	1
+seurat	Seurat v3 CCA	satijalab/seurat	1	1	1	1	1	1	1	0	1	1	1
+seurat	Seurat v3 RPCA	satijalab/seurat	1	1	1	1	1	1	1	0	1	1	1
+trVAE	trVAE	theislab/trVAE	1	1	1	1	1	1	0.25	0	0	0	0
+sva	ComBat	jtleek/sva-devel	1	1	1	1	1	1	0.25	0	1	1	1
+desc	DESC	eleozzr/desc	1	1	1	0	0.25	0	0.25	0	0	0	0
+SAUCIE	SAUCIE	KrishnaswamyLab/SAUCIE/	1	1	1	0	1	0	0.25	0	0	0	0
+batchelor	FastMNN	LTLA/batchelor	0	1	0	0	0.25	0	0.25	0	1	1	1
+scgen	scGen	theislab/scgen	1	1	1	0	1	1	0.25	0	1	1	1
+scVI	scANVI	YosefLab/scvi-tools	1	1	1	1	0	0	0	0	1	1	1
