@@ -201,12 +201,12 @@ get_repo_df <- function(repo) {
 
 repos <- c(
     "Teichlab/bbknn",
-    "hms-dbmi/conos",
+    "kharchenkolab/conos",
     "immunogenomics/harmony",
     "MacoskoLab/liger",
     "chriscainx/mnnpy",
     "brianhie/scanorama",
-    "YosefLab/scVI",
+    "YosefLab/scvi-tools",
     "satijalab/seurat",
     "theislab/trVAE",
     "jtleek/sva-devel",
