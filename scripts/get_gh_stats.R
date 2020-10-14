@@ -251,18 +251,6 @@ repo_summ <- all_repos %>%
         IssueResponse = 30 - MedianResponseDays
     ) %>%
     mutate(
-        IssueActivity = if_else(
-            is.na(IssueActivity),
-            0.5 * min(IssueActivity, na.rm = TRUE),
-            IssueActivity
-        ),
-        IssueResponse = if_else(
-            is.na(IssueResponse),
-            0.5 * min(IssueResponse, na.rm = TRUE),
-            IssueResponse
-        )
-    ) %>%
-    mutate(
         IssueActivityScore = rescale(IssueActivity,
                                      from = c(0, max(IssueActivity)),
                                      to = c(0, 1)),
