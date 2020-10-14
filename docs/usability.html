@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Usability</title>
+
+<script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-16.12.0/react.min.js"></script>
+<script src="site_libs/react-16.12.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/reactable-binding-0.2.2/reactable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">scIB Results</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Datasets
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="dataset_mini_pancreas.html">mini_pancreas</a>
+    </li>
+    <li>
+      <a href="dataset_mini_sim.html">mini_sim</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Methods
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="method_BBKNN.html">BBKNN</a>
+    </li>
+    <li>
+      <a href="method_ComBat.html">ComBat</a>
+    </li>
+    <li>
+      <a href="method_FastMNN.html">FastMNN</a>
+    </li>
+    <li>
+      <a href="method_Harmony.html">Harmony</a>
+    </li>
+    <li>
+      <a href="method_LIGER.html">LIGER</a>
+    </li>
+    <li>
+      <a href="method_MNN.html">MNN</a>
+    </li>
+    <li>
+      <a href="method_Scanorama.html">Scanorama</a>
+    </li>
+    <li>
+      <a href="method_scANVI.html">scANVI</a>
+    </li>
+    <li>
+      <a href="method_scVI.html">scVI</a>
+    </li>
+    <li>
+      <a href="method_Seurat v3 CCA.html">Seurat v3 CCA</a>
+    </li>
+    <li>
+      <a href="method_Unintegrated.html">Unintegrated</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/theislab/scIB-results">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Usability</h1>
+
+</div>
+
+
+<p>This page displays usability scores for each of the methods based on the information presented in associated papers, package documentation and GitHub activity.</p>
+<div id="paper-scores" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Paper scores</h1>
+<p>These scores assess how well publications associated with a method explain how it works and demonstrate its effectiveness.</p>
+<ul>
+<li><strong>Peer-reviewed</strong> - The method is published in a peer-reviewed journal</li>
+<li><strong>Evaluation of accuracy</strong>
+<ul>
+<li><strong>Datasets</strong> - The paper shows the method’s usefulness on more than two (1.0), two (0.5) or one (0.25) real datasets</li>
+<li><strong>Simulations</strong> - The paper quantifies the accuracy of the method using a simulated dataset</li>
+</ul></li>
+<li><strong>Robustness</strong> - The paper assessed method robustness (to eg. noise, feature selection, down-sampling, parameter changes, stability) in one (0.25) , two (0.5), or more than two (1.0) ways</li>
+<li><strong>Benchmarking</strong> - The paper compares the performance of the method against other published methods</li>
+</ul>
+<div class="metrics">
+<div id="htmlwidget-f42c24bb6e82d725b9b5" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f42c24bb6e82d725b9b5">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Method":["BBKNN","Conos","Harmony","LIGER","MNN","Scanorama","scVI","Seurat v3 CCA","Seurat v3 RPCA","trVAE","ComBat","DESC","SAUCIE","FastMNN","scGen","scANVI"],"PeerReview":[1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,0],"AccuracyDatasets":[0.5,1,1,1,1,1,0.25,1,1,0.5,0.5,1,1,0,0.5,1],"AccuracySimulation":[1,1,1,0,1,1,0,1,1,0,0,0,1,0,0,0],"Robustness":[1,1,1,0.25,0.5,0.5,0.5,0.25,0.25,0.5,1,1,0,1,0,0.25],"Benchmarking":[1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1]},"columns":[{"accessor":"Method","name":"Method","type":"character","className":"cell","headerClassName":"header","headerStyle":{"fontWeight":700}},{"accessor":"PeerReview","name":"Peer-reviewed","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFFFD9"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFFFD9"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFFFD9"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"width":90,"align":"center","headerStyle":{"fontWeight":700}},{"accessor":"AccuracyDatasets","name":"Datasets","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#7FCDBB"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#DAF0B2"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#7FCDBB"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#7FCDBB"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFFFD9"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#7FCDBB"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]}],"maxWidth":80,"width":80,"align":"center"},{"accessor":"AccuracySimulation","name":"Simulations","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFFFD9"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFFFD9"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFFFD9"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFFFD9"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFFFD9"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFFFD9"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFFFD9"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFFFD9"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"width":110,"align":"center"},{"accessor":"Robustness","name":"Robustness","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#DAF0B2"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#7FCDBB"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#7FCDBB"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#7FCDBB"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#DAF0B2"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#DAF0B2"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#7FCDBB"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFFFD9"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFFFD9"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#DAF0B2"},"className":"score"},"children":["0.25"]}],"maxWidth":80,"width":120,"align":"center","headerStyle":{"fontWeight":700}},{"accessor":"Benchmarking","name":"Benchmarking","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFFFD9"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#225EA8"},"className":"score"},"children":["1.00"]}],"maxWidth":80,"width":130,"align":"center","headerStyle":{"fontWeight":700}}],"columnGroups":[{"headerClassName":"group-header","name":"Evaluation of accuracy","columns":["AccuracyDatasets","AccuracySimulation"]}],"defaultSorted":[{"id":"Method","desc":false}],"defaultPageSize":16,"paginationType":"numbers","showPageInfo":true,"minRows":1,"highlight":true,"borderless":true,"compact":true,"showSortIcon":false,"className":"metrics-table","dataKey":"098792f5e6df174aab19004d3d79bc33","key":"098792f5e6df174aab19004d3d79bc33"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="package-scores" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Package scores</h1>
+<p>These scores assess the software packages that implement a method.</p>
+<ul>
+<li><strong>Open source</strong>
+<ul>
+<li><strong>Code</strong> - The packages code is freely available</li>
+<li><strong>Platform</strong> - The code can be run using a freely available platform or programming language</li>
+</ul></li>
+<li><strong>Version control</strong> - The code is available on a public version controlled repository, such as GitHub</li>
+<li><strong>Unit tests</strong> - The package includes unit tests</li>
+<li><strong>Tutorial</strong>
+<ul>
+<li><strong>Has tutorial</strong> - The package has a vignette or tutorial</li>
+<li><strong>Errors</strong> - The steps in the tutorial can be followed without any issues or errors</li>
+<li><strong>Scenarios</strong> - The tutorial shows the method’s usefulness on more than two (1.0), two (0.5), one (0.25) or no different scenarios</li>
+<li><strong>Non-native</strong> - The tutorial shows how to run the method in a non-native language (i.e. R to Python or vice versa)</li>
+</ul></li>
+<li><strong>Function documentation</strong>
+<ul>
+<li><strong>Purpose</strong> - The purpose and usage of functions/commands is documented</li>
+<li><strong>Parameters</strong> - The parameters of functions/commands are documented</li>
+<li><strong>Output</strong> - The output of functions/commands is documented</li>
+</ul></li>
+<li><strong>GitHub issues</strong>
+<ul>
+<li><strong>Activity</strong> - The amount of issues the GitHub repository receives</li>
+<li><strong>Response</strong> - How quickly new GitHub issues are responsed to</li>
+</ul></li>
+</ul>
+<div class="metrics">
+<div id="htmlwidget-837e9ba208db6da01dfc" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-837e9ba208db6da01dfc">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Package":["bbknn","conos","harmony","liger","batchelor","mnnpy","scanorama","scvi","seurat","seurat","trVAE","sva","desc","SAUCIE","batchelor","scgen","scVI"],"Method":["BBKNN","Conos","Harmony","LIGER","MNN","MNN","Scanorama","scVI","Seurat v3 CCA","Seurat v3 RPCA","trVAE","ComBat","DESC","SAUCIE","FastMNN","scGen","scANVI"],"Repo":["Teichlab/bbknn","kharchenkolab/conos","immunogenomics/harmony","MacoskoLab/liger","LTLA/batchelor","chriscainx/mnnpy","brianhie/scanorama","YosefLab/scvi-tools","satijalab/seurat","satijalab/seurat","theislab/trVAE","jtleek/sva-devel","eleozzr/desc","KrishnaswamyLab/SAUCIE","LTLA/batchelor","theislab/scgen","YosefLab/scvi-tools"],"OpenCode":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1],"OpenPlatform":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"VersionControl":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1],"UnitTests":[0,0,1,1,0,0,0,1,1,1,1,1,0,0,0,0,1],"HasTutorial":[1,1,1,1,1,1,1,1,1,1,1,1,0.25,1,0.25,1,0],"TutorialErrors":[1,1,1,1,1,0,1,0.5,1,1,1,1,0,0,0,1,0],"TutorialScenarios":[1,1,1,1,0.25,0,0.5,0.25,1,1,0.25,0.25,0.25,0.25,0.25,0.25,0],"TutorialNonNative":[1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],"FunctionPurpose":[1,0,1,1,1,0,1,1,1,1,0,1,0,0,1,1,1],"FunctionParameters":[1,0,1,1,1,0,1,1,1,1,0,1,0,0,1,1,1],"FunctionOutput":[1,0,1,1,1,0,1,1,1,1,0,1,0,0,1,1,1],"IssueActivityScore":[0.371091982402448,0.501234522440952,0.51734661820858,0.515830740933201,0.353960459275263,0.171117441484491,0.477002871575578,0.749793275743047,1,1,0.27640811404199,0.060008564676322,0.186333654827177,0.274129284608475,0.353960459275263,0.388463762069508,0.749793275743047],"IssueResponseScore":[0.994662422839506,0.977150848765432,0.317210455246914,0.860582947530864,0.988836033950617,0.885132137345679,0.997559799382716,0.973371913580247,0.952951581790124,0.952951581790124,0.995917438271605,0.998319830246914,0.619598572530864,0.957412422839506,0.988836033950617,0.835899305555556,0.973371913580247]},"columns":[{"accessor":"Package","name":"Package","type":"character","className":"cell","headerClassName":"header","headerStyle":{"fontWeight":700}},{"accessor":"Method","name":"Method","type":"character","className":"cell","headerClassName":"header","headerStyle":{"fontWeight":700}},{"accessor":"Repo","name":"Repository","type":"character","className":"cell","headerClassName":"header","width":190,"headerStyle":{"fontWeight":700}},{"accessor":"OpenCode","name":"Code","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]}],"maxWidth":80,"width":60,"align":"center"},{"accessor":"OpenPlatform","name":"Platform","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]}],"maxWidth":80,"width":80,"align":"center"},{"accessor":"VersionControl","name":"Version control","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]}],"maxWidth":80,"width":80,"align":"center","headerStyle":{"fontWeight":700}},{"accessor":"UnitTests","name":"Unit tests","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]}],"maxWidth":80,"width":90,"align":"center","headerStyle":{"fontWeight":700}},{"accessor":"HasTutorial","name":"Has tutorial","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FCD2CE"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FCD2CE"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"width":80,"align":"center"},{"accessor":"TutorialErrors","name":"Errors","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FA9FB5"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"width":70,"align":"center"},{"accessor":"TutorialScenarios","name":"Scenarios","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FCD2CE"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FA9FB5"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#FCD2CE"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FCD2CE"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FCD2CE"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FCD2CE"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FCD2CE"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FCD2CE"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FCD2CE"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"width":90,"align":"center"},{"accessor":"TutorialNonNative","name":"Non-native","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"width":90,"align":"center"},{"accessor":"FunctionPurpose","name":"Purpose","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]}],"maxWidth":80,"width":80,"align":"center"},{"accessor":"FunctionParameters","name":"Parameters","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]}],"maxWidth":80,"width":100,"align":"center"},{"accessor":"FunctionOutput","name":"Output","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]}],"maxWidth":80,"width":70,"align":"center"},{"accessor":"IssueActivityScore","name":"Activity","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FBBCBD"},"className":"score"},"children":["0.37"]},{"name":"div","attribs":{"style":{"background":"#F99EB4"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#F999B2"},"className":"score"},"children":["0.52"]},{"name":"div","attribs":{"style":{"background":"#F999B3"},"className":"score"},"children":["0.52"]},{"name":"div","attribs":{"style":{"background":"#FBC0BE"},"className":"score"},"children":["0.35"]},{"name":"div","attribs":{"style":{"background":"#FCDFDC"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#FAA4B6"},"className":"score"},"children":["0.48"]},{"name":"div","attribs":{"style":{"background":"#EA4E9C"},"className":"score"},"children":["0.75"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FCCEC9"},"className":"score"},"children":["0.28"]},{"name":"div","attribs":{"style":{"background":"#FEEEEB"},"className":"score"},"children":["0.06"]},{"name":"div","attribs":{"style":{"background":"#FCDCD9"},"className":"score"},"children":["0.19"]},{"name":"div","attribs":{"style":{"background":"#FCCECA"},"className":"score"},"children":["0.27"]},{"name":"div","attribs":{"style":{"background":"#FBC0BE"},"className":"score"},"children":["0.35"]},{"name":"div","attribs":{"style":{"background":"#FBB8BC"},"className":"score"},"children":["0.39"]},{"name":"div","attribs":{"style":{"background":"#EA4E9C"},"className":"score"},"children":["0.75"]}],"maxWidth":80,"width":80,"align":"center"},{"accessor":"IssueResponseScore","name":"Response","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#AF027E"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#B40781"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#FCC7C2"},"className":"score"},"children":["0.32"]},{"name":"div","attribs":{"style":{"background":"#D52B92"},"className":"score"},"children":["0.86"]},{"name":"div","attribs":{"style":{"background":"#B1047F"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#CE248F"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#B50981"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#BB0F85"},"className":"score"},"children":["0.95"]},{"name":"div","attribs":{"style":{"background":"#BB0F85"},"className":"score"},"children":["0.95"]},{"name":"div","attribs":{"style":{"background":"#AF027E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#F777A6"},"className":"score"},"children":["0.62"]},{"name":"div","attribs":{"style":{"background":"#BA0E84"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#B1047F"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#DC3396"},"className":"score"},"children":["0.84"]},{"name":"div","attribs":{"style":{"background":"#B50981"},"className":"score"},"children":["0.97"]}],"maxWidth":80,"width":90,"align":"center"}],"columnGroups":[{"headerClassName":"group-header","name":"Open source","columns":["OpenCode","OpenPlatform"]},{"headerClassName":"group-header","name":"Tutorials","columns":["HasTutorial","TutorialErrors","TutorialScenarios","TutorialNonNative"]},{"headerClassName":"group-header","name":"Function documentation","columns":["FunctionPurpose","FunctionParameters","FunctionOutput"]},{"headerClassName":"group-header","name":"GitHub issues","columns":["IssueActivityScore","IssueResponseScore"]}],"defaultSorted":[{"id":"Method","desc":false}],"defaultPageSize":17,"paginationType":"numbers","showPageInfo":true,"minRows":1,"highlight":true,"borderless":true,"compact":true,"showSortIcon":false,"className":"metrics-table","dataKey":"ae9c2516feb04cab132a17d07de5466e","key":"ae9c2516feb04cab132a17d07de5466e"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

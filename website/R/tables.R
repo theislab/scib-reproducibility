@@ -1,5 +1,7 @@
 make_dataset_table <- function(metrics, labels) {
 
+    `%>%` <- magrittr::`%>%`
+
     overall_cell <- make_score_cell_func(
         c("#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0",
           "#225ea8")
@@ -12,10 +14,6 @@ make_dataset_table <- function(metrics, labels) {
         c("#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548",
           "#d7301f")
     )
-
-    score_column <- function(maxWidth = 80, class = "cell number", ...) {
-        colDef(maxWidth = maxWidth, align = "center", class = class, ...)
-    }
 
     tbl <- metrics %>%
         dplyr::select(-scenario, -dataset, -input, -full_method) %>%
@@ -140,9 +138,217 @@ make_dataset_table <- function(metrics, labels) {
             class        = "metrics-table"
         )
 
-    htmltools::div(class = "metrics",
-        tbl
+    htmltools::div(class = "metrics", tbl)
+}
+
+make_papers_table <- function(usability_papers) {
+
+    `%>%` <- magrittr::`%>%`
+
+    papers_cell <- make_score_cell_func(
+        c("#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0",
+          "#225ea8")
     )
+
+    tbl <- usability_papers %>%
+        reactable::reactable(
+            pagination = FALSE,
+            defaultSorted = "Method",
+            defaultSortOrder = "asc",
+            defaultColDef = reactable::colDef(
+                class       = "cell",
+                headerClass = "header"
+            ),
+            defaultColGroup = reactable::colGroup(headerClass = "group-header"),
+            columnGroups = list(
+                reactable::colGroup(
+                    "Evaluation of accuracy",
+                    columns = c("AccuracyDatasets", "AccuracySimulation")
+                )
+            ),
+            columns = list(
+                Method = reactable::colDef(
+                    name        = "Method",
+                    headerStyle = list(fontWeight = 700)
+                ),
+                PeerReview = score_column(
+                    name        = "Peer-reviewed",
+                    headerStyle = list(fontWeight = 700),
+                    cell        = papers_cell,
+                    class       = "cell number border-left",
+                    width       = 90
+                ),
+                AccuracyDatasets = score_column(
+                    name  = "Datasets",
+                    cell  = papers_cell,
+                    class = "cell number border-left",
+                    width = 80
+                ),
+                AccuracySimulation = score_column(
+                    name  = "Simulations",
+                    cell  = papers_cell,
+                    width = 110
+                ),
+                Robustness = score_column(
+                    name        = "Robustness",
+                    headerStyle = list(fontWeight = 700),
+                    cell        = papers_cell,
+                    class       = "cell number border-left",
+                    width       = 120
+                ),
+                Benchmarking = score_column(
+                    name        = "Benchmarking",
+                    headerStyle = list(fontWeight = 700),
+                    cell        = papers_cell,
+                    class       = "cell number border-left",
+                    width       = 130
+                )
+            ),
+            compact      = TRUE,
+            highlight    = TRUE,
+            showSortIcon = FALSE,
+            borderless   = TRUE,
+            class        = "metrics-table"
+        )
+
+    htmltools::div(class = "metrics", tbl)
+}
+
+make_packages_table <- function(usability_packages) {
+
+    `%>%` <- magrittr::`%>%`
+
+    packages_cell <- make_score_cell_func(
+        c("#fff7f3", "#fde0dd", "#fcc5c0", "#fa9fb5", "#f768a1", "#dd3497",
+          "#ae017e")
+    )
+
+    tbl <- usability_packages %>%
+        reactable::reactable(
+            pagination = FALSE,
+            defaultSorted = "Method",
+            defaultSortOrder = "asc",
+            defaultColDef = reactable::colDef(
+                class       = "cell",
+                headerClass = "header"
+            ),
+            defaultColGroup = reactable::colGroup(headerClass = "group-header"),
+            columnGroups = list(
+                reactable::colGroup(
+                    "Open source",
+                    columns = c("OpenCode", "OpenPlatform")
+                ),
+                reactable::colGroup(
+                    "Tutorials",
+                    columns = c("HasTutorial", "TutorialErrors",
+                                "TutorialScenarios", "TutorialNonNative")
+                ),
+                reactable::colGroup(
+                    "Function documentation",
+                    columns = c("FunctionPurpose", "FunctionParameters",
+                                "FunctionOutput")
+                ),
+                reactable::colGroup(
+                    "GitHub issues",
+                    columns = c("IssueActivityScore", "IssueResponseScore")
+                )
+            ),
+            columns = list(
+                Package = reactable::colDef(
+                    name        = "Package",
+                    headerStyle = list(fontWeight = 700)
+                ),
+                Method = reactable::colDef(
+                    name        = "Method",
+                    headerStyle = list(fontWeight = 700)
+                ),
+                Repo = reactable::colDef(
+                    name        = "Repository",
+                    headerStyle = list(fontWeight = 700),
+                    width       = 190
+                ),
+                OpenCode = score_column(
+                    name  = "Code",
+                    cell  = packages_cell,
+                    class = "cell number border-left",
+                    width = 60
+                ),
+                OpenPlatform = score_column(
+                    name  = "Platform",
+                    cell  = packages_cell,
+                    width = 80
+                ),
+                VersionControl = score_column(
+                    name        = "Version control",
+                    headerStyle = list(fontWeight = 700),
+                    cell        = packages_cell,
+                    class       = "cell number border-left",
+                    width       = 80,
+                ),
+                UnitTests = score_column(
+                    name        = "Unit tests",
+                    headerStyle = list(fontWeight = 700),
+                    cell        = packages_cell,
+                    class       = "cell number border-left",
+                    width       = 90,
+                ),
+                HasTutorial = score_column(
+                    name  = "Has tutorial",
+                    cell  = packages_cell,
+                    class = "cell number border-left",
+                    width = 80
+                ),
+                TutorialErrors = score_column(
+                    name  = "Errors",
+                    cell  = packages_cell,
+                    width = 70
+                ),
+                TutorialScenarios = score_column(
+                    name  = "Scenarios",
+                    cell  = packages_cell,
+                    width = 90
+                ),
+                TutorialNonNative = score_column(
+                    name  = "Non-native",
+                    cell  = packages_cell,
+                    width = 90
+                ),
+                FunctionPurpose = score_column(
+                    name  = "Purpose",
+                    cell  = packages_cell,
+                    class = "cell number border-left",
+                    width = 80
+                ),
+                FunctionParameters = score_column(
+                    name  = "Parameters",
+                    cell  = packages_cell,
+                    width = 100
+                ),
+                FunctionOutput = score_column(
+                    name  = "Output",
+                    cell  = packages_cell,
+                    width = 70
+                ),
+                IssueActivityScore = score_column(
+                    name  = "Activity",
+                    cell  = packages_cell,
+                    class = "cell number border-left",
+                    width = 80
+                ),
+                IssueResponseScore = score_column(
+                    name  = "Response",
+                    cell  = packages_cell,
+                    width = 90
+                )
+            ),
+            compact      = TRUE,
+            highlight    = TRUE,
+            showSortIcon = FALSE,
+            borderless   = TRUE,
+            class        = "metrics-table"
+        )
+
+    htmltools::div(class = "metrics", tbl)
 }
 
 make_colour_pal <- function(colours, bias = 1) {
@@ -171,4 +377,8 @@ make_score_cell_func <- function(colours) {
             value
         )
     }
+}
+
+score_column <- function(maxWidth = 80, class = "cell number", ...) {
+    reactable::colDef(maxWidth = maxWidth, align = "center", class = class, ...)
 }
