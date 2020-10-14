@@ -12,7 +12,7 @@ seurat	Seurat v3 RPCA	satijalab/seurat	1	1	1	1	1	1	1	0	1	1	1
 trVAE	trVAE	theislab/trVAE	1	1	1	1	1	1	0.25	0	0	0	0
 sva	ComBat	jtleek/sva-devel	1	1	1	1	1	1	0.25	0	1	1	1
 desc	DESC	eleozzr/desc	1	1	1	0	0.25	0	0.25	0	0	0	0
-SAUCIE	SAUCIE	KrishnaswamyLab/SAUCIE/	1	1	1	0	1	0	0.25	0	0	0	0
+SAUCIE	SAUCIE	KrishnaswamyLab/SAUCIE	1	1	1	0	1	0	0.25	0	0	0	0
 batchelor	FastMNN	LTLA/batchelor	0	1	0	0	0.25	0	0.25	0	1	1	1
 scgen	scGen	theislab/scgen	1	1	1	0	1	1	0.25	0	1	1	1
 scVI	scANVI	YosefLab/scvi-tools	1	1	1	1	0	0	0	0	1	1	1
