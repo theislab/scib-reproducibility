@@ -201,12 +201,12 @@ get_repo_df <- function(repo) {
 
 repos <- c(
     "Teichlab/bbknn",
-    "hms-dbmi/conos",
+    "kharchenkolab/conos",
     "immunogenomics/harmony",
     "MacoskoLab/liger",
     "chriscainx/mnnpy",
     "brianhie/scanorama",
-    "YosefLab/scVI",
+    "YosefLab/scvi-tools",
     "satijalab/seurat",
     "theislab/trVAE",
     "jtleek/sva-devel",
@@ -249,18 +249,6 @@ repo_summ <- all_repos %>%
         # Add 1 to avoid negative scores
         IssueActivity = log10((Closed / AgeYears) + 1),
         IssueResponse = 30 - MedianResponseDays
-    ) %>%
-    mutate(
-        IssueActivity = if_else(
-            is.na(IssueActivity),
-            0.5 * min(IssueActivity, na.rm = TRUE),
-            IssueActivity
-        ),
-        IssueResponse = if_else(
-            is.na(IssueResponse),
-            0.5 * min(IssueResponse, na.rm = TRUE),
-            IssueResponse
-        )
     ) %>%
     mutate(
         IssueActivityScore = rescale(IssueActivity,
