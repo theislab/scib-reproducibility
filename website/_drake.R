@@ -39,6 +39,11 @@ plan <- drake_plan(
     benchmarks = get_benchmarks(here(file_in("../data/benchmarks.csv")), labels),
     datasets_meta = get_datasets_meta(here(file_in("../data/datasets_meta.tsv"))),
     methods_meta = get_methods_meta(here(file_in("../data/methods_meta.tsv"))),
+    usability = get_usability(
+        here(file_in("../data/usability_papers.tsv")),
+        here(file_in("../data/usability_packages.tsv")),
+        here(file_in("../data/gh_repo_summary.tsv"))
+    ),
     rmd_index = target(
         callr_render(
             here(knitr_in("pages/index.Rmd")),
@@ -56,7 +61,8 @@ plan <- drake_plan(
             here("..", "docs", paste0("dataset_", dataset, ".html")),
             list(
                 dataset = dataset,
-                fig_dir = here("..", "docs", "figures", paste0("dataset_", dataset))
+                fig_dir = here("..", "docs", "figures",
+                               paste0("dataset_", dataset))
             )
         ),
         transform = map(dataset = !!DATASETS),
@@ -68,7 +74,8 @@ plan <- drake_plan(
             here("..", "docs", paste0("method_", method, ".html")),
             list(
                 method = method,
-                fig_dir = here("..", "docs", "figures", paste0("method_", method))
+                fig_dir = here("..", "docs", "figures",
+                               paste0("method_", method))
             )
         ),
         transform = map(method = !!METHODS),

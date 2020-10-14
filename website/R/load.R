@@ -254,3 +254,42 @@ get_methods_meta <- function(methods_meta_file) {
         )
     )
 }
+
+get_usability <- function(usability_papers_file, usability_packages_file,
+                          gh_stats_file) {
+
+    `%>%` <- magrittr::`%>%`
+
+    usability_papers <- readr::read_tsv(
+        usability_papers_file,
+        col_types = readr::cols(
+            .default = readr::col_double(),
+            Method   = readr::col_character()
+        )
+    )
+
+    gh_stats <- readr::read_tsv(
+        gh_stats_file,
+        col_types = readr::cols(
+            .default = readr::col_double(),
+            Repo     = readr::col_character(),
+            Tool     = readr::col_character(),
+            Created  = readr::col_datetime(format = ""),
+            Updated  = readr::col_datetime(format = "")
+        )
+    ) %>%
+        dplyr::select(Repo, IssueActivityScore, IssueResponseScore)
+
+    usability_packages <- readr::read_tsv(
+        usability_packages_file,
+        col_types = readr::cols(
+            .default = readr::col_double(),
+            Package  = readr::col_character(),
+            Method   = readr::col_character(),
+            Repo     = readr::col_character()
+        )
+    ) %>%
+        dplyr::left_join(gh_stats, by = "Repo")
+
+    list(papers = usability_papers, packages = usability_packages)
+}
