@@ -1,6 +1,8 @@
-make_dataset_table <- function(metrics, labels) {
+make_overall_table <- function(metrics, labels, type = c("dataset", "method")) {
 
     `%>%` <- magrittr::`%>%`
+
+    type <- match.arg(type)
 
     overall_cell <- make_score_cell_func(
         c("#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0",
@@ -14,6 +16,11 @@ make_dataset_table <- function(metrics, labels) {
         c("#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548",
           "#d7301f")
     )
+
+    # Replace method with dataset if we are making a method table
+    if (type == "method") {
+        metrics <- dplyr::mutate(metrics, method = dataset)
+    }
 
     tbl <- metrics %>%
         dplyr::select(-scenario, -dataset, -input, -full_method) %>%
@@ -39,7 +46,11 @@ make_dataset_table <- function(metrics, labels) {
             ),
             columns = list(
                 method = reactable::colDef(
-                    name        = "Method",
+                    name = dplyr::if_else(
+                        type == "dataset",
+                        "Method",
+                        "Dataset"
+                    ),
                     headerStyle = list(fontWeight = 700),
                     filterable  = TRUE
                 ),

@@ -63,7 +63,7 @@ Table
 -----
 
 ```{r overall-table}
-make_dataset_table(metrics, labels)
+make_overall_table(metrics, labels, type = "dataset")
 ```
 
 Individual metrics
