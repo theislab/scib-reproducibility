@@ -275,6 +275,11 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
         readr::read_csv(coords_path
     )))
 
+    # Shuffle cells so the plopt order is random
+    withr::with_seed(1, {
+        coords <- coords[sample(nrow(coords)), ]
+    })
+
     group_name <- colnames(coords)[2]
     batch_name <- colnames(coords)[3]
     dim1_name  <- colnames(coords)[4]
@@ -291,14 +296,20 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
         )
 
     group_plot <- base_plot +
-        ggplot2::geom_point(ggplot2::aes(colour = .data[[group_name]])) +
+        ggplot2::geom_point(
+            ggplot2::aes(colour = factor(.data[[group_name]])),
+            size = 0.5, alpha = 0.5
+        ) +
         ggplot2::labs(title = group_name)  +
-        ggplot2::scale_colour_hue(h = c(10, 170))
+        ggplot2::scale_colour_hue(h = c(10, 170), name = group_name)
 
     batch_plot <- base_plot +
-        ggplot2::geom_point(ggplot2::aes(colour = .data[[batch_name]])) +
+        ggplot2::geom_point(
+            ggplot2::aes(colour = factor(.data[[batch_name]])),
+            size = 0.5, alpha = 0.5
+        ) +
         ggplot2::labs(title = batch_name) +
-        ggplot2::scale_colour_hue(h = c(190, 350))
+        ggplot2::scale_colour_hue(h = c(190, 350), name = batch_name)
 
     group_plot + batch_plot
 }
