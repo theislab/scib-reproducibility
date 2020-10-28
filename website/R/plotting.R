@@ -174,7 +174,13 @@ metric_method_barplot <- function(metrics, metric, label) {
         median(dplyr::pull(metrics, {{ metric }}), na.rm = TRUE), "Median",
     )
 
-    metric_barplot(metrics, {{ metric }}, dataset, dataset, ref_lines, label)
+    metrics <- dplyr::mutate(
+        metrics,
+        dataset_output = paste0(dataset, " (", output, ")")
+    )
+
+    metric_barplot(metrics, {{ metric }}, dataset_output, dataset, ref_lines,
+                   label)
 }
 
 metric_barplot <- function(metrics, metric, group, colour, ref_lines, label) {
@@ -275,7 +281,7 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
         readr::read_csv(coords_path
     )))
 
-    # Shuffle cells so the plopt order is random
+    # Shuffle cells so the plot order is random
     withr::with_seed(1, {
         coords <- coords[sample(nrow(coords)), ]
     })
