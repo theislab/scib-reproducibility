@@ -1,5 +1,5 @@
 Name	Description	Type	Cells	Batches	Labels
-pancreas_jointnorm	Human pancreas	RNA	16382	9	14
+pancreas	Human pancreas	RNA	16382	9	14
 lung_atlas	Human lung	RNA	32472	16	17
 immune_cell_hum	Human immune cells	RNA	33506	10	16
 immune_cell_hum_mou	Human and mouse immune cells	RNA	97952	23	19
