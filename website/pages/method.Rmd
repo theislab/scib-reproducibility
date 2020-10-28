@@ -175,7 +175,7 @@ Time
 ----
 
 ```{r scalability-time, eval = is_method}
-benchmark_barplot(benchmarks, s, dataset, "Time") +
+benchmark_barplot(benchmarks, s, dataset, "Time", dataset_pal()) +
     scale_y_log10(
         breaks = c(      1,      60,  60 * 60, 60 * 60 * 24),
         labels = c("1 sec", "1 min", "1 hour",      "1 day")
@@ -186,7 +186,8 @@ Memory
 ------
 
 ```{r scalability-memory, eval = is_method}
-benchmark_barplot(benchmarks, max_pss, dataset, "Maximum memory") +
+benchmark_barplot(benchmarks, max_pss, dataset, "Maximum memory (PSS)",
+                  dataset_pal()) +
     scale_y_log10(
         breaks = c(    1,     10,     100,   1024, 1024 * 10, 1024 * 100),
         labels = c("1 MB","10 MB","100 MB", "1 GB",  "10 GB",   "100 GB")

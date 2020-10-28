@@ -1,3 +1,39 @@
+method_pal <- function() {
+    c(
+        "BBKNN"          = "#5A5156",
+        "Conos"          = "#E4E1E3",
+        "trVAE"          = "#F6222E",
+        "scVI"           = "#FE00FA",
+        "ComBat"         = "#16FF32",
+        "Harmony"        = "#3283FE",
+        "LIGER"          = "#FEAF16",
+        "Scanorama"      = "#B00068",
+        "Seurat v3 CCA"  = "#1CFFCE",
+        "Seurat v3 RPCA" = "#90AD1C",
+        "MNN"            = "#2ED9FF",
+        "FastMNN"        = "#DEA0FD",
+        "scGen"          = "#AA0DFE",
+        "scANVI"         = "#F8A19F",
+        "DESC"           = "#325A9B",
+        "SAUCIE"         = "#C4451C",
+        "Unintegrated"   = "#66B0FF"
+    )
+}
+
+dataset_pal <- function() {
+    c(
+        "immune_cell_hum"      = "#e41a1c",
+        "immune_cell_hum_mou"  = "#377eb8",
+        "lung_atlas"           = "#4daf4a",
+        "mouse_brain"          = "#984ea3",
+        "pancreas"             = "#ff7f00",
+        "simulations_1_1"      = "#ffff33",
+        "simulations_2"        = "#a65628",
+        "mini_sim"             = "#f781bf",
+        "mini_pancreas"        = "#999999"
+    )
+}
+
 plot_dataset_overall <- function(metrics) {
 
     plot_data <- metrics %>%
@@ -17,7 +53,7 @@ plot_dataset_overall <- function(metrics) {
         dplyr::select(type, batch_correction, bio_conservation) %>%
         dplyr::bind_rows(medians)
 
-    plot_overall(plot_data, ref_lines, method)
+    plot_overall(plot_data, ref_lines, method, method_pal())
 }
 
 plot_method_overall <- function(metrics) {
@@ -32,10 +68,10 @@ plot_method_overall <- function(metrics) {
         ) %>%
         dplyr::mutate(type = "Median")
 
-    plot_overall(plot_data, ref_lines, dataset)
+    plot_overall(plot_data, ref_lines, dataset, dataset_pal())
 }
 
-plot_overall <- function(metrics, ref_lines, colour_by) {
+plot_overall <- function(metrics, ref_lines, colour_by, palette) {
 
     plot <- ggplot2::ggplot(
         metrics,
@@ -93,7 +129,7 @@ plot_overall <- function(metrics, ref_lines, colour_by) {
         ) +
         ggplot2::scale_x_continuous(limits = c(0, 1)) +
         ggplot2::scale_y_continuous(limits = c(0, 1)) +
-        ggplot2::scale_colour_brewer(palette = "Paired") +
+        ggplot2::scale_colour_manual(values = palette) +
         ggplot2::scale_size_continuous(range = c(0.5, 5), limits = c(0, 1),
                                        breaks = seq(0, 1, 0.2)) +
         ggplot2::scale_shape_manual(
@@ -164,7 +200,8 @@ metric_dataset_barplot <- function(metrics, metric, label) {
             dplyr::pull({{ metric }}),                            "Unintegrated"
     )
 
-    metric_barplot(metrics, {{ metric }}, full_method, method, ref_lines, label)
+    metric_barplot(metrics, {{ metric }}, full_method, method, ref_lines, label,
+                   method_pal())
 }
 
 metric_method_barplot <- function(metrics, metric, label) {
@@ -180,12 +217,14 @@ metric_method_barplot <- function(metrics, metric, label) {
     )
 
     metric_barplot(metrics, {{ metric }}, dataset_output, dataset, ref_lines,
-                   label)
+                   label, dataset_pal())
 }
 
-metric_barplot <- function(metrics, metric, group, colour, ref_lines, label) {
+metric_barplot <- function(metrics, metric, group, colour, ref_lines, label,
+                           palette) {
 
     metric_str <- rlang::as_label(rlang::enquo(metric))
+    colour_str <- rlang::as_label(rlang::enquo(colour))
 
     ref_lines <- ref_lines %>%
         dplyr::arrange(Type) %>%
@@ -212,7 +251,7 @@ metric_barplot <- function(metrics, metric, group, colour, ref_lines, label) {
         ggplot2::geom_col() +
         ggplot2::geom_point(
             ggplot2::aes(shape = output),
-            size = 4, colour = "white",
+            size = 3.5, colour = "white",
             show.legend = c(fill = FALSE, shape = TRUE)
         ) +
         ggplot2::geom_text(
@@ -220,14 +259,14 @@ metric_barplot <- function(metrics, metric, group, colour, ref_lines, label) {
             y = 0.5, label = "Not computed"
         ) +
         ggplot2::coord_flip() +
-        ggplot2::scale_fill_brewer(palette = "Paired") +
+        ggplot2::scale_fill_manual(values = palette, drop = FALSE) +
         ggplot2::scale_linetype_manual(values = c(1, 5)) +
         ggplot2::scale_colour_manual(values = c("blue", "red"), guide = FALSE) +
-        ggplot2::scale_shape_manual(values = c(21, 22, 23)) +
+        ggplot2::scale_shape_manual(values = c(21, 22, 23), drop = FALSE) +
         ggplot2::labs(y = label) +
         ggplot2::guides(
             fill = ggplot2::guide_legend(
-                title          = "Method",
+                title          = stringr::str_to_title(colour_str),
                 title.position = "top",
                 ncol           = 2,
                 order          = 10
@@ -349,9 +388,11 @@ get_coords_path <- function(dataset, scaling, features, method, output,
     )
 }
 
-benchmark_barplot <- function(benchmarks, metric, group, label) {
+benchmark_barplot <- function(benchmarks, metric, group, label, palette) {
 
     `%>%` <- magrittr::`%>%`
+
+    group_str <- rlang::as_label(rlang::enquo(group))
 
     medians <- benchmarks %>%
         dplyr::group_by(features, scaling) %>%
@@ -372,11 +413,11 @@ benchmark_barplot <- function(benchmarks, metric, group, label) {
         ) +
         ggplot2::geom_col() +
         ggplot2::coord_flip() +
-        ggplot2::scale_fill_brewer(palette = "Paired") +
+        ggplot2::scale_fill_manual(values = palette, drop = FALSE) +
         ggplot2::labs(y = label) +
         ggplot2::guides(
             fill = ggplot2::guide_legend(
-                title          = "Method",
+                title          = stringr::str_to_title(group_str),
                 title.position = "top",
                 ncol           = 2,
                 order          = 10

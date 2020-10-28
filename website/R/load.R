@@ -142,22 +142,22 @@ get_metrics <- function(metrics_file, labels) {
 get_labels <- function() {
     list(
         methods = c(
-            "MNN"            = "mnn",
+            "BBKNN"          = "bbknn",
+            "Conos"          = "conos",
+            "trVAE"          = "trvae",
+            "scVI"           = "scvi",
+            "ComBat"         = "combat",
+            "Harmony"        = "harmony",
+            "LIGER"          = "liger",
             "Scanorama"      = "scanorama",
             "Seurat v3 CCA"  = "seurat",
             "Seurat v3 RPCA" = "seuratrpca",
-            "Harmony"        = "harmony",
-            "BBKNN"          = "bbknn",
-            "SAUCIE"         = "saucie",
-            "trVAE"          = "trvae",
-            "scVI"           = "scvi",
-            "Conos"          = "conos",
-            "ComBat"         = "combat",
-            "LIGER"          = "liger",
+            "MNN"            = "mnn",
+            "FastMNN"        = "fastmnn",
             "scGen"          = "scgen",
             "scANVI"         = "scanvi",
-            "FastMNN"        = "fastmnn",
             "DESC"           = "desc",
+            "SAUCIE"         = "saucie",
             "Unintegrated"   = "unintegrated"
         ),
         metrics = list(
@@ -211,6 +211,8 @@ get_benchmarks <- function(benchmarks_file, labels) {
             into = c("dataset", NA, "scaling", "features", "method"),
             sep = "/"
         ) %>%
+        # Filter ATAC datasets
+        dplyr::filter(!stringr::str_detect(dataset, "atac")) %>%
         # Set factors with pretty labels
         dplyr::mutate(
             dataset = factor(dataset),
