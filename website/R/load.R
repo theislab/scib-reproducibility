@@ -203,6 +203,8 @@ get_benchmarks <- function(benchmarks_file, labels) {
             scenario = stringr::str_remove(scenario, ".h5ad"),
             scenario = stringr::str_remove(scenario, ".RDS")
         ) %>%
+        # Remove leading / if present
+        dplyr::mutate(scenario = stringr::str_remove(scenario, "^/")) %>%
         # Split the path into the different parts of the scenario
         tidyr::separate(
             scenario,
