@@ -295,6 +295,13 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
         coords,
         ggplot2::aes(x = .data[[dim1_name]], y = .data[[dim2_name]])
     ) +
+        guides(
+            colour = guide_legend(
+                title        = NULL,
+                ncol         = 3,
+                override.aes = list(size = 2, alpha = 1)
+            )
+        ) +
         ggplot2::theme(
             plot.title      = ggplot2::element_text(hjust = 0.5, size = 20),
             legend.position = "bottom",
@@ -307,7 +314,7 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
             size = 0.5, alpha = 0.5
         ) +
         ggplot2::labs(title = group_name)  +
-        ggplot2::scale_colour_hue(h = c(10, 170), name = group_name)
+        ggplot2::scale_colour_hue(l = 75, name = group_name)
 
     batch_plot <- base_plot +
         ggplot2::geom_point(
@@ -315,7 +322,7 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
             size = 0.5, alpha = 0.5
         ) +
         ggplot2::labs(title = batch_name) +
-        ggplot2::scale_colour_hue(h = c(190, 350), name = batch_name)
+        ggplot2::scale_colour_hue(l = 55, name = batch_name)
 
     group_plot + batch_plot
 }
