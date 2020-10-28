@@ -53,6 +53,8 @@ get_metrics <- function(metrics_file, labels) {
         ),
         skip = 1
     ) %>%
+        # Remove empty rows from failed runs
+        dplyr::filter(!is.na(NMI_cluster_label)) %>%
         # Remove leading / if present
         dplyr::mutate(path = stringr::str_remove(path, "^/")) %>%
         # Split the path into the different parts of the scenario
