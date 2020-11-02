@@ -1,15 +1,34 @@
+#' Get datasets
+#'
+#' Get a vector of dataset names for use by Drake
+#'
+#' @return Vector of dataset names
 get_datasets <- function() {
     labels <- get_labels()
     metrics <- get_metrics(here::here("..", "data", "metrics.csv"), labels)
     sort(unique(as.character(metrics$dataset)))
 }
 
+#' Get methods
+#'
+#' Get a vector of method names for use by Drake
+#'
+#' @return Vector of method names
 get_methods <- function() {
     labels <- get_labels()
     metrics <- get_metrics(here::here("..", "data", "metrics.csv"), labels)
     sort(unique(as.character(metrics$method)))
 }
 
+#' Get metrics
+#'
+#' Read the combined benchmarking metrics file. Also scales scores between
+#' zero and one for each dataset and calculates overall scores for each dataset.
+#'
+#' @param metrics_file Path to the metrics CSV file
+#' @param labels List containing standard labels
+#'
+#' @return tibble containing tidied metrics
 get_metrics <- function(metrics_file, labels) {
 
     `%>%` <- magrittr::`%>%`
@@ -135,10 +154,16 @@ get_metrics <- function(metrics_file, labels) {
             output, overall, batch_correction, PCR_batch, ASW_label_batch, iLISI,
             graph_connectivity, kBET, bio_conservation, NMI_cluster_label,
             ARI_cluster_label, ASW_label, isolated_label_F1,
-            isolated_label_silhouette, cLISI, HVG_overlap, cell_cycle, trajectory
+            isolated_label_silhouette, cLISI, HVG_overlap, cell_cycle,
+            trajectory
         )
 }
 
+#' Get labels
+#'
+#' Get a list of standard labels to use in other functions
+#'
+#' @return list of standard labels
 get_labels <- function() {
     list(
         methods = c(
@@ -185,6 +210,14 @@ get_labels <- function() {
     )
 }
 
+#' Get benchmarks
+#'
+#' Read the combined scalability benchmarks file.
+#'
+#' @param benchmarks_file Path to benchmarks CSV file
+#' @param labels List containing standard labels
+#'
+#' @return tibble of tidied scalability benchmarks
 get_benchmarks <- function(benchmarks_file, labels) {
 
     `%>%` <- magrittr::`%>%`
@@ -234,6 +267,13 @@ get_benchmarks <- function(benchmarks_file, labels) {
         )
 }
 
+#' Get datasets metadata
+#'
+#' Read the datasets metadata file
+#'
+#' @param datasets_meta_file Path to datasets metadata TSV file
+#'
+#' @return tibble of datasets metadata
 get_datasets_meta <- function(datasets_meta_file) {
 
     readr::read_tsv(
@@ -249,6 +289,13 @@ get_datasets_meta <- function(datasets_meta_file) {
     )
 }
 
+#' Get methods metadata
+#'
+#' Read the methods metadata file
+#'
+#' @param methods_meta_file Path to methods metadata TSV file
+#'
+#' @return tibble of methods metadata
 get_methods_meta <- function(methods_meta_file) {
 
     readr::read_tsv(
@@ -263,6 +310,15 @@ get_methods_meta <- function(methods_meta_file) {
     )
 }
 
+#' Get usability
+#'
+#' Read the method usability scores
+#'
+#' @param usability_papers_file Path to papers usability TSV file
+#' @param usability_packages_file Path to packages usability TSV file
+#' @param gh_stats_file Path to GitHub activity statistics TSV file
+#'
+#' @return list of tibbles with papers and packages usability scores
 get_usability <- function(usability_papers_file, usability_packages_file,
                           gh_stats_file) {
 

@@ -2,15 +2,15 @@
 #'
 #' Call `rmarkdown::render()` inside a new **callr** environment
 #'
-#' @param input input to render
-#' @param output_file patr to output file
+#' @param input Input to render
+#' @param output_file Path to output file
 #'
 #' @details
 #' Some packages (including **htmltools**) mess with the random seed which
 #' **drake** doesn't like. Wrapping them with **callr** is one solution. See
 #' https://github.com/rstudio/gt/issues/297#issuecomment-497778735.
 #'
-#' @return path to the output file
+#' @return Path to the output file
 callr_render <- function(input, output_file, params = NULL) {
     callr::r(
         function(...) {rmarkdown::render(...)},
@@ -18,6 +18,21 @@ callr_render <- function(input, output_file, params = NULL) {
     )
 }
 
+#' Make site YAML
+#'
+#' Creat the `_site.yml` file describing the website.
+#'
+#' @param outpath Path to the file `_site.yml` file
+#' @param datasets Vector of datasets
+#' @param methods Vector of methods
+#'
+#' @details
+#' Loops over the methods and datasets and add them to the `_site.yml`. This
+#' allows the navbar to be automatically populated when new methods/datasets are
+#' added. Note that the navbar is still embedded in the file HTML files so every
+#' file still needs to be rebuilt for the navbar to be updated.
+#'
+#' @return Writes the YAML to `outpath` but also returns it invisibly
 make_site_yaml <- function(outpath, datasets, methods) {
 
     `%>%` <- magrittr::`%>%`

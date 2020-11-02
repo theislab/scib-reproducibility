@@ -1,3 +1,13 @@
+#' Make overall table
+#'
+#' Make a an interactive HTML table displaying all the metric scores for a
+#' dataset or method.
+#'
+#' @param metrics tibble containing metrics to show
+#' @param labels List of standard labels
+#' @param type Whether the table is showing a `"dataset"` or `"method"`
+#'
+#' @return List containing HTML
 make_overall_table <- function(metrics, labels, type = c("dataset", "method")) {
 
     `%>%` <- magrittr::`%>%`
@@ -152,6 +162,13 @@ make_overall_table <- function(metrics, labels, type = c("dataset", "method")) {
     htmltools::div(class = "metrics", tbl)
 }
 
+#' Make papers table
+#'
+#' Make an interactive HTML table showing the usability scores for papers.
+#'
+#' @param usability_papers tibble of paper usability scores
+#'
+#' @return List of HTML
 make_papers_table <- function(usability_papers) {
 
     `%>%` <- magrittr::`%>%`
@@ -225,6 +242,13 @@ make_papers_table <- function(usability_papers) {
     htmltools::div(class = "metrics", tbl)
 }
 
+#' Make packages
+#'
+#' Make an interactive HTML showing usability scores for packages.
+#'
+#' @param usability_packages tibble containing package usability scores
+#'
+#' @return List of HTML
 make_packages_table <- function(usability_packages) {
 
     `%>%` <- magrittr::`%>%`
@@ -362,6 +386,14 @@ make_packages_table <- function(usability_packages) {
     htmltools::div(class = "metrics", tbl)
 }
 
+#' Make colour palette
+#'
+#' Create a function that converts values to colours
+#'
+#' @param colours Vector of colours to form the palette
+#' @param bias Controls the separation of colours, see [`colorRamp()`]
+#'
+#' @return Function that takes a value and returns a colour
 make_colour_pal <- function(colours, bias = 1) {
 
     get_color <- colorRamp(colours, bias = bias)
@@ -375,6 +407,14 @@ make_colour_pal <- function(colours, bias = 1) {
     }
 }
 
+#' Make score cell function
+#'
+#' Create a function for specifying a coloured table cell
+#'
+#' @param colours Vector of colours to use
+#'
+#' @return Function that takes a value and returns a HTML div with a specific
+#' background colour
 make_score_cell_func <- function(colours) {
 
     colour_pal <- make_colour_pal(colours)
@@ -390,6 +430,15 @@ make_score_cell_func <- function(colours) {
     }
 }
 
+#' Score column
+#'
+#' Wrapper around [`reactable::colDef()`] that sets some default options.
+#'
+#' @param maxWidth Maximum width of the column
+#' @param class Class for the column div
+#' @param ... Additional arguments passed to [`reactable::colDef()`]
+#'
+#' @return A **reactable** column definition object
 score_column <- function(maxWidth = 80, class = "cell number", ...) {
     reactable::colDef(maxWidth = maxWidth, align = "center", class = class, ...)
 }

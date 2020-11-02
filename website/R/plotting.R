@@ -1,3 +1,8 @@
+#' Method palette
+#'
+#' Colour palette for methods
+#'
+#' @return Name vector of method colours
 method_pal <- function() {
     c(
         "BBKNN"          = "#5A5156",
@@ -20,6 +25,11 @@ method_pal <- function() {
     )
 }
 
+#' Dataset palette
+#'
+#' Colour palette for datasets
+#'
+#' @return Named vector of dataset colours
 dataset_pal <- function() {
     c(
         "immune_cell_hum"      = "#e41a1c",
@@ -34,6 +44,13 @@ dataset_pal <- function() {
     )
 }
 
+#' Plot dataset overall
+#'
+#' Plot an overall summary scatter plot for a dataset
+#'
+#' @param metrics tibble containing metrics for a single dataset
+#'
+#' @return ggplot object
 plot_dataset_overall <- function(metrics) {
 
     plot_data <- metrics %>%
@@ -56,6 +73,13 @@ plot_dataset_overall <- function(metrics) {
     plot_overall(plot_data, ref_lines, method, method_pal())
 }
 
+#' Plot method overall
+#'
+#' Plot an overall summary scatter plot for a method
+#'
+#' @param metrics tibble containing metrics for a single metrics
+#'
+#' @return ggplot object
 plot_method_overall <- function(metrics) {
 
     plot_data <- metrics %>%
@@ -71,6 +95,17 @@ plot_method_overall <- function(metrics) {
     plot_overall(plot_data, ref_lines, dataset, dataset_pal())
 }
 
+#' Plot overall
+#'
+#' Plot an overall scatter plot
+#'
+#' @param metrics tibble containing metrics for scenarios to be plotted
+#' @param ref_lines tibble containing reference lines add
+#' @param colour_by Name of the metrics column to colour points by
+#' @param palette Named vector containing colours for the items in the colour
+#' column
+#'
+#' @return ggplot object
 plot_overall <- function(metrics, ref_lines, colour_by, palette) {
 
     plot <- ggplot2::ggplot(
@@ -99,12 +134,13 @@ plot_overall <- function(metrics, ref_lines, colour_by, palette) {
 
             hline <- ggplot2::geom_hline(
                     data = current,
-                    aes(yintercept = bio_conservation, linetype = type),
+                    ggplot2::aes(yintercept = bio_conservation,
+                                 linetype = type),
                     colour = current$colour
             )
             vline <- ggplot2::geom_vline(
                 data = current,
-                aes(xintercept = batch_correction, linetype = type),
+                ggplot2::aes(xintercept = batch_correction, linetype = type),
                 colour = current$colour
             )
 
@@ -119,12 +155,12 @@ plot_overall <- function(metrics, ref_lines, colour_by, palette) {
         ggplot2::geom_point(stroke = 1, fill = "white") +
         ggplot2::geom_point(
             data = dplyr::filter(metrics, features == "Full"),
-            aes(alpha = scaling),
+            ggplot2::aes(alpha = scaling),
             shape = 4, size = 1.5, colour = "white"
         ) +
         ggplot2::geom_point(
             data = dplyr::filter(metrics, features == "HVG"),
-            aes(alpha = scaling),
+            ggplot2::aes(alpha = scaling),
             shape = 4, size = 1.5
         ) +
         ggplot2::scale_x_continuous(limits = c(0, 1)) +
@@ -191,6 +227,15 @@ plot_overall <- function(metrics, ref_lines, colour_by, palette) {
     return(plot)
 }
 
+#' Metric dataset barplot
+#'
+#' Plot a metrics barplot for a dataset
+#'
+#' @param metrics tibble of metrics for a single dataset
+#' @param metric Name of the metric column to plot
+#' @param label Label for the metric to plot
+#'
+#' @return ggplot object
 metric_dataset_barplot <- function(metrics, metric, label) {
 
     ref_lines <- tibble::tribble(
@@ -204,6 +249,15 @@ metric_dataset_barplot <- function(metrics, metric, label) {
                    method_pal())
 }
 
+#' Metric method barplot
+#'
+#' Plot a metrics barplot for a method
+#'
+#' @param metrics tibble of metrics for a single method
+#' @param metric Name of the metric column to plot
+#' @param label Label for the metric to plot
+#'
+#' @return ggplot object
 metric_method_barplot <- function(metrics, metric, label) {
 
     ref_lines <- tibble::tribble(
@@ -220,6 +274,19 @@ metric_method_barplot <- function(metrics, metric, label) {
                    label, dataset_pal())
 }
 
+#' Metric barplot
+#'
+#' Plot a barplot showing performance on a single metric
+#'
+#' @param metrics tibble containing metrics to plot
+#' @param metric Name of the metric column to plot
+#' @param group Name of the column containing groups for each bar
+#' @param colour Name of the column to colour bars by
+#' @param ref_lines tibble containing reference lines to plot
+#' @param label Label for the metric column
+#' @param palette Named vector of colours matching the items in `colour`
+#'
+#' @return ggplot object
 metric_barplot <- function(metrics, metric, group, colour, ref_lines, label,
                            palette) {
 
@@ -308,6 +375,25 @@ metric_barplot <- function(metrics, metric, group, colour, ref_lines, label,
     plot
 }
 
+#' Plot embedding coordinates
+#'
+#' Plot an embedding scatter plot for a specific combination of dataset, input,
+#' method and output.
+#'
+#' @param dataset String giving the name of the dataset to plot
+#' @param scaling String giving the scaling to plot, either "Scaled" or
+#' "Unscaled"
+#' @param features String giving the features to plot, either "Full" or "HVG"
+#' @param method String giving the method to plot
+#' @param output String giving the output to plot, either "Features",
+#' "Embedding" or "Graph"
+#' @param labels List containing standard labels
+#'
+#' @details
+#' Note that paths to CSV files containing embedding coordinates are hardcoded
+#' through `get_coords_path()`
+#'
+#' @return ggplot object
 plot_embedding_coords <- function(dataset, scaling, features, method, output,
                                   labels) {
 
@@ -366,6 +452,20 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
     group_plot + batch_plot
 }
 
+#' Get coords path
+#'
+#' Get the path to a specific embedding coordinated CSV file
+#'
+#' @param dataset String giving the name of the dataset to plot
+#' @param scaling String giving the scaling to plot, either "Scaled" or
+#' "Unscaled"
+#' @param features String giving the features to plot, either "Full" or "HVG"
+#' @param method String giving the method to plot
+#' @param output String giving the output to plot, either "Features",
+#' "Embedding" or "Graph"
+#' @param labels List containing standard labels
+#'
+#' @return Path to embedding CSV file
 get_coords_path <- function(dataset, scaling, features, method, output,
                             labels) {
     scaling <- stringr::str_to_lower(scaling)
@@ -388,6 +488,17 @@ get_coords_path <- function(dataset, scaling, features, method, output,
     )
 }
 
+#' Benchmark barplot
+#'
+#' Plot a barplot for a scalability benchmark
+#'
+#' @param benchmarks tibble containing scalability benchmarks to plot
+#' @param metric Name of the scalability metric to plot
+#' @param group Name of the column containing groups for each bar
+#' @param label Label for the plotted metric column
+#' @param palette Named vector of colours matching the items in `group`
+#'
+#' @return ggplot object
 benchmark_barplot <- function(benchmarks, metric, group, label, palette) {
 
     `%>%` <- magrittr::`%>%`
