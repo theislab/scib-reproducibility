@@ -1,0 +1,7 @@
+Name	Description	Type	Cells	Batches	Labels
+mouse_brain_atac_genes_large	Large mouse brain (genes)	ATAC (genes)	84813	11	8
+mouse_brain_atac_peaks_large	Large mouse brain (peaks)	ATAC (peaks)	84813	11	8
+mouse_brain_atac_windows_large	Large mouse brain (windows)	ATAC (windows)	84813	11	8
+mouse_brain_atac_genes_small	Small mouse brain (genes)	ATAC (genes)	11270	3	12
+mouse_brain_atac_peaks_small	Small mouse brain (peaks)	ATAC (peaks)	11597	3	12
+mouse_brain_atac_windows_small	Small mouse brain (windows)	ATAC (windows)	10761	3	12
