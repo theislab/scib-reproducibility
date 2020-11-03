@@ -2,7 +2,7 @@
 params:
   method: "Scanorama"
   fig_dir: false
-title: "`r paste('Method:', params$method)`"
+title: "`r paste('ATAC method:', params$method)`"
 ---
 
 ```{r setup, include=FALSE}
@@ -28,10 +28,10 @@ labels <- drake::readd("labels")
 method_meta <- drake::readd("methods_meta") %>%
     filter(Name == params$method)
 
-metrics <- drake::readd("metrics") %>%
+metrics <- drake::readd("metrics_atac") %>%
     filter(method == params$method)
 
-benchmarks <- drake::readd("benchmarks") %>%
+benchmarks <- drake::readd("benchmarks_atac") %>%
     filter(
         method    == params$method,
         dataset %in% as.character(metrics$dataset)

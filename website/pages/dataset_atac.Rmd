@@ -1,8 +1,8 @@
 ---
 params:
-  method: "Scanorama"
+  dataset: "mouse_brain_atac_genes_small"
   fig_dir: false
-title: "`r paste('Method:', params$method)`"
+title: "`r paste('ATAC dataset:', params$dataset)`"
 ---
 
 ```{r setup, include=FALSE}
@@ -21,44 +21,31 @@ source(here("R", "tables.R"))
 ```
 
 ```{r load}
-is_method <- params$method != "Unintegrated"
-
 labels <- drake::readd("labels")
 
-method_meta <- drake::readd("methods_meta") %>%
-    filter(Name == params$method)
+dataset_meta <- drake::readd("datasets_meta_atac") %>%
+    filter(Name == params$dataset)
 
-metrics <- drake::readd("metrics") %>%
-    filter(method == params$method)
+metrics <- drake::readd("metrics_atac") %>%
+    filter(dataset == params$dataset)
 
-benchmarks <- drake::readd("benchmarks") %>%
+benchmarks <- drake::readd("benchmarks_atac") %>%
     filter(
-        method    == params$method,
-        dataset %in% as.character(metrics$dataset)
+        dataset  == params$dataset,
+        method %in% as.character(metrics$method)
     )
 ```
 
-This page displays information for the following method:
+This page displays information for the following dataset:
 
 ```{r metadata}
-link_github <- function(github) {
-    githubs <- str_split(github, ",")[[1]]
-    glue("[{githubs}](https://github.com/{githubs})") %>%
-        glue_collapse(sep = ", ")
-}
-
-tribble(
-            ~ Category, ~ Value,
-                "Name", method_meta$Name,
-         "Description", method_meta$Description,
-              "GitHub", link_github(method_meta$GitHub),
-                 "DOI", glue("[{method_meta$DOI}](https://doi.org/{method_meta$DOI})"),
-    "Labels required?", method_meta$Labels
+data.frame(
+    Category = glue("**{colnames(dataset_meta)}:**"),
+    Value    = unlist(dataset_meta[1, ])
 ) %>%
-    mutate(Category = glue("**{Category}**:")) %>%
     gt() %>%
     cols_label(Category = "", Value = "") %>%
-    fmt_markdown(c("Category", "Value")) %>%
+    fmt_markdown("Category") %>%
     cols_align("left")
 ```
 
@@ -69,14 +56,14 @@ Plot
 ----
 
 ```{r overall-plot}
-plot_method_overall(metrics)
+plot_dataset_overall(metrics)
 ```
 
 Table
 -----
 
 ```{r overall-table}
-make_overall_table(metrics, labels, type = "method")
+make_overall_table(metrics, labels, type = "dataset")
 ```
 
 Individual metrics
@@ -86,7 +73,7 @@ Overall
 -------
 
 ```{r metrics-overall}
-metric_method_barplot(metrics, overall, "Overall score")
+metric_dataset_barplot(metrics, overall, "Overall score")
 ```
 
 Batch correction {.tabset}
@@ -98,7 +85,7 @@ src_list <- lapply(names(labels$metrics$batch), function(label) {
     src <- c(
         "### <<label>> {.unnumbered}",
         "```{r metrics-batch-<<metric>>}",
-        "metric_method_barplot(metrics, <<metric>>, '<<label>>')",
+        "metric_dataset_barplot(metrics, <<metric>>, '<<label>>')",
         "```",
         ""
     )
@@ -118,7 +105,7 @@ src_list <- lapply(names(labels$metrics$bio), function(label) {
     src <- c(
         "### <<label>> {.unnumbered}",
         "```{r metrics-bio-<<metric>>}",
-        "metric_method_barplot(metrics, <<metric>>, '<<label>>')",
+        "metric_dataset_barplot(metrics, <<metric>>, '<<label>>')",
         "```",
         ""
     )
@@ -147,13 +134,13 @@ for (feature in unique(metrics$features)) {
         )
         metrics_sel <- filter(metrics, features == feature, scaling == scale)
         src_list <- map2_chr(
-            metrics_sel$dataset, metrics_sel$output,
-            function(.dataset, .output) {
+            metrics_sel$method, metrics_sel$output,
+            function(.method, .output) {
                 src <- c(
-                    "#### <<.dataset>> (<<.output>>) {.unnumbered}",
-                    "```{r embedding-<<feature>>-<<scale>>-<<.dataset>>-<<.output>>}",
-                    "plot_embedding_coords('<<.dataset>>', '<<scale>>',",
-                    "'<<feature>>', params$method, '<<.output>>', labels)",
+                    "#### <<.method>> (<<.output>>) {.unnumbered}",
+                    "```{r embedding-<<feature>>-<<scale>>-<<.method>>-<<.output>>}",
+                    "plot_embedding_coords(params$dataset, '<<scale>>',",
+                    "'<<feature>>', '<<.method>>', '<<.output>>', labels)",
                     "```",
                     ""
                 )
@@ -174,8 +161,8 @@ Scalability
 Time
 ----
 
-```{r scalability-time, eval = is_method}
-benchmark_barplot(benchmarks, s, dataset, "Time", dataset_pal()) +
+```{r scalability-time}
+benchmark_barplot(benchmarks, s, method, "Time", method_pal()) +
     scale_y_log10(
         breaks = c(      1,      60,  60 * 60, 60 * 60 * 24),
         labels = c("1 sec", "1 min", "1 hour",      "1 day")
@@ -185,9 +172,8 @@ benchmark_barplot(benchmarks, s, dataset, "Time", dataset_pal()) +
 Memory
 ------
 
-```{r scalability-memory, eval = is_method}
-benchmark_barplot(benchmarks, max_pss, dataset, "Maximum memory (PSS)",
-                  dataset_pal()) +
+```{r scalability-memory}
+benchmark_barplot(benchmarks, max_rss, method, "Maximum memory", method_pal()) +
     scale_y_log10(
         breaks = c(    1,     10,     100,   1024, 1024 * 10, 1024 * 100),
         labels = c("1 MB","10 MB","100 MB", "1 GB",  "10 GB",   "100 GB")

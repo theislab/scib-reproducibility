@@ -23,11 +23,14 @@ callr_render <- function(input, output_file, params = NULL) {
 #' Generate the HTML content for the site navigation bar
 #'
 #' @param datasets Vector of datasets
+#' @param datasets_atac Vector of ATAC datasets
 #' @param methods Vector of methods
+#' @param methods_atac Vector of ATAC methods
 #' @param outpath Path to output HTML files
 #'
 #' @return Writes the HTML to `outpath` but also return is invisibly
-make_navbar_html <- function(datasets, methods, outpath) {
+make_navbar_html <- function(datasets, datasets_atac, methods, methods_atac,
+                             outpath) {
 
     tags <- htmltools::tags
 
@@ -40,10 +43,28 @@ make_navbar_html <- function(datasets, methods, outpath) {
         )
     })
 
+    datasets_atac_list <- purrr::map(datasets_atac, function(.dataset) {
+        tags$li(
+            tags$a(
+                href = paste0("dataset_atac_", .dataset, ".html"),
+                .dataset
+            )
+        )
+    })
+
     methods_list <- purrr::map(methods, function(.method) {
         tags$li(
             tags$a(
                 href = paste0("method_", .method, ".html"),
+                .method
+            )
+        )
+    })
+
+    methods_atac_list <- purrr::map(methods_atac, function(.method) {
+        tags$li(
+            tags$a(
+                href = paste0("method_atac_", .method, ".html"),
                 .method
             )
         )
@@ -108,6 +129,40 @@ make_navbar_html <- function(datasets, methods, outpath) {
                             class = "dropdown-menu",
                             role  = "menu",
                             methods_list
+                        )
+                    ),
+                    tags$li(
+                        class = "dropdown",
+                        tags$a(
+                            href            = "#",
+                            class           = "dropdown-toggle",
+                            `data-toggle`   = "dropdown",
+                            role            = "button",
+                            `aria-expanded` = "false",
+                            "ATAC datasets",
+                            tags$span(class = "caret")
+                        ),
+                        tags$ul(
+                            class = "dropdown-menu",
+                            role  = "menu",
+                            datasets_atac_list
+                        )
+                    ),
+                    tags$li(
+                        class = "dropdown",
+                        tags$a(
+                            href            = "#",
+                            class           = "dropdown-toggle",
+                            `data-toggle`   = "dropdown",
+                            role            = "button",
+                            `aria-expanded` = "false",
+                            "ATAC methods",
+                            tags$span(class = "caret")
+                        ),
+                        tags$ul(
+                            class = "dropdown-menu",
+                            role  = "menu",
+                            methods_atac_list
                         )
                     ),
                     tags$li(tags$a(href = "usability.html", "Usability")),

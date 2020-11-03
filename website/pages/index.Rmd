@@ -11,6 +11,12 @@ params:
   methods:
     - Method1
     - Method2
+  datasets_atac:
+    - Dataset1
+    - Dataset2
+  methods_atac:
+    - Method1
+    - Method2
 ---
 
 ```{r setup, include=FALSE}
@@ -27,7 +33,7 @@ Here you can view all the individual benchmarking metrics broken down by dataset
 ## Datasets
 
 ```{r datasets}
-dataset_list <- paste(
+datasets_list <- paste(
     glue::glue(
         "* [{params$datasets}](dataset_{params$datasets}.html)"
     ),
@@ -35,7 +41,7 @@ dataset_list <- paste(
 )
 ```
 
-`r dataset_list`
+`r datasets_list`
 
 </div>
 <div class = "col-md-2"></div>
@@ -54,6 +60,45 @@ methods_list <- paste(
 ```
 
 `r methods_list`
+
+</div>
+<div class = "col-md-2"></div>
+</div>
+
+<div class = "row">
+<div class = "col-md-2"></div>
+<div class = "col-md-3">
+
+## ATAC Datasets
+
+```{r datasets-atac}
+datasets_atac_list <- paste(
+    glue::glue(
+        "* [{params$datasets_atac}](dataset_atac_{params$datasets_atac}.html)"
+    ),
+    collapse = "\n"
+)
+```
+
+`r datasets_atac_list`
+
+</div>
+<div class = "col-md-2"></div>
+
+<div class = "col-md-3">
+
+## ATAC Methods
+
+```{r methods-atac}
+methods_atac_list <- paste(
+    glue::glue(
+        "* [{params$methods_atac}](method_{params$methods_atac}.html)"
+    ),
+    collapse = "\n"
+)
+```
+
+`r methods_atac_list`
 
 </div>
 <div class = "col-md-2"></div>

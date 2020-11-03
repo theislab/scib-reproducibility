@@ -17,8 +17,8 @@ method_pal <- function() {
         "Seurat v3 RPCA" = "#90AD1C",
         "MNN"            = "#2ED9FF",
         "FastMNN"        = "#DEA0FD",
-        "scGen"          = "#AA0DFE",
-        "scANVI"         = "#F8A19F",
+        "scGen*"         = "#AA0DFE",
+        "scANVI*"        = "#F8A19F",
         "DESC"           = "#325A9B",
         "SAUCIE"         = "#C4451C",
         "Unintegrated"   = "#66B0FF"
@@ -32,15 +32,21 @@ method_pal <- function() {
 #' @return Named vector of dataset colours
 dataset_pal <- function() {
     c(
-        "immune_cell_hum"      = "#e41a1c",
-        "immune_cell_hum_mou"  = "#377eb8",
-        "lung_atlas"           = "#4daf4a",
-        "mouse_brain"          = "#984ea3",
-        "pancreas"             = "#ff7f00",
-        "simulations_1_1"      = "#ffff33",
-        "simulations_2"        = "#a65628",
-        "mini_sim"             = "#f781bf",
-        "mini_pancreas"        = "#999999"
+        "immune_cell_hum"                = "#e41a1c",
+        "immune_cell_hum_mou"            = "#377eb8",
+        "lung_atlas"                     = "#4daf4a",
+        "mouse_brain"                    = "#984ea3",
+        "pancreas"                       = "#ff7f00",
+        "simulations_1_1"                = "#f781bf",
+        "simulations_2"                  = "#a65628",
+        "mini_sim"                       = "#f781bf",
+        "mini_pancreas"                  = "#999999",
+        "mouse_brain_atac_genes_large"   = "#1f78b4",
+        "mouse_brain_atac_genes_small"   = "#a6cee3",
+        "mouse_brain_atac_peaks_large"   = "#33a02c",
+        "mouse_brain_atac_peaks_small"   = "#b2df8a",
+        'mouse_brain_atac_windows_large' = "#ff7f00",
+        "mouse_brain_atac_windows_small" = "#fdbf6f"
     )
 }
 
@@ -54,8 +60,7 @@ dataset_pal <- function() {
 plot_dataset_overall <- function(metrics) {
 
     plot_data <- metrics %>%
-        dplyr::filter(method != "Unintegrated") %>%
-        dplyr::mutate(output_features = paste(output, features, sep = "-"))
+        dplyr::filter(method != "Unintegrated")
 
     medians <- metrics %>%
         dplyr::summarise(
@@ -82,9 +87,6 @@ plot_dataset_overall <- function(metrics) {
 #' @return ggplot object
 plot_method_overall <- function(metrics) {
 
-    plot_data <- metrics %>%
-        dplyr::mutate(output_features = paste(output, features, sep = "-"))
-
     ref_lines <- metrics %>%
         dplyr::summarise(
             batch_correction = median(batch_correction),
@@ -92,7 +94,7 @@ plot_method_overall <- function(metrics) {
         ) %>%
         dplyr::mutate(type = "Median")
 
-    plot_overall(plot_data, ref_lines, dataset, dataset_pal())
+    plot_overall(metrics, ref_lines, dataset, dataset_pal())
 }
 
 #' Plot overall
@@ -108,8 +110,11 @@ plot_method_overall <- function(metrics) {
 #' @return ggplot object
 plot_overall <- function(metrics, ref_lines, colour_by, palette) {
 
+    plot_data <- metrics %>%
+        dplyr::mutate(output_features = paste(output, features, sep = "-"))
+
     plot <- ggplot2::ggplot(
-        metrics,
+        plot_data,
         ggplot2::aes(
             x      = batch_correction,
             y      = bio_conservation,
@@ -171,9 +176,12 @@ plot_overall <- function(metrics, ref_lines, colour_by, palette) {
         ggplot2::scale_shape_manual(
             values = c(16, 21, 15, 22, 17, 24),
             labels = c("Embedding (Full)", "Embedding (HVG)", "Features (Full)",
-                       "Features (HVG)", "Graph (Full)", "Graph (HVG)")
+                       "Features (HVG)", "Graph (Full)", "Graph (HVG)"),
+            breaks = c("Embedding-Full", "Embedding-HVG", "Features-Full",
+                       "Features-HVG", "Graph-Full", "Graph-HVG"),
+            drop = FALSE
         ) +
-        ggplot2::scale_alpha_manual(values = c(1, 0)) +
+        ggplot2::scale_alpha_manual(values = c(1, 0), drop = FALSE) +
         ggplot2::scale_linetype_manual(values = c(1, 5)) +
         ggplot2::coord_fixed() +
         ggplot2::labs(

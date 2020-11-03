@@ -121,13 +121,13 @@ Embeddings {.tabset .tabset-pills .tabset-fade}
 
 ```{r embeddings, results = "hide"}
 full_src <- list()
-for (feature in levels(metrics$features)) {
+for (feature in unique(metrics$features)) {
     full_src <- c(
         full_src,
         paste("##", feature, "{.unnumbered .tabset .tabset-pills .tabset-fade}"),
         ""
     )
-    for (scale in levels(metrics$scaling)) {
+    for (scale in unique(metrics$scaling)) {
         full_src <- c(
             full_src,
             paste("###", scale, "{.unnumbered .tabset}"), ""

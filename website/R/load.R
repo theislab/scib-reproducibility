@@ -2,10 +2,12 @@
 #'
 #' Get a vector of dataset names for use by Drake
 #'
+#' @param metrics_path Path to metrics CSV file
+#'
 #' @return Vector of dataset names
-get_datasets <- function() {
+get_datasets <- function(metrics_path) {
     labels <- get_labels()
-    metrics <- get_metrics(here::here("..", "data", "metrics.csv"), labels)
+    metrics <- get_metrics(metrics_path, labels)
     sort(unique(as.character(metrics$dataset)))
 }
 
@@ -13,10 +15,12 @@ get_datasets <- function() {
 #'
 #' Get a vector of method names for use by Drake
 #'
+#' @param metrics_path Path to metrics CSV file
+#'
 #' @return Vector of method names
-get_methods <- function() {
+get_methods <- function(metrics_path) {
     labels <- get_labels()
-    metrics <- get_metrics(here::here("..", "data", "metrics.csv"), labels)
+    metrics <- get_metrics(metrics_path, labels)
     sort(unique(as.character(metrics$method)))
 }
 
@@ -179,8 +183,8 @@ get_labels <- function() {
             "Seurat v3 RPCA" = "seuratrpca",
             "MNN"            = "mnn",
             "FastMNN"        = "fastmnn",
-            "scGen"          = "scgen",
-            "scANVI"         = "scanvi",
+            "scGen*"         = "scgen",
+            "scANVI*"        = "scanvi",
             "DESC"           = "desc",
             "SAUCIE"         = "saucie",
             "Unintegrated"   = "unintegrated"
@@ -244,8 +248,6 @@ get_benchmarks <- function(benchmarks_file, labels) {
             into = c("dataset", NA, "scaling", "features", "method"),
             sep = "/"
         ) %>%
-        # Filter ATAC datasets
-        dplyr::filter(!stringr::str_detect(dataset, "atac")) %>%
         # Set factors with pretty labels
         dplyr::mutate(
             dataset = factor(dataset),
