@@ -21,14 +21,17 @@ DATASETS <- get_datasets()
 METHODS  <- get_methods()
 
 plan <- drake_plan(
-    site = target(
-        make_site_yaml(here(file_out("pages/_site.yml")), DATASETS, METHODS),
+    navbar_content = target(
+        make_navbar_html(
+            DATASETS,
+            METHODS,
+            here(file_out("../docs/navbar-content.html"))
+        ),
         trigger = trigger(change = list(DATASETS, METHODS)),
     ),
-    setup = list(
-        setup = readr::read_lines(here(file_in("R/document_setup.R")))
-    ),
-    configs = list(site, setup),
+    navbar = readr::read_lines(here(file_in("pages/_navbar.html"))),
+    setup = readr::read_lines(here(file_in("R/document_setup.R"))),
+    configs = list(setup, navbar),
     css = fs::file_copy(
         here(file_in("pages/style.css")),
         here(file_out("../docs/style.css")),

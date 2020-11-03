@@ -1,68 +1,5 @@
 name: scIB-results
 output_dir: ../../docs
-navbar:
-  title: scIB Results
-  type: default
-  left:
-  - text: Home
-    href: index.html
-  - text: Datasets
-    menu:
-    - text: immune_cell_hum
-      href: dataset_immune_cell_hum.html
-    - text: immune_cell_hum_mou
-      href: dataset_immune_cell_hum_mou.html
-    - text: lung_atlas
-      href: dataset_lung_atlas.html
-    - text: mouse_brain
-      href: dataset_mouse_brain.html
-    - text: pancreas
-      href: dataset_pancreas.html
-    - text: simulations_1_1
-      href: dataset_simulations_1_1.html
-    - text: simulations_2
-      href: dataset_simulations_2.html
-  - text: Methods
-    menu:
-    - text: BBKNN
-      href: method_BBKNN.html
-    - text: ComBat
-      href: method_ComBat.html
-    - text: Conos
-      href: method_Conos.html
-    - text: DESC
-      href: method_DESC.html
-    - text: FastMNN
-      href: method_FastMNN.html
-    - text: Harmony
-      href: method_Harmony.html
-    - text: LIGER
-      href: method_LIGER.html
-    - text: MNN
-      href: method_MNN.html
-    - text: SAUCIE
-      href: method_SAUCIE.html
-    - text: Scanorama
-      href: method_Scanorama.html
-    - text: scANVI
-      href: method_scANVI.html
-    - text: scGen
-      href: method_scGen.html
-    - text: scVI
-      href: method_scVI.html
-    - text: Seurat v3 CCA
-      href: method_Seurat v3 CCA.html
-    - text: Seurat v3 RPCA
-      href: method_Seurat v3 RPCA.html
-    - text: trVAE
-      href: method_trVAE.html
-    - text: Unintegrated
-      href: method_Unintegrated.html
-  - text: Usability
-    href: usability.html
-  right:
-  - href: https://github.com/theislab/scIB-results
-    icon: fa-github fa-lg
 output:
   rmarkdown::html_document:
     theme: yeti
@@ -73,4 +10,3 @@ output:
     css: style.css
     self_contained: false
     lib_dir: ../../docs/site_libs
-
