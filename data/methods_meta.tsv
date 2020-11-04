@@ -13,6 +13,6 @@ trVAE	Conditional variational autoencoder	theislab/trvae	arXiv:1910.01791	No
 SAUCIE	Sparse regularizes autoencoder	KrishnaswamyLab/SAUCIE	10.1038/s41592-019-0576-7	No
 FastMNN	PCA and mutual nearest neighbours	LTLA/batchelor		No
 DESC	Autoencoder with interative clustering	eleozzr/desc	10.1038/s41467-020-15851-3	No
-scANVI	Semi-supervised variational inference with deep generative models	YosefLab/scvi-tools	10.1101/532895	Yes
-scGen	Conditional variational autoencoder with cell labels	theislab/scgen	10.1038/s41592-019-0494-8	Yes
+scANVI*	Semi-supervised variational inference with deep generative models	YosefLab/scvi-tools	10.1101/532895	Yes
+scGen*	Conditional variational autoencoder with cell labels	theislab/scgen	10.1038/s41592-019-0494-8	Yes
 Unintegrated	Raw unintegrated dataset			No
