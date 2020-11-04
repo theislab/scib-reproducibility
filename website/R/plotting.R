@@ -401,7 +401,7 @@ metric_barplot <- function(metrics, metric, group, colour, ref_lines, label,
 #' Note that paths to CSV files containing embedding coordinates are hardcoded
 #' through `get_coords_path()`
 #'
-#' @return ggplot object
+#' @return List of two ggplot objects ("Group" and "Batch")
 plot_embedding_coords <- function(dataset, scaling, features, method, output,
                                   labels) {
 
@@ -457,7 +457,7 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
         ggplot2::labs(title = batch_name) +
         ggplot2::scale_colour_hue(l = 55, name = batch_name)
 
-    group_plot + batch_plot
+    list(Group = group_plot, Batch = batch_plot)
 }
 
 #' Get coords path

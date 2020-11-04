@@ -139,8 +139,9 @@ for (feature in unique(metrics$features)) {
                 src <- c(
                     "#### <<.method>> (<<.output>>) {.unnumbered}",
                     "```{r embedding-<<feature>>-<<scale>>-<<.method>>-<<.output>>}",
-                    "plot_embedding_coords(params$dataset, '<<scale>>',",
+                    "plots <- plot_embedding_coords(params$dataset, '<<scale>>',",
                     "'<<feature>>', '<<.method>>', '<<.output>>', labels)",
+                    "plots$Group + plots$Batch",
                     "```",
                     ""
                 )

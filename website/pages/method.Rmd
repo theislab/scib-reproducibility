@@ -1,6 +1,6 @@
 ---
 params:
-  method: "Scanorama"
+  method: "scGen*"
   fig_dir: false
 title: "`r paste('Method:', params$method)`"
 ---
@@ -152,8 +152,9 @@ for (feature in unique(metrics$features)) {
                 src <- c(
                     "#### <<.dataset>> (<<.output>>) {.unnumbered}",
                     "```{r embedding-<<feature>>-<<scale>>-<<.dataset>>-<<.output>>}",
-                    "plot_embedding_coords('<<.dataset>>', '<<scale>>',",
+                    "plots <- plot_embedding_coords('<<.dataset>>', '<<scale>>',",
                     "'<<feature>>', params$method, '<<.output>>', labels)",
+                    "plots$Group + plots$Batch",
                     "```",
                     ""
                 )
