@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>ATAC dataset: mouse_brain_atac_genes_small</title>
+
+<script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-16.12.0/react.min.js"></script>
+<script src="site_libs/react-16.12.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/reactable-binding-0.2.2/reactable.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div id="nav-placeholder"></div>
+
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar-content.html");
+});
+</script>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">ATAC dataset: mouse_brain_atac_genes_small</h1>
+
+</div>
+
+
+<p>This page displays information for the following dataset:</p>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#ecjjijmpzd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ecjjijmpzd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ecjjijmpzd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ecjjijmpzd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ecjjijmpzd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ecjjijmpzd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ecjjijmpzd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ecjjijmpzd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ecjjijmpzd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ecjjijmpzd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ecjjijmpzd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ecjjijmpzd .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ecjjijmpzd .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ecjjijmpzd .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ecjjijmpzd .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ecjjijmpzd .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ecjjijmpzd .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#ecjjijmpzd .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ecjjijmpzd .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#ecjjijmpzd .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ecjjijmpzd .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ecjjijmpzd .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ecjjijmpzd .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ecjjijmpzd .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ecjjijmpzd .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ecjjijmpzd .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ecjjijmpzd .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ecjjijmpzd .gt_left {
+  text-align: left;
+}
+
+#ecjjijmpzd .gt_center {
+  text-align: center;
+}
+
+#ecjjijmpzd .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ecjjijmpzd .gt_font_normal {
+  font-weight: normal;
+}
+
+#ecjjijmpzd .gt_font_bold {
+  font-weight: bold;
+}
+
+#ecjjijmpzd .gt_font_italic {
+  font-style: italic;
+}
+
+#ecjjijmpzd .gt_super {
+  font-size: 65%;
+}
+
+#ecjjijmpzd .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="ecjjijmpzd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>Name:</strong></p>
+</div></td>
+      <td class="gt_row gt_left">mouse_brain_atac_genes_small</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>Description:</strong></p>
+</div></td>
+      <td class="gt_row gt_left">Small mouse brain (genes)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>Type:</strong></p>
+</div></td>
+      <td class="gt_row gt_left">ATAC (genes)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>Cells:</strong></p>
+</div></td>
+      <td class="gt_row gt_left">11270</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>Batches:</strong></p>
+</div></td>
+      <td class="gt_row gt_left">3</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>Labels:</strong></p>
+</div></td>
+      <td class="gt_row gt_left">7</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+<div id="overall" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Overall</h1>
+<div id="plot" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Plot</h2>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/overall-plot-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="table" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Table</h2>
+<div class="metrics">
+<div id="htmlwidget-96fc3cc56c7599866eda" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-96fc3cc56c7599866eda">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"method":["MNN","Scanorama","Scanorama","Seurat v3 CCA","Seurat v3 RPCA","SAUCIE","SAUCIE","trVAE","trVAE","Harmony","BBKNN","scVI","scANVI*","Conos","ComBat","LIGER","scGen*","FastMNN","FastMNN","DESC","Unintegrated"],"output":["Features","Embedding","Features","Features","Features","Features","Embedding","Embedding","Features","Embedding","Graph","Embedding","Embedding","Graph","Features","Embedding","Features","Embedding","Features","Embedding","Features"],"features":["Full","Full","Full","Full","Full","Full","Full","Full","Full","Full","Full","Full","Full","Full","Full","Full","Full","Full","Full","Full","Full"],"scaling":["Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled"],"overall":[0.610942705017586,0.584107624617974,0.490513776501464,0.49131765996111,0.567066362280089,0.22990435946632,0.224181232022174,0.531498641239045,0.459233554903414,0.547757265540379,0.350004500297703,0.665171532975144,0.781730269198323,0.395023899756979,0.555818253707957,0.49014436647704,0.683454734272744,0.392522493656856,0.390575011999469,0.617423133786801,0.501686743865799],"batch_correction":[0.646056239712008,0.673762442076493,0.561644885341778,0.673378407663861,0.820249324942217,0.399615937091486,0.398837512907718,0.475366367951847,0.294160136555897,0.802388221918177,0.769426425984078,0.754691609716642,0.693142362090154,0.328961537933272,0.737978299362837,0.728855336023512,0.548487404175248,0.601802060212644,0.602461029867787,0.444269394643561,0.433004304292603],"PCR_batch":[0.474254953739698,0.210154215069578,0.185359523914673,0.788197586429576,0.870773933012354,0.739698449193628,0.739698744460405,0.57399138448743,0,0.84494878736756,"NA",0.846460199203748,0.735417324832327,"NA",1,0.937716586162673,0.169829197024934,0.435719378509314,0.435719754738395,0.725258933927611,0],"ASW_label_batch":[0.830226917333467,0.842759271718543,0.32889565403846,0.559600039800413,0.628337836972141,0.299731107247359,0.302021733529874,0.208080708592329,0.476191233073546,0.879826695975511,"NA",0.90833038217802,0.899211661602866,"NA",1,0.846631043799588,0.418681914912344,0.903926382436345,0.903926370322149,0,0.753847521732208],"iLISI":[0.33646422557925,0.506250592950579,0.428228491890733,0.652441551828359,0.702666366744407,0.763551364759187,0.757847959432479,0.183764214319402,0.0265654799699649,0.63234553032499,1,0.818227834950488,0.751173091962404,0,0.541343092438464,0.953642523917775,0.479457662615708,0.599188291017224,0.60263010688047,0.652146768507666,0.193821347915245],"graph_connectivity":[0.978280202433894,0.972478318065793,0.865740756865023,0.423722084310591,0.925905778930436,0,0,0.955682931798355,0.968043969735974,0.927601913317413,0.906812629683414,0.956569609588495,0.959760940864896,0.907535119447057,0.979734013469917,0.866847411467311,1,0.967594295174999,0.967594295174999,0.822901150503331,0.989131061287374],"kBET":[0.611054899473729,0.837169812577973,1,0.942930775950366,0.973562709051743,0.195098764257256,0.194619127115834,0.455312600561719,0,0.727218182605413,0.401466648268819,0.243870022662456,0.120148791188278,0.0793494943527581,0.168814390905804,0.0394391147702145,0.674468246323255,0.102581953925337,0.102434622222922,0.0210401202791978,0.228221590528191],"bio_conservation":[0.587533681887972,0.524337746312294,0.443093037274589,0.369943828159276,0.398277720505338,0.116763307716209,0.107743711431812,0.568920156763844,0.569282500468426,0.378003294621847,0.0703898831734528,0.605491481814146,0.840788873937103,0.439065474306117,0.43437822327137,0.331003720112726,0.773432954337741,0.253002782619664,0.249317666753924,0.732858959882294,0.547475036914596],"NMI_cluster_label":[0.397560209821728,0.297733741186375,0.196264757558493,0.126016388334529,0.179429634201622,0.044514732678072,0.00177779465243071,0.437317803969257,0.285689607883305,0.316829186191375,0,0.510499697714179,1,0.213369049722592,0.207367657454512,0.0367059748061185,0.586283721334735,0.0453837380582184,0.0453837380582184,0.528511818847517,0.274760074797281],"ARI_cluster_label":[0.530522330580566,0.272791778896961,0.184420993089307,0.242776129823133,0.211236563093221,0.0627283063391725,0,0.339290724801754,0.268926263302628,0.417319741700554,0.156204793598292,0.539346623362995,1,0.258730392190407,0.331372035203576,0.0813540246832856,0.761723340260077,0.0131880109300832,0.0131880109300832,0.252721556307284,0.237267239234639],"ASW_label":[0.2089770055087,0.133883164722724,0.0922271593934167,0.137580448746934,0.124271554898179,0.000279331080329111,0,0.119955485009198,0.254705881304927,0.244672009712247,"NA",0.183799007064984,0.259240105453025,"NA",0.180877545577946,0.153910516631351,0.424821414187175,0.149846207648247,0.149846194638695,1,0.199165649619781],"isolated_label_F1":[0.718802367860441,0.881764512671476,0.584890810665437,0.445403690289523,0.574044667723222,0,0.0224382668468703,0.975812033121051,0.944863544904732,0.540557620582314,0.125354739095519,0.833881246605881,1,0.83817488970895,0.621573030969107,0.358159478612673,0.86776925024446,0.285317937772692,0.285317937772692,0.992029871565528,0.963423019640835],"isolated_label_silhouette":[0.952037422191253,0.932478778070469,0.932478778070469,0.997912025378611,0.9179549825458,0.296421824657498,0.296421824657498,0.980733985270457,0.980733985270457,0,"NA",0.891083733086457,0.891083733086457,"NA",0.718233964385407,0.891083733086457,1,0.652489329264209,0.652489329264209,0.649359672975384,0.891083733086457],"cLISI":[0.717302755365145,0.627374502325759,0.66827572487041,0.269974286382928,0.382728920569983,0.29663565154218,0.325824382434073,0.560410908411345,0.680775720144508,0.74864120954459,0,0.67433858305038,0.894409405083134,0.445987565602517,0.546845106037671,0.464808592856468,1,0.371791472044535,0.349680789859647,0.974530839598054,0.71915050510858],"HVG_overlap":["NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"],"cell_cycle":["NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"],"trajectory":["NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"]},"columns":[{"accessor":"method","name":"Method","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"output","name":"Output","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"features","name":"Features","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"scaling","name":"Scaling","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"overall","name":"Overall score","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#55BDC0"},"className":"score"},"children":["0.61"]},{"name":"div","attribs":{"style":{"background":"#5FC1BF"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#83CEBA"},"className":"score"},"children":["0.49"]},{"name":"div","attribs":{"style":{"background":"#82CEBA"},"className":"score"},"children":["0.49"]},{"name":"div","attribs":{"style":{"background":"#66C3BE"},"className":"score"},"children":["0.57"]},{"name":"div","attribs":{"style":{"background":"#DEF2B2"},"className":"score"},"children":["0.23"]},{"name":"div","attribs":{"style":{"background":"#DFF2B2"},"className":"score"},"children":["0.22"]},{"name":"div","attribs":{"style":{"background":"#73C8BC"},"className":"score"},"children":["0.53"]},{"name":"div","attribs":{"style":{"background":"#90D3B9"},"className":"score"},"children":["0.46"]},{"name":"div","attribs":{"style":{"background":"#6DC6BD"},"className":"score"},"children":["0.55"]},{"name":"div","attribs":{"style":{"background":"#BFE6B4"},"className":"score"},"children":["0.35"]},{"name":"div","attribs":{"style":{"background":"#41B6C3"},"className":"score"},"children":["0.67"]},{"name":"div","attribs":{"style":{"background":"#289CC1"},"className":"score"},"children":["0.78"]},{"name":"div","attribs":{"style":{"background":"#ACDEB6"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#6AC5BE"},"className":"score"},"children":["0.56"]},{"name":"div","attribs":{"style":{"background":"#83CEBA"},"className":"score"},"children":["0.49"]},{"name":"div","attribs":{"style":{"background":"#3DB2C3"},"className":"score"},"children":["0.68"]},{"name":"div","attribs":{"style":{"background":"#ADDFB6"},"className":"score"},"children":["0.39"]},{"name":"div","attribs":{"style":{"background":"#AEDFB6"},"className":"score"},"children":["0.39"]},{"name":"div","attribs":{"style":{"background":"#53BCC1"},"className":"score"},"children":["0.62"]},{"name":"div","attribs":{"style":{"background":"#7ECCBB"},"className":"score"},"children":["0.50"]}],"maxWidth":80,"align":"center","headerStyle":{"fontWeight":700}},{"accessor":"batch_correction","name":"Overall","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#F76EA3"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#F565A0"},"className":"score"},"children":["0.67"]},{"name":"div","attribs":{"style":{"background":"#F88AAD"},"className":"score"},"children":["0.56"]},{"name":"div","attribs":{"style":{"background":"#F565A0"},"className":"score"},"children":["0.67"]},{"name":"div","attribs":{"style":{"background":"#DF3897"},"className":"score"},"children":["0.82"]},{"name":"div","attribs":{"style":{"background":"#FBB5BB"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#FBB6BB"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#FAA4B6"},"className":"score"},"children":["0.48"]},{"name":"div","attribs":{"style":{"background":"#FCCBC6"},"className":"score"},"children":["0.29"]},{"name":"div","attribs":{"style":{"background":"#E13D98"},"className":"score"},"children":["0.80"]},{"name":"div","attribs":{"style":{"background":"#E6479A"},"className":"score"},"children":["0.77"]},{"name":"div","attribs":{"style":{"background":"#E94C9B"},"className":"score"},"children":["0.75"]},{"name":"div","attribs":{"style":{"background":"#F25F9F"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#FCC5C0"},"className":"score"},"children":["0.33"]},{"name":"div","attribs":{"style":{"background":"#EB519C"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#ED549D"},"className":"score"},"children":["0.73"]},{"name":"div","attribs":{"style":{"background":"#F98EAF"},"className":"score"},"children":["0.55"]},{"name":"div","attribs":{"style":{"background":"#F87DA8"},"className":"score"},"children":["0.60"]},{"name":"div","attribs":{"style":{"background":"#F87DA8"},"className":"score"},"children":["0.60"]},{"name":"div","attribs":{"style":{"background":"#FAABB8"},"className":"score"},"children":["0.44"]},{"name":"div","attribs":{"style":{"background":"#FAAEB9"},"className":"score"},"children":["0.43"]}],"maxWidth":80,"align":"center"},{"accessor":"PCR_batch","name":"PCR batch","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FAA4B6"},"className":"score"},"children":["0.47"]},{"name":"div","attribs":{"style":{"background":"#FCD8D5"},"className":"score"},"children":["0.21"]},{"name":"div","attribs":{"style":{"background":"#FCDCD9"},"className":"score"},"children":["0.19"]},{"name":"div","attribs":{"style":{"background":"#E44299"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#D22891"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#EB519C"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#EB519C"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#F886AC"},"className":"score"},"children":["0.57"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#D93095"},"className":"score"},"children":["0.84"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#D92F95"},"className":"score"},"children":["0.85"]},{"name":"div","attribs":{"style":{"background":"#EC529C"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#BF1487"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#FCDFDC"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#FAADB9"},"className":"score"},"children":["0.44"]},{"name":"div","attribs":{"style":{"background":"#FAADB9"},"className":"score"},"children":["0.44"]},{"name":"div","attribs":{"style":{"background":"#ED559D"},"className":"score"},"children":["0.73"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"align":"center"},{"accessor":"ASW_label_batch","name":"Batch ASW","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#DD3497"},"className":"score"},"children":["0.83"]},{"name":"div","attribs":{"style":{"background":"#DA3195"},"className":"score"},"children":["0.84"]},{"name":"div","attribs":{"style":{"background":"#FCC5C0"},"className":"score"},"children":["0.33"]},{"name":"div","attribs":{"style":{"background":"#F88BAD"},"className":"score"},"children":["0.56"]},{"name":"div","attribs":{"style":{"background":"#F774A5"},"className":"score"},"children":["0.63"]},{"name":"div","attribs":{"style":{"background":"#FCCAC5"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FCCAC5"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FCD9D5"},"className":"score"},"children":["0.21"]},{"name":"div","attribs":{"style":{"background":"#FAA4B6"},"className":"score"},"children":["0.48"]},{"name":"div","attribs":{"style":{"background":"#CF2590"},"className":"score"},"children":["0.88"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#C71D8B"},"className":"score"},"children":["0.91"]},{"name":"div","attribs":{"style":{"background":"#CA1F8D"},"className":"score"},"children":["0.90"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D92F95"},"className":"score"},"children":["0.85"]},{"name":"div","attribs":{"style":{"background":"#FAB1BA"},"className":"score"},"children":["0.42"]},{"name":"div","attribs":{"style":{"background":"#C91E8C"},"className":"score"},"children":["0.90"]},{"name":"div","attribs":{"style":{"background":"#C91E8C"},"className":"score"},"children":["0.90"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#E94C9B"},"className":"score"},"children":["0.75"]}],"maxWidth":80,"align":"center"},{"accessor":"iLISI","name":"Graph\niLISI","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FBC4BF"},"className":"score"},"children":["0.34"]},{"name":"div","attribs":{"style":{"background":"#F99CB4"},"className":"score"},"children":["0.51"]},{"name":"div","attribs":{"style":{"background":"#FAAFB9"},"className":"score"},"children":["0.43"]},{"name":"div","attribs":{"style":{"background":"#F76CA2"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#F15C9E"},"className":"score"},"children":["0.70"]},{"name":"div","attribs":{"style":{"background":"#E7499B"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#E84B9B"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#FCDDDA"},"className":"score"},"children":["0.18"]},{"name":"div","attribs":{"style":{"background":"#FEF3EF"},"className":"score"},"children":["0.03"]},{"name":"div","attribs":{"style":{"background":"#F773A5"},"className":"score"},"children":["0.63"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#DF3897"},"className":"score"},"children":["0.82"]},{"name":"div","attribs":{"style":{"background":"#E94D9B"},"className":"score"},"children":["0.75"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#F991B0"},"className":"score"},"children":["0.54"]},{"name":"div","attribs":{"style":{"background":"#BB0F84"},"className":"score"},"children":["0.95"]},{"name":"div","attribs":{"style":{"background":"#FAA3B6"},"className":"score"},"children":["0.48"]},{"name":"div","attribs":{"style":{"background":"#F87EA9"},"className":"score"},"children":["0.60"]},{"name":"div","attribs":{"style":{"background":"#F87DA8"},"className":"score"},"children":["0.60"]},{"name":"div","attribs":{"style":{"background":"#F76CA2"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#FCDBD8"},"className":"score"},"children":["0.19"]}],"maxWidth":80,"align":"center"},{"accessor":"graph_connectivity","name":"Graph connectivity","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#B40781"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#B50982"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#D32A92"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#FAB0BA"},"className":"score"},"children":["0.42"]},{"name":"div","attribs":{"style":{"background":"#C21789"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#BA0E84"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#B70A82"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#C21788"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#C81D8B"},"className":"score"},"children":["0.91"]},{"name":"div","attribs":{"style":{"background":"#BA0E84"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#B90D84"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#C81D8B"},"className":"score"},"children":["0.91"]},{"name":"div","attribs":{"style":{"background":"#B30781"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#D32991"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#B70A82"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#B70A82"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#DE3797"},"className":"score"},"children":["0.82"]},{"name":"div","attribs":{"style":{"background":"#B1047F"},"className":"score"},"children":["0.99"]}],"maxWidth":80,"align":"center"},{"accessor":"kBET","name":"kBET","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#F87AA7"},"className":"score"},"children":["0.61"]},{"name":"div","attribs":{"style":{"background":"#DB3296"},"className":"score"},"children":["0.84"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#BE1286"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#B50981"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#FCDBD8"},"className":"score"},"children":["0.20"]},{"name":"div","attribs":{"style":{"background":"#FCDBD8"},"className":"score"},"children":["0.19"]},{"name":"div","attribs":{"style":{"background":"#FAA9B7"},"className":"score"},"children":["0.46"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#ED559D"},"className":"score"},"children":["0.73"]},{"name":"div","attribs":{"style":{"background":"#FBB5BB"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#FCD3CF"},"className":"score"},"children":["0.24"]},{"name":"div","attribs":{"style":{"background":"#FDE6E3"},"className":"score"},"children":["0.12"]},{"name":"div","attribs":{"style":{"background":"#FEECE8"},"className":"score"},"children":["0.08"]},{"name":"div","attribs":{"style":{"background":"#FCDFDC"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#FEF1ED"},"className":"score"},"children":["0.04"]},{"name":"div","attribs":{"style":{"background":"#F565A0"},"className":"score"},"children":["0.67"]},{"name":"div","attribs":{"style":{"background":"#FDE8E5"},"className":"score"},"children":["0.10"]},{"name":"div","attribs":{"style":{"background":"#FDE8E5"},"className":"score"},"children":["0.10"]},{"name":"div","attribs":{"style":{"background":"#FEF4F0"},"className":"score"},"children":["0.02"]},{"name":"div","attribs":{"style":{"background":"#FCD6D2"},"className":"score"},"children":["0.23"]}],"maxWidth":80,"align":"center"},{"accessor":"bio_conservation","name":"Overall","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FCA26D"},"className":"score"},"children":["0.59"]},{"name":"div","attribs":{"style":{"background":"#FCB47D"},"className":"score"},"children":["0.52"]},{"name":"div","attribs":{"style":{"background":"#FDC38C"},"className":"score"},"children":["0.44"]},{"name":"div","attribs":{"style":{"background":"#FDCE98"},"className":"score"},"children":["0.37"]},{"name":"div","attribs":{"style":{"background":"#FDCA93"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#FEECD2"},"className":"score"},"children":["0.12"]},{"name":"div","attribs":{"style":{"background":"#FEEDD4"},"className":"score"},"children":["0.11"]},{"name":"div","attribs":{"style":{"background":"#FCA772"},"className":"score"},"children":["0.57"]},{"name":"div","attribs":{"style":{"background":"#FCA772"},"className":"score"},"children":["0.57"]},{"name":"div","attribs":{"style":{"background":"#FDCD97"},"className":"score"},"children":["0.38"]},{"name":"div","attribs":{"style":{"background":"#FEF0DC"},"className":"score"},"children":["0.07"]},{"name":"div","attribs":{"style":{"background":"#FC9D68"},"className":"score"},"children":["0.61"]},{"name":"div","attribs":{"style":{"background":"#ED6246"},"className":"score"},"children":["0.84"]},{"name":"div","attribs":{"style":{"background":"#FDC48D"},"className":"score"},"children":["0.44"]},{"name":"div","attribs":{"style":{"background":"#FDC48E"},"className":"score"},"children":["0.43"]},{"name":"div","attribs":{"style":{"background":"#FDD49E"},"className":"score"},"children":["0.33"]},{"name":"div","attribs":{"style":{"background":"#F3734E"},"className":"score"},"children":["0.77"]},{"name":"div","attribs":{"style":{"background":"#FDDDB2"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FDDEB3"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#F67D52"},"className":"score"},"children":["0.73"]},{"name":"div","attribs":{"style":{"background":"#FCAD77"},"className":"score"},"children":["0.55"]}],"maxWidth":80,"align":"center"},{"accessor":"NMI_cluster_label","name":"NMI cluster/label","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FDCA93"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#FDD8A6"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FDE4C0"},"className":"score"},"children":["0.20"]},{"name":"div","attribs":{"style":{"background":"#FEEBD0"},"className":"score"},"children":["0.13"]},{"name":"div","attribs":{"style":{"background":"#FDE6C4"},"className":"score"},"children":["0.18"]},{"name":"div","attribs":{"style":{"background":"#FEF2E2"},"className":"score"},"children":["0.04"]},{"name":"div","attribs":{"style":{"background":"#FEF6EB"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FDC48D"},"className":"score"},"children":["0.44"]},{"name":"div","attribs":{"style":{"background":"#FDD9AA"},"className":"score"},"children":["0.29"]},{"name":"div","attribs":{"style":{"background":"#FDD5A2"},"className":"score"},"children":["0.32"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FCB881"},"className":"score"},"children":["0.51"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FDE2BC"},"className":"score"},"children":["0.21"]},{"name":"div","attribs":{"style":{"background":"#FDE3BD"},"className":"score"},"children":["0.21"]},{"name":"div","attribs":{"style":{"background":"#FEF3E4"},"className":"score"},"children":["0.04"]},{"name":"div","attribs":{"style":{"background":"#FCA36D"},"className":"score"},"children":["0.59"]},{"name":"div","attribs":{"style":{"background":"#FEF2E2"},"className":"score"},"children":["0.05"]},{"name":"div","attribs":{"style":{"background":"#FEF2E2"},"className":"score"},"children":["0.05"]},{"name":"div","attribs":{"style":{"background":"#FCB37C"},"className":"score"},"children":["0.53"]},{"name":"div","attribs":{"style":{"background":"#FDDBAC"},"className":"score"},"children":["0.27"]}],"maxWidth":80,"align":"center"},{"accessor":"ARI_cluster_label","name":"ARI cluster/label","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FCB27C"},"className":"score"},"children":["0.53"]},{"name":"div","attribs":{"style":{"background":"#FDDBAD"},"className":"score"},"children":["0.27"]},{"name":"div","attribs":{"style":{"background":"#FDE5C3"},"className":"score"},"children":["0.18"]},{"name":"div","attribs":{"style":{"background":"#FDDEB4"},"className":"score"},"children":["0.24"]},{"name":"div","attribs":{"style":{"background":"#FDE2BC"},"className":"score"},"children":["0.21"]},{"name":"div","attribs":{"style":{"background":"#FEF1DE"},"className":"score"},"children":["0.06"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FDD39D"},"className":"score"},"children":["0.34"]},{"name":"div","attribs":{"style":{"background":"#FDDBAE"},"className":"score"},"children":["0.27"]},{"name":"div","attribs":{"style":{"background":"#FDC790"},"className":"score"},"children":["0.42"]},{"name":"div","attribs":{"style":{"background":"#FEE8CA"},"className":"score"},"children":["0.16"]},{"name":"div","attribs":{"style":{"background":"#FCB079"},"className":"score"},"children":["0.54"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FDDCB0"},"className":"score"},"children":["0.26"]},{"name":"div","attribs":{"style":{"background":"#FDD49E"},"className":"score"},"children":["0.33"]},{"name":"div","attribs":{"style":{"background":"#FEEFDA"},"className":"score"},"children":["0.08"]},{"name":"div","attribs":{"style":{"background":"#F4764F"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#FEF5E9"},"className":"score"},"children":["0.01"]},{"name":"div","attribs":{"style":{"background":"#FEF5E9"},"className":"score"},"children":["0.01"]},{"name":"div","attribs":{"style":{"background":"#FDDDB2"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FDDFB6"},"className":"score"},"children":["0.24"]}],"maxWidth":80,"align":"center"},{"accessor":"ASW_label","name":"Label ASW","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FDE2BD"},"className":"score"},"children":["0.21"]},{"name":"div","attribs":{"style":{"background":"#FEEACF"},"className":"score"},"children":["0.13"]},{"name":"div","attribs":{"style":{"background":"#FEEED8"},"className":"score"},"children":["0.09"]},{"name":"div","attribs":{"style":{"background":"#FEEACE"},"className":"score"},"children":["0.14"]},{"name":"div","attribs":{"style":{"background":"#FEEBD1"},"className":"score"},"children":["0.12"]},{"name":"div","attribs":{"style":{"background":"#FEF6EB"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEECD2"},"className":"score"},"children":["0.12"]},{"name":"div","attribs":{"style":{"background":"#FDDDB1"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FDDEB4"},"className":"score"},"children":["0.24"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#FDE5C3"},"className":"score"},"children":["0.18"]},{"name":"div","attribs":{"style":{"background":"#FDDCB0"},"className":"score"},"children":["0.26"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#FDE6C4"},"className":"score"},"children":["0.18"]},{"name":"div","attribs":{"style":{"background":"#FEE9CA"},"className":"score"},"children":["0.15"]},{"name":"div","attribs":{"style":{"background":"#FDC68F"},"className":"score"},"children":["0.42"]},{"name":"div","attribs":{"style":{"background":"#FEE9CB"},"className":"score"},"children":["0.15"]},{"name":"div","attribs":{"style":{"background":"#FEE9CB"},"className":"score"},"children":["0.15"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FDE4BF"},"className":"score"},"children":["0.20"]}],"maxWidth":80,"align":"center"},{"accessor":"isolated_label_F1","name":"Isolated label F1","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#F78053"},"className":"score"},"children":["0.72"]},{"name":"div","attribs":{"style":{"background":"#E8553C"},"className":"score"},"children":["0.88"]},{"name":"div","attribs":{"style":{"background":"#FCA36E"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#FDC38C"},"className":"score"},"children":["0.45"]},{"name":"div","attribs":{"style":{"background":"#FCA670"},"className":"score"},"children":["0.57"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF4E7"},"className":"score"},"children":["0.02"]},{"name":"div","attribs":{"style":{"background":"#DA3724"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#DE412C"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#FCAF79"},"className":"score"},"children":["0.54"]},{"name":"div","attribs":{"style":{"background":"#FEEBD0"},"className":"score"},"children":["0.13"]},{"name":"div","attribs":{"style":{"background":"#EE6447"},"className":"score"},"children":["0.83"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#EE6346"},"className":"score"},"children":["0.84"]},{"name":"div","attribs":{"style":{"background":"#FC9964"},"className":"score"},"children":["0.62"]},{"name":"div","attribs":{"style":{"background":"#FDD09A"},"className":"score"},"children":["0.36"]},{"name":"div","attribs":{"style":{"background":"#EA5A3F"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#FDD9AA"},"className":"score"},"children":["0.29"]},{"name":"div","attribs":{"style":{"background":"#FDD9AA"},"className":"score"},"children":["0.29"]},{"name":"div","attribs":{"style":{"background":"#D83220"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#DC3B27"},"className":"score"},"children":["0.96"]}],"maxWidth":80,"align":"center"},{"accessor":"isolated_label_silhouette","name":"Isolated label silhouette","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#DD3F2A"},"className":"score"},"children":["0.95"]},{"name":"div","attribs":{"style":{"background":"#E0452F"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#E0452F"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#E24A33"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#FDD8A7"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FDD8A7"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#D93623"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#D93623"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#E65239"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#E65239"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#F78053"},"className":"score"},"children":["0.72"]},{"name":"div","attribs":{"style":{"background":"#E65239"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FC905C"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#FC905C"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#FC915D"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#E65239"},"className":"score"},"children":["0.89"]}],"maxWidth":80,"align":"center"},{"accessor":"cLISI","name":"Graph cLISI","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#F88053"},"className":"score"},"children":["0.72"]},{"name":"div","attribs":{"style":{"background":"#FC9763"},"className":"score"},"children":["0.63"]},{"name":"div","attribs":{"style":{"background":"#FB8C58"},"className":"score"},"children":["0.67"]},{"name":"div","attribs":{"style":{"background":"#FDDBAD"},"className":"score"},"children":["0.27"]},{"name":"div","attribs":{"style":{"background":"#FDCC96"},"className":"score"},"children":["0.38"]},{"name":"div","attribs":{"style":{"background":"#FDD8A7"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FDD49F"},"className":"score"},"children":["0.33"]},{"name":"div","attribs":{"style":{"background":"#FCAA74"},"className":"score"},"children":["0.56"]},{"name":"div","attribs":{"style":{"background":"#FA8957"},"className":"score"},"children":["0.68"]},{"name":"div","attribs":{"style":{"background":"#F57950"},"className":"score"},"children":["0.75"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FB8B58"},"className":"score"},"children":["0.67"]},{"name":"div","attribs":{"style":{"background":"#E65138"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#FDC38C"},"className":"score"},"children":["0.45"]},{"name":"div","attribs":{"style":{"background":"#FCAE77"},"className":"score"},"children":["0.55"]},{"name":"div","attribs":{"style":{"background":"#FDC089"},"className":"score"},"children":["0.46"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FDCE98"},"className":"score"},"children":["0.37"]},{"name":"div","attribs":{"style":{"background":"#FDD19B"},"className":"score"},"children":["0.35"]},{"name":"div","attribs":{"style":{"background":"#DA3825"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#F78053"},"className":"score"},"children":["0.72"]}],"maxWidth":80,"align":"center"},{"accessor":"HVG_overlap","name":"HVG conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]}],"maxWidth":80,"align":"center"},{"accessor":"cell_cycle","name":"Cell cycle conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]}],"maxWidth":80,"align":"center"},{"accessor":"trajectory","name":"Trajectory conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]}],"maxWidth":80,"align":"center"}],"columnGroups":[{"headerClassName":"group-header","name":"Batch correction","columns":["batch_correction","PCR_batch","ASW_label_batch","iLISI","graph_connectivity","kBET"]},{"headerClassName":"group-header","name":"Bio conservation","columns":["bio_conservation","NMI_cluster_label","ARI_cluster_label","ASW_label","isolated_label_F1","isolated_label_silhouette","cLISI","HVG_overlap","cell_cycle","trajectory"]}],"defaultSortDesc":true,"defaultSorted":[{"id":"overall","desc":true}],"defaultPageSize":21,"paginationType":"numbers","showPageInfo":true,"minRows":1,"highlight":true,"borderless":true,"compact":true,"showSortIcon":false,"className":"metrics-table","dataKey":"28dcc7e21ce134d5b08fe57abe2f2aa0","key":"28dcc7e21ce134d5b08fe57abe2f2aa0"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="individual-metrics" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Individual metrics</h1>
+<div id="overall-1" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Overall</h2>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-overall-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="batch-correction" class="section level2 tabset" number="2.2">
+<h2 class="tabset" number="2.2"><span class="header-section-number">2.2</span> Batch correction</h2>
+<div id="batch-correction-1" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Batch correction</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-batch-batch_correction-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pcr-batch" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">PCR batch</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-batch-PCR_batch-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="batch-asw" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Batch ASW</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-batch-ASW_label_batch-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="graph-ilisi" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Graph iLISI</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-batch-iLISI-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="graph-connectivity" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Graph connectivity</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-batch-graph_connectivity-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="kbet" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">kBET</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-batch-kBET-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="bio-conservation" class="section level2 tabset" number="2.3">
+<h2 class="tabset" number="2.3"><span class="header-section-number">2.3</span> Bio conservation</h2>
+<div id="bio-conservation-1" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Bio conservation</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-bio-bio_conservation-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="nmi-clusterlabel" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">NMI cluster/label</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-bio-NMI_cluster_label-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="ari-clusterlabel" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">ARI cluster/label</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-bio-ARI_cluster_label-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="label-asw" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Label ASW</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-bio-ASW_label-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="isolated-label-f1" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Isolated label F1</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-bio-isolated_label_F1-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="isolated-label-silhouette" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Isolated label silhouette</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-bio-isolated_label_silhouette-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="graph-clisi" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Graph cLISI</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-bio-cLISI-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="hvg-conservation" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">HVG conservation</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-bio-HVG_overlap-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cell-cycle-conservation" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Cell cycle conservation</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-bio-cell_cycle-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="trajectory-conservation" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Trajectory conservation</h3>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/metrics-bio-trajectory-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="embeddings" class="section level1 tabset tabset-pills tabset-fade" number="3">
+<h1 class="tabset tabset-pills tabset-fade" number="3"><span class="header-section-number">3</span> Embeddings</h1>
+<div id="full" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">Full</h2>
+<div id="unscaled" class="section level3 unnumbered tabset" number="">
+<h3 class="unnumbered tabset" number="">Unscaled</h3>
+<div id="mnn-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">MNN (Features)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-MNN-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="scanorama-embedding" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">Scanorama (Embedding)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-Scanorama-Embedding-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="scanorama-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">Scanorama (Features)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-Scanorama-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="seurat-v3-cca-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">Seurat v3 CCA (Features)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-Seurat%20v3%20CCA-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="seurat-v3-rpca-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">Seurat v3 RPCA (Features)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-Seurat%20v3%20RPCA-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="saucie-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">SAUCIE (Features)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-SAUCIE-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="saucie-embedding" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">SAUCIE (Embedding)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-SAUCIE-Embedding-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="trvae-embedding" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">trVAE (Embedding)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-trVAE-Embedding-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="trvae-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">trVAE (Features)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-trVAE-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="harmony-embedding" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">Harmony (Embedding)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-Harmony-Embedding-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="bbknn-graph" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">BBKNN (Graph)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-BBKNN-Graph-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="scvi-embedding" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">scVI (Embedding)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-scVI-Embedding-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="scanvi-embedding" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">scANVI* (Embedding)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-scANVI*-Embedding-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos-graph" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">Conos (Graph)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-Conos-Graph-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="combat-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">ComBat (Features)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-ComBat-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="liger-embedding" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">LIGER (Embedding)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-LIGER-Embedding-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="scgen-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">scGen* (Features)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-scGen*-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fastmnn-embedding" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">FastMNN (Embedding)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-FastMNN-Embedding-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fastmnn-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">FastMNN (Features)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-FastMNN-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="desc-embedding" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">DESC (Embedding)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-DESC-Embedding-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="unintegrated-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">Unintegrated (Features)</h4>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/embedding-Full-Unscaled-Unintegrated-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+</div>
+<div id="scalability" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Scalability</h1>
+<div id="time" class="section level2" number="4.1">
+<h2 number="4.1"><span class="header-section-number">4.1</span> Time</h2>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/scalability-time-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="memory" class="section level2" number="4.2">
+<h2 number="4.2"><span class="header-section-number">4.2</span> Memory</h2>
+<p><img src="figures/dataset_atac_mouse_brain_atac_genes_small/scalability-memory-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

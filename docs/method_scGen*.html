@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Method: scGen*</title>
+
+<script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-16.12.0/react.min.js"></script>
+<script src="site_libs/react-16.12.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/reactable-binding-0.2.2/reactable.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div id="nav-placeholder"></div>
+
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar-content.html");
+});
+</script>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Method: scGen*</h1>
+
+</div>
+
+
+<p>This page displays information for the following method:</p>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#bubvnsbgje .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bubvnsbgje .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bubvnsbgje .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bubvnsbgje .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bubvnsbgje .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bubvnsbgje .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bubvnsbgje .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bubvnsbgje .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bubvnsbgje .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bubvnsbgje .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bubvnsbgje .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bubvnsbgje .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bubvnsbgje .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bubvnsbgje .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bubvnsbgje .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bubvnsbgje .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bubvnsbgje .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#bubvnsbgje .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bubvnsbgje .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#bubvnsbgje .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bubvnsbgje .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bubvnsbgje .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bubvnsbgje .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bubvnsbgje .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bubvnsbgje .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#bubvnsbgje .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bubvnsbgje .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#bubvnsbgje .gt_left {
+  text-align: left;
+}
+
+#bubvnsbgje .gt_center {
+  text-align: center;
+}
+
+#bubvnsbgje .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bubvnsbgje .gt_font_normal {
+  font-weight: normal;
+}
+
+#bubvnsbgje .gt_font_bold {
+  font-weight: bold;
+}
+
+#bubvnsbgje .gt_font_italic {
+  font-style: italic;
+}
+
+#bubvnsbgje .gt_super {
+  font-size: 65%;
+}
+
+#bubvnsbgje .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="bubvnsbgje" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>Name</strong>:</p>
+</div></td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p>scGen*</p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>Description</strong>:</p>
+</div></td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p>Conditional variational autoencoder with cell labels</p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>GitHub</strong>:</p>
+</div></td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><a href="https://github.com/theislab/scgen">theislab/scgen</a></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>DOI</strong>:</p>
+</div></td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><a href="https://doi.org/10.1038/s41592-019-0494-8">10.1038/s41592-019-0494-8</a></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>Labels required?</strong>:</p>
+</div></td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p>Yes</p>
+</div></td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+<div id="overall" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Overall</h1>
+<div id="plot" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Plot</h2>
+<p><img src="figures/method_scGen*/overall-plot-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="table" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Table</h2>
+<div class="metrics">
+<div id="htmlwidget-538ba2b877d936c7b0c8" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-538ba2b877d936c7b0c8">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"method":["pancreas","pancreas","lung_atlas","lung_atlas","immune_cell_hum","immune_cell_hum","immune_cell_hum_mou","immune_cell_hum_mou","simulations_1_1","simulations_1_1","simulations_2","simulations_2","pancreas","pancreas","lung_atlas","lung_atlas","immune_cell_hum","immune_cell_hum","immune_cell_hum_mou","simulations_1_1","simulations_1_1","simulations_2","simulations_2"],"output":["Features","Features","Features","Features","Features","Features","Features","Features","Features","Features","Features","Features","Features","Features","Features","Features","Features","Features","Features","Features","Features","Features","Features"],"features":["HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","Full","HVG","HVG","Full","HVG","Full"],"scaling":["Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Scaled","Scaled","Scaled","Scaled","Scaled","Scaled","Scaled","Scaled","Scaled","Scaled","Scaled"],"overall":[0.731702538378471,0.676922208682997,0.724014013315846,0.70943605013758,0.756897533091821,0.708784305983502,0.663452340076599,0.60471385319672,0.838348512319501,0.841045874670289,0.80214649386704,0.738016660632643,0.680088718227853,0.304579586690688,0.553443152543229,0.495649952765933,0.36869193200527,0.317576535552188,0.463934686309579,0.728116907299733,0.794535450415525,0.433459318405406,0.554382122801425],"batch_correction":[0.800206883723559,0.677162769163984,0.537561423643756,0.475338174074167,0.617383234199519,0.587621838864556,0.546430820305069,0.501204144346657,0.88271095140769,0.803967670465097,0.714306013337429,0.516883220780207,0.719346645302949,0.53876871298681,0.512635433063493,0.475317853329666,0.534874599552482,0.500975611458419,0.59614350890674,0.778731046353745,0.762708089243559,0.752555107632506,0.635987759987307],"PCR_batch":[0.88418361976556,0.89888391013401,0.519076420766313,0.439154904707099,0.688842186282806,0.597501369121516,0.593344681581867,0.594643121328281,0.939339712857591,0.91543361463974,0.463993913722746,0.401119362058372,0.961658568845195,0.999611008782384,0.891560304497743,0.874096577603277,0.999566407466197,0.999446239917371,0.981402959847848,0.967505574903494,0.949476298748711,0.967653473851911,0.865910090653565],"ASW_label_batch":[0.702085988028434,0.653905741170532,0.68301758975728,0.692175130529883,0.8149412151432,0.800573820115376,0.711701666741541,0.68047261861836,0.796215785615771,0.743936272752487,0.883650207759415,0.878847247873597,0.690240832204432,0.484894518489993,0.678679090892987,0.626242020003252,0.668180677350214,0.301249802309634,0.699282346813743,0.925448543674022,0.943667725398237,0.983341785790089,0.9212685898703],"iLISI":[0.878961011598499,0.794439112454339,0.309631414994785,0.294726320498481,0.523383100697562,0.522574090343202,0.305023300729842,0.260756823856201,0.707038068525252,0.756009862057974,0.402079797753448,0.247688100220908,0.92887306893392,0.789295614196389,0.435605052248413,0.381638056473348,0.812807213144637,0.770250149313476,0.441488373535781,0.928295327194411,0.902178759598436,0.819035224757154,0.395925475591649],"graph_connectivity":[0.994502725391996,0.991305650018694,0.923289471242277,0.85885791382714,0.985718763209038,1,1,0.941162131578099,1,1,1,1,0.963935061279698,0.411458108166793,0.531805277651426,0.481821151074518,0,0.256055555760613,0.754902815502666,0.990380642838543,0.999932068307194,0.991772088873012,0.995013013190457],"kBET":[0.541301073833306,0.0472794320423447,0.252792221458126,0.0917766008082309,0.0740309056649878,0.0174599147426872,0.122084452472097,0.0289860263523428,0.970961190039838,0.604458602875282,0.821806147451537,0.0567613937481578,0.0520256952514981,0.00858431529849204,0.0255274400268974,0.0127914614939326,0.193818699801362,0.177876309990998,0.103641048833663,0.0820251431582558,0.0182855941652173,0.000972964890363593,0.0018216306305653],"bio_conservation":[0.686032974815078,0.676761835029005,0.848315739763906,0.865501300846522,0.849907065686689,0.7895592840628,0.741466686590953,0.673720325763429,0.808773552927374,0.865764677473751,0.860706814220113,0.8854389538676,0.653916766844455,0.148453502493274,0.580648298863053,0.509204685723445,0.257903486973795,0.195310484948035,0.375795471244806,0.694374147930391,0.815753691196836,0.220728792254006,0.499978364677504],"NMI_cluster_label":[1,0.969333066603283,0.984571418853451,1,1,0.927947062859271,1,0.993795339342062,1,1,1,1,0.765375933604237,0.0750931905659462,0.539333588591153,0.53331232422334,0,0.0759373753719512,0.356455419300761,0.755807612639291,0.997664511698792,0.138951152716162,0.543876806260088],"ARI_cluster_label":[1,0.986609041237577,1,0.999310363014856,1,0.93403683192495,1,0.999527855005521,1,1,1,1,0.842520322256967,0.0197264743500654,0.478109342445113,0.487099507252778,0,0.121753251577829,0.250923819798239,0.910241192373034,0.999342934445561,0.125295030439501,0.530856600125374],"ASW_label":[0.804542569193847,0.657084462054049,0.993122354363204,1,1,0.996955314711466,1,0.971221579786993,0.640612582266035,1,0.835924491232682,1,0.652882565117713,0,0.653476920022788,0.528618812275389,0.134564661527812,0,0.403444837671547,0.476760068023671,0.689955686923994,0.255120568934652,0.283609272844856],"isolated_label_F1":[0.163383101857764,0.162016612407582,0.995835853574393,1,0.984927606023504,0.987146700417091,0.433415094422265,0.433936023580542,1,1,1,1,0.178231569899109,0.0307271454927158,0.634493414146048,0.706154441019489,0.0865954489108245,0.183463147799236,0.0635109257562216,0.892677407369879,1,0.173477152233151,0.706621659363071],"isolated_label_silhouette":[0.539173232413461,0.577395887105055,0.598670556725057,0.809208884659312,0.722700719550563,0.72228754470348,0.661577849556961,0.716811611773523,0.614831943710902,0.799570131442207,0.873817924877154,1,0.985549290256504,0.0584574249832247,0.61592436486858,0.50933418317178,0.436108715503151,0,0.548906693060694,0.578421102716514,1,0.406806030064014,0.494981787996988],"cLISI":[1,1,1,1,1,1,1,1,1,1,1,1,0.998517196307805,0.769180438721947,0.876630792152809,0.86607382668484,0.587119412132605,0.738232980847201,0.844862800546167,1,1,0.216135392289597,0.884819822551584],"HVG_overlap":[0.575228291271849,0.400556951653154,0.512067486085885,0.396627686050657,0.39849324138379,0.205627237368031,0.374738022970882,0.183130099547629,0.405970344514682,0.260782610874049,0.315205283430954,0.198072677073199,0.343740186175474,0.0422880619824942,0.310781167807101,0.112202122484289,0.348187559329203,0.0781914562258984,0.284937214493969,0.246711652390349,0.0233127053095041,0.229316219100961,0.0550826036005652],"cell_cycle":[0.405936603783707,0.661098659171338,0.702258248509256,0.718863473047355,0.543042024222342,0.338020781328813,0.267696448351885,0.155904051004195,"NA","NA","NA","NA",0.464517071137831,0.192155283849795,0.536436800870835,0.330842268675655,0.216090606873268,0.5602161527102,0,"NA","NA","NA","NA"],"trajectory":["NA","NA","NA","NA",1,0.994012083252093,0.93577276401658,0.609156371830395,"NA","NA","NA","NA","NA","NA","NA","NA",0.512464978487291,0,0.629117530575651,"NA","NA","NA","NA"]},"columns":[{"accessor":"method","name":"Dataset","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"output","name":"Output","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"features","name":"Features","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"scaling","name":"Scaling","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"overall","name":"Overall score","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#32A7C2"},"className":"score"},"children":["0.73"]},{"name":"div","attribs":{"style":{"background":"#3EB3C3"},"className":"score"},"children":["0.68"]},{"name":"div","attribs":{"style":{"background":"#34A9C2"},"className":"score"},"children":["0.72"]},{"name":"div","attribs":{"style":{"background":"#37ACC2"},"className":"score"},"children":["0.71"]},{"name":"div","attribs":{"style":{"background":"#2DA1C1"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#37ACC2"},"className":"score"},"children":["0.71"]},{"name":"div","attribs":{"style":{"background":"#42B6C3"},"className":"score"},"children":["0.66"]},{"name":"div","attribs":{"style":{"background":"#58BEC0"},"className":"score"},"children":["0.60"]},{"name":"div","attribs":{"style":{"background":"#1D8FBF"},"className":"score"},"children":["0.84"]},{"name":"div","attribs":{"style":{"background":"#1D8EBE"},"className":"score"},"children":["0.84"]},{"name":"div","attribs":{"style":{"background":"#2397C0"},"className":"score"},"children":["0.80"]},{"name":"div","attribs":{"style":{"background":"#31A6C2"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#3EB3C3"},"className":"score"},"children":["0.68"]},{"name":"div","attribs":{"style":{"background":"#CDEBB3"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#6BC5BD"},"className":"score"},"children":["0.55"]},{"name":"div","attribs":{"style":{"background":"#80CDBA"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#B7E3B5"},"className":"score"},"children":["0.37"]},{"name":"div","attribs":{"style":{"background":"#CAEAB3"},"className":"score"},"children":["0.32"]},{"name":"div","attribs":{"style":{"background":"#8ED3B9"},"className":"score"},"children":["0.46"]},{"name":"div","attribs":{"style":{"background":"#33A8C2"},"className":"score"},"children":["0.73"]},{"name":"div","attribs":{"style":{"background":"#2599C0"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#9BD8B8"},"className":"score"},"children":["0.43"]},{"name":"div","attribs":{"style":{"background":"#6AC5BD"},"className":"score"},"children":["0.55"]}],"maxWidth":80,"align":"center","headerStyle":{"fontWeight":700}},{"accessor":"batch_correction","name":"Overall","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#E23E98"},"className":"score"},"children":["0.80"]},{"name":"div","attribs":{"style":{"background":"#F564A0"},"className":"score"},"children":["0.68"]},{"name":"div","attribs":{"style":{"background":"#F992B0"},"className":"score"},"children":["0.54"]},{"name":"div","attribs":{"style":{"background":"#FAA4B6"},"className":"score"},"children":["0.48"]},{"name":"div","attribs":{"style":{"background":"#F778A6"},"className":"score"},"children":["0.62"]},{"name":"div","attribs":{"style":{"background":"#F882AA"},"className":"score"},"children":["0.59"]},{"name":"div","attribs":{"style":{"background":"#F98FAF"},"className":"score"},"children":["0.55"]},{"name":"div","attribs":{"style":{"background":"#F99EB4"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#CF248F"},"className":"score"},"children":["0.88"]},{"name":"div","attribs":{"style":{"background":"#E13D98"},"className":"score"},"children":["0.80"]},{"name":"div","attribs":{"style":{"background":"#EF599E"},"className":"score"},"children":["0.71"]},{"name":"div","attribs":{"style":{"background":"#F999B2"},"className":"score"},"children":["0.52"]},{"name":"div","attribs":{"style":{"background":"#EE579D"},"className":"score"},"children":["0.72"]},{"name":"div","attribs":{"style":{"background":"#F992B0"},"className":"score"},"children":["0.54"]},{"name":"div","attribs":{"style":{"background":"#F99AB3"},"className":"score"},"children":["0.51"]},{"name":"div","attribs":{"style":{"background":"#FAA4B6"},"className":"score"},"children":["0.48"]},{"name":"div","attribs":{"style":{"background":"#F993B0"},"className":"score"},"children":["0.53"]},{"name":"div","attribs":{"style":{"background":"#F99EB4"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#F87FA9"},"className":"score"},"children":["0.60"]},{"name":"div","attribs":{"style":{"background":"#E5459A"},"className":"score"},"children":["0.78"]},{"name":"div","attribs":{"style":{"background":"#E84A9B"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#E94D9B"},"className":"score"},"children":["0.75"]},{"name":"div","attribs":{"style":{"background":"#F772A4"},"className":"score"},"children":["0.64"]}],"maxWidth":80,"align":"center"},{"accessor":"PCR_batch","name":"PCR batch","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#CE248F"},"className":"score"},"children":["0.88"]},{"name":"div","attribs":{"style":{"background":"#CA1F8D"},"className":"score"},"children":["0.90"]},{"name":"div","attribs":{"style":{"background":"#F998B2"},"className":"score"},"children":["0.52"]},{"name":"div","attribs":{"style":{"background":"#FAACB9"},"className":"score"},"children":["0.44"]},{"name":"div","attribs":{"style":{"background":"#F3619F"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#F87EA9"},"className":"score"},"children":["0.60"]},{"name":"div","attribs":{"style":{"background":"#F880A9"},"className":"score"},"children":["0.59"]},{"name":"div","attribs":{"style":{"background":"#F87FA9"},"className":"score"},"children":["0.59"]},{"name":"div","attribs":{"style":{"background":"#BF1387"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#C51A8A"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#FAA7B7"},"className":"score"},"children":["0.46"]},{"name":"div","attribs":{"style":{"background":"#FBB5BB"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#B80C83"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#CC228E"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#D12790"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#B30680"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#B70A82"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#BC1085"},"className":"score"},"children":["0.95"]},{"name":"div","attribs":{"style":{"background":"#B70A82"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#D32A92"},"className":"score"},"children":["0.87"]}],"maxWidth":80,"align":"center"},{"accessor":"ASW_label_batch","name":"Batch ASW","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#F15C9E"},"className":"score"},"children":["0.70"]},{"name":"div","attribs":{"style":{"background":"#F76CA2"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#F462A0"},"className":"score"},"children":["0.68"]},{"name":"div","attribs":{"style":{"background":"#F3609F"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#DF3998"},"className":"score"},"children":["0.81"]},{"name":"div","attribs":{"style":{"background":"#E23E98"},"className":"score"},"children":["0.80"]},{"name":"div","attribs":{"style":{"background":"#EF599E"},"className":"score"},"children":["0.71"]},{"name":"div","attribs":{"style":{"background":"#F463A0"},"className":"score"},"children":["0.68"]},{"name":"div","attribs":{"style":{"background":"#E23F99"},"className":"score"},"children":["0.80"]},{"name":"div","attribs":{"style":{"background":"#EA4F9C"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#CE248F"},"className":"score"},"children":["0.88"]},{"name":"div","attribs":{"style":{"background":"#D02690"},"className":"score"},"children":["0.88"]},{"name":"div","attribs":{"style":{"background":"#F3609F"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#FAA2B5"},"className":"score"},"children":["0.48"]},{"name":"div","attribs":{"style":{"background":"#F564A0"},"className":"score"},"children":["0.68"]},{"name":"div","attribs":{"style":{"background":"#F775A5"},"className":"score"},"children":["0.63"]},{"name":"div","attribs":{"style":{"background":"#F667A0"},"className":"score"},"children":["0.67"]},{"name":"div","attribs":{"style":{"background":"#FCCAC5"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#F15D9F"},"className":"score"},"children":["0.70"]},{"name":"div","attribs":{"style":{"background":"#C31789"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#BD1286"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#B20680"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#C41989"},"className":"score"},"children":["0.92"]}],"maxWidth":80,"align":"center"},{"accessor":"iLISI","name":"Graph\niLISI","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#D02690"},"className":"score"},"children":["0.88"]},{"name":"div","attribs":{"style":{"background":"#E34099"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#FCC8C4"},"className":"score"},"children":["0.31"]},{"name":"div","attribs":{"style":{"background":"#FCCBC6"},"className":"score"},"children":["0.29"]},{"name":"div","attribs":{"style":{"background":"#F997B2"},"className":"score"},"children":["0.52"]},{"name":"div","attribs":{"style":{"background":"#F997B2"},"className":"score"},"children":["0.52"]},{"name":"div","attribs":{"style":{"background":"#FCC9C4"},"className":"score"},"children":["0.31"]},{"name":"div","attribs":{"style":{"background":"#FCD0CC"},"className":"score"},"children":["0.26"]},{"name":"div","attribs":{"style":{"background":"#F05B9E"},"className":"score"},"children":["0.71"]},{"name":"div","attribs":{"style":{"background":"#E94C9B"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#FBB5BB"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#FCD2CE"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#C21688"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#E34199"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#FAADB9"},"className":"score"},"children":["0.44"]},{"name":"div","attribs":{"style":{"background":"#FBB9BC"},"className":"score"},"children":["0.38"]},{"name":"div","attribs":{"style":{"background":"#E03A98"},"className":"score"},"children":["0.81"]},{"name":"div","attribs":{"style":{"background":"#E6479A"},"className":"score"},"children":["0.77"]},{"name":"div","attribs":{"style":{"background":"#FAACB8"},"className":"score"},"children":["0.44"]},{"name":"div","attribs":{"style":{"background":"#C21688"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#C91E8C"},"className":"score"},"children":["0.90"]},{"name":"div","attribs":{"style":{"background":"#DF3897"},"className":"score"},"children":["0.82"]},{"name":"div","attribs":{"style":{"background":"#FBB6BB"},"className":"score"},"children":["0.40"]}],"maxWidth":80,"align":"center"},{"accessor":"graph_connectivity","name":"Graph connectivity","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#AF027E"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#B0037F"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#C31889"},"className":"score"},"children":["0.92"]},{"name":"div","attribs":{"style":{"background":"#D52C93"},"className":"score"},"children":["0.86"]},{"name":"div","attribs":{"style":{"background":"#B20580"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#BE1386"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#B80C83"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#FBB3BA"},"className":"score"},"children":["0.41"]},{"name":"div","attribs":{"style":{"background":"#F994B1"},"className":"score"},"children":["0.53"]},{"name":"div","attribs":{"style":{"background":"#FAA3B6"},"className":"score"},"children":["0.48"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FCD1CD"},"className":"score"},"children":["0.26"]},{"name":"div","attribs":{"style":{"background":"#E94C9B"},"className":"score"},"children":["0.75"]},{"name":"div","attribs":{"style":{"background":"#B0037F"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#AE017E"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#B0037F"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#AF027E"},"className":"score"},"children":["1.00"]}],"maxWidth":80,"align":"center"},{"accessor":"kBET","name":"kBET","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#F991B0"},"className":"score"},"children":["0.54"]},{"name":"div","attribs":{"style":{"background":"#FEF0EC"},"className":"score"},"children":["0.05"]},{"name":"div","attribs":{"style":{"background":"#FCD2CE"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FDEAE6"},"className":"score"},"children":["0.09"]},{"name":"div","attribs":{"style":{"background":"#FEECE9"},"className":"score"},"children":["0.07"]},{"name":"div","attribs":{"style":{"background":"#FEF4F0"},"className":"score"},"children":["0.02"]},{"name":"div","attribs":{"style":{"background":"#FDE6E2"},"className":"score"},"children":["0.12"]},{"name":"div","attribs":{"style":{"background":"#FEF2EF"},"className":"score"},"children":["0.03"]},{"name":"div","attribs":{"style":{"background":"#B60982"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#F87CA8"},"className":"score"},"children":["0.60"]},{"name":"div","attribs":{"style":{"background":"#DE3797"},"className":"score"},"children":["0.82"]},{"name":"div","attribs":{"style":{"background":"#FEEFEB"},"className":"score"},"children":["0.06"]},{"name":"div","attribs":{"style":{"background":"#FEEFEC"},"className":"score"},"children":["0.05"]},{"name":"div","attribs":{"style":{"background":"#FEF5F1"},"className":"score"},"children":["0.01"]},{"name":"div","attribs":{"style":{"background":"#FEF3EF"},"className":"score"},"children":["0.03"]},{"name":"div","attribs":{"style":{"background":"#FEF5F1"},"className":"score"},"children":["0.01"]},{"name":"div","attribs":{"style":{"background":"#FCDBD8"},"className":"score"},"children":["0.19"]},{"name":"div","attribs":{"style":{"background":"#FCDEDB"},"className":"score"},"children":["0.18"]},{"name":"div","attribs":{"style":{"background":"#FDE8E5"},"className":"score"},"children":["0.10"]},{"name":"div","attribs":{"style":{"background":"#FEEBE8"},"className":"score"},"children":["0.08"]},{"name":"div","attribs":{"style":{"background":"#FEF4F0"},"className":"score"},"children":["0.02"]},{"name":"div","attribs":{"style":{"background":"#FEF6F2"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF6F2"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"align":"center"},{"accessor":"bio_conservation","name":"Overall","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FA8857"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#FB8A57"},"className":"score"},"children":["0.68"]},{"name":"div","attribs":{"style":{"background":"#EC6044"},"className":"score"},"children":["0.85"]},{"name":"div","attribs":{"style":{"background":"#EA5A40"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#EC5F43"},"className":"score"},"children":["0.85"]},{"name":"div","attribs":{"style":{"background":"#F26F4C"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#F67B51"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#FB8B58"},"className":"score"},"children":["0.67"]},{"name":"div","attribs":{"style":{"background":"#F06A4A"},"className":"score"},"children":["0.81"]},{"name":"div","attribs":{"style":{"background":"#EA5A40"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#EB5C41"},"className":"score"},"children":["0.86"]},{"name":"div","attribs":{"style":{"background":"#E7543B"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#FC905C"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#FEE9CB"},"className":"score"},"children":["0.15"]},{"name":"div","attribs":{"style":{"background":"#FCA46F"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#FCB881"},"className":"score"},"children":["0.51"]},{"name":"div","attribs":{"style":{"background":"#FDDDB1"},"className":"score"},"children":["0.26"]},{"name":"div","attribs":{"style":{"background":"#FDE4C0"},"className":"score"},"children":["0.20"]},{"name":"div","attribs":{"style":{"background":"#FDCD97"},"className":"score"},"children":["0.38"]},{"name":"div","attribs":{"style":{"background":"#F98656"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#F06949"},"className":"score"},"children":["0.82"]},{"name":"div","attribs":{"style":{"background":"#FDE1BA"},"className":"score"},"children":["0.22"]},{"name":"div","attribs":{"style":{"background":"#FDBB84"},"className":"score"},"children":["0.50"]}],"maxWidth":80,"align":"center"},{"accessor":"NMI_cluster_label","name":"NMI cluster/label","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#DB3926"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#D93422"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#E14630"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D73120"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#F4754E"},"className":"score"},"children":["0.77"]},{"name":"div","attribs":{"style":{"background":"#FEF0DB"},"className":"score"},"children":["0.08"]},{"name":"div","attribs":{"style":{"background":"#FCB079"},"className":"score"},"children":["0.54"]},{"name":"div","attribs":{"style":{"background":"#FCB17B"},"className":"score"},"children":["0.53"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF0DB"},"className":"score"},"children":["0.08"]},{"name":"div","attribs":{"style":{"background":"#FDD09A"},"className":"score"},"children":["0.36"]},{"name":"div","attribs":{"style":{"background":"#F5774F"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FEEACD"},"className":"score"},"children":["0.14"]},{"name":"div","attribs":{"style":{"background":"#FCAE78"},"className":"score"},"children":["0.54"]}],"maxWidth":80,"align":"center"},{"accessor":"ARI_cluster_label","name":"ARI cluster/label","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D83422"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#E0442F"},"className":"score"},"children":["0.93"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#ED6245"},"className":"score"},"children":["0.84"]},{"name":"div","attribs":{"style":{"background":"#FEF5E7"},"className":"score"},"children":["0.02"]},{"name":"div","attribs":{"style":{"background":"#FDBE87"},"className":"score"},"children":["0.48"]},{"name":"div","attribs":{"style":{"background":"#FDBC86"},"className":"score"},"children":["0.49"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEECD1"},"className":"score"},"children":["0.12"]},{"name":"div","attribs":{"style":{"background":"#FDDDB2"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#E34C35"},"className":"score"},"children":["0.91"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FEEBD0"},"className":"score"},"children":["0.13"]},{"name":"div","attribs":{"style":{"background":"#FCB27C"},"className":"score"},"children":["0.53"]}],"maxWidth":80,"align":"center"},{"accessor":"ASW_label","name":"Label ASW","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#F16B4A"},"className":"score"},"children":["0.80"]},{"name":"div","attribs":{"style":{"background":"#FC8F5B"},"className":"score"},"children":["0.66"]},{"name":"div","attribs":{"style":{"background":"#D73220"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#DB3926"},"className":"score"},"children":["0.97"]},{"name":"div","attribs":{"style":{"background":"#FC945F"},"className":"score"},"children":["0.64"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#EE6447"},"className":"score"},"children":["0.84"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FC905C"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FC905C"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#FCB37C"},"className":"score"},"children":["0.53"]},{"name":"div","attribs":{"style":{"background":"#FEEACE"},"className":"score"},"children":["0.13"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FDC993"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#FDBE87"},"className":"score"},"children":["0.48"]},{"name":"div","attribs":{"style":{"background":"#FA8756"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#FDDDB1"},"className":"score"},"children":["0.26"]},{"name":"div","attribs":{"style":{"background":"#FDD9AA"},"className":"score"},"children":["0.28"]}],"maxWidth":80,"align":"center"},{"accessor":"isolated_label_F1","name":"Isolated label F1","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FEE8C8"},"className":"score"},"children":["0.16"]},{"name":"div","attribs":{"style":{"background":"#FEE8C9"},"className":"score"},"children":["0.16"]},{"name":"div","attribs":{"style":{"background":"#D73120"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D93422"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#D83422"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#FDC48E"},"className":"score"},"children":["0.43"]},{"name":"div","attribs":{"style":{"background":"#FDC48E"},"className":"score"},"children":["0.43"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FDE6C5"},"className":"score"},"children":["0.18"]},{"name":"div","attribs":{"style":{"background":"#FEF4E5"},"className":"score"},"children":["0.03"]},{"name":"div","attribs":{"style":{"background":"#FC9561"},"className":"score"},"children":["0.63"]},{"name":"div","attribs":{"style":{"background":"#F88354"},"className":"score"},"children":["0.71"]},{"name":"div","attribs":{"style":{"background":"#FEEFD9"},"className":"score"},"children":["0.09"]},{"name":"div","attribs":{"style":{"background":"#FDE5C3"},"className":"score"},"children":["0.18"]},{"name":"div","attribs":{"style":{"background":"#FEF1DE"},"className":"score"},"children":["0.06"]},{"name":"div","attribs":{"style":{"background":"#E65239"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FDE7C6"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#F88354"},"className":"score"},"children":["0.71"]}],"maxWidth":80,"align":"center"},{"accessor":"isolated_label_silhouette","name":"Isolated label silhouette","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FCB079"},"className":"score"},"children":["0.54"]},{"name":"div","attribs":{"style":{"background":"#FCA570"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#FC9F6A"},"className":"score"},"children":["0.60"]},{"name":"div","attribs":{"style":{"background":"#F06A4A"},"className":"score"},"children":["0.81"]},{"name":"div","attribs":{"style":{"background":"#F77F53"},"className":"score"},"children":["0.72"]},{"name":"div","attribs":{"style":{"background":"#F77F53"},"className":"score"},"children":["0.72"]},{"name":"div","attribs":{"style":{"background":"#FC8E5A"},"className":"score"},"children":["0.66"]},{"name":"div","attribs":{"style":{"background":"#F88053"},"className":"score"},"children":["0.72"]},{"name":"div","attribs":{"style":{"background":"#FC9B66"},"className":"score"},"children":["0.61"]},{"name":"div","attribs":{"style":{"background":"#F16D4B"},"className":"score"},"children":["0.80"]},{"name":"div","attribs":{"style":{"background":"#E9583E"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D93422"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#FEF1DF"},"className":"score"},"children":["0.06"]},{"name":"div","attribs":{"style":{"background":"#FC9B66"},"className":"score"},"children":["0.62"]},{"name":"div","attribs":{"style":{"background":"#FCB881"},"className":"score"},"children":["0.51"]},{"name":"div","attribs":{"style":{"background":"#FDC48D"},"className":"score"},"children":["0.44"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FCAD77"},"className":"score"},"children":["0.55"]},{"name":"div","attribs":{"style":{"background":"#FCA56F"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FDC892"},"className":"score"},"children":["0.41"]},{"name":"div","attribs":{"style":{"background":"#FDBB84"},"className":"score"},"children":["0.49"]}],"maxWidth":80,"align":"center"},{"accessor":"cLISI","name":"Graph cLISI","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#F4744E"},"className":"score"},"children":["0.77"]},{"name":"div","attribs":{"style":{"background":"#E8573D"},"className":"score"},"children":["0.88"]},{"name":"div","attribs":{"style":{"background":"#EA5A3F"},"className":"score"},"children":["0.87"]},{"name":"div","attribs":{"style":{"background":"#FCA26D"},"className":"score"},"children":["0.59"]},{"name":"div","attribs":{"style":{"background":"#F67B51"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#ED6145"},"className":"score"},"children":["0.84"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#FDE2BB"},"className":"score"},"children":["0.22"]},{"name":"div","attribs":{"style":{"background":"#E7543B"},"className":"score"},"children":["0.88"]}],"maxWidth":80,"align":"center"},{"accessor":"HVG_overlap","name":"HVG conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FCA670"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#FDC993"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#FCB780"},"className":"score"},"children":["0.51"]},{"name":"div","attribs":{"style":{"background":"#FDCA94"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#FDCA93"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#FDE3BE"},"className":"score"},"children":["0.21"]},{"name":"div","attribs":{"style":{"background":"#FDCD97"},"className":"score"},"children":["0.37"]},{"name":"div","attribs":{"style":{"background":"#FDE6C3"},"className":"score"},"children":["0.18"]},{"name":"div","attribs":{"style":{"background":"#FDC992"},"className":"score"},"children":["0.41"]},{"name":"div","attribs":{"style":{"background":"#FDDCB0"},"className":"score"},"children":["0.26"]},{"name":"div","attribs":{"style":{"background":"#FDD6A2"},"className":"score"},"children":["0.32"]},{"name":"div","attribs":{"style":{"background":"#FDE4C0"},"className":"score"},"children":["0.20"]},{"name":"div","attribs":{"style":{"background":"#FDD29C"},"className":"score"},"children":["0.34"]},{"name":"div","attribs":{"style":{"background":"#FEF3E2"},"className":"score"},"children":["0.04"]},{"name":"div","attribs":{"style":{"background":"#FDD6A3"},"className":"score"},"children":["0.31"]},{"name":"div","attribs":{"style":{"background":"#FEECD3"},"className":"score"},"children":["0.11"]},{"name":"div","attribs":{"style":{"background":"#FDD19B"},"className":"score"},"children":["0.35"]},{"name":"div","attribs":{"style":{"background":"#FEEFDB"},"className":"score"},"children":["0.08"]},{"name":"div","attribs":{"style":{"background":"#FDD9AA"},"className":"score"},"children":["0.28"]},{"name":"div","attribs":{"style":{"background":"#FDDEB3"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FEF4E6"},"className":"score"},"children":["0.02"]},{"name":"div","attribs":{"style":{"background":"#FDE0B8"},"className":"score"},"children":["0.23"]},{"name":"div","attribs":{"style":{"background":"#FEF2E0"},"className":"score"},"children":["0.06"]}],"maxWidth":80,"align":"center"},{"accessor":"cell_cycle","name":"Cell cycle conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FDC992"},"className":"score"},"children":["0.41"]},{"name":"div","attribs":{"style":{"background":"#FC8E5A"},"className":"score"},"children":["0.66"]},{"name":"div","attribs":{"style":{"background":"#F98455"},"className":"score"},"children":["0.70"]},{"name":"div","attribs":{"style":{"background":"#F78053"},"className":"score"},"children":["0.72"]},{"name":"div","attribs":{"style":{"background":"#FCAF78"},"className":"score"},"children":["0.54"]},{"name":"div","attribs":{"style":{"background":"#FDD39D"},"className":"score"},"children":["0.34"]},{"name":"div","attribs":{"style":{"background":"#FDDBAE"},"className":"score"},"children":["0.27"]},{"name":"div","attribs":{"style":{"background":"#FEE8CA"},"className":"score"},"children":["0.16"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#FDC089"},"className":"score"},"children":["0.46"]},{"name":"div","attribs":{"style":{"background":"#FDE4C1"},"className":"score"},"children":["0.19"]},{"name":"div","attribs":{"style":{"background":"#FCB07A"},"className":"score"},"children":["0.54"]},{"name":"div","attribs":{"style":{"background":"#FDD49E"},"className":"score"},"children":["0.33"]},{"name":"div","attribs":{"style":{"background":"#FDE2BB"},"className":"score"},"children":["0.22"]},{"name":"div","attribs":{"style":{"background":"#FCAA74"},"className":"score"},"children":["0.56"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]}],"maxWidth":80,"align":"center"},{"accessor":"trajectory","name":"Trajectory conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D73120"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#E0442E"},"className":"score"},"children":["0.94"]},{"name":"div","attribs":{"style":{"background":"#FC9C67"},"className":"score"},"children":["0.61"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#FCB780"},"className":"score"},"children":["0.51"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FC9762"},"className":"score"},"children":["0.63"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]}],"maxWidth":80,"align":"center"}],"columnGroups":[{"headerClassName":"group-header","name":"Batch correction","columns":["batch_correction","PCR_batch","ASW_label_batch","iLISI","graph_connectivity","kBET"]},{"headerClassName":"group-header","name":"Bio conservation","columns":["bio_conservation","NMI_cluster_label","ARI_cluster_label","ASW_label","isolated_label_F1","isolated_label_silhouette","cLISI","HVG_overlap","cell_cycle","trajectory"]}],"defaultSortDesc":true,"defaultSorted":[{"id":"overall","desc":true}],"defaultPageSize":23,"paginationType":"numbers","showPageInfo":true,"minRows":1,"highlight":true,"borderless":true,"compact":true,"showSortIcon":false,"className":"metrics-table","dataKey":"610ade00ff0792178bd6b4af7efa2f36","key":"610ade00ff0792178bd6b4af7efa2f36"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="individual-metrics" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Individual metrics</h1>
+<div id="overall-1" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Overall</h2>
+<p><img src="figures/method_scGen*/metrics-overall-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="batch-correction" class="section level2 tabset" number="2.2">
+<h2 class="tabset" number="2.2"><span class="header-section-number">2.2</span> Batch correction</h2>
+<div id="batch-correction-1" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Batch correction</h3>
+<p><img src="figures/method_scGen*/metrics-batch-batch_correction-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pcr-batch" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">PCR batch</h3>
+<p><img src="figures/method_scGen*/metrics-batch-PCR_batch-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="batch-asw" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Batch ASW</h3>
+<p><img src="figures/method_scGen*/metrics-batch-ASW_label_batch-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="graph-ilisi" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Graph iLISI</h3>
+<p><img src="figures/method_scGen*/metrics-batch-iLISI-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="graph-connectivity" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Graph connectivity</h3>
+<p><img src="figures/method_scGen*/metrics-batch-graph_connectivity-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="kbet" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">kBET</h3>
+<p><img src="figures/method_scGen*/metrics-batch-kBET-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="bio-conservation" class="section level2 tabset" number="2.3">
+<h2 class="tabset" number="2.3"><span class="header-section-number">2.3</span> Bio conservation</h2>
+<div id="bio-conservation-1" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Bio conservation</h3>
+<p><img src="figures/method_scGen*/metrics-bio-bio_conservation-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="nmi-clusterlabel" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">NMI cluster/label</h3>
+<p><img src="figures/method_scGen*/metrics-bio-NMI_cluster_label-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="ari-clusterlabel" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">ARI cluster/label</h3>
+<p><img src="figures/method_scGen*/metrics-bio-ARI_cluster_label-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="label-asw" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Label ASW</h3>
+<p><img src="figures/method_scGen*/metrics-bio-ASW_label-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="isolated-label-f1" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Isolated label F1</h3>
+<p><img src="figures/method_scGen*/metrics-bio-isolated_label_F1-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="isolated-label-silhouette" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Isolated label silhouette</h3>
+<p><img src="figures/method_scGen*/metrics-bio-isolated_label_silhouette-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="graph-clisi" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Graph cLISI</h3>
+<p><img src="figures/method_scGen*/metrics-bio-cLISI-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="hvg-conservation" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">HVG conservation</h3>
+<p><img src="figures/method_scGen*/metrics-bio-HVG_overlap-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cell-cycle-conservation" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Cell cycle conservation</h3>
+<p><img src="figures/method_scGen*/metrics-bio-cell_cycle-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="trajectory-conservation" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Trajectory conservation</h3>
+<p><img src="figures/method_scGen*/metrics-bio-trajectory-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="embeddings" class="section level1 tabset tabset-pills tabset-fade" number="3">
+<h1 class="tabset tabset-pills tabset-fade" number="3"><span class="header-section-number">3</span> Embeddings</h1>
+<div id="hvg" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">HVG</h2>
+<div id="unscaled" class="section level3 unnumbered tabset" number="">
+<h3 class="unnumbered tabset" number="">Unscaled</h3>
+<div id="pancreas-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">pancreas (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-HVG-Unscaled-pancreas-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="lung_atlas-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">lung_atlas (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-HVG-Unscaled-lung_atlas-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="immune_cell_hum-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">immune_cell_hum (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-HVG-Unscaled-immune_cell_hum-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="immune_cell_hum_mou-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">immune_cell_hum_mou (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-HVG-Unscaled-immune_cell_hum_mou-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="simulations_1_1-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">simulations_1_1 (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-HVG-Unscaled-simulations_1_1-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="simulations_2-features" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">simulations_2 (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-HVG-Unscaled-simulations_2-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scaled" class="section level3 unnumbered tabset" number="">
+<h3 class="unnumbered tabset" number="">Scaled</h3>
+<div id="pancreas-features-1" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">pancreas (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-HVG-Scaled-pancreas-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="lung_atlas-features-1" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">lung_atlas (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-HVG-Scaled-lung_atlas-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="immune_cell_hum-features-1" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">immune_cell_hum (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-HVG-Scaled-immune_cell_hum-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="immune_cell_hum_mou-features-1" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">immune_cell_hum_mou (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-HVG-Scaled-immune_cell_hum_mou-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="simulations_1_1-features-1" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">simulations_1_1 (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-HVG-Scaled-simulations_1_1-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="simulations_2-features-1" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">simulations_2 (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-HVG-Scaled-simulations_2-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="full" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">Full</h2>
+<div id="unscaled-1" class="section level3 unnumbered tabset" number="">
+<h3 class="unnumbered tabset" number="">Unscaled</h3>
+<div id="pancreas-features-2" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">pancreas (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-Full-Unscaled-pancreas-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="lung_atlas-features-2" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">lung_atlas (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-Full-Unscaled-lung_atlas-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="immune_cell_hum-features-2" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">immune_cell_hum (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-Full-Unscaled-immune_cell_hum-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="immune_cell_hum_mou-features-2" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">immune_cell_hum_mou (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-Full-Unscaled-immune_cell_hum_mou-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="simulations_1_1-features-2" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">simulations_1_1 (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-Full-Unscaled-simulations_1_1-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="simulations_2-features-2" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">simulations_2 (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-Full-Unscaled-simulations_2-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scaled-1" class="section level3 unnumbered tabset" number="">
+<h3 class="unnumbered tabset" number="">Scaled</h3>
+<div id="pancreas-features-3" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">pancreas (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-Full-Scaled-pancreas-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="lung_atlas-features-3" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">lung_atlas (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-Full-Scaled-lung_atlas-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="immune_cell_hum-features-3" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">immune_cell_hum (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-Full-Scaled-immune_cell_hum-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="simulations_1_1-features-3" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">simulations_1_1 (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-Full-Scaled-simulations_1_1-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="simulations_2-features-3" class="section level4 unnumbered" number="">
+<h4 class="unnumbered" number="">simulations_2 (Features)</h4>
+<p><img src="figures/method_scGen*/embedding-Full-Scaled-simulations_2-Features-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+</div>
+<div id="scalability" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Scalability</h1>
+<div id="time" class="section level2" number="4.1">
+<h2 number="4.1"><span class="header-section-number">4.1</span> Time</h2>
+<p><img src="figures/method_scGen*/scalability-time-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="memory" class="section level2" number="4.2">
+<h2 number="4.2"><span class="header-section-number">4.2</span> Memory</h2>
+<p><img src="figures/method_scGen*/scalability-memory-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

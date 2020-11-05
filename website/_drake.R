@@ -26,9 +26,9 @@ METHODS_ATAC <- get_methods(here::here("..", "data", "metrics_atac.csv"))
 `%>%` <- magrittr::`%>%`
 
 # Set TRUE for testing
-if (TRUE) {
+if (FALSE) {
     DATASETS      <- "pancreas"
-    METHODS       <- "trVAE"
+    METHODS       <- "scGen*"
     DATASETS_ATAC <- "mouse_brain_atac_genes_small"
     METHODS_ATAC  <- "trVAE"
 }
