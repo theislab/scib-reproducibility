@@ -428,8 +428,8 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
         coords,
         ggplot2::aes(x = .data[[dim1_name]], y = .data[[dim2_name]])
     ) +
-        guides(
-            colour = guide_legend(
+        ggplot2::guides(
+            colour = ggplot2::guide_legend(
                 title        = NULL,
                 ncol         = 3,
                 override.aes = list(size = 2, alpha = 1)
@@ -438,24 +438,33 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
         ggplot2::theme(
             plot.title      = ggplot2::element_text(hjust = 0.5, size = 20),
             legend.position = "bottom",
+            legend.text     = ggplot2::element_text(lineheight = 0.75),
             panel.border    = ggplot2::element_rect(fill = NA)
         )
 
+    wrap20 <- function(x) {
+        stringr::str_wrap(x, width = 20)
+    }
+
     group_plot <- base_plot +
-        ggplot2::geom_point(
+        scattermore::geom_scattermore(
             ggplot2::aes(colour = factor(.data[[group_name]])),
-            size = 0.5, alpha = 0.5
+            pointsize = 3,
+            alpha     = 0.5,
+            pixels    = c(1200, 1200)
         ) +
         ggplot2::labs(title = group_name)  +
-        ggplot2::scale_colour_hue(l = 75, name = group_name)
+        ggsci::scale_colour_d3("category20", labels = wrap20)
 
     batch_plot <- base_plot +
-        ggplot2::geom_point(
+        scattermore::geom_scattermore(
             ggplot2::aes(colour = factor(.data[[batch_name]])),
-            size = 0.5, alpha = 0.5
+            pointsize = 3,
+            alpha     = 0.5,
+            pixels    = c(1200, 1200)
         ) +
         ggplot2::labs(title = batch_name) +
-        ggplot2::scale_colour_hue(l = 55, name = batch_name)
+        ggsci::scale_colour_ucscgb(labels = wrap20)
 
     list(Group = group_plot, Batch = batch_plot)
 }

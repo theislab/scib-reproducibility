@@ -132,7 +132,10 @@ for (feature in unique(metrics$features)) {
             full_src,
             paste("###", scale, "{.unnumbered .tabset}"), ""
         )
-        metrics_sel <- filter(metrics, features == feature, scaling == scale)
+        metrics_sel <- filter(
+            metrics, features == feature, scaling == scale
+        ) %>%
+            arrange(desc(overall))
         src_list <- map2_chr(
             metrics_sel$method, metrics_sel$output,
             function(.method, .output) {

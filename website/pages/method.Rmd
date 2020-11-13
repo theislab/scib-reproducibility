@@ -145,7 +145,10 @@ for (feature in unique(metrics$features)) {
             full_src,
             paste("###", scale, "{.unnumbered .tabset}"), ""
         )
-        metrics_sel <- filter(metrics, features == feature, scaling == scale)
+        metrics_sel <- filter(
+            metrics, features == feature, scaling == scale
+        ) %>%
+            arrange(desc(overall))
         src_list <- map2_chr(
             metrics_sel$dataset, metrics_sel$output,
             function(.dataset, .output) {
@@ -194,3 +197,4 @@ benchmark_barplot(benchmarks, max_pss, dataset, "Maximum memory (PSS)",
         labels = c("1 MB","10 MB","100 MB", "1 GB",  "10 GB",   "100 GB")
     )
 ```
+
