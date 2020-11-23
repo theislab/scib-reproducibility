@@ -18,6 +18,7 @@ library("htmltools")
 ```{r functions}
 source(here("R", "plotting.R"))
 source(here("R", "tables.R"))
+source(here("R", "render.R"))
 ```
 
 ```{r load}
@@ -129,46 +130,15 @@ out <- knitr::knit_child(text = unlist(src_list), options = list(cache = FALSE))
 
 `r out`
 
-Embeddings {.tabset .tabset-pills .tabset-fade}
+Embeddings {.tabset .tabset-dropdown .tabset-fade}
 ==========
 
 ```{r embeddings, results = "hide"}
-full_src <- list()
-for (feature in unique(metrics$features)) {
-    full_src <- c(
-        full_src,
-        paste("##", feature, "{.unnumbered .tabset .tabset-pills .tabset-fade}"),
-        ""
-    )
-    for (scale in unique(metrics$scaling)) {
-        full_src <- c(
-            full_src,
-            paste("###", scale, "{.unnumbered .tabset}"), ""
-        )
-        metrics_sel <- filter(
-            metrics, features == feature, scaling == scale
-        ) %>%
-            arrange(desc(overall))
-        src_list <- map2_chr(
-            metrics_sel$dataset, metrics_sel$output,
-            function(.dataset, .output) {
-                src <- c(
-                    "#### <<.dataset>> (<<.output>>) {.unnumbered}",
-                    "```{r embedding-<<feature>>-<<scale>>-<<.dataset>>-<<.output>>}",
-                    "plots <- plot_embedding_coords('<<.dataset>>', '<<scale>>',",
-                    "'<<feature>>', params$method, '<<.output>>', labels)",
-                    "plots$Group + plots$Batch",
-                    "```",
-                    ""
-                )
-                knitr::knit_expand(text = src, delim = c("<<", ">>"))
-        })
-        full_src <- c(full_src, src_list)
-    }
-}
-
+full_src <- make_method_embeddings_md(metrics, params$method, labels)
 out <- knitr::knit_child(text = unlist(full_src), options = list(cache = FALSE))
 ```
+
+**Dataset (Output)**
 
 `r out`
 

@@ -186,3 +186,135 @@ make_navbar_html <- function(datasets, datasets_atac, methods, methods_atac,
 
     invisible(html_rendered)
 }
+
+#' Mark dataset embeddings markdown
+#'
+#' Produce markdown for displaying embedding plots for a dataset
+#'
+#' @param metrics tibble containing metrics for a single dataset
+#' @param dataset String giving the name of the dataset
+#' @param labels List containing standard labels
+#'
+#' @return List containing markdown strings
+make_dataset_embeddings_md <- function(metrics, dataset, labels) {
+
+    metrics <- dplyr::arrange(metrics, dplyr::desc(overall))
+
+    full_src <- list()
+
+    for (full_method in unique(metrics$full_method)) {
+        split_method <- stringr::str_split(full_method, pattern = "-")
+        method <- split_method[[1]][1]
+        output <- split_method[[1]][2]
+        full_src <- c(
+            full_src,
+            glue::glue(
+                "## {method} ({output}) {{.unnumbered .tabset .tabset-pills ",
+                ".tabset-fade}}"
+            ),
+            "**Input features (Scaling)**",
+            ""
+        )
+
+        metrics_method <- dplyr::filter(metrics, full_method == !!full_method)
+        full_src <- c(
+            full_src,
+            make_inner_embedding_md(metrics_method, dataset, method, output,
+                                    labels, type = "dataset")
+        )
+    }
+
+    return(full_src)
+}
+
+#' Mark method embeddings markdown
+#'
+#' Produce markdown for displaying embedding plots for a method
+#'
+#' @param metrics tibble containing metrics for a single method
+#' @param method String giving the name of the method
+#' @param labels List containing standard labels
+#'
+#' @return List containing markdown strings
+make_method_embeddings_md <- function(metrics, method, labels) {
+
+    metrics <- dplyr::arrange(metrics, dplyr::desc(overall))
+    metrics$dataset_output <- paste(metrics$dataset, metrics$output, sep = "-")
+
+    full_src <- list()
+
+    for (dataset_output in unique(metrics$dataset_output)) {
+        split_dataset <- stringr::str_split(dataset_output, pattern = "-")
+        dataset <- split_dataset[[1]][1]
+        output <- split_dataset[[1]][2]
+        full_src <- c(
+            full_src,
+            glue::glue(
+                "## {dataset} ({output}) {{.unnumbered .tabset .tabset-pills ",
+                ".tabset-fade}}"
+            ),
+            "**Input features (Scaling)**",
+            ""
+        )
+
+        metrics_dataset <- dplyr::filter(
+            metrics, dataset_output == !!dataset_output
+        )
+        full_src <- c(
+            full_src,
+            make_inner_embedding_md(metrics_dataset, dataset, method, output,
+                                    labels, type = "method")
+        )
+    }
+
+    return(full_src)
+}
+
+#' Mark inner embeddings markdown
+#'
+#' Produce markdown for displaying embedding plots by looping over input
+#' features and scaling
+#'
+#' @param metrics tibble containing selected metrics
+#' @param dataset String giving the name of the dataset
+#' @param method String giving the name of the method
+#' @param output String giving the method output type
+#' @param labels List containing standard labels
+#' @param type Whether the embeddings are for a "dataset", or a "method"
+#'
+#' @return List containing markdown strings
+make_inner_embedding_md <- function(metrics, dataset, method, output, labels,
+                                    type = c("dataset", "method")) {
+
+    type <- match.arg(type)
+
+    top_label <- switch (type,
+        dataset = method,
+        method  = dataset
+    )
+
+    full_src <- list()
+    for (features in sort(unique(metrics$features))) {
+
+        metrics_sel <- dplyr::filter(metrics, features == !!features)
+        src_list <- purrr::map_chr(
+            sort(unique(metrics_sel$scaling)),
+            function(.scaling) {
+                src <- c(
+                    "### <<features>> (<<.scaling>>) {.unnumbered}",
+                    "```{r embedding-<<top_label>>-<<output>>-<<features>>-<<.scaling>>}",
+                    "plots <- plot_embedding_coords('<<dataset>>',",
+                    "'<<.scaling>>', '<<features>>', '<<method>>',",
+                    "'<<output>>', labels)",
+                    "plots$Group + plots$Batch",
+                    "```",
+                    ""
+                )
+                knitr::knit_expand(text = src, delim = c("<<", ">>"))
+            }
+        )
+        full_src <- c(full_src, src_list)
+    }
+
+    return(full_src)
+}
