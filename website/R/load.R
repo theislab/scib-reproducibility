@@ -86,6 +86,8 @@ get_metrics <- function(metrics_file, labels) {
             into = c("dataset", NA, "scaling", "features", "method"),
             sep = "/"
         ) %>%
+        # Remove results for trvae_full (reconstruction not integration)
+        dplyr::filter(method != "trvae_full") %>%
         # Split method into method and output
         tidyr::separate(method, into = c("method", "output"), sep = "_") %>%
         # Set factors with pretty labels
