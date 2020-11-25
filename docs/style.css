@@ -70,3 +70,12 @@
   font-size: 13px;
   letter-spacing: -2px;
 }
+
+/* *****************************************************************************
+   Custom
+***************************************************************************** */
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > .active:before {
+    content: "\e258" !important;
+    border: none;
+}

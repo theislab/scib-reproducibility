@@ -28,9 +28,9 @@ METHODS_ATAC <- get_methods(here::here("..", "data", "metrics_atac.csv"))
 # Set TRUE for testing
 if (FALSE) {
     DATASETS      <- "pancreas"
-    METHODS       <- "scGen*"
+    METHODS       <- "Scanorama"
     DATASETS_ATAC <- "mouse_brain_atac_genes_small"
-    METHODS_ATAC  <- "trVAE"
+    METHODS_ATAC  <- "Scanorama"
 }
 
 plan <- drake_plan(
