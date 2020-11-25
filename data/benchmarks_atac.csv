@@ -6,6 +6,22 @@ scenario,s,h_m_s,max_rss,max_vms,max_uss,max_pss,io_in,io_out,mean_load
 /mouse_brain_atac_windows_large/integration/unscaled/full_feature/R/harmony.RDS,8915.6227,02:28:35,336477.95,337104.59,336473.39,336474.06,2772.16,74144.8,98.28
 /mouse_brain_atac_windows_large/integration/unscaled/full_feature/R/liger.RDS,90679.9276,"1 day, 1:11:19",277760.49,279281.38,276514.33,276515,2065.8,2037.79,99.67
 /mouse_brain_atac_windows_large/integration/unscaled/full_feature/R/conos.RDS,1573.3563,00:26:13,1220858.08,1237244.08,54891.46,77878.26,2069.13,4037.89,276.08
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/bbknn.h5ad,328.6168,00:05:28,10691,35033.01,10618.72,10643.51,306.33,310.71,93.59
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/scanvi.h5ad,99337.1097,"1 day, 3:35:37",9253.29,35155.34,9127.48,9187.7,200.2,353.6,99.75
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/mnn.h5ad,32925.0641,09:08:45,651540.91,706989.57,183161.64,183194.2,10729.9,2634.38,324.26
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/saucie.h5ad,399.5956,00:06:39,12649.56,35033.01,12530.07,12575.51,318.84,3858.1,94.93
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/scvi.h5ad,96284.622,"1 day, 2:44:44",4543.53,35033.01,4467.84,4491.41,485.12,193.5,99.73
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/combat.h5ad,410.5081,00:06:50,39602.04,48940.65,39535.46,39556.76,1.68,1164.25,95.56
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/desc.h5ad,8639.496,02:23:59,11361.72,34365.7,11248.62,11294.9,41.18,799.82,265.68
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/scanorama.h5ad,1356.9811,00:22:36,80583.19,90701.76,80513.42,80544.46,166.04,5168.41,95.48
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/R/liger.RDS,10093.4619,02:48:13,34261.31,35033.01,34253.49,34255.39,1072.77,281.58,99.21
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/R/seuratrpca.RDS,2893.5382,00:48:13,104393.25,109726.25,104402.76,104403.48,335.54,5136.29,98.54
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/R/harmony.RDS,1669.0205,00:27:49,29656.28,35248.78,29651.73,29652.4,335.57,8264.36,98.63
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/R/conos.RDS,237.4977,00:03:57,20063.38,35033.01,6036.96,6038.29,1047.6,383.94,119.95
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/R/fastmnn.RDS,1861.9052,00:31:01,23840.64,24505.03,23835.94,23836.68,335.56,19980.59,98.27
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/R/seurat.RDS,2738.2237,00:45:38,94019.88,99619.38,94284.5,94285.79,0.05,5196.02,98.75
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/scgen.h5ad,97075.1145,"1 day, 2:57:55",33382.17,48773.18,33711.81,33712.43,20869.39,769.02,127.87
+/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/R/seuratrpca.RDS,2893.5382,00:48:13,104393.25,109726.25,104402.76,104403.48,335.54,5136.29,98.54
 /mouse_brain_atac_windows_small/integration/unscaled/full_feature/mnn.h5ad,20790.9879,05:46:30,541747.83,595837.49,268896.93,268899.58,582.59,3136.55,587.69
 /mouse_brain_atac_windows_small/integration/unscaled/full_feature/scgen.h5ad,71990.7405,19:59:50,38400.7,47776.93,38392.38,38395.01,611.15,1164.87,188.51
 /mouse_brain_atac_windows_small/integration/unscaled/full_feature/combat.h5ad,442.3021,00:07:22,38140.96,41207.72,38134.51,38137.12,596.55,1618.1,93.99
@@ -43,28 +59,6 @@ scenario,s,h_m_s,max_rss,max_vms,max_uss,max_pss,io_in,io_out,mean_load
 /mouse_brain_atac_genes_large/integration/unscaled/full_feature/R/seurat.RDS,3608.1184,01:00:08,42580.48,43206.2,42575.91,42576.58,166.16,319.82,99
 /mouse_brain_atac_genes_large/integration/unscaled/full_feature/R/seuratrpca.RDS,1473.366,00:24:33,41802.69,42599.82,41866.16,41866.89,883.28,368.76,94.62
 /mouse_brain_atac_genes_large/integration/unscaled/full_feature/R/harmony.RDS,501.0986,00:08:21,15702.27,36346.64,15697.71,15698.39,166.56,688.41,96.74
-/mouse_brain_atac_peaks_large/integration/unscaled/full_feature/saucie.h5ad,2622.6415,00:43:42,105684.17,120573.75,105634.79,105656.17,2467.8,30730.85,76.2
-/mouse_brain_atac_peaks_large/integration/unscaled/full_feature/bbknn.h5ad,3162.1624,00:52:42,86084.84,107457.31,87114.82,87146.39,2467.96,2451.34,95.92
-/mouse_brain_atac_peaks_large/integration/unscaled/full_feature/combat.h5ad,6424.2588,01:47:04,319732.48,322885.05,320213.33,320234.22,2467.96,5939.66,97.32
-/mouse_brain_atac_peaks_large/integration/unscaled/full_feature/desc.h5ad,57767.0528,16:02:47,61636.82,64675.75,61572.79,61594.32,2467.8,4186.5,262.65
-/mouse_brain_atac_peaks_large/integration/unscaled/full_feature/R/liger.RDS,86578.9631,"1 day, 0:02:58",228148.84,229534.48,225522.65,225523.95,4709.05,1855.61,99.48
-/mouse_brain_atac_peaks_large/integration/unscaled/full_feature/R/conos.RDS,2363.0618,00:39:23,828418.59,839126.92,47819.85,47820.33,2462.53,2829.16,236.18
-/mouse_brain_atac_peaks_large/integration/unscaled/full_feature/R/harmony.RDS,10569.5632,02:56:09,279424.59,280073.59,279423.68,279423.71,2502.73,60548.19,98.8
-/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/bbknn.h5ad,339.8471,00:05:39,10651.64,11805.68,10582.31,10606.72,0.42,335.82,88.29
-/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/scanvi.h5ad,99337.1097,"1 day, 3:35:37",9253.29,35155.34,9127.48,9187.7,200.2,353.6,99.75
-/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/saucie.h5ad,451.7923,00:07:31,12617.41,35033.01,12546.59,12575.67,683.38,4021.48,82.76
-/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/combat.h5ad,437.6096,00:07:17,45958.06,48640.18,45892.14,45913.06,7,1215.78,93.31
-/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/mnn.h5ad,26470.5909,07:21:10,212363.46,301187.18,365561.51,365566.27,456.79,2634.88,343.11
-/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/scvi.h5ad,100192.5694,"1 day, 3:49:52",4670.65,35145.16,4546.74,4606.95,653.84,321.03,99.73
-/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/desc.h5ad,8157.9376,02:15:57,11241.19,34523.97,11174.36,11196.21,10.88,906.92,273.77
-/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/scgen.h5ad,97075.1145,"1 day, 2:57:55",33382.17,48773.18,33711.81,33712.43,20869.39,769.02,127.87
-/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/scanorama.h5ad,1356.9811,00:22:36,80583.19,90701.76,80513.42,80544.46,166.04,5168.41,95.48
-/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/R/fastmnn.RDS,1861.9052,00:31:01,23840.64,24505.03,23835.94,23836.68,335.56,19980.59,98.27
-/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/R/conos.RDS,219.2589,00:03:39,6046.1,10628.39,6044.48,6045.3,339.1,310.47,130.56
-/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/R/seuratrpca.RDS,2893.5382,00:48:13,104393.25,109726.25,104402.76,104403.48,335.54,5136.29,98.54
-/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/R/harmony.RDS,1669.0205,00:27:49,29656.28,35248.78,29651.73,29652.4,335.57,8264.36,98.63
-/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/R/seurat.RDS,2653.8093,00:44:13,85041.71,86123.52,83689,83689.41,1092.04,5203.66,95.89
-/mouse_brain_atac_peaks_small/integration/unscaled/full_feature/R/liger.RDS,8031.045,02:13:51,33962.62,35022.36,33957.88,33958.69,1079.3,220.35,98.34
 /mouse_brain_atac_genes_small/integration/unscaled/full_feature/scgen.h5ad,3403.7334,00:56:43,4201.15,36234.49,4196.94,4199.56,70.31,0.24,194.53
 /mouse_brain_atac_genes_small/integration/unscaled/full_feature/mnn.h5ad,1309.1755,00:21:49,36304.59,69335.9,1936.31,1938.96,40.18,108.4,97.39
 /mouse_brain_atac_genes_small/integration/unscaled/full_feature/scanorama.h5ad,66.9619,00:01:06,3689.1,36234.48,3680.89,3683.52,76.05,0.24,53.07
