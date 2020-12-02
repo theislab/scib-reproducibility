@@ -153,3 +153,4 @@ benchmark_barplot(benchmarks, max_rss, method, "Maximum memory", method_pal()) +
         labels = c("1 MB","10 MB","100 MB", "1 GB",  "10 GB",   "100 GB")
     )
 ```
+

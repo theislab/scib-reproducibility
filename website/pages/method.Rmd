@@ -163,8 +163,7 @@ Memory
 benchmark_barplot(benchmarks, max_pss, dataset, "Maximum memory (PSS)",
                   dataset_pal()) +
     scale_y_log10(
-        breaks = c(    1,     10,     100,   1024, 1024 * 10, 1024 * 100),
-        labels = c("1 MB","10 MB","100 MB", "1 GB",  "10 GB",   "100 GB")
+        breaks = c(    1,     10,      100,   1024, 1024 * 10, 1024 * 100),
+        labels = c("1 MB","10 MB","100 MB", "1 GB",   "10 GB",   "100 GB")
     )
 ```
-

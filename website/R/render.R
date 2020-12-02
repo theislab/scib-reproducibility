@@ -300,13 +300,17 @@ make_inner_embedding_md <- function(metrics, dataset, method, output, labels,
         src_list <- purrr::map_chr(
             sort(unique(metrics_sel$scaling)),
             function(.scaling) {
+                inner_label <- glue::glue(
+                    "embedding-{top_label}-{output}-{features}-{.scaling}"
+                )
+                height <- get_embedding_rows(dataset) * 7
                 src <- c(
                     "### <<features>> (<<.scaling>>) {.unnumbered}",
-                    "```{r embedding-<<top_label>>-<<output>>-<<features>>-<<.scaling>>}",
+                    "```{r <<inner_label>>, fig.height = <<height>>}",
                     "plots <- plot_embedding_coords('<<dataset>>',",
                     "'<<.scaling>>', '<<features>>', '<<method>>',",
                     "'<<output>>', labels)",
-                    "plots$Group + plots$Batch",
+                    "wrap_plots(plots, ncol = 2)",
                     "```",
                     ""
                 )
@@ -317,4 +321,35 @@ make_inner_embedding_md <- function(metrics, dataset, method, output, labels,
     }
 
     return(full_src)
+}
+
+#' Get embedding rows
+#'
+#' Get the number of rows for an embedding plot (two plots per row)
+#'
+#' @param dataset Name of the dataset to check for.
+#'
+#' @details
+#' Checks if there is an additional annotation file for the dataset.
+#' If so head a sample of the file and use the number of annotation columns to calculate the number of rows.
+#'
+#' @return Number of rows
+get_embedding_rows <- function(dataset) {
+
+    annot_path <- here::here(
+        "..",
+        "data",
+        "annotations",
+        paste0(dataset, ".csv")
+    )
+
+    if (!fs::file_exists(annot_path)) {
+        return(1)
+    }
+
+    annot <- suppressMessages(suppressWarnings(
+        readr::read_csv(annot_path, n_max = 100)
+    ))
+
+    return(ceiling((ncol(annot) + 1) / 2))
 }

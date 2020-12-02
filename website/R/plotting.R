@@ -401,7 +401,7 @@ metric_barplot <- function(metrics, metric, group, colour, ref_lines, label,
 #' Note that paths to CSV files containing embedding coordinates are hardcoded
 #' through `get_coords_path()`
 #'
-#' @return List of two ggplot objects ("Group" and "Batch")
+#' @return List of ggplot objects, including "Group", "Batch" and any additional annotations
 plot_embedding_coords <- function(dataset, scaling, features, method, output,
                                   labels) {
 
@@ -411,8 +411,25 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
                                    labels)
 
     coords <- suppressMessages(suppressWarnings(
-        readr::read_csv(coords_path
-    )))
+        readr::read_csv(coords_path)
+    ))
+
+    annot_path <- here::here(
+        "..",
+        "data",
+        "annotations",
+        paste0(dataset, ".csv")
+    )
+
+    if (fs::file_exists(annot_path)) {
+        annot <- suppressMessages(suppressWarnings(
+            readr::read_csv(annot_path)
+        ))
+        coords <- dplyr::left_join(coords, annot, by = "CellID")
+        annot_cols <- colnames(annot)[-1]
+    } else {
+        annot_cols <- NULL
+    }
 
     # Shuffle cells so the plot order is random
     withr::with_seed(1, {
@@ -466,7 +483,20 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
         ggplot2::labs(title = batch_name) +
         ggsci::scale_colour_ucscgb(labels = wrap20)
 
-    list(Group = group_plot, Batch = batch_plot)
+    annot_plots <- purrr::map(annot_cols, function(.annot) {
+        base_plot +
+            scattermore::geom_scattermore(
+                ggplot2::aes(colour = factor(.data[[.annot]])),
+                pointsize = 3,
+                alpha     = 0.5,
+                pixels    = c(1200, 1200)
+            ) +
+            ggplot2::labs(title = .annot) +
+            ggsci::scale_colour_igv(labels = wrap20)
+    })
+    names(annot_plots) <- annot_cols
+
+    c(list(Group = group_plot, Batch = batch_plot), annot_plots)
 }
 
 #' Get coords path

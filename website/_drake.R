@@ -28,8 +28,8 @@ METHODS_ATAC <- get_methods(here::here("..", "data", "metrics_atac.csv"))
 # Set TRUE for testing
 if (FALSE) {
     DATASETS      <- "pancreas"
-    METHODS       <- "Scanorama"
-    DATASETS_ATAC <- "mouse_brain_atac_genes_small"
+    METHODS       <- "scANVI*"
+    DATASETS_ATAC <- "mouse_brain_atac_genes_large"
     METHODS_ATAC  <- "Scanorama"
 }
 

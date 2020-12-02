@@ -3,3 +3,4 @@
 
 *.bak
 data/embeddings/
+data/annotations/
