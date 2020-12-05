@@ -144,7 +144,7 @@ plan <- drake_plan(
     rmd_usability = target(
         callr_render(
             here(knitr_in("pages/usability.Rmd")),
-            here("..", "docs", "usability.html"),
+            here(file_out("../docs/usability.html")),
         ),
         trigger = trigger(change = configs)
     ),

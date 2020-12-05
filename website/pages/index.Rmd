@@ -1,5 +1,5 @@
 ---
-title: "scIB Results"
+title: "Single-cell integration benchmarking"
 output:
   rmarkdown::html_document:
     toc: false
@@ -23,12 +23,27 @@ params:
 source(here::here("R", "document_setup.R"))
 ```
 
-This website displays additional results from the single-cell integration benchmarking project. 
+Single-cell integration benchmarking (scIB) is a project to assess the performance of scRNA-seq batch integration methods.
+We have used 14 metrics to evaluate **`r length(params$methods)` methods** on **`r length(params$datasets)` scRNA-seq** and **`r length(params$datasets_atac)` scATAC-seq** tasks.
+These metrics are designed to test both **batch correction** and **convervation of biological variability**.
+
+For each task we also consider different combinations of pre-processing, including highly variable gene (HVG) selection and scaling.
+The usability and scalability of methods are also assessed.
+
+```{r overview, fig.align = "center", out.width = "80%"}
+figure_dir <- fs::dir_create(here("..", "docs", "figures", "index"))
+fs::file_copy(here("..", "data", "img", "overview.png"), figure_dir,
+              overwrite = TRUE)
+
+knitr::include_graphics(fs::path(figure_dir, "overview.png"))
+```
+
+# Results
+
 Here you can view all the individual benchmarking metrics broken down by dataset and method.
 
 <div class = "row">
-<div class = "col-md-2"></div>
-<div class = "col-md-3">
+<div class = "col-sm-6 col-md-3">
 
 ## Datasets
 
@@ -44,9 +59,8 @@ datasets_list <- paste(
 `r datasets_list`
 
 </div>
-<div class = "col-md-2"></div>
 
-<div class = "col-md-3">
+<div class = "col-sm-6 col-md-3">
 
 ## Methods
 
@@ -62,19 +76,16 @@ methods_list <- paste(
 `r methods_list`
 
 </div>
-<div class = "col-md-2"></div>
-</div>
 
-<div class = "row">
-<div class = "col-md-2"></div>
-<div class = "col-md-3">
+<div class = "col-sm-6 col-md-3">
 
 ## ATAC Datasets
 
 ```{r datasets-atac}
+datasets_atac_str <- str_remove(params$datasets_atac, "mouse_brain_atac_")
 datasets_atac_list <- paste(
     glue::glue(
-        "* [{params$datasets_atac}](dataset_atac_{params$datasets_atac}.html)"
+        "* [{datasets_atac_str}](dataset_atac_{params$datasets_atac}.html)"
     ),
     collapse = "\n"
 )
@@ -83,9 +94,8 @@ datasets_atac_list <- paste(
 `r datasets_atac_list`
 
 </div>
-<div class = "col-md-2"></div>
 
-<div class = "col-md-3">
+<div class = "col-sm-6 col-md-3">
 
 ## ATAC Methods
 
@@ -101,11 +111,21 @@ methods_atac_list <- paste(
 `r methods_atac_list`
 
 </div>
-<div class = "col-md-2"></div>
 </div>
 
-For more information please refer to the main [scIB GitHub page][scIB-github] or the [preprint][preprint].
-You can also view the code for this website on [GitHub][scIB-results-github].
+## Useability
+
+You can view the usability scores for each method [here](usability.html).
+
+# Links
+
+More information about the project can be found at these links:
+
+* **[scIB package][scIB-github]** - Python module implementing the metrics and wrapping the methods used in the evaluation.
+* **[scIB pipeline][scIB-pipe-github]** - Snakemake pipeline implementing the evaluation workflow.
+* **[scIB reproducibility][scIB-repro-github]** - Additional code used to produce the results in the paper (including this website).
+
+# Citation
 
 If any part of the project is useful for your work please cite:
 
@@ -114,6 +134,7 @@ If any part of the project is useful for your work please cite:
 > **bioRxiv**. 2020
 > DOI: [10.1101/2020.05.22.111161][preprint]
 
-[scIB-github]: https://github.com/theislab/scib "scIB GitHub repository"
-[scIB-results-github]: https://github.com/theislab/scib "scIB results GitHub repository"
+[scIB-github]: https://github.com/theislab/scib "scIB package GitHub repository"
+[scIB-pipe-github]: https://github.com/theislab/scib-pipeline "scIB pipeline GitHub repository"
+[scIB-repro-github]: https://github.com/theislab/scib-reproducibility "scIB reproducibility GitHub repository"
 [preprint]: https://doi.org/10.1101/2020.05.22.111161 "scIB preprint"
