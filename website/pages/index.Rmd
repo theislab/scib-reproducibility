@@ -21,6 +21,7 @@ params:
 
 ```{r setup, include=FALSE}
 source(here::here("R", "document_setup.R"))
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 ```
 
 Single-cell integration benchmarking (scIB) is a project to assess the performance of scRNA-seq batch integration methods.

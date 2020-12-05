@@ -180,6 +180,18 @@ make_navbar_html <- function(datasets, datasets_atac, methods, methods_atac,
         )
     )
 
+    html_tags <- list(
+        tags$link(
+            href = "site_libs/font-awesome-5.1.0/css/all.css",
+            rel  = "stylesheet"
+        ),
+        tags$link(
+            href = "site_libs/font-awesome-5.1.0/css/v4-shims.css",
+            rel  = "stylesheet"
+        ),
+        html_tags
+    )
+
     html_rendered <- htmltools::renderTags(html_tags)$html
 
     writeLines(html_rendered, outpath)
