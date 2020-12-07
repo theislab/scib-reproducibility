@@ -22,11 +22,16 @@ params:
 ```{r setup, include=FALSE}
 source(here::here("R", "document_setup.R"))
 htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+
+n_methods       <- length(params$methods)
+n_datasets      <- length(params$datasets)
+n_datasets_sim  <- sum(grepl("simulation", unlist(params$datasets)))
+n_datasets_atac <- length(params$datasets_atac)
 ```
 
 Single-cell integration benchmarking (scIB) is a project to assess the performance of scRNA-seq batch integration methods.
-We have used 14 metrics to evaluate **`r length(params$methods)` methods** on **`r length(params$datasets)` scRNA-seq** and **`r length(params$datasets_atac)` scATAC-seq** tasks.
-These metrics are designed to test both **batch correction** and **convervation of biological variability**.
+We have used 14 metrics to evaluate **`r n_methods` methods** on **`r n_datasets` scRNA-seq** (`r n_datasets - n_datasets_sim` real and `r n_datasets_sim` simulated) and **`r length(params$datasets_atac)` scATAC-seq** tasks.
+These metrics are designed to test both **batch correction** and **conservation of biological variance**.
 
 For each task we also consider different combinations of pre-processing, including highly variable gene (HVG) selection and scaling.
 The usability and scalability of methods are also assessed.
@@ -114,7 +119,7 @@ methods_atac_list <- paste(
 </div>
 </div>
 
-## Useability
+## Usability
 
 You can view the usability scores for each method [here](usability.html).
 
