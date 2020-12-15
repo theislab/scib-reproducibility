@@ -473,6 +473,12 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
         ggplot2::labs(title = group_name)  +
         ggsci::scale_colour_d3("category20", labels = wrap20)
 
+    batch_colours <- withr::with_seed(
+        7,
+        sample(ggsci::pal_ucscgb()(26))
+    )
+    batch_colours <- batch_colours[seq_along(unique(coords[[batch_name]]))]
+
     batch_plot <- base_plot +
         scattermore::geom_scattermore(
             ggplot2::aes(colour = factor(.data[[batch_name]])),
@@ -481,7 +487,8 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
             pixels    = c(1200, 1200)
         ) +
         ggplot2::labs(title = batch_name) +
-        ggsci::scale_colour_ucscgb(labels = wrap20)
+        # ggsci::scale_colour_ucscgb(labels = wrap20)
+        ggplot2::scale_colour_manual(values = batch_colours, labels = wrap20)
 
     annot_plots <- purrr::map(annot_cols, function(.annot) {
         base_plot +
