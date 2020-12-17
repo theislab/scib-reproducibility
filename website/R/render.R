@@ -97,6 +97,7 @@ make_navbar_html <- function(datasets, datasets_atac, methods, methods_atac,
                 tags$ul(
                     class = "nav navbar-nav",
                     tags$li(tags$a(href = "index.html", "Home")),
+                    tags$li(tags$a(href = "overview.html", "Overview")),
                     tags$li(
                         class = "dropdown",
                         tags$a(

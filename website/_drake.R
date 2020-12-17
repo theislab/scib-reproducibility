@@ -89,6 +89,13 @@ plan <- drake_plan(
         ),
         trigger = trigger(change = configs)
     ),
+    rmd_overview = target(
+        callr_render(
+            here(knitr_in("pages/overview.Rmd")),
+            here("..", "docs", "overview.html")
+        ),
+        trigger = trigger(change = configs)
+    ),
     rmd_dataset = target(
         callr_render(
             here(knitr_in("pages/dataset.Rmd")),
