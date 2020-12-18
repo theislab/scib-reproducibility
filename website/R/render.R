@@ -172,7 +172,7 @@ make_navbar_html <- function(datasets, datasets_atac, methods, methods_atac,
                     class = "nav navbar-nav navbar-right",
                     tags$li(
                         tags$a(
-                            href = "https://github.com/theislab/scIB-reproducibility",
+                            href = "https://github.com/theislab/scib-reproducibility",
                             tags$span(class = "fa fa-github fa-lg")
                         )
                     )
