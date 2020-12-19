@@ -1,2 +1,6 @@
 .DS_Store
 .Rproj.user
+
+*.bak
+data/embeddings/
+data/annotations/

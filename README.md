@@ -6,7 +6,7 @@ For other parts of the scIB project see these repositories:
 * [scIB package][scIB]
 * [scIB pipeline][pipeline]
 
-Some supplementary results can be viewed on the results website at https://theislab.github.io/scIB-reproducibility.
+Some supplementary results can be viewed on the results website at https://theislab.github.io/scib-reproducibility.
 
 ## Directory structure
 

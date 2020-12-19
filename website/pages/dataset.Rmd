@@ -18,10 +18,14 @@ library("htmltools")
 ```{r functions}
 source(here("R", "plotting.R"))
 source(here("R", "tables.R"))
+source(here("R", "render.R"))
 ```
 
 ```{r load}
 labels <- drake::readd("labels")
+
+dataset_meta <- drake::readd("datasets_meta") %>%
+    filter(Name == params$dataset)
 
 metrics <- drake::readd("metrics") %>%
     filter(dataset == params$dataset)
@@ -31,6 +35,19 @@ benchmarks <- drake::readd("benchmarks") %>%
         dataset  == params$dataset,
         method %in% as.character(metrics$method)
     )
+```
+
+This page displays information for the following dataset:
+
+```{r metadata}
+data.frame(
+    Category = glue("**{colnames(dataset_meta)}:**"),
+    Value    = unlist(dataset_meta[1, ])
+) %>%
+    gt() %>%
+    cols_label(Category = "", Value = "") %>%
+    fmt_markdown("Category") %>%
+    cols_align("left")
 ```
 
 Overall
@@ -47,7 +64,7 @@ Table
 -----
 
 ```{r overall-table}
-make_dataset_table(metrics, labels)
+make_overall_table(metrics, labels, type = "dataset")
 ```
 
 Individual metrics
@@ -100,42 +117,15 @@ out <- knitr::knit_child(text = unlist(src_list), options = list(cache = FALSE))
 
 `r out`
 
-Embeddings {.tabset .tabset-pills .tabset-fade}
+Embeddings {.tabset .tabset-dropdown .tabset-fade}
 ==========
 
 ```{r embeddings, results = "hide"}
-full_src <- list()
-for (feature in levels(metrics$features)) {
-    full_src <- c(
-        full_src,
-        paste("##", feature, "{.unnumbered .tabset .tabset-pills .tabset-fade}"),
-        ""
-    )
-    for (scale in levels(metrics$scaling)) {
-        full_src <- c(
-            full_src,
-            paste("###", scale, "{.unnumbered .tabset}"), ""
-        )
-        metrics_sel <- filter(metrics, features == feature, scaling == scale)
-        src_list <- map2_chr(
-            metrics_sel$method, metrics_sel$output,
-            function(.method, .output) {
-                src <- c(
-                    "#### <<.method>> (<<.output>>) {.unnumbered}",
-                    "```{r embedding-<<feature>>-<<scale>>-<<.method>>-<<.output>>}",
-                    "plot_embedding_coords(params$dataset, '<<scale>>',",
-                    "'<<feature>>', '<<.method>>', '<<.output>>', labels)",
-                    "```",
-                    ""
-                )
-                knitr::knit_expand(text = src, delim = c("<<", ">>"))
-        })
-        full_src <- c(full_src, src_list)
-    }
-}
-
+full_src <- make_dataset_embeddings_md(metrics, params$dataset, labels)
 out <- knitr::knit_child(text = unlist(full_src), options = list(cache = FALSE))
 ```
+
+**Method (Output)**
 
 `r out`
 
@@ -146,7 +136,7 @@ Time
 ----
 
 ```{r scalability-time}
-benchmark_barplot(benchmarks, s, method, "Time") +
+benchmark_barplot(benchmarks, s, method, "Time", method_pal()) +
     scale_y_log10(
         breaks = c(      1,      60,  60 * 60, 60 * 60 * 24),
         labels = c("1 sec", "1 min", "1 hour",      "1 day")
@@ -157,7 +147,7 @@ Memory
 ------
 
 ```{r scalability-memory}
-benchmark_barplot(benchmarks, max_rss, method, "Maximum memory") +
+benchmark_barplot(benchmarks, max_rss, method, "Maximum memory", method_pal()) +
     scale_y_log10(
         breaks = c(    1,     10,     100,   1024, 1024 * 10, 1024 * 100),
         labels = c("1 MB","10 MB","100 MB", "1 GB",  "10 GB",   "100 GB")

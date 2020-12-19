@@ -1,44 +1,5 @@
 name: scIB-results
 output_dir: ../../docs
-navbar:
-  title: scIB Results
-  type: default
-  left:
-  - text: Home
-    href: index.html
-  - text: Datasets
-    menu:
-    - text: mini_pancreas
-      href: dataset_mini_pancreas.html
-    - text: mini_sim
-      href: dataset_mini_sim.html
-  - text: Methods
-    menu:
-    - text: BBKNN
-      href: method_BBKNN.html
-    - text: ComBat
-      href: method_ComBat.html
-    - text: FastMNN
-      href: method_FastMNN.html
-    - text: Harmony
-      href: method_Harmony.html
-    - text: LIGER
-      href: method_LIGER.html
-    - text: MNN
-      href: method_MNN.html
-    - text: Scanorama
-      href: method_Scanorama.html
-    - text: scANVI
-      href: method_scANVI.html
-    - text: scVI
-      href: method_scVI.html
-    - text: Seurat CCA
-      href: method_Seurat CCA.html
-    - text: Unintegrated
-      href: method_Unintegrated.html
-  right:
-  - href: https://github.com/theislab/scIB-results
-    icon: fa-github fa-lg
 output:
   rmarkdown::html_document:
     theme: yeti
@@ -49,4 +10,3 @@ output:
     css: style.css
     self_contained: false
     lib_dir: ../../docs/site_libs
-

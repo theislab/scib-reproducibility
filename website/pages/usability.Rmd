@@ -1,0 +1,68 @@
+---
+title: "Usability"
+---
+
+```{r setup, include=FALSE}
+source(here::here("R", "document_setup.R"))
+knitr::opts_chunk$set(fig.path = here("..", "docs", "figures", "usability"))
+```
+
+```{r libraries}
+library("reactable")
+library("htmltools")
+```
+
+```{r functions}
+source(here("R", "tables.R"))
+```
+
+This page displays usability scores for each of the methods based on the
+information presented in associated papers, package documentation and GitHub
+activity.
+
+```{r load}
+usability <- drake::readd("usability")
+```
+
+Paper scores
+============
+
+These scores assess how well publications associated with a method explain how it works and demonstrate its effectiveness.
+
+* **Peer-reviewed** - The method is published in a peer-reviewed journal
+* **Evaluation of accuracy**
+  * **Datasets** - The paper shows the method's usefulness on more than two (1.0), two (0.5) or one (0.25) real datasets
+  * **Simulations** - The paper quantifies the accuracy of the method using a simulated dataset
+* **Robustness** - The paper assessed method robustness (to eg. noise, feature selection, down-sampling, parameter changes, stability) in one (0.25) , two (0.5), or more than two (1.0) ways
+* **Benchmarking** - The paper compares the performance of the method against other published methods
+
+```{r papers}
+make_papers_table(usability$papers)
+```
+
+Package scores
+==============
+
+These scores assess the software packages that implement a method.
+
+* **Open source**
+  * **Code** - The packages code is freely available
+  * **Platform** - The code can be run using a freely available platform or programming language
+* **Version control** - The code is available on a public version controlled repository, such as GitHub
+* **Unit tests** - The package includes unit tests
+* **Tutorial**
+  * **Has tutorial** - The package has a vignette or tutorial
+  * **Errors** - The steps in the tutorial can be followed without any issues or errors
+  * **Scenarios** - The tutorial shows the method's usefulness on more than two (1.0), two (0.5), one (0.25) or no different scenarios
+  * **Non-native** - The tutorial shows how to run the method in a non-native language (i.e. R to Python or vice versa)
+* **Function documentation**
+  * **Purpose** - The purpose and usage of functions/commands is documented
+  * **Parameters** - The parameters of functions/commands are documented
+  * **Output** - The output of functions/commands is documented
+* **GitHub issues**
+  * **Activity** - The amount of issues the GitHub repository receives
+  * **Response** - How quickly new GitHub issues are responsed to
+
+```{r packages}
+make_packages_table(usability$packages)
+```

@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>ATAC method: SAUCIE</title>
+
+<script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-16.12.0/react.min.js"></script>
+<script src="site_libs/react-16.12.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/reactable-binding-0.2.2/reactable.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div id="nav-placeholder"></div>
+
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar-content.html");
+});
+</script>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">ATAC method: SAUCIE</h1>
+
+</div>
+
+
+<p>This page displays information for the following method:</p>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#shyuyfuisv .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#shyuyfuisv .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#shyuyfuisv .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#shyuyfuisv .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#shyuyfuisv .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#shyuyfuisv .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#shyuyfuisv .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#shyuyfuisv .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#shyuyfuisv .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#shyuyfuisv .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#shyuyfuisv .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#shyuyfuisv .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#shyuyfuisv .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#shyuyfuisv .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#shyuyfuisv .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#shyuyfuisv .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#shyuyfuisv .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#shyuyfuisv .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#shyuyfuisv .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#shyuyfuisv .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#shyuyfuisv .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#shyuyfuisv .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#shyuyfuisv .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#shyuyfuisv .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#shyuyfuisv .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#shyuyfuisv .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#shyuyfuisv .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#shyuyfuisv .gt_left {
+  text-align: left;
+}
+
+#shyuyfuisv .gt_center {
+  text-align: center;
+}
+
+#shyuyfuisv .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#shyuyfuisv .gt_font_normal {
+  font-weight: normal;
+}
+
+#shyuyfuisv .gt_font_bold {
+  font-weight: bold;
+}
+
+#shyuyfuisv .gt_font_italic {
+  font-style: italic;
+}
+
+#shyuyfuisv .gt_super {
+  font-size: 65%;
+}
+
+#shyuyfuisv .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="shyuyfuisv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>Name</strong>:</p>
+</div></td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p>SAUCIE</p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>Description</strong>:</p>
+</div></td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p>Sparse regularizes autoencoder</p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>GitHub</strong>:</p>
+</div></td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><a href="https://github.com/KrishnaswamyLab/SAUCIE">KrishnaswamyLab/SAUCIE</a></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>DOI</strong>:</p>
+</div></td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><a href="https://doi.org/10.1038/s41592-019-0576-7">10.1038/s41592-019-0576-7</a></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>Labels required?</strong>:</p>
+</div></td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p>No</p>
+</div></td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+<div id="overall" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Overall</h1>
+<div id="plot" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Plot</h2>
+<p><img src="figures/method_atac_SAUCIE/overall-plot-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="table" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Table</h2>
+<div class="metrics">
+<div id="htmlwidget-fcc02c48e87fffc7eee4" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-fcc02c48e87fffc7eee4">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"method":["mouse_brain_atac_windows_small","mouse_brain_atac_windows_large","mouse_brain_atac_peaks_small","mouse_brain_atac_peaks_large","mouse_brain_atac_genes_small","mouse_brain_atac_windows_small","mouse_brain_atac_windows_large","mouse_brain_atac_peaks_small","mouse_brain_atac_peaks_large","mouse_brain_atac_genes_small","mouse_brain_atac_genes_large","mouse_brain_atac_genes_large"],"output":["Features","Features","Features","Features","Features","Embedding","Embedding","Embedding","Embedding","Embedding","Features","Embedding"],"features":["Full","Full","Full","Full","Full","Full","Full","Full","Full","Full","Full","Full"],"scaling":["Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled"],"overall":[0.336185363784185,0.144188350234723,0.45459392028302,0.253217789887507,0.228520423725222,0.327864573151753,0.172682889166512,0.451881474344971,0.271702212668752,0.222796471860255,0.132498048005719,0.14602892687355],"batch_correction":[0.578735830038157,0.268043022539366,0.689190685369726,0.334347275025633,0.396156097867074,0.581326990413062,0.272644691475615,0.687379348268822,0.349703172025005,0.395375611799763,0.143782618359572,0.158467996719243],"PCR_batch":[0.726180370278514,0.14618431874257,0.950572488024144,0,0.739698449825206,0.72619180439646,0.146184898855858,0.950570885856933,0,0.739698744894205,0,0],"ASW_label_batch":[0.501289339370835,0,0.756146705678659,0,0.299731106334412,0.502603544032562,0.0439838005809429,0.757156969844401,0.0551972840820106,0.302021732942711,0,0.0489990963669322],"iLISI":[0.813316349396469,0.789664711897072,0.908609647576245,0.890342591250209,0.763551364866408,0.824165987224973,0.784791956488025,0.899315535828756,0.887267125420092,0.757847958863771,0.498185738762477,0.482286237285533],"graph_connectivity":[0.640679576389751,0.144495619947398,0.761295960453757,0.578690464436004,0,0.640346795481318,0.142738034527855,0.761295960453757,0.582823818405071,0,0.049635224312679,0.0839559742761801],"kBET":[0.212213514755215,0.259870462109792,0.0693286251158235,0.20270331944195,0.177799568309342,0.213326820929998,0.245524766925391,0.0685573893602646,0.223227632217849,0.17730962229813,0.171092128722706,0.177098675667571],"bio_conservation":[0.174485052948204,0.0616185686982944,0.298196076891883,0.199131466462089,0.116763307630654,0.15888962831088,0.106041687627109,0.29488289172907,0.219701573097917,0.107743711900584,0.12497500110315,0.137736213643088],"NMI_cluster_label":[0.177613572085233,0.0267957075664323,0.322110829457413,0.299682655419831,0.0445147341520814,0.14912427015789,0.0975188627765026,0.302182257597768,0.313563618479423,0.00177779559695448,0.162051048606323,0.180100896706282],"ARI_cluster_label":[0.168206686317901,0,0.218629156823393,0.116723029456574,0.0627283051597651,0.15599093188946,0.129622971004125,0.213870788767889,0.121426848332863,0,0,0.0433447338486379],"ASW_label":[0.000535337356778188,0,0.392229083947179,0,0.000279329051010484,0,0.0227156491062812,0.391392013679457,0.00832263141013605,0,0,0.0218433448749018],"isolated_label_F1":[0.0548538600807731,0,0,0,0,0,0.0399360329167149,0.00700259048238663,0.0914570151813934,0.0224382674528526,0.208121689528242,0.197067602854932],"isolated_label_silhouette":[0,0,0.165293713202124,0,0.296421824941076,0,0,0.165293713202124,0,0.296421824941076,0,0],"cLISI":[0.64570086184854,0.342915704623334,0.690913677921192,0.77838311389613,0.296635652479991,0.648222567817931,0.346456609959033,0.689555986644797,0.783439325183689,0.325824383412618,0.379677268484336,0.384060703573777],"HVG_overlap":["NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"],"cell_cycle":["NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"],"trajectory":["NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"]},"columns":[{"accessor":"method","name":"Dataset","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"output","name":"Output","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"features","name":"Features","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"scaling","name":"Scaling","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"overall","name":"Overall score","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#C5E8B4"},"className":"score"},"children":["0.34"]},{"name":"div","attribs":{"style":{"background":"#EFF8B6"},"className":"score"},"children":["0.14"]},{"name":"div","attribs":{"style":{"background":"#92D4B9"},"className":"score"},"children":["0.45"]},{"name":"div","attribs":{"style":{"background":"#D9F0B2"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#DEF2B2"},"className":"score"},"children":["0.23"]},{"name":"div","attribs":{"style":{"background":"#C8E9B3"},"className":"score"},"children":["0.33"]},{"name":"div","attribs":{"style":{"background":"#EBF7B1"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#93D5B8"},"className":"score"},"children":["0.45"]},{"name":"div","attribs":{"style":{"background":"#D5EEB2"},"className":"score"},"children":["0.27"]},{"name":"div","attribs":{"style":{"background":"#E0F2B2"},"className":"score"},"children":["0.22"]},{"name":"div","attribs":{"style":{"background":"#F0F9B9"},"className":"score"},"children":["0.13"]},{"name":"div","attribs":{"style":{"background":"#EFF8B5"},"className":"score"},"children":["0.15"]}],"maxWidth":80,"align":"center","headerStyle":{"fontWeight":700}},{"accessor":"batch_correction","name":"Overall","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#F885AB"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#FCCFCB"},"className":"score"},"children":["0.27"]},{"name":"div","attribs":{"style":{"background":"#F3609F"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#FBC4BF"},"className":"score"},"children":["0.33"]},{"name":"div","attribs":{"style":{"background":"#FBB6BB"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#F884AB"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#FCCECA"},"className":"score"},"children":["0.27"]},{"name":"div","attribs":{"style":{"background":"#F3619F"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#FBC1BE"},"className":"score"},"children":["0.35"]},{"name":"div","attribs":{"style":{"background":"#FBB6BB"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#FDE3E0"},"className":"score"},"children":["0.14"]},{"name":"div","attribs":{"style":{"background":"#FDE1DE"},"className":"score"},"children":["0.16"]}],"maxWidth":80,"align":"center"},{"accessor":"PCR_batch","name":"PCR batch","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#ED559D"},"className":"score"},"children":["0.73"]},{"name":"div","attribs":{"style":{"background":"#FDE2DF"},"className":"score"},"children":["0.15"]},{"name":"div","attribs":{"style":{"background":"#BB1085"},"className":"score"},"children":["0.95"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#EB519C"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#ED559D"},"className":"score"},"children":["0.73"]},{"name":"div","attribs":{"style":{"background":"#FDE2DF"},"className":"score"},"children":["0.15"]},{"name":"div","attribs":{"style":{"background":"#BB1085"},"className":"score"},"children":["0.95"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#EB519C"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"align":"center"},{"accessor":"ASW_label_batch","name":"Batch ASW","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#F99EB4"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#E94C9B"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FCCAC5"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#F99EB4"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#FEF0ED"},"className":"score"},"children":["0.04"]},{"name":"div","attribs":{"style":{"background":"#E84B9B"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#FEEFEB"},"className":"score"},"children":["0.06"]},{"name":"div","attribs":{"style":{"background":"#FCCAC5"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF0EC"},"className":"score"},"children":["0.05"]}],"maxWidth":80,"align":"center"},{"accessor":"iLISI","name":"Graph\niLISI","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#E03A98"},"className":"score"},"children":["0.81"]},{"name":"div","attribs":{"style":{"background":"#E34199"},"className":"score"},"children":["0.79"]},{"name":"div","attribs":{"style":{"background":"#C71C8B"},"className":"score"},"children":["0.91"]},{"name":"div","attribs":{"style":{"background":"#CC228E"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#E7499B"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#DE3697"},"className":"score"},"children":["0.82"]},{"name":"div","attribs":{"style":{"background":"#E44399"},"className":"score"},"children":["0.78"]},{"name":"div","attribs":{"style":{"background":"#CA1F8D"},"className":"score"},"children":["0.90"]},{"name":"div","attribs":{"style":{"background":"#CD238E"},"className":"score"},"children":["0.89"]},{"name":"div","attribs":{"style":{"background":"#E84B9B"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#FA9FB5"},"className":"score"},"children":["0.50"]},{"name":"div","attribs":{"style":{"background":"#FAA3B6"},"className":"score"},"children":["0.48"]}],"maxWidth":80,"align":"center"},{"accessor":"graph_connectivity","name":"Graph connectivity","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#F770A4"},"className":"score"},"children":["0.64"]},{"name":"div","attribs":{"style":{"background":"#FDE3DF"},"className":"score"},"children":["0.14"]},{"name":"div","attribs":{"style":{"background":"#E84A9B"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#F885AB"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#F770A4"},"className":"score"},"children":["0.64"]},{"name":"div","attribs":{"style":{"background":"#FDE3E0"},"className":"score"},"children":["0.14"]},{"name":"div","attribs":{"style":{"background":"#E84A9B"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#F883AB"},"className":"score"},"children":["0.58"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF0EC"},"className":"score"},"children":["0.05"]},{"name":"div","attribs":{"style":{"background":"#FDEBE7"},"className":"score"},"children":["0.08"]}],"maxWidth":80,"align":"center"},{"accessor":"kBET","name":"kBET","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FCD8D5"},"className":"score"},"children":["0.21"]},{"name":"div","attribs":{"style":{"background":"#FCD0CC"},"className":"score"},"children":["0.26"]},{"name":"div","attribs":{"style":{"background":"#FEEDE9"},"className":"score"},"children":["0.07"]},{"name":"div","attribs":{"style":{"background":"#FCDAD6"},"className":"score"},"children":["0.20"]},{"name":"div","attribs":{"style":{"background":"#FCDEDB"},"className":"score"},"children":["0.18"]},{"name":"div","attribs":{"style":{"background":"#FCD8D4"},"className":"score"},"children":["0.21"]},{"name":"div","attribs":{"style":{"background":"#FCD3CF"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FEEDE9"},"className":"score"},"children":["0.07"]},{"name":"div","attribs":{"style":{"background":"#FCD6D3"},"className":"score"},"children":["0.22"]},{"name":"div","attribs":{"style":{"background":"#FCDEDB"},"className":"score"},"children":["0.18"]},{"name":"div","attribs":{"style":{"background":"#FCDFDC"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#FCDEDB"},"className":"score"},"children":["0.18"]}],"maxWidth":80,"align":"center"},{"accessor":"bio_conservation","name":"Overall","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FDE7C6"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#FEF1DE"},"className":"score"},"children":["0.06"]},{"name":"div","attribs":{"style":{"background":"#FDD8A6"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FDE4BF"},"className":"score"},"children":["0.20"]},{"name":"div","attribs":{"style":{"background":"#FEECD2"},"className":"score"},"children":["0.12"]},{"name":"div","attribs":{"style":{"background":"#FEE8C9"},"className":"score"},"children":["0.16"]},{"name":"div","attribs":{"style":{"background":"#FEEDD5"},"className":"score"},"children":["0.11"]},{"name":"div","attribs":{"style":{"background":"#FDD8A7"},"className":"score"},"children":["0.29"]},{"name":"div","attribs":{"style":{"background":"#FDE1BA"},"className":"score"},"children":["0.22"]},{"name":"div","attribs":{"style":{"background":"#FEEDD4"},"className":"score"},"children":["0.11"]},{"name":"div","attribs":{"style":{"background":"#FEEBD1"},"className":"score"},"children":["0.12"]},{"name":"div","attribs":{"style":{"background":"#FEEACE"},"className":"score"},"children":["0.14"]}],"maxWidth":80,"align":"center"},{"accessor":"NMI_cluster_label","name":"NMI cluster/label","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FDE6C5"},"className":"score"},"children":["0.18"]},{"name":"div","attribs":{"style":{"background":"#FEF4E6"},"className":"score"},"children":["0.03"]},{"name":"div","attribs":{"style":{"background":"#FDD5A0"},"className":"score"},"children":["0.32"]},{"name":"div","attribs":{"style":{"background":"#FDD8A6"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FEF2E2"},"className":"score"},"children":["0.04"]},{"name":"div","attribs":{"style":{"background":"#FEE9CB"},"className":"score"},"children":["0.15"]},{"name":"div","attribs":{"style":{"background":"#FEEED6"},"className":"score"},"children":["0.10"]},{"name":"div","attribs":{"style":{"background":"#FDD7A5"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FDD6A2"},"className":"score"},"children":["0.31"]},{"name":"div","attribs":{"style":{"background":"#FEF6EB"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEE8C8"},"className":"score"},"children":["0.16"]},{"name":"div","attribs":{"style":{"background":"#FDE6C4"},"className":"score"},"children":["0.18"]}],"maxWidth":80,"align":"center"},{"accessor":"ARI_cluster_label","name":"ARI cluster/label","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FDE7C7"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FDE1BA"},"className":"score"},"children":["0.22"]},{"name":"div","attribs":{"style":{"background":"#FEECD2"},"className":"score"},"children":["0.12"]},{"name":"div","attribs":{"style":{"background":"#FEF1DE"},"className":"score"},"children":["0.06"]},{"name":"div","attribs":{"style":{"background":"#FEE8CA"},"className":"score"},"children":["0.16"]},{"name":"div","attribs":{"style":{"background":"#FEEBD0"},"className":"score"},"children":["0.13"]},{"name":"div","attribs":{"style":{"background":"#FDE2BC"},"className":"score"},"children":["0.21"]},{"name":"div","attribs":{"style":{"background":"#FEECD1"},"className":"score"},"children":["0.12"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF3E2"},"className":"score"},"children":["0.04"]}],"maxWidth":80,"align":"center"},{"accessor":"ASW_label","name":"Label ASW","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FEF6EB"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FDCB94"},"className":"score"},"children":["0.39"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF6EB"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF4E7"},"className":"score"},"children":["0.02"]},{"name":"div","attribs":{"style":{"background":"#FDCB94"},"className":"score"},"children":["0.39"]},{"name":"div","attribs":{"style":{"background":"#FEF6EA"},"className":"score"},"children":["0.01"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF5E7"},"className":"score"},"children":["0.02"]}],"maxWidth":80,"align":"center"},{"accessor":"isolated_label_F1","name":"Isolated label F1","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FEF2E0"},"className":"score"},"children":["0.05"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF3E3"},"className":"score"},"children":["0.04"]},{"name":"div","attribs":{"style":{"background":"#FEF6EA"},"className":"score"},"children":["0.01"]},{"name":"div","attribs":{"style":{"background":"#FEEED8"},"className":"score"},"children":["0.09"]},{"name":"div","attribs":{"style":{"background":"#FEF4E7"},"className":"score"},"children":["0.02"]},{"name":"div","attribs":{"style":{"background":"#FDE3BD"},"className":"score"},"children":["0.21"]},{"name":"div","attribs":{"style":{"background":"#FDE4C0"},"className":"score"},"children":["0.20"]}],"maxWidth":80,"align":"center"},{"accessor":"isolated_label_silhouette","name":"Isolated label silhouette","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEE8C8"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FDD8A7"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEE8C8"},"className":"score"},"children":["0.17"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FDD8A7"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"align":"center"},{"accessor":"cLISI","name":"Graph cLISI","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FC925E"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#FDD29C"},"className":"score"},"children":["0.34"]},{"name":"div","attribs":{"style":{"background":"#FA8756"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#F3724D"},"className":"score"},"children":["0.78"]},{"name":"div","attribs":{"style":{"background":"#FDD8A7"},"className":"score"},"children":["0.30"]},{"name":"div","attribs":{"style":{"background":"#FC925D"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#FDD29B"},"className":"score"},"children":["0.35"]},{"name":"div","attribs":{"style":{"background":"#FA8756"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#F2704D"},"className":"score"},"children":["0.78"]},{"name":"div","attribs":{"style":{"background":"#FDD49F"},"className":"score"},"children":["0.33"]},{"name":"div","attribs":{"style":{"background":"#FDCD96"},"className":"score"},"children":["0.38"]},{"name":"div","attribs":{"style":{"background":"#FDCC96"},"className":"score"},"children":["0.38"]}],"maxWidth":80,"align":"center"},{"accessor":"HVG_overlap","name":"HVG conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]}],"maxWidth":80,"align":"center"},{"accessor":"cell_cycle","name":"Cell cycle conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]}],"maxWidth":80,"align":"center"},{"accessor":"trajectory","name":"Trajectory conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]}],"maxWidth":80,"align":"center"}],"columnGroups":[{"headerClassName":"group-header","name":"Batch correction","columns":["batch_correction","PCR_batch","ASW_label_batch","iLISI","graph_connectivity","kBET"]},{"headerClassName":"group-header","name":"Bio conservation","columns":["bio_conservation","NMI_cluster_label","ARI_cluster_label","ASW_label","isolated_label_F1","isolated_label_silhouette","cLISI","HVG_overlap","cell_cycle","trajectory"]}],"defaultSortDesc":true,"defaultSorted":[{"id":"overall","desc":true}],"defaultPageSize":12,"paginationType":"numbers","showPageInfo":true,"minRows":1,"highlight":true,"borderless":true,"compact":true,"showSortIcon":false,"className":"metrics-table","dataKey":"54e541b09180553d619f686f0af2e9b9","key":"54e541b09180553d619f686f0af2e9b9"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="individual-metrics" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Individual metrics</h1>
+<div id="overall-1" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Overall</h2>
+<p><img src="figures/method_atac_SAUCIE/metrics-overall-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="batch-correction" class="section level2 tabset" number="2.2">
+<h2 class="tabset" number="2.2"><span class="header-section-number">2.2</span> Batch correction</h2>
+<div id="batch-correction-1" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Batch correction</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-batch-batch_correction-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pcr-batch" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">PCR batch</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-batch-PCR_batch-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="batch-asw" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Batch ASW</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-batch-ASW_label_batch-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="graph-ilisi" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Graph iLISI</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-batch-iLISI-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="graph-connectivity" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Graph connectivity</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-batch-graph_connectivity-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="kbet" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">kBET</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-batch-kBET-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="bio-conservation" class="section level2 tabset" number="2.3">
+<h2 class="tabset" number="2.3"><span class="header-section-number">2.3</span> Bio conservation</h2>
+<div id="bio-conservation-1" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Bio conservation</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-bio-bio_conservation-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="nmi-clusterlabel" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">NMI cluster/label</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-bio-NMI_cluster_label-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="ari-clusterlabel" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">ARI cluster/label</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-bio-ARI_cluster_label-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="label-asw" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Label ASW</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-bio-ASW_label-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="isolated-label-f1" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Isolated label F1</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-bio-isolated_label_F1-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="isolated-label-silhouette" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Isolated label silhouette</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-bio-isolated_label_silhouette-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="graph-clisi" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Graph cLISI</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-bio-cLISI-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="hvg-conservation" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">HVG conservation</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-bio-HVG_overlap-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cell-cycle-conservation" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Cell cycle conservation</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-bio-cell_cycle-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="trajectory-conservation" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Trajectory conservation</h3>
+<p><img src="figures/method_atac_SAUCIE/metrics-bio-trajectory-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="embeddings" class="section level1 tabset tabset-dropdown tabset-fade" number="3">
+<h1 class="tabset tabset-dropdown tabset-fade" number="3"><span class="header-section-number">3</span> Embeddings</h1>
+<p><strong>Dataset (Output)</strong></p>
+<div id="mouse_brain_atac_peaks_small-features" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">mouse_brain_atac_peaks_small (Features)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_atac_SAUCIE/embedding-mouse_brain_atac_peaks_small-Features-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="mouse_brain_atac_peaks_small-embedding" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">mouse_brain_atac_peaks_small (Embedding)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-1" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_atac_SAUCIE/embedding-mouse_brain_atac_peaks_small-Embedding-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="mouse_brain_atac_windows_small-features" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">mouse_brain_atac_windows_small (Features)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-2" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_atac_SAUCIE/embedding-mouse_brain_atac_windows_small-Features-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="mouse_brain_atac_windows_small-embedding" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">mouse_brain_atac_windows_small (Embedding)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-3" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_atac_SAUCIE/embedding-mouse_brain_atac_windows_small-Embedding-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="mouse_brain_atac_peaks_large-embedding" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">mouse_brain_atac_peaks_large (Embedding)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-4" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_atac_SAUCIE/embedding-mouse_brain_atac_peaks_large-Embedding-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="mouse_brain_atac_peaks_large-features" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">mouse_brain_atac_peaks_large (Features)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-5" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_atac_SAUCIE/embedding-mouse_brain_atac_peaks_large-Features-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="mouse_brain_atac_genes_small-features" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">mouse_brain_atac_genes_small (Features)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-6" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_atac_SAUCIE/embedding-mouse_brain_atac_genes_small-Features-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="mouse_brain_atac_genes_small-embedding" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">mouse_brain_atac_genes_small (Embedding)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-7" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_atac_SAUCIE/embedding-mouse_brain_atac_genes_small-Embedding-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="mouse_brain_atac_windows_large-embedding" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">mouse_brain_atac_windows_large (Embedding)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-8" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_atac_SAUCIE/embedding-mouse_brain_atac_windows_large-Embedding-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="mouse_brain_atac_genes_large-embedding" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">mouse_brain_atac_genes_large (Embedding)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-9" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_atac_SAUCIE/embedding-mouse_brain_atac_genes_large-Embedding-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="mouse_brain_atac_windows_large-features" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">mouse_brain_atac_windows_large (Features)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-10" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_atac_SAUCIE/embedding-mouse_brain_atac_windows_large-Features-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="mouse_brain_atac_genes_large-features" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">mouse_brain_atac_genes_large (Features)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-11" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_atac_SAUCIE/embedding-mouse_brain_atac_genes_large-Features-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="scalability" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Scalability</h1>
+<div id="time" class="section level2" number="4.1">
+<h2 number="4.1"><span class="header-section-number">4.1</span> Time</h2>
+<p><img src="figures/method_atac_SAUCIE/scalability-time-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+<div id="memory" class="section level2" number="4.2">
+<h2 number="4.2"><span class="header-section-number">4.2</span> Memory</h2>
+<p><img src="figures/method_atac_SAUCIE/scalability-memory-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

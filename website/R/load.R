@@ -1,15 +1,38 @@
-get_datasets <- function() {
+#' Get datasets
+#'
+#' Get a vector of dataset names for use by Drake
+#'
+#' @param metrics_path Path to metrics CSV file
+#'
+#' @return Vector of dataset names
+get_datasets <- function(metrics_path) {
     labels <- get_labels()
-    metrics <- get_metrics(here::here("..", "data", "metrics.csv"), labels)
+    metrics <- get_metrics(metrics_path, labels)
     sort(unique(as.character(metrics$dataset)))
 }
 
-get_methods <- function() {
+#' Get methods
+#'
+#' Get a vector of method names for use by Drake
+#'
+#' @param metrics_path Path to metrics CSV file
+#'
+#' @return Vector of method names
+get_methods <- function(metrics_path) {
     labels <- get_labels()
-    metrics <- get_metrics(here::here("..", "data", "metrics.csv"), labels)
+    metrics <- get_metrics(metrics_path, labels)
     sort(unique(as.character(metrics$method)))
 }
 
+#' Get metrics
+#'
+#' Read the combined benchmarking metrics file. Also scales scores between
+#' zero and one for each dataset and calculates overall scores for each dataset.
+#'
+#' @param metrics_file Path to the metrics CSV file
+#' @param labels List containing standard labels
+#'
+#' @return tibble containing tidied metrics
 get_metrics <- function(metrics_file, labels) {
 
     `%>%` <- magrittr::`%>%`
@@ -53,12 +76,18 @@ get_metrics <- function(metrics_file, labels) {
         ),
         skip = 1
     ) %>%
+        # Remove empty rows from failed runs
+        dplyr::filter(!is.na(NMI_cluster_label)) %>%
+        # Remove leading / if present
+        dplyr::mutate(path = stringr::str_remove(path, "^/")) %>%
         # Split the path into the different parts of the scenario
         tidyr::separate(
             path,
             into = c("dataset", NA, "scaling", "features", "method"),
             sep = "/"
         ) %>%
+        # Remove results for trvae_full (reconstruction not integration)
+        dplyr::filter(method != "trvae_full") %>%
         # Split method into method and output
         tidyr::separate(method, into = c("method", "output"), sep = "_") %>%
         # Set factors with pretty labels
@@ -131,29 +160,36 @@ get_metrics <- function(metrics_file, labels) {
             output, overall, batch_correction, PCR_batch, ASW_label_batch, iLISI,
             graph_connectivity, kBET, bio_conservation, NMI_cluster_label,
             ARI_cluster_label, ASW_label, isolated_label_F1,
-            isolated_label_silhouette, cLISI, HVG_overlap, cell_cycle, trajectory
+            isolated_label_silhouette, cLISI, HVG_overlap, cell_cycle,
+            trajectory
         )
 }
 
+#' Get labels
+#'
+#' Get a list of standard labels to use in other functions
+#'
+#' @return list of standard labels
 get_labels <- function() {
     list(
         methods = c(
-            "MNN"          = "mnn",
-            "Scanorama"    = "scanorama",
-            "Seurat CCA"   = "seurat",
-            "Harmony"      = "harmony",
-            "BBKNN"        = "bbknn",
-            "SAUCIE"       = "saucie",
-            "trVAE"        = "trvae",
-            "scVI"         = "scvi",
-            "CONOS"        = "conos",
-            "ComBat"       = "combat",
-            "LIGER"        = "liger",
-            "scGen"        = "scgen",
-            "scANVI"       = "scanvi",
-            "FastMNN"      = "fastmnn",
-            "DESC"         = "desc",
-            "Unintegrated" = "unintegrated"
+            "BBKNN"          = "bbknn",
+            "Conos"          = "conos",
+            "trVAE"          = "trvae",
+            "scVI"           = "scvi",
+            "ComBat"         = "combat",
+            "Harmony"        = "harmony",
+            "LIGER"          = "liger",
+            "Scanorama"      = "scanorama",
+            "Seurat v3 CCA"  = "seurat",
+            "Seurat v3 RPCA" = "seuratrpca",
+            "MNN"            = "mnn",
+            "FastMNN"        = "fastmnn",
+            "scGen*"         = "scgen",
+            "scANVI*"        = "scanvi",
+            "DESC"           = "desc",
+            "SAUCIE"         = "saucie",
+            "Unintegrated"   = "unintegrated"
         ),
         metrics = list(
             batch = c(
@@ -180,6 +216,14 @@ get_labels <- function() {
     )
 }
 
+#' Get benchmarks
+#'
+#' Read the combined scalability benchmarks file.
+#'
+#' @param benchmarks_file Path to benchmarks CSV file
+#' @param labels List containing standard labels
+#'
+#' @return tibble of tidied scalability benchmarks
 get_benchmarks <- function(benchmarks_file, labels) {
 
     `%>%` <- magrittr::`%>%`
@@ -198,6 +242,8 @@ get_benchmarks <- function(benchmarks_file, labels) {
             scenario = stringr::str_remove(scenario, ".h5ad"),
             scenario = stringr::str_remove(scenario, ".RDS")
         ) %>%
+        # Remove leading / if present
+        dplyr::mutate(scenario = stringr::str_remove(scenario, "^/")) %>%
         # Split the path into the different parts of the scenario
         tidyr::separate(
             scenario,
@@ -223,4 +269,95 @@ get_benchmarks <- function(benchmarks_file, labels) {
                 labels = names(labels$methods)
             )
         )
+}
+
+#' Get datasets metadata
+#'
+#' Read the datasets metadata file
+#'
+#' @param datasets_meta_file Path to datasets metadata TSV file
+#'
+#' @return tibble of datasets metadata
+get_datasets_meta <- function(datasets_meta_file) {
+
+    readr::read_tsv(
+        datasets_meta_file,
+        col_types = readr::cols(
+            Name        = readr::col_character(),
+            Description = readr::col_character(),
+            Type        = readr::col_character(),
+            Cells       = readr::col_double(),
+            Batches     = readr::col_double(),
+            Labels      = readr::col_double()
+        )
+    )
+}
+
+#' Get methods metadata
+#'
+#' Read the methods metadata file
+#'
+#' @param methods_meta_file Path to methods metadata TSV file
+#'
+#' @return tibble of methods metadata
+get_methods_meta <- function(methods_meta_file) {
+
+    readr::read_tsv(
+        methods_meta_file,
+        col_types       = readr::cols(
+            Name        = readr::col_character(),
+            Description = readr::col_character(),
+            GitHub      = readr::col_character(),
+            DOI         = readr::col_character(),
+            Labels      = readr::col_character()
+        )
+    )
+}
+
+#' Get usability
+#'
+#' Read the method usability scores
+#'
+#' @param usability_papers_file Path to papers usability TSV file
+#' @param usability_packages_file Path to packages usability TSV file
+#' @param gh_stats_file Path to GitHub activity statistics TSV file
+#'
+#' @return list of tibbles with papers and packages usability scores
+get_usability <- function(usability_papers_file, usability_packages_file,
+                          gh_stats_file) {
+
+    `%>%` <- magrittr::`%>%`
+
+    usability_papers <- readr::read_tsv(
+        usability_papers_file,
+        col_types = readr::cols(
+            .default = readr::col_double(),
+            Method   = readr::col_character()
+        )
+    )
+
+    gh_stats <- readr::read_tsv(
+        gh_stats_file,
+        col_types = readr::cols(
+            .default = readr::col_double(),
+            Repo     = readr::col_character(),
+            Tool     = readr::col_character(),
+            Created  = readr::col_datetime(format = ""),
+            Updated  = readr::col_datetime(format = "")
+        )
+    ) %>%
+        dplyr::select(Repo, IssueActivityScore, IssueResponseScore)
+
+    usability_packages <- readr::read_tsv(
+        usability_packages_file,
+        col_types = readr::cols(
+            .default = readr::col_double(),
+            Package  = readr::col_character(),
+            Method   = readr::col_character(),
+            Repo     = readr::col_character()
+        )
+    ) %>%
+        dplyr::left_join(gh_stats, by = "Repo")
+
+    list(papers = usability_papers, packages = usability_packages)
 }

@@ -32,8 +32,6 @@
 <script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
 <script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="site_libs/reactable-binding-0.2.2/reactable.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -344,91 +342,13 @@ div.tocify {
 
 
 
+<div id="nav-placeholder"></div>
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">scIB Results</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Datasets
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="dataset_mini_pancreas.html">mini_pancreas</a>
-    </li>
-    <li>
-      <a href="dataset_mini_sim.html">mini_sim</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Methods
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="method_BBKNN.html">BBKNN</a>
-    </li>
-    <li>
-      <a href="method_ComBat.html">ComBat</a>
-    </li>
-    <li>
-      <a href="method_FastMNN.html">FastMNN</a>
-    </li>
-    <li>
-      <a href="method_Harmony.html">Harmony</a>
-    </li>
-    <li>
-      <a href="method_LIGER.html">LIGER</a>
-    </li>
-    <li>
-      <a href="method_MNN.html">MNN</a>
-    </li>
-    <li>
-      <a href="method_Scanorama.html">Scanorama</a>
-    </li>
-    <li>
-      <a href="method_scANVI.html">scANVI</a>
-    </li>
-    <li>
-      <a href="method_scVI.html">scVI</a>
-    </li>
-    <li>
-      <a href="method_Seurat CCA.html">Seurat CCA</a>
-    </li>
-    <li>
-      <a href="method_Unintegrated.html">Unintegrated</a>
-    </li>
-  </ul>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/theislab/scIB-results">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar-content.html");
+});
+</script>
 
 <div class="fluid-row" id="header">
 
@@ -439,17 +359,397 @@ div.tocify {
 </div>
 
 
+<p>This page displays information for the following method:</p>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#mxiqgzoygy .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mxiqgzoygy .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mxiqgzoygy .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mxiqgzoygy .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mxiqgzoygy .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mxiqgzoygy .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mxiqgzoygy .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mxiqgzoygy .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mxiqgzoygy .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mxiqgzoygy .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mxiqgzoygy .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mxiqgzoygy .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mxiqgzoygy .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mxiqgzoygy .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mxiqgzoygy .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mxiqgzoygy .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mxiqgzoygy .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#mxiqgzoygy .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mxiqgzoygy .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#mxiqgzoygy .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mxiqgzoygy .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mxiqgzoygy .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mxiqgzoygy .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mxiqgzoygy .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mxiqgzoygy .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#mxiqgzoygy .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mxiqgzoygy .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#mxiqgzoygy .gt_left {
+  text-align: left;
+}
+
+#mxiqgzoygy .gt_center {
+  text-align: center;
+}
+
+#mxiqgzoygy .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mxiqgzoygy .gt_font_normal {
+  font-weight: normal;
+}
+
+#mxiqgzoygy .gt_font_bold {
+  font-weight: bold;
+}
+
+#mxiqgzoygy .gt_font_italic {
+  font-style: italic;
+}
+
+#mxiqgzoygy .gt_super {
+  font-size: 65%;
+}
+
+#mxiqgzoygy .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="mxiqgzoygy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>Name</strong>:</p>
+</div></td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p>Unintegrated</p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>Description</strong>:</p>
+</div></td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p>Raw unintegrated dataset</p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>GitHub</strong>:</p>
+</div></td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><a href="https://github.com/NA">NA</a></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>DOI</strong>:</p>
+</div></td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><a href="https://doi.org/NA">NA</a></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><strong>Labels required?</strong>:</p>
+</div></td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p>No</p>
+</div></td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 <div id="overall" class="section level1" number="1">
 <h1 number="1"><span class="header-section-number">1</span> Overall</h1>
 <div id="plot" class="section level2" number="1.1">
 <h2 number="1.1"><span class="header-section-number">1.1</span> Plot</h2>
-<p><img src="figures/method_Unintegrated/overall-plot-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/overall-plot-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="table" class="section level2" number="1.2">
 <h2 number="1.2"><span class="header-section-number">1.2</span> Table</h2>
 <div class="metrics">
-<div id="htmlwidget-ca6283aca1c1d841276a" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-ca6283aca1c1d841276a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"method":["Unintegrated","Unintegrated"],"output":["Features","Features"],"features":["Full","Full"],"scaling":["Unscaled","Unscaled"],"overall":[0.44643880331497,0.308495998765003],"batch_correction":[0.0108388201789366,0.11791877797594],"PCR_batch":[0,0],"ASW_label_batch":[0,0.488433290684306],"iLISI":[0,0],"graph_connectivity":[0,0],"kBET":[0.054194100894683,0.101160599195396],"bio_conservation":[0.736838792072325,0.435547479291044],"NMI_cluster_label":[0.831001833342162,0.485575142317621],"ARI_cluster_label":[0.758144342616694,0.238596609666655],"ASW_label":[0,0.0509894789688371],"isolated_label_F1":[0.736075777804862,0.191547891270343],"isolated_label_silhouette":[0.607057606468754,0.11191856345776],"cLISI":[0.962430776346134,0.970204669356094],"HVG_overlap":[1,1],"cell_cycle":[1,"NA"],"trajectory":["NA","NA"]},"columns":[{"accessor":"method","name":"Method","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"output","name":"Output","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"features","name":"Features","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"scaling","name":"Scaling","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"overall","name":"Overall score","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#96D5B8"},"className":"score"},"children":["0.45"]},{"name":"div","attribs":{"style":{"background":"#CCEBB3"},"className":"score"},"children":["0.31"]}],"maxWidth":80,"align":"center","headerStyle":{"fontWeight":700}},{"accessor":"batch_correction","name":"Overall","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FEF5F1"},"className":"score"},"children":["0.01"]},{"name":"div","attribs":{"style":{"background":"#FDE6E3"},"className":"score"},"children":["0.12"]}],"maxWidth":80,"align":"center"},{"accessor":"PCR_batch","name":"PCR batch","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"align":"center"},{"accessor":"ASW_label_batch","name":"Batch ASW","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FAA1B5"},"className":"score"},"children":["0.49"]}],"maxWidth":80,"align":"center"},{"accessor":"iLISI","name":"Graph\niLISI","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"align":"center"},{"accessor":"graph_connectivity","name":"Graph connectivity","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"align":"center"},{"accessor":"kBET","name":"kBET","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FEEFEB"},"className":"score"},"children":["0.05"]},{"name":"div","attribs":{"style":{"background":"#FDE9E5"},"className":"score"},"children":["0.10"]}],"maxWidth":80,"align":"center"},{"accessor":"bio_conservation","name":"Overall","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#F67C51"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#FDC48E"},"className":"score"},"children":["0.44"]}],"maxWidth":80,"align":"center"},{"accessor":"NMI_cluster_label","name":"NMI cluster/label","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#EF6548"},"className":"score"},"children":["0.83"]},{"name":"div","attribs":{"style":{"background":"#FDBD86"},"className":"score"},"children":["0.49"]}],"maxWidth":80,"align":"center"},{"accessor":"ARI_cluster_label","name":"ARI cluster/label","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#F4774F"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#FDDFB5"},"className":"score"},"children":["0.24"]}],"maxWidth":80,"align":"center"},{"accessor":"ASW_label","name":"Label ASW","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF2E0"},"className":"score"},"children":["0.05"]}],"maxWidth":80,"align":"center"},{"accessor":"isolated_label_F1","name":"Isolated label F1","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#F67C51"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#FDE5C1"},"className":"score"},"children":["0.19"]}],"maxWidth":80,"align":"center"},{"accessor":"isolated_label_silhouette","name":"Isolated label silhouette","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FC9D68"},"className":"score"},"children":["0.61"]},{"name":"div","attribs":{"style":{"background":"#FEECD3"},"className":"score"},"children":["0.11"]}],"maxWidth":80,"align":"center"},{"accessor":"cLISI","name":"Graph cLISI","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#DC3B28"},"className":"score"},"children":["0.96"]},{"name":"div","attribs":{"style":{"background":"#DB3926"},"className":"score"},"children":["0.97"]}],"maxWidth":80,"align":"center"},{"accessor":"HVG_overlap","name":"HVG conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]}],"maxWidth":80,"align":"center"},{"accessor":"cell_cycle","name":"Cell cycle conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]}],"maxWidth":80,"align":"center"},{"accessor":"trajectory","name":"Trajectory conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]}],"maxWidth":80,"align":"center"}],"columnGroups":[{"headerClassName":"group-header","name":"Batch correction","columns":["batch_correction","PCR_batch","ASW_label_batch","iLISI","graph_connectivity","kBET"]},{"headerClassName":"group-header","name":"Bio conservation","columns":["bio_conservation","NMI_cluster_label","ARI_cluster_label","ASW_label","isolated_label_F1","isolated_label_silhouette","cLISI","HVG_overlap","cell_cycle","trajectory"]}],"defaultSortDesc":true,"defaultSorted":[{"id":"overall","desc":true}],"defaultPageSize":2,"paginationType":"numbers","showPageInfo":true,"minRows":1,"highlight":true,"borderless":true,"compact":true,"showSortIcon":false,"className":"metrics-table","dataKey":"745a1098a60fe2a5d649987b3c9f8d9d","key":"745a1098a60fe2a5d649987b3c9f8d9d"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a91cf051bf0911956d35" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a91cf051bf0911956d35">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"method":["pancreas","lung_atlas","immune_cell_hum","immune_cell_hum_mou","simulations_1_1","simulations_2","mouse_brain"],"output":["Features","Features","Features","Features","Features","Features","Features"],"features":["Full","Full","Full","Full","Full","Full","Full"],"scaling":["Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled","Unscaled"],"overall":[0.404590978155946,0.531047176759756,0.561635686953782,0.492282671192424,0.336246531009686,0.342326254838686,0.42488654421957],"batch_correction":[0.195609811448268,0.215084280722294,0.257450394356027,0.21526735428159,0.0535982594764044,0.000647058902470004,0.186391281940782],"PCR_batch":[0,0,0,0,0,0,0],"ASW_label_batch":[0.666277492233206,0.823353977180477,0.592337852210275,0.63011425967147,0,0,0.388248424925346],"iLISI":[3.15828586920077e-16,0.00581845392080057,0.0460164388954769,0.0481602068407187,0,0,0],"graph_connectivity":[0.311670609239193,0.244956281055463,0.616106360880011,0.363015924139717,0,0,0.357316702837783],"kBET":[0.00010095576893908,0.00129269145473225,0.0327913197943718,0.0350463807560454,0.267991297382022,0.00323529451235002,"NA"],"bio_conservation":[0.543911755961066,0.741689107451397,0.764425882018953,0.67695954913298,0.524678712031874,0.570112385462829,0.583883385738763],"NMI_cluster_label":[0.409139054540001,0.694960041562152,0.551341894679491,0.545703943435262,0.136697701607087,0.600897473627872,0.455627445852649],"ARI_cluster_label":[0.0116270346477125,0.359674473406918,0.252919734330722,0.176362420478697,0,0.245993135732599,0.188109643247541],"ASW_label":[0.219123208654877,0.600308544167947,0.515298543520325,0.214008519157431,0.201585167580898,0.368671828037711,0.481676031968721],"isolated_label_F1":[0.175077709704938,0.629132973644082,0.821055882761436,0.767156174811895,0.659548933495648,0.235173235542003,0.941175120273655],"isolated_label_silhouette":[0.538728748013969,0.654574502522216,0.753562047786643,0.710321321777484,0.674919181539483,0.540051025299621,0.833827520356311],"cLISI":[0.997598292127028,0.994862324307861,0.987894988046058,0.98004470208676,1,1,1],"HVG_overlap":[1,1,1,1,1,1,"NA"],"cell_cycle":[1,1,1,1,"NA","NA",0.186767938472461],"trajectory":["NA","NA",0.997759847045899,0.699038860449288,"NA","NA","NA"]},"columns":[{"accessor":"method","name":"Dataset","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"output","name":"Output","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"features","name":"Features","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"scaling","name":"Scaling","type":"factor","className":"cell","headerClassName":"header","filterable":true,"headerStyle":{"fontWeight":700}},{"accessor":"overall","name":"Overall score","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#A8DDB6"},"className":"score"},"children":["0.40"]},{"name":"div","attribs":{"style":{"background":"#73C8BC"},"className":"score"},"children":["0.53"]},{"name":"div","attribs":{"style":{"background":"#68C4BE"},"className":"score"},"children":["0.56"]},{"name":"div","attribs":{"style":{"background":"#82CEBA"},"className":"score"},"children":["0.49"]},{"name":"div","attribs":{"style":{"background":"#C5E8B4"},"className":"score"},"children":["0.34"]},{"name":"div","attribs":{"style":{"background":"#C3E7B4"},"className":"score"},"children":["0.34"]},{"name":"div","attribs":{"style":{"background":"#9FD9B7"},"className":"score"},"children":["0.42"]}],"maxWidth":80,"align":"center","headerStyle":{"fontWeight":700}},{"accessor":"batch_correction","name":"Overall","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FCDBD7"},"className":"score"},"children":["0.20"]},{"name":"div","attribs":{"style":{"background":"#FCD8D4"},"className":"score"},"children":["0.22"]},{"name":"div","attribs":{"style":{"background":"#FCD1CD"},"className":"score"},"children":["0.26"]},{"name":"div","attribs":{"style":{"background":"#FCD8D4"},"className":"score"},"children":["0.22"]},{"name":"div","attribs":{"style":{"background":"#FEEFEB"},"className":"score"},"children":["0.05"]},{"name":"div","attribs":{"style":{"background":"#FEF6F2"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FCDCD9"},"className":"score"},"children":["0.19"]}],"maxWidth":80,"align":"center"},{"accessor":"PCR_batch","name":"PCR batch","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"align":"center"},{"accessor":"ASW_label_batch","name":"Batch ASW","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#F768A1"},"className":"score"},"children":["0.67"]},{"name":"div","attribs":{"style":{"background":"#DE3797"},"className":"score"},"children":["0.82"]},{"name":"div","attribs":{"style":{"background":"#F880A9"},"className":"score"},"children":["0.59"]},{"name":"div","attribs":{"style":{"background":"#F774A5"},"className":"score"},"children":["0.63"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FBB8BC"},"className":"score"},"children":["0.39"]}],"maxWidth":80,"align":"center"},{"accessor":"iLISI","name":"Graph\niLISI","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FFF6F2"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF6F2"},"className":"score"},"children":["0.01"]},{"name":"div","attribs":{"style":{"background":"#FEF0EC"},"className":"score"},"children":["0.05"]},{"name":"div","attribs":{"style":{"background":"#FEF0EC"},"className":"score"},"children":["0.05"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]}],"maxWidth":80,"align":"center"},{"accessor":"graph_connectivity","name":"Graph connectivity","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FCC8C3"},"className":"score"},"children":["0.31"]},{"name":"div","attribs":{"style":{"background":"#FCD3CF"},"className":"score"},"children":["0.24"]},{"name":"div","attribs":{"style":{"background":"#F778A7"},"className":"score"},"children":["0.62"]},{"name":"div","attribs":{"style":{"background":"#FBBEBE"},"className":"score"},"children":["0.36"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FFF7F3"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FBBFBE"},"className":"score"},"children":["0.36"]}],"maxWidth":80,"align":"center"},{"accessor":"kBET","name":"kBET","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FEF6F2"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF6F2"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FEF2EE"},"className":"score"},"children":["0.03"]},{"name":"div","attribs":{"style":{"background":"#FEF2EE"},"className":"score"},"children":["0.04"]},{"name":"div","attribs":{"style":{"background":"#FCCFCB"},"className":"score"},"children":["0.27"]},{"name":"div","attribs":{"style":{"background":"#FEF6F2"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]}],"maxWidth":80,"align":"center"},{"accessor":"bio_conservation","name":"Overall","type":"numeric","className":"cell number border-left","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FCAE78"},"className":"score"},"children":["0.54"]},{"name":"div","attribs":{"style":{"background":"#F67A51"},"className":"score"},"children":["0.74"]},{"name":"div","attribs":{"style":{"background":"#F4754F"},"className":"score"},"children":["0.76"]},{"name":"div","attribs":{"style":{"background":"#FB8A57"},"className":"score"},"children":["0.68"]},{"name":"div","attribs":{"style":{"background":"#FCB47D"},"className":"score"},"children":["0.52"]},{"name":"div","attribs":{"style":{"background":"#FCA771"},"className":"score"},"children":["0.57"]},{"name":"div","attribs":{"style":{"background":"#FCA36E"},"className":"score"},"children":["0.58"]}],"maxWidth":80,"align":"center"},{"accessor":"NMI_cluster_label","name":"NMI cluster/label","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FDC892"},"className":"score"},"children":["0.41"]},{"name":"div","attribs":{"style":{"background":"#F98656"},"className":"score"},"children":["0.69"]},{"name":"div","attribs":{"style":{"background":"#FCAC76"},"className":"score"},"children":["0.55"]},{"name":"div","attribs":{"style":{"background":"#FCAE78"},"className":"score"},"children":["0.55"]},{"name":"div","attribs":{"style":{"background":"#FEEACE"},"className":"score"},"children":["0.14"]},{"name":"div","attribs":{"style":{"background":"#FC9F69"},"className":"score"},"children":["0.60"]},{"name":"div","attribs":{"style":{"background":"#FDC18A"},"className":"score"},"children":["0.46"]}],"maxWidth":80,"align":"center"},{"accessor":"ARI_cluster_label","name":"ARI cluster/label","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FEF5E9"},"className":"score"},"children":["0.01"]},{"name":"div","attribs":{"style":{"background":"#FDD099"},"className":"score"},"children":["0.36"]},{"name":"div","attribs":{"style":{"background":"#FDDDB2"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FDE6C5"},"className":"score"},"children":["0.18"]},{"name":"div","attribs":{"style":{"background":"#FFF7EC"},"className":"score"},"children":["0.00"]},{"name":"div","attribs":{"style":{"background":"#FDDEB4"},"className":"score"},"children":["0.25"]},{"name":"div","attribs":{"style":{"background":"#FDE5C2"},"className":"score"},"children":["0.19"]}],"maxWidth":80,"align":"center"},{"accessor":"ASW_label","name":"Label ASW","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FDE1BA"},"className":"score"},"children":["0.22"]},{"name":"div","attribs":{"style":{"background":"#FC9F6A"},"className":"score"},"children":["0.60"]},{"name":"div","attribs":{"style":{"background":"#FCB680"},"className":"score"},"children":["0.52"]},{"name":"div","attribs":{"style":{"background":"#FDE2BC"},"className":"score"},"children":["0.21"]},{"name":"div","attribs":{"style":{"background":"#FDE3BF"},"className":"score"},"children":["0.20"]},{"name":"div","attribs":{"style":{"background":"#FDCE98"},"className":"score"},"children":["0.37"]},{"name":"div","attribs":{"style":{"background":"#FDBD86"},"className":"score"},"children":["0.48"]}],"maxWidth":80,"align":"center"},{"accessor":"isolated_label_F1","name":"Isolated label F1","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FDE6C5"},"className":"score"},"children":["0.18"]},{"name":"div","attribs":{"style":{"background":"#FC9762"},"className":"score"},"children":["0.63"]},{"name":"div","attribs":{"style":{"background":"#EF6749"},"className":"score"},"children":["0.82"]},{"name":"div","attribs":{"style":{"background":"#F4744E"},"className":"score"},"children":["0.77"]},{"name":"div","attribs":{"style":{"background":"#FC8E5A"},"className":"score"},"children":["0.66"]},{"name":"div","attribs":{"style":{"background":"#FDDFB6"},"className":"score"},"children":["0.24"]},{"name":"div","attribs":{"style":{"background":"#DF422D"},"className":"score"},"children":["0.94"]}],"maxWidth":80,"align":"center"},{"accessor":"isolated_label_silhouette","name":"Isolated label silhouette","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#FCB07A"},"className":"score"},"children":["0.54"]},{"name":"div","attribs":{"style":{"background":"#FC905C"},"className":"score"},"children":["0.65"]},{"name":"div","attribs":{"style":{"background":"#F57850"},"className":"score"},"children":["0.75"]},{"name":"div","attribs":{"style":{"background":"#F88254"},"className":"score"},"children":["0.71"]},{"name":"div","attribs":{"style":{"background":"#FB8B58"},"className":"score"},"children":["0.67"]},{"name":"div","attribs":{"style":{"background":"#FCAF79"},"className":"score"},"children":["0.54"]},{"name":"div","attribs":{"style":{"background":"#EE6447"},"className":"score"},"children":["0.83"]}],"maxWidth":80,"align":"center"},{"accessor":"cLISI","name":"Graph cLISI","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D73120"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#D83321"},"className":"score"},"children":["0.99"]},{"name":"div","attribs":{"style":{"background":"#D93623"},"className":"score"},"children":["0.98"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]}],"maxWidth":80,"align":"center"},{"accessor":"HVG_overlap","name":"HVG conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]}],"maxWidth":80,"align":"center"},{"accessor":"cell_cycle","name":"Cell cycle conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#FDE5C2"},"className":"score"},"children":["0.19"]}],"maxWidth":80,"align":"center"},{"accessor":"trajectory","name":"Trajectory conservation","type":"numeric","className":"cell number","headerClassName":"header","cell":[{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"#D7301F"},"className":"score"},"children":["1.00"]},{"name":"div","attribs":{"style":{"background":"#F98555"},"className":"score"},"children":["0.70"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]},{"name":"div","attribs":{"style":{"background":"white"},"className":"score"},"children":["NA"]}],"maxWidth":80,"align":"center"}],"columnGroups":[{"headerClassName":"group-header","name":"Batch correction","columns":["batch_correction","PCR_batch","ASW_label_batch","iLISI","graph_connectivity","kBET"]},{"headerClassName":"group-header","name":"Bio conservation","columns":["bio_conservation","NMI_cluster_label","ARI_cluster_label","ASW_label","isolated_label_F1","isolated_label_silhouette","cLISI","HVG_overlap","cell_cycle","trajectory"]}],"defaultSortDesc":true,"defaultSorted":[{"id":"overall","desc":true}],"defaultPageSize":7,"paginationType":"numbers","showPageInfo":true,"minRows":1,"highlight":true,"borderless":true,"compact":true,"showSortIcon":false,"className":"metrics-table","dataKey":"7b5dcdd67b63a0b0625c2d145fe980de","key":"7b5dcdd67b63a0b0625c2d145fe980de"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -457,105 +757,136 @@ div.tocify {
 <h1 number="2"><span class="header-section-number">2</span> Individual metrics</h1>
 <div id="overall-1" class="section level2" number="2.1">
 <h2 number="2.1"><span class="header-section-number">2.1</span> Overall</h2>
-<p><img src="figures/method_Unintegrated/metrics-overall-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-overall-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="batch-correction" class="section level2 tabset" number="2.2">
 <h2 class="tabset" number="2.2"><span class="header-section-number">2.2</span> Batch correction</h2>
 <div id="batch-correction-1" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">Batch correction</h3>
-<p><img src="figures/method_Unintegrated/metrics-batch-batch_correction-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-batch-batch_correction-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="pcr-batch" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">PCR batch</h3>
-<p><img src="figures/method_Unintegrated/metrics-batch-PCR_batch-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-batch-PCR_batch-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="batch-asw" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">Batch ASW</h3>
-<p><img src="figures/method_Unintegrated/metrics-batch-ASW_label_batch-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-batch-ASW_label_batch-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="graph-ilisi" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">Graph iLISI</h3>
-<p><img src="figures/method_Unintegrated/metrics-batch-iLISI-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-batch-iLISI-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="graph-connectivity" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">Graph connectivity</h3>
-<p><img src="figures/method_Unintegrated/metrics-batch-graph_connectivity-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-batch-graph_connectivity-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="kbet" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">kBET</h3>
-<p><img src="figures/method_Unintegrated/metrics-batch-kBET-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-batch-kBET-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="bio-conservation" class="section level2 tabset" number="2.3">
 <h2 class="tabset" number="2.3"><span class="header-section-number">2.3</span> Bio conservation</h2>
 <div id="bio-conservation-1" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">Bio conservation</h3>
-<p><img src="figures/method_Unintegrated/metrics-bio-bio_conservation-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-bio-bio_conservation-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="nmi-clusterlabel" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">NMI cluster/label</h3>
-<p><img src="figures/method_Unintegrated/metrics-bio-NMI_cluster_label-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-bio-NMI_cluster_label-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="ari-clusterlabel" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">ARI cluster/label</h3>
-<p><img src="figures/method_Unintegrated/metrics-bio-ARI_cluster_label-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-bio-ARI_cluster_label-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="label-asw" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">Label ASW</h3>
-<p><img src="figures/method_Unintegrated/metrics-bio-ASW_label-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-bio-ASW_label-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="isolated-label-f1" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">Isolated label F1</h3>
-<p><img src="figures/method_Unintegrated/metrics-bio-isolated_label_F1-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-bio-isolated_label_F1-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="isolated-label-silhouette" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">Isolated label silhouette</h3>
-<p><img src="figures/method_Unintegrated/metrics-bio-isolated_label_silhouette-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-bio-isolated_label_silhouette-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="graph-clisi" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">Graph cLISI</h3>
-<p><img src="figures/method_Unintegrated/metrics-bio-cLISI-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-bio-cLISI-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="hvg-conservation" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">HVG conservation</h3>
-<p><img src="figures/method_Unintegrated/metrics-bio-HVG_overlap-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-bio-HVG_overlap-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="cell-cycle-conservation" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">Cell cycle conservation</h3>
-<p><img src="figures/method_Unintegrated/metrics-bio-cell_cycle-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-bio-cell_cycle-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="trajectory-conservation" class="section level3 unnumbered" number="">
 <h3 class="unnumbered" number="">Trajectory conservation</h3>
-<p><img src="figures/method_Unintegrated/metrics-bio-trajectory-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figures/method_Unintegrated/metrics-bio-trajectory-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
-<div id="embeddings" class="section level1 tabset tabset-pills tabset-fade" number="3">
-<h1 class="tabset tabset-pills tabset-fade" number="3"><span class="header-section-number">3</span> Embeddings</h1>
-<div id="full" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
-<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">Full</h2>
-<div id="scaled" class="section level3 unnumbered tabset" number="">
-<h3 class="unnumbered tabset" number="">Scaled</h3>
-</div>
-<div id="unscaled" class="section level3 unnumbered tabset" number="">
-<h3 class="unnumbered tabset" number="">Unscaled</h3>
-<div id="mini_pancreas-features" class="section level4 unnumbered" number="">
-<h4 class="unnumbered" number="">mini_pancreas (Features)</h4>
-<p><img src="figures/method_Unintegrated/embedding-Full-Unscaled-mini_pancreas-Features-1.png" width="960" style="display: block; margin: auto;" /></p>
-</div>
-<div id="mini_sim-features" class="section level4 unnumbered" number="">
-<h4 class="unnumbered" number="">mini_sim (Features)</h4>
-<p><img src="figures/method_Unintegrated/embedding-Full-Unscaled-mini_sim-Features-1.png" width="960" style="display: block; margin: auto;" /></p>
+<div id="embeddings" class="section level1 tabset tabset-dropdown tabset-fade" number="3">
+<h1 class="tabset tabset-dropdown tabset-fade" number="3"><span class="header-section-number">3</span> Embeddings</h1>
+<p><strong>Dataset (Output)</strong></p>
+<div id="immune_cell_hum-features" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">immune_cell_hum (Features)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_Unintegrated/embedding-immune_cell_hum-Features-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 </div>
+<div id="lung_atlas-features" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">lung_atlas (Features)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-1" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_Unintegrated/embedding-lung_atlas-Features-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
-<div id="hvg" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
-<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">HVG</h2>
-<div id="scaled-1" class="section level3 unnumbered tabset" number="">
-<h3 class="unnumbered tabset" number="">Scaled</h3>
 </div>
-<div id="unscaled-1" class="section level3 unnumbered tabset" number="">
-<h3 class="unnumbered tabset" number="">Unscaled</h3>
+<div id="immune_cell_hum_mou-features" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">immune_cell_hum_mou (Features)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-2" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_Unintegrated/embedding-immune_cell_hum_mou-Features-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="mouse_brain-features" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">mouse_brain (Features)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-3" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_Unintegrated/embedding-mouse_brain-Features-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="pancreas-features" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">pancreas (Features)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-4" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_Unintegrated/embedding-pancreas-Features-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="simulations_2-features" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">simulations_2 (Features)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-5" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_Unintegrated/embedding-simulations_2-Features-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="simulations_1_1-features" class="section level2 unnumbered tabset tabset-pills tabset-fade" number="">
+<h2 class="unnumbered tabset tabset-pills tabset-fade" number="">simulations_1_1 (Features)</h2>
+<p><strong>Input features (Scaling)</strong></p>
+<div id="full-unscaled-6" class="section level3 unnumbered" number="">
+<h3 class="unnumbered" number="">Full (Unscaled)</h3>
+<p><img src="figures/method_Unintegrated/embedding-simulations_1_1-Features-Full-Unscaled-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>

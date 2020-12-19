@@ -1,0 +1,124 @@
+---
+title: "Overview"
+---
+
+```{r setup, include=FALSE}
+source(here::here("R", "document_setup.R"))
+
+figure_dir <- fs::dir_create(here("..", "docs", "figures", "overview"))
+```
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+This page includes an overview of the key results from the paper.
+Although we provide them here we highly encourage you to read the paper for more in-depth discussion.
+
+# Best methods
+
+These tables show the overall scores for the best performing methods on each task as well as an overall summary score.
+Methods that failed to run for a particular task were assigned the unintegrated ranking for that task.
+An asterisk after a method name (scANVI and scGen) indicates that cell identity information was passed to this method.
+
+For more details on how methods were scored and ranked please refer to the methods section of the paper.
+
+## RNA
+
+For each method we selected the best performing combination of input features and scaling and then ranked those combinations.
+Methods were only ranked using scores from real RNA datasets, not simulations.
+We also show the summarised usability and scalability scores here.
+For ComBat and MNN these scores correspond to the Python implementation of the methods (Scanpy and mnnpy).
+
+<br/>
+
+```{r best-rna, fig.align = "center", out.width = "90%"}
+fs::file_copy(here("..", "data", "img", "best-RNA.png"), figure_dir,
+              overwrite = TRUE)
+```
+
+<a data-fancybox href="figures/overview/best-RNA.png">
+  <img src="figures/overview/best-RNA.png">
+</a>
+
+<br/>
+
+## ATAC
+
+For ATAC task considered different input features (windows, peaks, genes) as different tasks rather than pre-processing steps.
+Because these features are so different we don't provide an overall summary score.
+
+<br/>
+
+```{r best-atac, fig.align = "center", out.width = "90%"}
+fs::file_copy(here("..", "data", "img", "best-ATAC.png"), figure_dir,
+              overwrite = TRUE)
+```
+
+<a data-fancybox href="figures/overview/best-ATAC.png">
+  <img src="figures/overview/best-ATAC.png">
+</a>
+
+<br/>
+
+# Batch removal vs bio-conservation
+
+Batch removal and conservation of biological variance (bio-conservation) are often in competition with each each.
+These plots show the trade-off between these for each of the top method versions.
+Each point shows the mean across tasks and the error bars represent one standard deviation.
+
+## RNA
+
+<br/>
+
+```{r scatter-rna, fig.align = "center", out.width = "90%"}
+fs::file_copy(here("..", "data", "img", "scatter-RNA.png"), figure_dir,
+              overwrite = TRUE)
+```
+
+<a data-fancybox href="figures/overview/scatter-RNA.png">
+  <img src="figures/overview/scatter-RNA.png">
+</a>
+
+<br/>
+
+## ATAC
+
+<br/>
+
+```{r scatter-atac, fig.align = "center", out.width = "90%"}
+fs::file_copy(here("..", "data", "img", "scatter-ATAC.png"), figure_dir,
+              overwrite = TRUE)
+```
+
+<a data-fancybox href="figures/overview/scatter-ATAC.png">
+  <img src="figures/overview/scatter-ATAC.png">
+</a>
+
+<br/>
+
+# Summary
+
+This table presents some of our main observations from the results of the study (click to enlarge).
+We hope this will be useful for deciding which methods to use for your analysis.
+
+Ticks show which methods fulfil each criterion, grey dashes indicate partial fulfilment, and crosses are used to highlight methods that do not fulfil a criterion when more than half of the methods do.
+Python and R symbols indicate the primary language in which the method is programmed and used.
+
+Considerations are divided into the five broad categories (input, scIB results, task details, speed, and output), which cover usability (input, output), scalability (speed), and expected performance (scIB results, task details).
+We also suggest using the scIB pipeline to test all methods on your own integration task.
+
+Part (b) shows the relative strength of batch effect contributors in our study.
+
+<br/>
+
+```{r summary, fig.align = "center"}
+fs::file_copy(here("..", "data", "img", "summary.png"), figure_dir,
+              overwrite = TRUE)
+```
+
+<a data-fancybox href="figures/overview/summary.png">
+  <img src="figures/overview/summary.png">
+</a>
+
+<br/>

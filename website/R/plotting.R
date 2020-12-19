@@ -1,8 +1,66 @@
+#' Method palette
+#'
+#' Colour palette for methods
+#'
+#' @return Name vector of method colours
+method_pal <- function() {
+    c(
+        "BBKNN"          = "#5A5156",
+        "Conos"          = "#E4E1E3",
+        "trVAE"          = "#F6222E",
+        "scVI"           = "#FE00FA",
+        "ComBat"         = "#16FF32",
+        "Harmony"        = "#3283FE",
+        "LIGER"          = "#FEAF16",
+        "Scanorama"      = "#B00068",
+        "Seurat v3 CCA"  = "#1CFFCE",
+        "Seurat v3 RPCA" = "#90AD1C",
+        "MNN"            = "#2ED9FF",
+        "FastMNN"        = "#DEA0FD",
+        "scGen*"         = "#AA0DFE",
+        "scANVI*"        = "#F8A19F",
+        "DESC"           = "#325A9B",
+        "SAUCIE"         = "#C4451C",
+        "Unintegrated"   = "#66B0FF"
+    )
+}
+
+#' Dataset palette
+#'
+#' Colour palette for datasets
+#'
+#' @return Named vector of dataset colours
+dataset_pal <- function() {
+    c(
+        "immune_cell_hum"                = "#e41a1c",
+        "immune_cell_hum_mou"            = "#377eb8",
+        "lung_atlas"                     = "#4daf4a",
+        "mouse_brain"                    = "#984ea3",
+        "pancreas"                       = "#ff7f00",
+        "simulations_1_1"                = "#f781bf",
+        "simulations_2"                  = "#a65628",
+        "mini_sim"                       = "#f781bf",
+        "mini_pancreas"                  = "#999999",
+        "mouse_brain_atac_genes_large"   = "#1f78b4",
+        "mouse_brain_atac_genes_small"   = "#a6cee3",
+        "mouse_brain_atac_peaks_large"   = "#33a02c",
+        "mouse_brain_atac_peaks_small"   = "#b2df8a",
+        'mouse_brain_atac_windows_large' = "#ff7f00",
+        "mouse_brain_atac_windows_small" = "#fdbf6f"
+    )
+}
+
+#' Plot dataset overall
+#'
+#' Plot an overall summary scatter plot for a dataset
+#'
+#' @param metrics tibble containing metrics for a single dataset
+#'
+#' @return ggplot object
 plot_dataset_overall <- function(metrics) {
 
     plot_data <- metrics %>%
-        dplyr::filter(method != "Unintegrated") %>%
-        dplyr::mutate(output_features = paste(output, features, sep = "-"))
+        dplyr::filter(method != "Unintegrated")
 
     medians <- metrics %>%
         dplyr::summarise(
@@ -17,13 +75,17 @@ plot_dataset_overall <- function(metrics) {
         dplyr::select(type, batch_correction, bio_conservation) %>%
         dplyr::bind_rows(medians)
 
-    plot_overall(plot_data, ref_lines, method)
+    plot_overall(plot_data, ref_lines, method, method_pal())
 }
 
+#' Plot method overall
+#'
+#' Plot an overall summary scatter plot for a method
+#'
+#' @param metrics tibble containing metrics for a single metrics
+#'
+#' @return ggplot object
 plot_method_overall <- function(metrics) {
-
-    plot_data <- metrics %>%
-        dplyr::mutate(output_features = paste(output, features, sep = "-"))
 
     ref_lines <- metrics %>%
         dplyr::summarise(
@@ -32,13 +94,27 @@ plot_method_overall <- function(metrics) {
         ) %>%
         dplyr::mutate(type = "Median")
 
-    plot_overall(plot_data, ref_lines, dataset)
+    plot_overall(metrics, ref_lines, dataset, dataset_pal())
 }
 
-plot_overall <- function(metrics, ref_lines, colour_by) {
+#' Plot overall
+#'
+#' Plot an overall scatter plot
+#'
+#' @param metrics tibble containing metrics for scenarios to be plotted
+#' @param ref_lines tibble containing reference lines add
+#' @param colour_by Name of the metrics column to colour points by
+#' @param palette Named vector containing colours for the items in the colour
+#' column
+#'
+#' @return ggplot object
+plot_overall <- function(metrics, ref_lines, colour_by, palette) {
+
+    plot_data <- metrics %>%
+        dplyr::mutate(output_features = paste(output, features, sep = "-"))
 
     plot <- ggplot2::ggplot(
-        metrics,
+        plot_data,
         ggplot2::aes(
             x      = batch_correction,
             y      = bio_conservation,
@@ -63,12 +139,13 @@ plot_overall <- function(metrics, ref_lines, colour_by) {
 
             hline <- ggplot2::geom_hline(
                     data = current,
-                    aes(yintercept = bio_conservation, linetype = type),
+                    ggplot2::aes(yintercept = bio_conservation,
+                                 linetype = type),
                     colour = current$colour
             )
             vline <- ggplot2::geom_vline(
                 data = current,
-                aes(xintercept = batch_correction, linetype = type),
+                ggplot2::aes(xintercept = batch_correction, linetype = type),
                 colour = current$colour
             )
 
@@ -83,25 +160,28 @@ plot_overall <- function(metrics, ref_lines, colour_by) {
         ggplot2::geom_point(stroke = 1, fill = "white") +
         ggplot2::geom_point(
             data = dplyr::filter(metrics, features == "Full"),
-            aes(alpha = scaling),
+            ggplot2::aes(alpha = scaling),
             shape = 4, size = 1.5, colour = "white"
         ) +
         ggplot2::geom_point(
             data = dplyr::filter(metrics, features == "HVG"),
-            aes(alpha = scaling),
+            ggplot2::aes(alpha = scaling),
             shape = 4, size = 1.5
         ) +
         ggplot2::scale_x_continuous(limits = c(0, 1)) +
         ggplot2::scale_y_continuous(limits = c(0, 1)) +
-        ggplot2::scale_colour_brewer(palette = "Paired") +
+        ggplot2::scale_colour_manual(values = palette) +
         ggplot2::scale_size_continuous(range = c(0.5, 5), limits = c(0, 1),
                                        breaks = seq(0, 1, 0.2)) +
         ggplot2::scale_shape_manual(
             values = c(16, 21, 15, 22, 17, 24),
             labels = c("Embedding (Full)", "Embedding (HVG)", "Features (Full)",
-                       "Features (HVG)", "Graph (Full)", "Graph (HVG)")
+                       "Features (HVG)", "Graph (Full)", "Graph (HVG)"),
+            breaks = c("Embedding-Full", "Embedding-HVG", "Features-Full",
+                       "Features-HVG", "Graph-Full", "Graph-HVG"),
+            drop = FALSE
         ) +
-        ggplot2::scale_alpha_manual(values = c(1, 0)) +
+        ggplot2::scale_alpha_manual(values = c(1, 0), drop = FALSE) +
         ggplot2::scale_linetype_manual(values = c(1, 5)) +
         ggplot2::coord_fixed() +
         ggplot2::labs(
@@ -155,6 +235,15 @@ plot_overall <- function(metrics, ref_lines, colour_by) {
     return(plot)
 }
 
+#' Metric dataset barplot
+#'
+#' Plot a metrics barplot for a dataset
+#'
+#' @param metrics tibble of metrics for a single dataset
+#' @param metric Name of the metric column to plot
+#' @param label Label for the metric to plot
+#'
+#' @return ggplot object
 metric_dataset_barplot <- function(metrics, metric, label) {
 
     ref_lines <- tibble::tribble(
@@ -164,9 +253,19 @@ metric_dataset_barplot <- function(metrics, metric, label) {
             dplyr::pull({{ metric }}),                            "Unintegrated"
     )
 
-    metric_barplot(metrics, {{ metric }}, full_method, method, ref_lines, label)
+    metric_barplot(metrics, {{ metric }}, full_method, method, ref_lines, label,
+                   method_pal())
 }
 
+#' Metric method barplot
+#'
+#' Plot a metrics barplot for a method
+#'
+#' @param metrics tibble of metrics for a single method
+#' @param metric Name of the metric column to plot
+#' @param label Label for the metric to plot
+#'
+#' @return ggplot object
 metric_method_barplot <- function(metrics, metric, label) {
 
     ref_lines <- tibble::tribble(
@@ -174,12 +273,33 @@ metric_method_barplot <- function(metrics, metric, label) {
         median(dplyr::pull(metrics, {{ metric }}), na.rm = TRUE), "Median",
     )
 
-    metric_barplot(metrics, {{ metric }}, dataset, dataset, ref_lines, label)
+    metrics <- dplyr::mutate(
+        metrics,
+        dataset_output = paste0(dataset, " (", output, ")")
+    )
+
+    metric_barplot(metrics, {{ metric }}, dataset_output, dataset, ref_lines,
+                   label, dataset_pal())
 }
 
-metric_barplot <- function(metrics, metric, group, colour, ref_lines, label) {
+#' Metric barplot
+#'
+#' Plot a barplot showing performance on a single metric
+#'
+#' @param metrics tibble containing metrics to plot
+#' @param metric Name of the metric column to plot
+#' @param group Name of the column containing groups for each bar
+#' @param colour Name of the column to colour bars by
+#' @param ref_lines tibble containing reference lines to plot
+#' @param label Label for the metric column
+#' @param palette Named vector of colours matching the items in `colour`
+#'
+#' @return ggplot object
+metric_barplot <- function(metrics, metric, group, colour, ref_lines, label,
+                           palette) {
 
     metric_str <- rlang::as_label(rlang::enquo(metric))
+    colour_str <- rlang::as_label(rlang::enquo(colour))
 
     ref_lines <- ref_lines %>%
         dplyr::arrange(Type) %>%
@@ -206,7 +326,7 @@ metric_barplot <- function(metrics, metric, group, colour, ref_lines, label) {
         ggplot2::geom_col() +
         ggplot2::geom_point(
             ggplot2::aes(shape = output),
-            size = 4, colour = "white",
+            size = 3.5, colour = "white",
             show.legend = c(fill = FALSE, shape = TRUE)
         ) +
         ggplot2::geom_text(
@@ -214,14 +334,14 @@ metric_barplot <- function(metrics, metric, group, colour, ref_lines, label) {
             y = 0.5, label = "Not computed"
         ) +
         ggplot2::coord_flip() +
-        ggplot2::scale_fill_brewer(palette = "Paired") +
+        ggplot2::scale_fill_manual(values = palette, drop = FALSE) +
         ggplot2::scale_linetype_manual(values = c(1, 5)) +
         ggplot2::scale_colour_manual(values = c("blue", "red"), guide = FALSE) +
-        ggplot2::scale_shape_manual(values = c(21, 22, 23)) +
+        ggplot2::scale_shape_manual(values = c(21, 22, 23), drop = FALSE) +
         ggplot2::labs(y = label) +
         ggplot2::guides(
             fill = ggplot2::guide_legend(
-                title          = "Method",
+                title          = stringr::str_to_title(colour_str),
                 title.position = "top",
                 ncol           = 2,
                 order          = 10
@@ -263,6 +383,25 @@ metric_barplot <- function(metrics, metric, group, colour, ref_lines, label) {
     plot
 }
 
+#' Plot embedding coordinates
+#'
+#' Plot an embedding scatter plot for a specific combination of dataset, input,
+#' method and output.
+#'
+#' @param dataset String giving the name of the dataset to plot
+#' @param scaling String giving the scaling to plot, either "Scaled" or
+#' "Unscaled"
+#' @param features String giving the features to plot, either "Full" or "HVG"
+#' @param method String giving the method to plot
+#' @param output String giving the output to plot, either "Features",
+#' "Embedding" or "Graph"
+#' @param labels List containing standard labels
+#'
+#' @details
+#' Note that paths to CSV files containing embedding coordinates are hardcoded
+#' through `get_coords_path()`
+#'
+#' @return List of ggplot objects, including "Group", "Batch" and any additional annotations
 plot_embedding_coords <- function(dataset, scaling, features, method, output,
                                   labels) {
 
@@ -272,8 +411,30 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
                                    labels)
 
     coords <- suppressMessages(suppressWarnings(
-        readr::read_csv(coords_path
-    )))
+        readr::read_csv(coords_path)
+    ))
+
+    annot_path <- here::here(
+        "..",
+        "data",
+        "annotations",
+        paste0(dataset, ".csv")
+    )
+
+    if (fs::file_exists(annot_path)) {
+        annot <- suppressMessages(suppressWarnings(
+            readr::read_csv(annot_path)
+        ))
+        coords <- dplyr::left_join(coords, annot, by = "CellID")
+        annot_cols <- colnames(annot)[-1]
+    } else {
+        annot_cols <- NULL
+    }
+
+    # Shuffle cells so the plot order is random
+    withr::with_seed(1, {
+        coords <- coords[sample(nrow(coords)), ]
+    })
 
     group_name <- colnames(coords)[2]
     batch_name <- colnames(coords)[3]
@@ -284,25 +445,81 @@ plot_embedding_coords <- function(dataset, scaling, features, method, output,
         coords,
         ggplot2::aes(x = .data[[dim1_name]], y = .data[[dim2_name]])
     ) +
+        ggplot2::guides(
+            colour = ggplot2::guide_legend(
+                title        = NULL,
+                ncol         = 3,
+                override.aes = list(size = 2, alpha = 1)
+            )
+        ) +
         ggplot2::theme(
             plot.title      = ggplot2::element_text(hjust = 0.5, size = 20),
             legend.position = "bottom",
+            legend.text     = ggplot2::element_text(lineheight = 0.75),
             panel.border    = ggplot2::element_rect(fill = NA)
         )
 
+    wrap20 <- function(x) {
+        stringr::str_wrap(x, width = 20)
+    }
+
     group_plot <- base_plot +
-        ggplot2::geom_point(ggplot2::aes(colour = .data[[group_name]])) +
+        scattermore::geom_scattermore(
+            ggplot2::aes(colour = factor(.data[[group_name]])),
+            pointsize = 3,
+            alpha     = 0.5,
+            pixels    = c(1200, 1200)
+        ) +
         ggplot2::labs(title = group_name)  +
-        ggplot2::scale_colour_hue(h = c(10, 170))
+        ggsci::scale_colour_d3("category20", labels = wrap20)
+
+    batch_colours <- withr::with_seed(
+        7,
+        sample(ggsci::pal_ucscgb()(26))
+    )
+    batch_colours <- batch_colours[seq_along(unique(coords[[batch_name]]))]
 
     batch_plot <- base_plot +
-        ggplot2::geom_point(ggplot2::aes(colour = .data[[batch_name]])) +
+        scattermore::geom_scattermore(
+            ggplot2::aes(colour = factor(.data[[batch_name]])),
+            pointsize = 3,
+            alpha     = 0.5,
+            pixels    = c(1200, 1200)
+        ) +
         ggplot2::labs(title = batch_name) +
-        ggplot2::scale_colour_hue(h = c(190, 350))
+        # ggsci::scale_colour_ucscgb(labels = wrap20)
+        ggplot2::scale_colour_manual(values = batch_colours, labels = wrap20)
 
-    group_plot + batch_plot
+    annot_plots <- purrr::map(annot_cols, function(.annot) {
+        base_plot +
+            scattermore::geom_scattermore(
+                ggplot2::aes(colour = factor(.data[[.annot]])),
+                pointsize = 3,
+                alpha     = 0.5,
+                pixels    = c(1200, 1200)
+            ) +
+            ggplot2::labs(title = .annot) +
+            ggsci::scale_colour_igv(labels = wrap20)
+    })
+    names(annot_plots) <- annot_cols
+
+    c(list(Group = group_plot, Batch = batch_plot), annot_plots)
 }
 
+#' Get coords path
+#'
+#' Get the path to a specific embedding coordinated CSV file
+#'
+#' @param dataset String giving the name of the dataset to plot
+#' @param scaling String giving the scaling to plot, either "Scaled" or
+#' "Unscaled"
+#' @param features String giving the features to plot, either "Full" or "HVG"
+#' @param method String giving the method to plot
+#' @param output String giving the output to plot, either "Features",
+#' "Embedding" or "Graph"
+#' @param labels List containing standard labels
+#'
+#' @return Path to embedding CSV file
 get_coords_path <- function(dataset, scaling, features, method, output,
                             labels) {
     scaling <- stringr::str_to_lower(scaling)
@@ -325,9 +542,22 @@ get_coords_path <- function(dataset, scaling, features, method, output,
     )
 }
 
-benchmark_barplot <- function(benchmarks, metric, group, label) {
+#' Benchmark barplot
+#'
+#' Plot a barplot for a scalability benchmark
+#'
+#' @param benchmarks tibble containing scalability benchmarks to plot
+#' @param metric Name of the scalability metric to plot
+#' @param group Name of the column containing groups for each bar
+#' @param label Label for the plotted metric column
+#' @param palette Named vector of colours matching the items in `group`
+#'
+#' @return ggplot object
+benchmark_barplot <- function(benchmarks, metric, group, label, palette) {
 
     `%>%` <- magrittr::`%>%`
+
+    group_str <- rlang::as_label(rlang::enquo(group))
 
     medians <- benchmarks %>%
         dplyr::group_by(features, scaling) %>%
@@ -348,11 +578,11 @@ benchmark_barplot <- function(benchmarks, metric, group, label) {
         ) +
         ggplot2::geom_col() +
         ggplot2::coord_flip() +
-        ggplot2::scale_fill_brewer(palette = "Paired") +
+        ggplot2::scale_fill_manual(values = palette, drop = FALSE) +
         ggplot2::labs(y = label) +
         ggplot2::guides(
             fill = ggplot2::guide_legend(
-                title          = "Method",
+                title          = stringr::str_to_title(group_str),
                 title.position = "top",
                 ncol           = 2,
                 order          = 10

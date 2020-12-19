@@ -1,0 +1,156 @@
+---
+params:
+  dataset: "mouse_brain_atac_genes_small"
+  fig_dir: false
+title: "`r paste('ATAC dataset:', params$dataset)`"
+---
+
+```{r setup, include=FALSE}
+source(here::here("R", "document_setup.R"))
+knitr::opts_chunk$set(fig.path = paste0(params$fig_dir, "/"))
+```
+
+```{r libraries}
+library("reactable")
+library("htmltools")
+```
+
+```{r functions}
+source(here("R", "plotting.R"))
+source(here("R", "tables.R"))
+source(here("R", "render.R"))
+```
+
+```{r load}
+labels <- drake::readd("labels")
+
+dataset_meta <- drake::readd("datasets_meta_atac") %>%
+    filter(Name == params$dataset)
+
+metrics <- drake::readd("metrics_atac") %>%
+    filter(dataset == params$dataset)
+
+benchmarks <- drake::readd("benchmarks_atac") %>%
+    filter(
+        dataset  == params$dataset,
+        method %in% as.character(metrics$method)
+    )
+```
+
+This page displays information for the following dataset:
+
+```{r metadata}
+data.frame(
+    Category = glue("**{colnames(dataset_meta)}:**"),
+    Value    = unlist(dataset_meta[1, ])
+) %>%
+    gt() %>%
+    cols_label(Category = "", Value = "") %>%
+    fmt_markdown("Category") %>%
+    cols_align("left")
+```
+
+Overall
+=======
+
+Plot
+----
+
+```{r overall-plot}
+plot_dataset_overall(metrics)
+```
+
+Table
+-----
+
+```{r overall-table}
+make_overall_table(metrics, labels, type = "dataset")
+```
+
+Individual metrics
+==================
+
+Overall
+-------
+
+```{r metrics-overall}
+metric_dataset_barplot(metrics, overall, "Overall score")
+```
+
+Batch correction {.tabset}
+----------------
+
+```{r metrics-batch, results = "hide"}
+src_list <- lapply(names(labels$metrics$batch), function(label) {
+    metric <- labels$metrics$batch[label]
+    src <- c(
+        "### <<label>> {.unnumbered}",
+        "```{r metrics-batch-<<metric>>}",
+        "metric_dataset_barplot(metrics, <<metric>>, '<<label>>')",
+        "```",
+        ""
+    )
+    knitr::knit_expand(text = src, delim = c("<<", ">>"))
+})
+out <- knitr::knit_child(text = unlist(src_list), options = list(cache = FALSE))
+```
+
+`r out`
+
+Bio conservation {.tabset}
+----------------
+
+```{r metrics-bio, results = "hide"}
+src_list <- lapply(names(labels$metrics$bio), function(label) {
+    metric <- labels$metrics$bio[label]
+    src <- c(
+        "### <<label>> {.unnumbered}",
+        "```{r metrics-bio-<<metric>>}",
+        "metric_dataset_barplot(metrics, <<metric>>, '<<label>>')",
+        "```",
+        ""
+    )
+    knitr::knit_expand(text = src, delim = c("<<", ">>"))
+})
+out <- knitr::knit_child(text = unlist(src_list), options = list(cache = FALSE))
+```
+
+`r out`
+
+Embeddings {.tabset .tabset-dropdown .tabset-fade}
+==========
+
+```{r embeddings, results = "hide"}
+full_src <- make_dataset_embeddings_md(metrics, params$dataset, labels)
+out <- knitr::knit_child(text = unlist(full_src), options = list(cache = FALSE))
+```
+
+**Method (Output)**
+
+`r out`
+
+Scalability
+===========
+
+Time
+----
+
+```{r scalability-time}
+benchmark_barplot(benchmarks, s, method, "Time", method_pal()) +
+    scale_y_log10(
+        breaks = c(      1,      60,  60 * 60, 60 * 60 * 24),
+        labels = c("1 sec", "1 min", "1 hour",      "1 day")
+    )
+```
+
+Memory
+------
+
+```{r scalability-memory}
+benchmark_barplot(benchmarks, max_rss, method, "Maximum memory", method_pal()) +
+    scale_y_log10(
+        breaks = c(    1,     10,     100,   1024, 1024 * 10, 1024 * 100),
+        labels = c("1 MB","10 MB","100 MB", "1 GB",  "10 GB",   "100 GB")
+    )
+```
+

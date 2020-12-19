@@ -1,0 +1,169 @@
+---
+params:
+  method: "Scanorama"
+  fig_dir: false
+title: "`r paste('ATAC method:', params$method)`"
+---
+
+```{r setup, include=FALSE}
+source(here::here("R", "document_setup.R"))
+knitr::opts_chunk$set(fig.path = paste0(params$fig_dir, "/"))
+```
+
+```{r libraries}
+library("reactable")
+library("htmltools")
+```
+
+```{r functions}
+source(here("R", "plotting.R"))
+source(here("R", "tables.R"))
+source(here("R", "render.R"))
+```
+
+```{r load}
+is_method <- params$method != "Unintegrated"
+
+labels <- drake::readd("labels")
+
+method_meta <- drake::readd("methods_meta") %>%
+    filter(Name == params$method)
+
+metrics <- drake::readd("metrics_atac") %>%
+    filter(method == params$method)
+
+benchmarks <- drake::readd("benchmarks_atac") %>%
+    filter(
+        method    == params$method,
+        dataset %in% as.character(metrics$dataset)
+    )
+```
+
+This page displays information for the following method:
+
+```{r metadata}
+link_github <- function(github) {
+    githubs <- str_split(github, ",")[[1]]
+    glue("[{githubs}](https://github.com/{githubs})") %>%
+        glue_collapse(sep = ", ")
+}
+
+tribble(
+            ~ Category, ~ Value,
+                "Name", method_meta$Name,
+         "Description", method_meta$Description,
+              "GitHub", link_github(method_meta$GitHub),
+                 "DOI", glue("[{method_meta$DOI}](https://doi.org/{method_meta$DOI})"),
+    "Labels required?", method_meta$Labels
+) %>%
+    mutate(Category = glue("**{Category}**:")) %>%
+    gt() %>%
+    cols_label(Category = "", Value = "") %>%
+    fmt_markdown(c("Category", "Value")) %>%
+    cols_align("left")
+```
+
+Overall
+=======
+
+Plot
+----
+
+```{r overall-plot}
+plot_method_overall(metrics)
+```
+
+Table
+-----
+
+```{r overall-table}
+make_overall_table(metrics, labels, type = "method")
+```
+
+Individual metrics
+==================
+
+Overall
+-------
+
+```{r metrics-overall}
+metric_method_barplot(metrics, overall, "Overall score")
+```
+
+Batch correction {.tabset}
+----------------
+
+```{r metrics-batch, results = "hide"}
+src_list <- lapply(names(labels$metrics$batch), function(label) {
+    metric <- labels$metrics$batch[label]
+    src <- c(
+        "### <<label>> {.unnumbered}",
+        "```{r metrics-batch-<<metric>>}",
+        "metric_method_barplot(metrics, <<metric>>, '<<label>>')",
+        "```",
+        ""
+    )
+    knitr::knit_expand(text = src, delim = c("<<", ">>"))
+})
+out <- knitr::knit_child(text = unlist(src_list), options = list(cache = FALSE))
+```
+
+`r out`
+
+Bio conservation {.tabset}
+----------------
+
+```{r metrics-bio, results = "hide"}
+src_list <- lapply(names(labels$metrics$bio), function(label) {
+    metric <- labels$metrics$bio[label]
+    src <- c(
+        "### <<label>> {.unnumbered}",
+        "```{r metrics-bio-<<metric>>}",
+        "metric_method_barplot(metrics, <<metric>>, '<<label>>')",
+        "```",
+        ""
+    )
+    knitr::knit_expand(text = src, delim = c("<<", ">>"))
+})
+out <- knitr::knit_child(text = unlist(src_list), options = list(cache = FALSE))
+```
+
+`r out`
+
+Embeddings {.tabset .tabset-dropdown .tabset-fade}
+==========
+
+```{r embeddings, results = "hide"}
+full_src <- make_method_embeddings_md(metrics, params$method, labels)
+out <- knitr::knit_child(text = unlist(full_src), options = list(cache = FALSE))
+```
+
+**Dataset (Output)**
+
+`r out`
+
+Scalability
+===========
+
+Time
+----
+
+```{r scalability-time, eval = is_method}
+benchmark_barplot(benchmarks, s, dataset, "Time", dataset_pal()) +
+    scale_y_log10(
+        breaks = c(      1,      60,  60 * 60, 60 * 60 * 24),
+        labels = c("1 sec", "1 min", "1 hour",      "1 day")
+    )
+```
+
+Memory
+------
+
+```{r scalability-memory, eval = is_method}
+benchmark_barplot(benchmarks, max_pss, dataset, "Maximum memory (PSS)",
+                  dataset_pal()) +
+    scale_y_log10(
+        breaks = c(    1,     10,     100,   1024, 1024 * 10, 1024 * 100),
+        labels = c("1 MB","10 MB","100 MB", "1 GB",  "10 GB",   "100 GB")
+    )
+```
