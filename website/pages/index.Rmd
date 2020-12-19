@@ -23,7 +23,7 @@ params:
 source(here::here("R", "document_setup.R"))
 htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 
-n_methods       <- length(params$methods)
+n_methods       <- length(params$methods) - 1
 n_datasets      <- length(params$datasets)
 n_datasets_sim  <- sum(grepl("simulation", unlist(params$datasets)))
 n_datasets_atac <- length(params$datasets_atac)
