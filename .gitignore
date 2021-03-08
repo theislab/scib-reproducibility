@@ -4,3 +4,6 @@
 *.bak
 data/embeddings/
 data/annotations/
+
+.ipynb_checkpoints
+.idea
