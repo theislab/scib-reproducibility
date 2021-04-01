@@ -101,9 +101,14 @@ get_first_response <- function(comments_df, user, closed) {
 #' Get issues for a repository as a data frame
 #'
 #' @param repo Name of the repository (user/repo)
+#' @param cached_issues data.frame containing issues cache from previously
+#' running this script
 #'
 #' @return tibble containing issues
-get_issues_df <- function(repo) {
+get_issues_df <- function(repo, cached_issues) {
+
+    cached_issues <- filter(cached_issues, Repo == repo)
+
     issues <- get_issues(repo)
     message("Creating issues table for ", repo, "...")
 
@@ -147,18 +152,39 @@ get_issues_df <- function(repo) {
         select(-PR) %>%
         pmap_dfr(function(...) {
             row <- tibble(...)
+
+            if (row$Number %in% cached_issues$Number) {
+
+                cached_row <- cached_issues %>%
+                    filter(Number == row$Number) %>%
+                    select(-Repo)
+
+                if (cached_row$Updated == as_datetime(row$Updated)) {
+                    message("Using cached ", repo, " issue ", row$Number)
+                    return(cached_row)
+                }
+            }
+
             comments_df <- get_comments_df(repo, row$Number)
-            row$Comments <- nrow(comments_df)
-            row$Response <- get_first_response(comments_df, row$User,
-                                               row$Closed)
+
+            row <- row %>%
+                mutate(
+                    Comments = nrow(comments_df),
+                    Response = get_first_response(comments_df, row$User,
+                                                  row$Closed)
+                ) %>%
+                mutate(
+                    across(
+                        c("Created", "Response", "Updated", "Closed"),
+                        as_datetime
+                    )
+                )
+
             return(row)
         }) %>%
         mutate(Repo = repo) %>%
         relocate(Repo, ID, Number, User, State, Comments, Created, Response,
-                 Updated, Closed) %>%
-        mutate(
-            across(c("Created", "Response", "Updated", "Closed"), as_datetime)
-        )
+                 Updated, Closed)
 }
 
 #' Get repo
@@ -213,11 +239,29 @@ repos <- c(
     "eleozzr/desc",
     "KrishnaswamyLab/SAUCIE",
     "LTLA/batchelor",
-    "theislab/scgen"
+    "theislab/scgen",
+    "theislab/scanpy"
+)
+
+# Load cached issues data frame
+cached_issues <- read_tsv(
+    "../data/gh_all_issues.tsv",
+    col_types = cols(
+        Repo     = col_character(),
+        ID       = col_double(),
+        Number   = col_double(),
+        User     = col_character(),
+        State    = col_character(),
+        Comments = col_double(),
+        Created  = col_datetime(format = ""),
+        Response = col_datetime(format = ""),
+        Updated  = col_datetime(format = ""),
+        Closed   = col_datetime(format = "")
+    )
 )
 
 # Get the combined issues data frame for all repos
-all_issues <- map_dfr(repos, get_issues_df)
+all_issues <- map_dfr(repos, get_issues_df, cached_issues = cached_issues)
 
 # Summarise issues by repository
 issues_summ <- all_issues %>%
@@ -280,5 +324,6 @@ ggplot(repo_summ,
     geom_text() +
     theme_minimal()
 
-# Save the final summary
+# Save the final summary and issues cache
 write_tsv(repo_summ, "../data/gh_repo_summary.tsv")
+write_tsv(all_issues, "../data/gh_all_issues.tsv")
