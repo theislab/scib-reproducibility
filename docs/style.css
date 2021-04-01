@@ -79,3 +79,15 @@
     content: "\e258" !important;
     border: none;
 }
+
+.noticebox {
+  padding: 0.5em;
+  margin: 1em;
+  color: red;
+  border: 2px solid red;
+  border-radius: 10px;
+}
+
+.center {
+  text-align: center;
+}
