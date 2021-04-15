@@ -6,7 +6,7 @@ Scanorama	SVD and mutatl nearest neighbours	brianhie/scanorama	10.1038/s41587-01
 BBKNN	KNN graph integration	Teichlab/bbknn	10.1093/bioinformatics/btz625	No
 Conos	PCA and KNN integration	kharchenkolab/conos	10.1038/s41592-019-0466-z	No
 Seurat v3 CCA	Canonical correlation analysis and mutual nearest neighbours	satijalab/seurat	10.1016/j.cell.2019.05.031	No
-Seurat v3 RPCA	Randomised PCA and mutual nearest neighbouts	satijalab/seurat		No
+Seurat v3 RPCA	Randomised PCA and mutual nearest neighbouts	satijalab/seurat	10.1016/j.cell.2019.05.031	No
 Harmony	PCA and clustering-based correction	immunogenomics/harmony	10.1038/s41592-019-0619-0	No
 LIGER	Integrative non-negative matrix factorisation	MacoskoLab/liger	10.1016/j.cell.2019.05.006	No
 trVAE	Conditional variational autoencoder	theislab/trvae	arXiv:1910.01791	No

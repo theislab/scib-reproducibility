@@ -321,10 +321,11 @@ get_methods_meta <- function(methods_meta_file) {
 #' @param usability_papers_file Path to papers usability TSV file
 #' @param usability_packages_file Path to packages usability TSV file
 #' @param gh_stats_file Path to GitHub activity statistics TSV file
+#' @param methods_meta data.frame containing methods metadata
 #'
 #' @return list of tibbles with papers and packages usability scores
 get_usability <- function(usability_papers_file, usability_packages_file,
-                          gh_stats_file) {
+                          gh_stats_file, methods_meta) {
 
     `%>%` <- magrittr::`%>%`
 
@@ -334,7 +335,22 @@ get_usability <- function(usability_papers_file, usability_packages_file,
             .default = readr::col_double(),
             Method   = readr::col_character()
         )
-    )
+    ) %>%
+        dplyr::left_join(
+            methods_meta[, c("Name", "DOI")],
+            by = c(Method = "Name")
+        ) %>%
+        dplyr::rowwise() %>%
+        dplyr::mutate(
+            Overall = mean(c(
+                PeerReview,
+                mean(c(AccuracyDatasets, AccuracySimulation)),
+                Robustness,
+                Benchmarking
+            ))
+        ) %>%
+        dplyr::ungroup() %>%
+        dplyr::relocate(Method, DOI, Overall)
 
     gh_stats <- readr::read_tsv(
         gh_stats_file,
@@ -357,7 +373,21 @@ get_usability <- function(usability_papers_file, usability_packages_file,
             Repo     = readr::col_character()
         )
     ) %>%
-        dplyr::left_join(gh_stats, by = "Repo")
+        dplyr::left_join(gh_stats, by = "Repo") %>%
+        dplyr::rowwise() %>%
+        dplyr::mutate(
+            Overall = mean(c(
+                mean(c(OpenCode, OpenPlatform)),
+                VersionControl,
+                UnitTests,
+                mean(c(HasTutorial, TutorialErrors, TutorialScenarios,
+                       TutorialNonNative)),
+                mean(c(FunctionPurpose, FunctionParameters, FunctionOutput)),
+                mean(c(IssueActivityScore, IssueResponseScore))
+            ))
+        ) %>%
+        dplyr::ungroup() %>%
+        dplyr::relocate(Package, Method, Repo, Overall)
 
     list(papers = usability_papers, packages = usability_packages)
 }

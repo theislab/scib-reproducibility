@@ -74,7 +74,8 @@ plan <- drake_plan(
     usability = get_usability(
         here(file_in("../data/usability_papers.tsv")),
         here(file_in("../data/usability_packages.tsv")),
-        here(file_in("../data/gh_repo_summary.tsv"))
+        here(file_in("../data/gh_repo_summary.tsv")),
+        methods_meta
     ),
     rmd_index = target(
         callr_render(

@@ -181,8 +181,8 @@ make_papers_table <- function(usability_papers) {
     tbl <- usability_papers %>%
         reactable::reactable(
             pagination = FALSE,
-            defaultSorted = "Method",
-            defaultSortOrder = "asc",
+            defaultSorted = "Overall",
+            defaultSortOrder = "desc",
             defaultColDef = reactable::colDef(
                 class       = "cell",
                 headerClass = "header"
@@ -198,6 +198,18 @@ make_papers_table <- function(usability_papers) {
                 Method = reactable::colDef(
                     name        = "Method",
                     headerStyle = list(fontWeight = 700)
+                ),
+                DOI = reactable::colDef(
+                    name        = "DOI",
+                    headerStyle = list(fontWeight = 700),
+                    width       = 210
+                ),
+                Overall = score_column(
+                    name        = "Overall",
+                    headerStyle = list(fontWeight = 700),
+                    cell        = papers_cell,
+                    class       = "cell number border-left",
+                    width       = 90
                 ),
                 PeerReview = score_column(
                     name        = "Peer-reviewed",
@@ -261,8 +273,8 @@ make_packages_table <- function(usability_packages) {
     tbl <- usability_packages %>%
         reactable::reactable(
             pagination = FALSE,
-            defaultSorted = "Method",
-            defaultSortOrder = "asc",
+            defaultSorted = "Overall",
+            defaultSortOrder = "desc",
             defaultColDef = reactable::colDef(
                 class       = "cell",
                 headerClass = "header"
@@ -301,6 +313,13 @@ make_packages_table <- function(usability_packages) {
                     name        = "Repository",
                     headerStyle = list(fontWeight = 700),
                     width       = 190
+                ),
+                Overall = score_column(
+                    name        = "Overall",
+                    headerStyle = list(fontWeight = 700),
+                    cell        = packages_cell,
+                    class       = "cell number border-left",
+                    width       = 80,
                 ),
                 OpenCode = score_column(
                     name  = "Code",
