@@ -46,7 +46,8 @@ plan <- drake_plan(
     ),
     navbar = readr::read_lines(here(file_in("pages/_navbar.html"))),
     setup = readr::read_lines(here(file_in("R/document_setup.R"))),
-    configs = list(setup, navbar),
+    site_yml = readr::read_lines(here(file_in("pages/_site.yml"))),
+    configs = list(setup, navbar, site_yml),
     css = fs::file_copy(
         here(file_in("pages/style.css")),
         here(file_out("../docs/style.css")),
