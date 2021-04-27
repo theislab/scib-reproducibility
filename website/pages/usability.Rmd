@@ -24,6 +24,15 @@ activity.
 usability <- drake::readd("usability")
 ```
 
+:::: {.noticebox}
+<!-- :::{.center} -->
+**Note about usability scores**
+<!-- ::: -->
+
+The usability data was collected prior to 17 December 2020 and may have changed since.
+Please refer to the various packages, documentation and publications for the most up-to-date information.
+::::
+
 Paper scores
 ============
 

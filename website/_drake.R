@@ -46,7 +46,9 @@ plan <- drake_plan(
     ),
     navbar = readr::read_lines(here(file_in("pages/_navbar.html"))),
     setup = readr::read_lines(here(file_in("R/document_setup.R"))),
-    configs = list(setup, navbar),
+    site_yml = readr::read_lines(here(file_in("pages/_site.yml"))),
+    mixpanel = readr::read_lines(here(file_in("pages/_mixpanel.html"))),
+    configs = list(setup, navbar, site_yml, mixpanel),
     css = fs::file_copy(
         here(file_in("pages/style.css")),
         here(file_out("../docs/style.css")),
@@ -74,7 +76,8 @@ plan <- drake_plan(
     usability = get_usability(
         here(file_in("../data/usability_papers.tsv")),
         here(file_in("../data/usability_packages.tsv")),
-        here(file_in("../data/gh_repo_summary.tsv"))
+        here(file_in("../data/gh_repo_summary.tsv")),
+        methods_meta
     ),
     rmd_index = target(
         callr_render(

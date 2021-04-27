@@ -10,3 +10,5 @@ output:
     css: style.css
     self_contained: false
     lib_dir: ../../docs/site_libs
+    includes:
+      in_header: "_mixpanel.html"

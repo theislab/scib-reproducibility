@@ -1,5 +1,5 @@
 /* *****************************************************************************
-   reactable table for displaying metric score
+   reactable table for displaying metric scores
 ***************************************************************************** */
 
 .main-container {
@@ -53,6 +53,10 @@
   border-left: 2px solid #555;
 }
 
+.border-right {
+  border-right: 1px solid #eee;
+}
+
 .number {
   font-family: "Fira Mono", Consolas, Monaco, monospace;
   font-size: 16px;
@@ -71,6 +75,12 @@
   letter-spacing: -2px;
 }
 
+.sticky {
+  position: sticky !important;
+  background: #fff;
+  z-index: 1;
+}
+
 /* *****************************************************************************
    Custom
 ***************************************************************************** */
@@ -78,4 +88,16 @@
 .tabset-dropdown > .nav-tabs.nav-tabs-open > .active:before {
     content: "\e258" !important;
     border: none;
+}
+
+.noticebox {
+  padding: 0.2em;
+  margin: 1em 0 1em 0;
+  color: blue;
+  border: 2px solid blue;
+  border-radius: 10px;
+}
+
+.center {
+  text-align: center;
 }

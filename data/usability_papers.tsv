@@ -13,5 +13,5 @@ ComBat	1	0.5	0	1	1
 DESC	1	1	0	1	1
 SAUCIE	1	1	1	0	1
 FastMNN	0	0	0	1	0
-scGen	1	0.5	0	0	1
-scANVI	0	1	0	0.25	1
+scGen*	1	0.5	0	0	1
+scANVI*	0	1	0	0.25	1
