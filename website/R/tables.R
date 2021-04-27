@@ -61,22 +61,38 @@ make_overall_table <- function(metrics, labels, type = c("dataset", "method")) {
                         "Method",
                         "Dataset"
                     ),
-                    headerStyle = list(fontWeight = 700),
+                    width       = 100,
+                    class       = "sticky",
+                    headerClass = "sticky header",
+                    style       = list(left = 0),
+                    headerStyle = list(left = 0, fontWeight = 700),
                     filterable  = TRUE
                 ),
                 output = reactable::colDef(
                     name        = "Output",
-                    headerStyle = list(fontWeight = 700),
-                    filterable  = TRUE
-                ),
-                scaling = reactable::colDef(
-                    name        = "Scaling",
-                    headerStyle = list(fontWeight = 700),
+                    width       = 100,
+                    class       = "sticky",
+                    headerClass = "sticky header",
+                    style       = list(left = 100),
+                    headerStyle = list(left = 100, fontWeight = 700),
                     filterable  = TRUE
                 ),
                 features = reactable::colDef(
                     name        = "Features",
-                    headerStyle = list(fontWeight = 700),
+                    width       = 80,
+                    class       = "sticky",
+                    headerClass = "sticky header",
+                    style       = list(left = 200),
+                    headerStyle = list(left = 200, fontWeight = 700),
+                    filterable  = TRUE
+                ),
+                scaling = reactable::colDef(
+                    name        = "Scaling",
+                    width       = 80,
+                    class       = "sticky border-right",
+                    headerClass = "sticky header border-right",
+                    style       = list(left = 280),
+                    headerStyle = list(left = 280, fontWeight = 700),
                     filterable  = TRUE
                 ),
                 overall = score_column(
@@ -197,7 +213,10 @@ make_papers_table <- function(usability_papers) {
             columns = list(
                 Method = reactable::colDef(
                     name        = "Method",
-                    headerStyle = list(fontWeight = 700)
+                    class       = "sticky border-right",
+                    headerClass = "sticky header border-right",
+                    style       = list(left = 0),
+                    headerStyle = list(left = 0, fontWeight = 700)
                 ),
                 DOI = reactable::colDef(
                     name        = "DOI",
@@ -303,11 +322,18 @@ make_packages_table <- function(usability_packages) {
             columns = list(
                 Package = reactable::colDef(
                     name        = "Package",
-                    headerStyle = list(fontWeight = 700)
+                    width       = 100,
+                    class       = "sticky",
+                    headerClass = "sticky header",
+                    style       = list(left = 0),
+                    headerStyle = list(left = 0, fontWeight = 700),
                 ),
                 Method = reactable::colDef(
                     name        = "Method",
-                    headerStyle = list(fontWeight = 700)
+                    class       = "sticky border-right",
+                    headerClass = "sticky header border-right",
+                    style       = list(left = 100),
+                    headerStyle = list(left = 100, fontWeight = 700),
                 ),
                 Repo = reactable::colDef(
                     name        = "Repository",

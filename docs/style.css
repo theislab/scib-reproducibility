@@ -1,5 +1,5 @@
 /* *****************************************************************************
-   reactable table for displaying metric score
+   reactable table for displaying metric scores
 ***************************************************************************** */
 
 .main-container {
@@ -53,6 +53,10 @@
   border-left: 2px solid #555;
 }
 
+.border-right {
+  border-right: 1px solid #eee;
+}
+
 .number {
   font-family: "Fira Mono", Consolas, Monaco, monospace;
   font-size: 16px;
@@ -69,6 +73,12 @@
   margin: auto;
   font-size: 13px;
   letter-spacing: -2px;
+}
+
+.sticky {
+  position: sticky !important;
+  background: #fff;
+  z-index: 1;
 }
 
 /* *****************************************************************************
