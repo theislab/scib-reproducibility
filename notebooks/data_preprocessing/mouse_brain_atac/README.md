@@ -6,3 +6,5 @@ In both cases, we processed the ATAC data using either 5kb windows, peaks or gen
 In the preprocessing notebooks, we show how to filter, normalise and harmonise the data to later benchmark the tools for batch effect removal.
 The datasets were profiled by different sources using different technologies.
 The integration challenge is to remove technical variation between batches and to consider the nested batches in the large integration tasks while the biological information and the cell structure are still retained.
+
+Note that these notebooks do not include earlier sequence processing steps such as alignment and peak calling.
