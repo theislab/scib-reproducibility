@@ -26,7 +26,7 @@ To generate this figure you will need to:
 2. Download and place the script `plotSingleTaskRNA.R` in your working directory
 3. Run `source('plotSingleTaskRNA.R')`
 4. Call `plotSingleTaskRNA()` with the following parameters:
-   * `csv_metrics_path`: Path to a CSV file output of scib that contains the metrics calculated across one or multiple RNA tasks. 
+   * `csv_metrics_path`: Path to a CSV file output of scib that contains the metrics calculated across one or multiple RNA tasks.
    * `outdir`: Output directory where the plots and a CSV file for each task containing the ranked summary table scores will be saved.
    * `weight_batch`: Number between 0 and 1 to use as weight for the batch correction metrics.
      Weight for bio conservation is calculated as `1 - weight_batch`.
@@ -72,7 +72,7 @@ To generate this figure you will need to:
    * `ids_simulation`: Character vector of ids for simulated tasks, as they are named in `csv_metrics_path`.
    * `labels_RNA`: Character vector of label names for RNA tasks, to rename ids.
      These names will be plotted in the summary table.
-   * `labels_simulation`: Character vector of label names for simulated tasks, to rename ids. 
+   * `labels_simulation`: Character vector of label names for simulated tasks, to rename ids.
      These names will be plotted in the summary table.
    * `weight_batch`: Number between 0 and 1 to use as weight for the batch correction metrics.
      Weight for bio conservation is calculated as `1 - weight_batch`.
@@ -85,7 +85,7 @@ plotBestMethodsRNA(
     csv_metrics_path = "./data/metrics_RNA_allTasks.csv",
     outdir = ".",
     csv_usability_path = "./data/usability4bestMethods.csv",
-    csv_scalability_time_path = "./data/scalability_score_time.csv", 
+    csv_scalability_time_path = "./data/scalability_score_time.csv",
     csv_scalability_memory_path = "./data/scalability_score_memory.csv",
     ids_RNA = c("pancreas", "lung_atlas", "immune_cell_hum",
                 "immune_cell_hum_mou", "mouse_brain"),
@@ -94,7 +94,7 @@ plotBestMethodsRNA(
                    "Brain (mou)"),
     labels_simulation = c("Sim 1", "Sim 2"), weight_batch = 0.4
 )
-``` 
+```
 
 ## ATAC
 
@@ -107,7 +107,7 @@ To generate this figure you will need to:
 1. Have a CSV file computed by scib over one (or multiple) ATAC task, containing metrics scores.
    Example CSV files can be found in the `data/ATAC_metrics/` folder:
    * `metrics_ATAC_large11.csv` contains results of the Mouse Brain Large scenario (11 batches) over all feature spaces (genes/windows/peaks).
-   * `metrics_atac_large_11batches_gene.csv` contains results of the Mouse Brain Large scenario (11 batches), specific to only one feature space (gene). 
+   * `metrics_atac_large_11batches_gene.csv` contains results of the Mouse Brain Large scenario (11 batches), specific to only one feature space (gene).
 2. Download and place the script `plotSingleTaskATAC.R` in your working directory
 3. Run `source('plotSingleTaskRNA.R')`
 4. Call `plotSingleTaskATAC()`, with the following parameters:
@@ -129,7 +129,7 @@ plotSingleTaskATAC(
 
 ### Single-Task, all features Summary Tables
 
-Another way to plot a summary table for ATAC tasks is by considering all feature spaces. 
+Another way to plot a summary table for ATAC tasks is by considering all feature spaces.
 This summary table shows, as before, all integration methods ranked by **Overall Score**, but adds one column ("Feature Space") for genes/windows/peaks.
 Please refer to **Supplementary Figure 23** of the paper for an example.
 
@@ -165,13 +165,13 @@ Please refer to **Figure 4b** of the paper for an example.
 
 To generate this figure you will need to:
 
-1. Have a csv file computed by scib over multiple ATAC tasks, containing metrics scores. 
+1. Have a csv file computed by scib over multiple ATAC tasks, containing metrics scores.
    Example csv files can be found in the `data/` folder:
    * `metrics_ATAC_small3_large11.csv` contains results shown in the paper, for all six ATAC tasks.
 2. Download and place the script `plotBestMethodsATAC.R` in your working directory
 3. Run `source('plotBestMethodsATAC.R')`
 4. Call `plotBestMethodsATAC()`, with the following parameters:
-   * `csv_metrics_path`: Path to a CSV file output of scib that contains the metrics calculated across multiple ATAC tasks. 
+   * `csv_metrics_path`: Path to a CSV file output of scib that contains the metrics calculated across multiple ATAC tasks.
    * `outdir`: Output directory where the summary table (in three formats: PDF/TIFF/PNG) will be saved
    * `ids_ATAC`: Character vector of ids for ATAC tasks, as they are named in `csv_metrics_path`.
    * `labels_ATAC`: Character vector of label names for ATAC tasks, to rename ids.
@@ -187,7 +187,7 @@ plotBestMethodsATAC(
     csv_metrics_path = "./data/ATAC_metrics/metrics_ATAC_small3_large11.csv",
     ids_ATAC = c("mouse_brain_atac_windows_small",
                  "mouse_brain_atac_windows_large",
-                 "mouse_brain_atac_peaks_small", 
+                 "mouse_brain_atac_peaks_small",
                  "mouse_brain_atac_peaks_large",
                  "mouse_brain_atac_genes_small",
                  "mouse_brain_atac_genes_large"),
@@ -266,3 +266,8 @@ makeBestScatter(
     out_dir = "."
 )
 ```
+
+## Embeddings and trajectories
+
+Embedding and trajectory visualisations were created using the `embeddings_and_trajectories.ipynb` notebook.
+Please refer to the code here for details.
