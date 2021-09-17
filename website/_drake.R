@@ -20,7 +20,6 @@ source(here("R", "plotting.R"))
 DATASETS <- get_datasets(here::here("..", "data", "metrics.csv"))
 METHODS  <- get_methods(here::here("..", "data", "metrics.csv"))
 DATASETS_ATAC <- get_datasets(here::here("..", "data", "metrics_atac.csv"))
-DATASETS_ATAC <- DATASETS_ATAC[!grepl("3batches", DATASETS_ATAC)]
 METHODS_ATAC <- get_methods(here::here("..", "data", "metrics_atac.csv"))
 
 `%>%` <- magrittr::`%>%`
@@ -60,9 +59,6 @@ plan <- drake_plan(
         here(file_in("../data/metrics_atac.csv")),
         labels
     ) %>%
-        dplyr::filter(
-            stringr::str_detect(dataset, "3batches", negate = TRUE)
-        ) %>%
         dplyr::mutate(dataset = factor(dataset)),
     benchmarks = get_benchmarks(here(file_in("../data/benchmarks.csv")), labels),
     benchmarks_atac = get_benchmarks(
