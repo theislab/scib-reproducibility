@@ -1,5 +1,7 @@
 .DS_Store
 .Rproj.user
+.Rhistory
+*.Rproj
 
 *.bak
 data/embeddings/
