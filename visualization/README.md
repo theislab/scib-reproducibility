@@ -107,7 +107,7 @@ To generate this figure you will need to:
 1. Have a CSV file computed by scib over one (or multiple) ATAC task, containing metrics scores.
    Example CSV files can be found in the `data/ATAC_metrics/` folder:
    * `metrics_ATAC_large11.csv` contains results of the Mouse Brain Large scenario (11 batches) over all feature spaces (genes/windows/peaks).
-   * `metrics_atac_large_11batches_gene.csv` contains results of the Mouse Brain Large scenario (11 batches), specific to only one feature space (gene).
+   * `metrics_ATAC_allTasks.csv` contains all results for the Mouse Brain, small (3 batches) and large (11 batches).
 2. Download and place the script `plotSingleTaskATAC.R` in your working directory
 3. Run `source('plotSingleTaskRNA.R')`
 4. Call `plotSingleTaskATAC()`, with the following parameters:
@@ -167,7 +167,7 @@ To generate this figure you will need to:
 
 1. Have a csv file computed by scib over multiple ATAC tasks, containing metrics scores.
    Example csv files can be found in the `data/` folder:
-   * `metrics_ATAC_small3_large11.csv` contains results shown in the paper, for all six ATAC tasks.
+   * `metrics_ATAC_allTasks.csv` contains results shown in the paper, for all six ATAC tasks.
 2. Download and place the script `plotBestMethodsATAC.R` in your working directory
 3. Run `source('plotBestMethodsATAC.R')`
 4. Call `plotBestMethodsATAC()`, with the following parameters:
@@ -184,7 +184,7 @@ To generate this figure you will need to:
 
 ```r
 plotBestMethodsATAC(
-    csv_metrics_path = "./data/ATAC_metrics/metrics_ATAC_small3_large11.csv",
+    csv_metrics_path = "./data/ATAC_metrics/metrics_ATAC_allTasks.csv",
     ids_ATAC = c("mouse_brain_atac_windows_small",
                  "mouse_brain_atac_windows_large",
                  "mouse_brain_atac_peaks_small",
