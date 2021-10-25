@@ -1,22 +1,3 @@
-#' Plot scib single methods - ATAC with features
-#' @description Plotting scib-metrics result of the integration for each single ATAC task in an overview table. Multiple feature 
-#' spaces are considered simultaneously (genes/windows/peaks).
-#' Integration methods are ranked from top to bottom based on an 'Overall Score', calculated as weighted
-#' sum of 'Batch correction' (default w:0.4) and 'Bio conservation' (default w:0.6).
-#'
-#' @return \code{plotSingleATAC_withFeat} saves in `outdir` one overview table for each task in three formats (.pdf/.tiff/.png)
-#' and a .csv file for each task containing the ranked summary table scores. 
-#'
-#' @param csv_metrics_path path to a .csv file output of scib that contains the metrics calculated 
-#' across one or multiple ATAC tasks, over multiple feature spaces. 
-#' @param outdir output directory where the plots and .csv will be saved.
-#' @param weight_batch number in [0,1] to use as weight for the batch correction metrics. Weight for
-#' bio conservation is calculated as 1-weight_batch
-#' @example
-#' plotSingleATAC_withFeat(csv_metrics_path = "./data/ATAC_metrics/metrics_ATAC_large11.csv")
-#' 
-
-
 library(tibble)
 library(RColorBrewer)
 library(dynutils)
@@ -24,26 +5,26 @@ library(stringr)
 library(Hmisc)
 library(plyr)
 
-source("knit_table.R") # Please put knit_table.R in your working dir
+source("/home/python_scRNA/Munich/visualization/knit_table.R")# You will need to have in the same folder knit_table.R and this plotSingleAtlas.R
 
 
-plotSingleATAC_withFeat <- function(csv_metrics_path, outdir = ".", weight_batch = 0.4){
+plotSingleATAC_withFeat <- function(csv_file_path, outdir){
   
-  metrics_tab_lab <- read.csv(csv_metrics_path, sep = ",")
+  metrics_tab_lab <- read.csv(csv_file_path, sep = ",")
   
   
   # get metrics names from columns
   metrics <- colnames(metrics_tab_lab)[-1]
   metrics <- gsub("\\.", "/", metrics)
   metrics <- gsub("_", " ", metrics)
-  metrics <- plyr::mapvalues(metrics, from = c("ASW label", "ASW label/batch", "cell cycle conservation", "hvg overlap", "trajectory", "graph conn"), 
-                             to = c("Cell type ASW", "Batch ASW", "CC conservation", "HVG conservation", "trajectory conservation", "graph connectivity"))
+  metrics <- plyr::mapvalues(metrics, from = c("ASW label", "ASW label/batch", "cell cycle conservation", "hvg overlap", "trajectory", "graph conn", "iLISI", "cLISI"), 
+                             to = c("Cell type ASW", "Batch ASW", "CC conservation", "HVG conservation", "trajectory conservation", "graph connectivity", "graph iLISI", "graph cLISI"))
   
   
   # metrics names as they are supposed to be ordered
-  group_batch <- c("PCR batch", "Batch ASW", "iLISI", "graph connectivity", "kBET")
+  group_batch <- c("PCR batch", "Batch ASW", "graph iLISI", "graph connectivity", "kBET")
   group_bio <- c("NMI cluster/label", "ARI cluster/label", "Cell type ASW", 
-                 "isolated label F1", "isolated label silhouette", "CC conservation", "HVG conservation", "trajectory conservation","cLISI")
+                 "isolated label F1", "isolated label silhouette", "CC conservation", "HVG conservation", "trajectory conservation","graph cLISI")
   # set original values of number of metrics
   n_metrics_batch_original <- sum(group_batch %in% metrics)
   n_metrics_bio_original <- sum(group_bio %in% metrics)
@@ -133,15 +114,15 @@ plotSingleATAC_withFeat <- function(csv_metrics_path, outdir = ".", weight_batch
   scaled_metrics_tab <- apply(scaled_metrics_tab, 2, function(x) scale_minmax(x))
   
   # calculate average score by group and overall
-  score_group_batch <- rowMeans(scaled_metrics_tab[, 1:n_metrics_batch], na.rm = T)
-  score_group_bio <- rowMeans(scaled_metrics_tab[, (1+n_metrics_batch):ncol(scaled_metrics_tab)], 
+  score_group1 <- rowMeans(scaled_metrics_tab[, 1:n_metrics_batch], na.rm = T)
+  score_group2 <- rowMeans(scaled_metrics_tab[, (1+n_metrics_batch):ncol(scaled_metrics_tab)], 
                            na.rm = T)
   
-  score_all <- (weight_batch*score_group_batch + (1-weight_batch)*score_group_bio)
+  score_all <- (0.4*score_group1 + 0.6*score_group2)
     
   metrics_tab <- add_column(metrics_tab, "Overall Score" = score_all, .after = "Method")
-  metrics_tab <- add_column(metrics_tab, "Batch Correction" = score_group_batch, .after = "Overall Score")
-  metrics_tab <- add_column(metrics_tab, "Bio conservation" = score_group_bio, .after = "kBET")
+  metrics_tab <- add_column(metrics_tab, "Batch Correction" = score_group1, .after = "Overall Score")
+  metrics_tab <- add_column(metrics_tab, "Bio conservation" = score_group2, .after = "kBET")
   
   metrics_tab <- add_column(metrics_tab, "Output" = method_groups, .after = "Method")
   metrics_tab <- add_column(metrics_tab, "Feature Space" = features_groups, .after = "Output")
