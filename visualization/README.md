@@ -9,9 +9,8 @@ In order to generate different types of summary tables three simple steps are ne
 Depending on the data type of interest (RNA/ATAC) different functions will be called to generate the plots.
 It would be then necessary to download each specific script and place it in the same working directory.
 
-¹: `knit_table.R` is heavily based on dynbenchmark's [`funky_heatmap()`](https://github.com/dynverse/dynbenchmark/blob/master/package/R/funky_heatmap.R).
-  `funky_heatmap()` has since been published as a standalone [R package](https://github.com/rcannood/funkyheatmap/).
-  Please use this function as it is more maintainable.
+¹: This function is based on dynbenchmark's [`funky_heatmap()`](https://github.com/dynverse/dynbenchmark/blob/master/package/R/funky_heatmap.R).
+  `funky_heatmap()` has since been published as a standalone [R package](https://funkyheatmap.dynverse.org).
 
 ## RNA
 

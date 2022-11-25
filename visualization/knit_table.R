@@ -27,11 +27,8 @@
 #' \code{knit_table} returns a ggplot2 object with a ranking of the integration methods  
 #' and their relative scores over a set of metrics. 
 #' 
-#' This function is heavily based on dynbenchmark's
-#' [`funky_heatmap()`](https://github.com/dynverse/dynbenchmark/blob/master/package/R/funky_heatmap.R).
-#' `funky_heatmap()` has since been published as a standalone 
-#' [R package](https://github.com/rcannood/funkyheatmap/). Please use this function
-#' as it is more maintainable.
+#' This function is based on dynbenchmark's [`funky_heatmap()`](https://github.com/dynverse/dynbenchmark/blob/master/package/R/funky_heatmap.R).
+#' `funky_heatmap()` has since been published as a standalone [R package](https://funkyheatmap.dynverse.org).
 #'
 #' @author Robrecht Cannoodt, Wouter Saelens
 #' 
