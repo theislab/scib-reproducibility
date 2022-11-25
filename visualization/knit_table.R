@@ -59,7 +59,7 @@ library(scales)
 library(ggimage)
 library(cowplot)
 
-scIB_knit_table <- function(
+knit_table <- function(
   data,
   column_info,
   row_info,

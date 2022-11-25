@@ -311,7 +311,7 @@ plotBestMethodsRNA <- function(csv_metrics_path,
                    "Scalability" = "Greys")
  
   
-  g <- scIB_knit_table(data = best_methods_tab, column_info = column_info, row_info = row_info, palettes = palettes, usability = T)
+  g <- knit_table(data = best_methods_tab, column_info = column_info, row_info = row_info, palettes = palettes, usability = T)
   now <- Sys.time()
   ggsave(paste0(outdir, "/", format(now, "%Y%m%d_%H%M%S_"), "BestMethods_summary.pdf"), g, device = cairo_pdf, width = 210, height = 297, units = "mm")
   ggsave(paste0(outdir, "/", format(now, "%Y%m%d_%H%M%S_"), "BestMethods_summary.tiff"), g, device = "tiff", dpi = "retina", width = 210, height = 297, units = "mm")
