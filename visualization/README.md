@@ -2,12 +2,16 @@
 
 In order to generate different types of summary tables three simple steps are necessary. Please download and place in your working directory:
 
-1. The basic script `scib/R/visualization/knit_table.R`, which will be used by most plotting functions
+1. The basic script `scib/R/visualization/knit_table.R`, which will be used by most plotting functions ¹.
 2. The folder `scib/R/visualization/img`, containing icons used by `knit_table.R`
 3. The folder `scib/R/visualization/data`, which contains example metrics files, result files from the paper as well as usability/scalability metrics.
 
 Depending on the data type of interest (RNA/ATAC) different functions will be called to generate the plots.
 It would be then necessary to download each specific script and place it in the same working directory.
+
+¹: `knit_table.R` is heavily based on dynbenchmark's [`funky_heatmap()`](https://github.com/dynverse/dynbenchmark/blob/master/package/R/funky_heatmap.R).
+  `funky_heatmap()` has since been published as a standalone [R package](https://github.com/rcannood/funkyheatmap/).
+  Please use this function as it is more maintainable.
 
 ## RNA
 
