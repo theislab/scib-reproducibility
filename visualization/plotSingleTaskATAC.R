@@ -171,7 +171,7 @@ plotSingleTaskATAC <- function(csv_metrics_path, outdir = ".", weight_batch = 0.
                      "Cell type label variance" = "RdPu")
     
     
-    g <- knit_table(data = metrics_tab, column_info = column_info, row_info = row_info, palettes = palettes, usability = F, atac = T) 
+    g <- scIB_knit_table(data = metrics_tab, column_info = column_info, row_info = row_info, palettes = palettes, usability = F, atac = T) 
     now <- Sys.time()
     ggsave(paste0(outdir, "/", format(now, "%Y%m%d_%H%M%S_"), dt.sc, "_summary_metrics.pdf"), g, device = cairo_pdf, width = 210, height = 297, units = "mm")
     ggsave(paste0(outdir, "/", format(now, "%Y%m%d_%H%M%S_"), dt.sc, "_summary_metrics.tiff"), g, device = "tiff", dpi = "retina", width = 210, height = 297, units = "mm")

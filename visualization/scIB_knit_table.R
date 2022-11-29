@@ -24,13 +24,17 @@
 
 #' Visualizing scores in an overview table
 #'
-#' \code{knit_table} returns a ggplot2 object with a ranking of the integration methods  
+#' \code{scIB_knit_table} returns a ggplot2 object with a ranking of the integration methods  
 #' and their relative scores over a set of metrics. 
 #' 
 #' This function is based on dynbenchmark's [`funky_heatmap()`](https://github.com/dynverse/dynbenchmark/blob/master/package/R/funky_heatmap.R).
-#' `funky_heatmap()` has since been published as a standalone [R package](https://funkyheatmap.dynverse.org).
+#' Both `dynbenchmark::funky_heatmap()` and `scIB_knit_table()` contain hardcoded settings which might not work for your project.
+#' However, `funky_heatmap()` has since been published as a standalone [R package](https://funkyheatmap.dynverse.org)
+#' which contains features from `dynbenchmark::funky_heatmap()` and `scIB_knit_table()` and is more generally applicable.
+#' It is available on [CRAN](https://cloud.r-project.org/web/packages/funkyheatmap/index.html) and 
+#' as a [standalone CLI tool](http://funkyheatmap.dynverse.org/articles/executable.html).
 #'
-#' @author Robrecht Cannoodt, Wouter Saelens
+#' @author Robrecht Cannoodt, Wouter Saelens, Marta Interlandi
 #' 
 #' @param data A data frame with methods by row, metrics by columns. First column must be method's names. Score values
 #' should be scaled between [0,1].
@@ -56,7 +60,7 @@ library(scales)
 library(ggimage)
 library(cowplot)
 
-knit_table <- function(
+scIB_knit_table <- function(
   data,
   column_info,
   row_info,
