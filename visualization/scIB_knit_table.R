@@ -1,8 +1,41 @@
+# # MIT License
+# 
+# Copyright (c) 2014-2020 Robrecht Cannoodt, Wouter Saelens
+# Copyright (c) 2020 Marta Interlandi, Theis lab
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+
 #' Visualizing scores in an overview table
 #'
 #' \code{scIB_knit_table} returns a ggplot2 object with a ranking of the integration methods  
-#' and their relative scores over a set of metrics.
+#' and their relative scores over a set of metrics. 
+#' 
+#' This function is based on dynbenchmark's [`funky_heatmap()`](https://github.com/dynverse/dynbenchmark/blob/master/package/R/funky_heatmap.R).
+#' Both `dynbenchmark::funky_heatmap()` and `scIB_knit_table()` contain hardcoded settings which might not work for your project.
+#' However, `funky_heatmap()` has since been published as a standalone [R package](https://funkyheatmap.dynverse.org)
+#' which contains features from `dynbenchmark::funky_heatmap()` and `scIB_knit_table()` and is more generally applicable.
+#' It is available on [CRAN](https://cloud.r-project.org/web/packages/funkyheatmap/index.html) and 
+#' as a [standalone CLI tool](http://funkyheatmap.dynverse.org/articles/executable.html).
 #'
+#' @author Robrecht Cannoodt, Wouter Saelens, Marta Interlandi
+#' 
 #' @param data A data frame with methods by row, metrics by columns. First column must be method's names. Score values
 #' should be scaled between [0,1].
 #' @param column_info A data frame describing the columns of `data`. This data frame should contain the following columns:
